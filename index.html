@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechCoDesign - Desenvolvimento Web, Apps & Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :root {
+            --black: #090909;
+            --magenta: #b515bf;
+            --cyan: #33c5e8;
+            --purple: #400f7d;
+            --white: #ffffff;
+            --gray: #a0a0a0;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--black);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--magenta), var(--cyan));
+            border-radius: 5px;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: opacity 0.3s, transform 0.3s, width 0.3s, height 0.3s;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan);
+            animation: cursor-glow 2s infinite ease-in-out;
+        }
+
+        @keyframes cursor-glow {
+            0%, 100% { box-shadow: 0 0 8px var(--cyan); }
+            50% { box-shadow: 0 0 16px var(--cyan); }
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--cyan);
+            opacity: 0.5;
+            transition: all 0.15s ease-out;
+        }
+
+        .cursor-outline.hover {
+            width: 60px;
+            height: 60px;
+            opacity: 0.8;
+        }
+
+        /* Background Animado */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.25;
+            animation: float 30s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--magenta);
+            top: -15%;
+            right: -15%;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--cyan);
+            bottom: -15%;
+            left: -15%;
+            animation-delay: 7s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: var(--purple);
+            top: 50%;
+            left: 50%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(50px, -60px); }
+            66% { transform: translate(-40px, 70px); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--magenta), var(--cyan));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .nav-cta:hover {
+            color: var(--white) !important;
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        /* Menu Mobile */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(9, 9, 9, 0.98);
+            backdrop-filter: blur(20px);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            z-index: 999;
+            transform: translateY(-100%);
+            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .mobile-nav.active {
+            transform: translateY(0);
+        }
+
+        .mobile-nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10rem 5% 5rem;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Urbanist', sans-serif;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-weight: 700;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Urbanist', sans-serif;
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn i {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(181, 21, 191, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(181, 21, 191, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        /* Common */
+        section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Urbanist', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Terminal */
+        .about-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .terminal-window {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(9, 9, 9, 0.8);
+            border: 1px solid rgba(181, 21, 191, 0.3);
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(181, 21, 191, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-term {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .btn-term.close { background: #ff5f56; }
+        .btn-term.minimize { background: #ffbd2e; }
+        .btn-term.maximize { background: #27c93f; }
+
+        .terminal-title {
+            color: var(--cyan);
+            font-family: 'Urbanist', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .terminal-body {
+            padding: 3rem;
+            font-size: 1.05rem;
+            line-height: 1.9;
+        }
+
+        .terminal-body h3 {
+            font-family: 'Urbanist', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .terminal-body p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .terminal-highlight {
+            color: var(--cyan);
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--glass);
+            border: 1px solid rgba(181, 21, 191, 0.2);
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+
+        .stat-item:hover {
+            background: rgba(181, 21, 191, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--gray);
+        }
+
+        /* Serviços */
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .servico-card {
+            background: var(--glass);
+            border: 1px solid rgba(181, 21, 191, 0.2);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .servico-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cyan);
+            box-shadow: 0 20px 60px rgba(51, 197, 232, 0.3);
+        }
+
+        .servico-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .servico-card h3 {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .servico-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .servico-features {
+            list-style: none;
+        }
+
+        .servico-features li {
+            color: var(--gray);
+            padding: 0.5rem 0 0.5rem 2rem;
+            position: relative;
+        }
+
+        .servico-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+            font-weight: 700;
+        }
+
+        /* Modelos */
+        .modelos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .modelo-card {
+            background: var(--glass);
+            border: 1px solid rgba(181, 21, 191, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .modelo-image {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(64, 15, 125, 0.4), rgba(181, 21, 191, 0.4));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modelo-icon {
+            font-size: 4rem;
+            color: var(--white);
+        }
+
+        .modelo-info {
+            padding: 2rem;
+        }
+
+        .modelo-info h3 {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .modelo-info p {
+            color: var(--gray);
+        }
+
+        .modelo-card::after {
+            content: 'VER MODELOS →';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            font-weight: 700;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .modelo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(51, 197, 232, 0.3);
+        }
+
+        .modelo-card:hover::after {
+            transform: translateY(0);
+        }
+
+        /* Planos */
+        .planos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .plano-card {
+            background: var(--glass);
+            border: 2px solid rgba(181, 21, 191, 0.3);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plano-card.destaque {
+            border-color: var(--magenta);
+            transform: scale(1.05);
+        }
+
+        .plano-badge {
+            position: absolute;
+            top: 20px;
+            right: -40px;
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            padding: 0.5rem 3.5rem;
+            font-size: 0.75rem;
+            font-weight: 800;
+            transform: rotate(45deg);
+        }
+
+        .plano-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .plano-card.destaque:hover {
+            transform: translateY(-10px) scale(1.07);
+        }
+
+        .plano-nome {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .plano-preco {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .plano-periodo {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .plano-features {
+            list-style: none;
+            text-align: left;
+            margin: 2.5rem 0;
+        }
+
+        .plano-features li {
+            padding: 0.8rem 0 0.8rem 2rem;
+            color: var(--gray);
+            position: relative;
+        }
+
+        .plano-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* Contato */
+        .contact-section {
+            background: linear-gradient(180deg, var(--black) 0%, rgba(181, 21, 191, 0.05) 100%);
+        }
+
+        .contact-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--glass);
+            border: 1px solid rgba(181, 21, 191, 0.2);
+            border-radius: 24px;
+            padding: 4rem;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-step {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray);
+            position: relative;
+            padding-left: 30px;
+            z-index: 1;
+        }
+
+        .progress-step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--black);
+        }
+
+        .progress-step.active {
+            color: var(--cyan);
+        }
+
+        .progress-step.active::before {
+            background: var(--cyan);
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1.3rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(181, 21, 191, 0.3);
+            border-radius: 12px;
+            color: var(--white);
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--cyan);
+        }
+
+        .form-label {
+            position: absolute;
+            top: 1.3rem;
+            left: 1.5rem;
+            color: var(--gray);
+            pointer-events: none;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus + .form-label,
+        .form-input:not(:placeholder-shown) + .form-label {
+            top: -0.7rem;
+            left: 1rem;
+            font-size: 0.8rem;
+            color: var(--cyan);
+            background: var(--black);
+            padding: 0 0.5rem;
+        }
+
+        textarea.form-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-navigation {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-button,
+        .form-button-secondary {
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            flex: 1;
+        }
+
+        .form-button i,
+        .form-button-secondary i {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-button {
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            color: var(--white);
+        }
+
+        .form-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .form-button-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .review-title {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 5% 2rem;
+            border-top: 1px solid rgba(181, 21, 191, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section a,
+        .footer-section p {
+            color: var(--gray);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--cyan);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid rgba(181, 21, 191, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(181, 21, 191, 0.1);
+            text-align: center;
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .mobile-nav { display: flex; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .plano-card.destaque { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 4rem 5%; }
+            .hero { padding: 8rem 5% 4rem; }
+            .terminal-body { padding: 2rem; }
+            .contact-wrapper { padding: 2.5rem 2rem; }
+        }
+
+        @media (hover: none) {
+            body { cursor: auto; }
+            .cursor-dot, .cursor-outline { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <header>
+        <nav>
+            <a href="#home" class="logo">TECHCODESIGN</a>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#modelos">Modelos</a></li>
+                <li><a href="#planos">Planos</a></li>
+                <li><a href="#contato" class="nav-cta">Contato</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#home">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#modelos">Modelos</a>
+        <a href="#planos">Planos</a>
+        <a href="#contato">Contato</a>
+    </div>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <p class="hero-subtitle">Agência Digital Completa</p>
+            <h1>Transformamos Ideias em<br><span class="gradient-text">Experiências Digitais</span></h1>
+            <p class="hero-description">Desenvolvimento de sites, aplicativos e identidades visuais que elevam sua marca ao próximo nível. Soluções completas e personalizadas para o seu negócio digital.</p>
+            <div class="cta-buttons">
+                <a href="#planos" class="btn btn-primary"><span>Ver Planos</span><i class="ri-arrow-right-line"></i></a>
+                <a href="#contato" class="btn btn-secondary">Falar com Especialista</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="about-section">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="btn-term close"></span>
+                    <span class="btn-term minimize"></span>
+                    <span class="btn-term maximize"></span>
+                </div>
+                <div class="terminal-title">TECHCODESIGN.EXE</div>
+            </div>
+            <div class="terminal-body">
+                <h3>Bem-vindo à <span class="terminal-highlight">TechCoDesign</span></h3>
+                <p>Somos uma agência especializada em desenvolvimento web, criação de aplicativos e design de identidade visual. Nossa missão é transformar a presença digital dos nossos clientes através de soluções inovadoras e criativas.</p>
+                <p>Combinamos <span class="terminal-highlight">tecnologia de ponta</span> com design sofisticado para criar experiências digitais memoráveis. Seja um site institucional, e-commerce, aplicativo mobile ou uma identidade visual completa, entregamos projetos que geram resultados reais.</p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">150+</span>
+                        <span class="stat-label">Projetos Entregues</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">120+</span>
+                        <span class="stat-label">Clientes Satisfeitos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Dedicação</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicos">
+        <div class="section-header">
+            <p class="section-label">O que fazemos</p>
+            <h2 class="section-title">Nossos <span class="gradient-text">Serviços</span></h2>
+            <p class="section-description">Soluções completas para transformar sua presença digital</p>
+        </div>
+        <div class="servicos-grid">
+            <div class="servico-card">
+                <div class="servico-icon"><i class="ri-code-s-slash-line"></i></div>
+                <h3>Sites Personalizados</h3>
+                <p>Desenvolvimento de sites únicos e exclusivos, criados do zero para atender perfeitamente às necessidades do seu negócio.</p>
+                <ul class="servico-features">
+                    <li>Design 100% personalizado</li>
+                    <li>Responsivo e otimizado</li>
+                    <li>SEO integrado</li>
+                    <li>Painel administrativo</li>
+                </ul>
+            </div>
+            <div class="servico-card">
+                <div class="servico-icon"><i class="ri-smartphone-line"></i></div>
+                <h3>Aplicativos Mobile</h3>
+                <p>Criação de aplicativos nativos e híbridos para iOS e Android, com foco em usabilidade e performance.</p>
+                <ul class="servico-features">
+                    <li>Design intuitivo</li>
+                    <li>Alta performance</li>
+                    <li>Integração com APIs</li>
+                    <li>Publicação nas stores</li>
+                </ul>
+            </div>
+            <div class="servico-card">
+                <div class="servico-icon"><i class="ri-palette-line"></i></div>
+                <h3>Identidade Visual</h3>
+                <p>Criação completa de identidade visual que traduz a essência da sua marca de forma profissional e memorável.</p>
+                <ul class="servico-features">
+                    <li>Logotipo exclusivo</li>
+                    <li>Manual da marca</li>
+                    <li>Materiais gráficos</li>
+                    <li>Design para redes sociais</li>
+                </ul>
+            </div>
+            <div class="servico-card">
+                <div class="servico-icon"><i class="ri-layout-grid-line"></i></div>
+                <h3>Sites Modelo</h3>
+                <p>Opções de sites pré-desenvolvidos e otimizados para diversos segmentos, com custo reduzido e entrega rápida.</p>
+                <ul class="servico-features">
+                    <li>Templates profissionais</li>
+                    <li>Personalização incluída</li>
+                    <li>Entrega em 7 dias</li>
+                    <li>Preço acessível</li>
+                </ul>
+            </div>
+            <div class="servico-card">
+                <div class="servico-icon"><i class="ri-instagram-line"></i></div>
+                <h3>Design para Instagram</h3>
+                <p>Pacotes mensais de design para feed e stories, mantendo sua marca sempre atualizada nas redes sociais.</p>
+                <ul class="servico-features">
+                    <li>Posts profissionais</li>
+                    <li>Stories personalizados</li>
+                    <li>Planejamento visual</li>
+                    <li>Entrega mensal</li>
+                </ul>
+            </div>
+            <div class="servico-card">
+                <div class="servico-icon"><i class="ri-gift-line"></i></div>
+                <h3>Combos Especiais</h3>
+                <p>Pacotes completos que unem identidade visual e design para Instagram com preços promocionais.</p>
+                <ul class="servico-features">
+                    <li>ID Visual completa</li>
+                    <li>1 ou 2 meses de posts</li>
+                    <li>Economia garantida</li>
+                    <li>Consultoria incluída</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="modelos">
+        <div class="section-header">
+            <p class="section-label">Templates Prontos</p>
+            <h2 class="section-title">Modelos de <span class="gradient-text">Sites</span></h2>
+            <p class="section-description">Templates profissionais prontos para diversos segmentos</p>
+        </div>
+        <div class="modelos-grid">
+            <div class="modelo-card" onclick="alert('Em breve você será direcionado para ver os modelos de Contabilidade')">
+                <div class="modelo-image"><i class="modelo-icon ri-calculator-line"></i></div>
+                <div class="modelo-info">
+                    <h3>Contabilidade</h3>
+                    <p>Sites profissionais para escritórios contábeis com seções para serviços, equipe e área do cliente.</p>
+                </div>
+            </div>
+            <div class="modelo-card" onclick="alert('Em breve você será direcionado para ver os modelos de Advocacia')">
+                <div class="modelo-image"><i class="modelo-icon ri-scales-3-line"></i></div>
+                <div class="modelo-info">
+                    <h3>Advocacia</h3>
+                    <p>Layouts elegantes para escritórios de advocacia com foco em credibilidade e profissionalismo.</p>
+                </div>
+            </div>
+            <div class="modelo-card" onclick="alert('Em breve você será direcionado para ver os modelos de Academias')">
+                <div class="modelo-image"><i class="modelo-icon ri-boxing-line"></i></div>
+                <div class="modelo-info">
+                    <h3>Academias</h3>
+                    <p>Designs modernos e energéticos para academias, com grade de horários e planos de treino.</p>
+                </div>
+            </div>
+            <div class="modelo-card" onclick="alert('Em breve você será direcionado para ver os modelos de Personal Trainer')">
+                <div class="modelo-image"><i class="modelo-icon ri-heartbeat-line"></i></div>
+                <div class="modelo-info">
+                    <h3>Personal Trainer</h3>
+                    <p>Sites personalizados para personal trainers com portfólio, depoimentos e agendamento online.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="planos">
+        <div class="section-header">
+            <p class="section-label">Preços</p>
+            <h2 class="section-title">Nossos <span class="gradient-text">Planos</span></h2>
+            <p class="section-description">Pacotes completos com os melhores preços do mercado</p>
+        </div>
+        <div class="planos-grid">
+            <div class="plano-card">
+                <h3 class="plano-nome">Combo Starter</h3>
+                <div class="plano-preco">R$ 1.497</div>
+                <p class="plano-periodo">Pagamento único</p>
+                <ul class="plano-features">
+                    <li>Identidade Visual Completa</li>
+                    <li>Logotipo + Manual da Marca</li>
+                    <li>8 Posts para Instagram</li>
+                    <li>4 Stories Personalizados</li>
+                    <li>1 mês de conteúdo</li>
+                    <li>Formatos para redes sociais</li>
+                    <li>Revisões ilimitadas</li>
+                    <li>Entrega em 15 dias</li>
+                </ul>
+                <a href="#contato" class="btn btn-secondary" style="width:100%">Escolher Plano</a>
+            </div>
+            <div class="plano-card destaque">
+                <div class="plano-badge">POPULAR</div>
+                <h3 class="plano-nome">Combo Professional</h3>
+                <div class="plano-preco">R$ 2.397</div>
+                <p class="plano-periodo">Pagamento único</p>
+                <ul class="plano-features">
+                    <li>Identidade Visual Completa</li>
+                    <li>Logotipo + Manual da Marca</li>
+                    <li>Papelaria Empresarial</li>
+                    <li>16 Posts para Instagram</li>
+                    <li>8 Stories Personalizados</li>
+                    <li>2 meses de conteúdo</li>
+                    <li>Planejamento de conteúdo</li>
+                    <li>Hashtags estratégicas</li>
+                    <li>Revisões ilimitadas</li>
+                    <li>Entrega em 20 dias</li>
+                    <li>Suporte prioritário</li>
+                </ul>
+                <a href="#contato" class="btn btn-primary" style="width:100%">Escolher Plano</a>
+            </div>
+            <div class="plano-card">
+                <h3 class="plano-nome">Combo Premium</h3>
+                <div class="plano-preco">R$ 3.997</div>
+                <p class="plano-periodo">Pagamento único</p>
+                <ul class="plano-features">
+                    <li>Identidade Visual Premium</li>
+                    <li>Logotipo + Sublogo + Manual</li>
+                    <li>Papelaria Completa</li>
+                    <li>Site Modelo Personalizado</li>
+                    <li>24 Posts para Instagram</li>
+                    <li>12 Stories + 6 Reels</li>
+                    <li>2 meses de conteúdo</li>
+                    <li>Estratégia de conteúdo</li>
+                    <li>Consultoria de branding</li>
+                    <li>Banco de imagens</li>
+                    <li>Revisões ilimitadas</li>
+                    <li>Entrega em 25 dias</li>
+                    <li>Suporte VIP</li>
+                </ul>
+                <a href="#contato" class="btn btn-secondary" style="width:100%">Escolher Plano</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="contact-section">
+        <div class="section-header">
+            <p class="section-label">Entre em contato</p>
+            <h2 class="section-title">Vamos Trabalhar <span class="gradient-text">Juntos</span></h2>
+            <p class="section-description">Preencha o formulário e nossa equipe retornará em até 24 horas</p>
+        </div>
+        <div class="contact-wrapper">
+            <form id="contactForm">
+                <div class="progress-bar">
+                    <div class="progress-step active">Informações</div>
+                    <div class="progress-step">Detalhes</div>
+                    <div class="progress-step">Enviar</div>
+                </div>
+                <div class="form-step active" id="step1">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder=" " required>
+                        <label class="form-label">Seu nome</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" placeholder=" " required>
+                        <label class="form-label">Seu melhor email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-input" placeholder=" " required>
+                        <label class="form-label">Telefone / WhatsApp</label>
+                    </div>
+                    <button type="button" class="form-button" onclick="nextStep(2)">Avançar <i class="ri-arrow-right-line"></i></button>
+                </div>
+                <div class="form-step" id="step2">
+                    <div class="form-group">
+                        <select class="form-input" required>
+                            <option value=""></option>
+                            <option>Site Personalizado</option>
+                            <option>Site Modelo</option>
+                            <option>Aplicativo Mobile</option>
+                            <option>Identidade Visual</option>
+                            <option>Combo Starter</option>
+                            <option>Combo Professional</option>
+                            <option>Combo Premium</option>
+                        </select>
+                        <label class="form-label">O que você procura?</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-input" placeholder=" " required></textarea>
+                        <label class="form-label">Conte-nos sobre seu projeto</label>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="form-button-secondary" onclick="nextStep(1)"><i class="ri-arrow-left-line"></i> Voltar</button>
+                        <button type="button" class="form-button" onclick="nextStep(3)">Revisar <i class="ri-check-line"></i></button>
+                    </div>
+                </div>
+                <div class="form-step" id="step3">
+                    <h3 class="review-title">Tudo pronto!</h3>
+                    <p class="review-text">Clique abaixo para enviar sua mensagem. Respondemos o mais breve possível!</p>
+                    <div class="form-navigation">
+                        <button type="button" class="form-button-secondary" onclick="nextStep(2)"><i class="ri-arrow-left-line"></i> Voltar</button>
+                        <button type="submit" class="form-button">Enviar Mensagem <i class="ri-send-plane-fill"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>TechCoDesign</h4>
+                <p>Transformando ideias em experiências digitais memoráveis desde 2020.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="ri-instagram-line"></i></a>
+                    <a href="#" class="social-link"><i class="ri-linkedin-fill"></i></a>
+                    <a href="#" class="social-link"><i class="ri-github-fill"></i></a>
+                    <a href="#" class="social-link"><i class="ri-whatsapp-line"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Navegação</h4>
+                <a href="#home">Início</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#modelos">Modelos</a>
+                <a href="#planos">Planos</a>
+                <a href="#contato">Contato</a>
+            </div>
+            <div class="footer-section">
+                <h4>Serviços</h4>
+                <a href="#servicos">Sites Personalizados</a>
+                <a href="#servicos">Aplicativos Mobile</a>
+                <a href="#servicos">Identidade Visual</a>
+                <a href="#modelos">Sites Modelo</a>
+                <a href="#planos">Combos</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <p>contato@techcodesign.com</p>
+                <p>(81) 99999-9999</p>
+                <p>Segunda a Sexta<br>9h às 18h</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TechCoDesign. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+    (function(){
+        // Cursor
+        const dot = document.querySelector('.cursor-dot');
+        const outline = document.querySelector('.cursor-outline');
+        if(dot && outline && !('ontouchstart' in window)){
+            let x=0,y=0,ox=0,oy=0;
+            document.addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY;dot.style.left=x+'px';dot.style.top=y+'px'});
+            function anim(){ox+=(x-ox)*0.15;oy+=(y-oy)*0.15;outline.style.left=ox+'px';outline.style.top=oy+'px';requestAnimationFrame(anim)}
+            anim();
+            document.querySelectorAll('a,button,.modelo-card,.servico-card,.plano-card').forEach(el=>{
+                el.addEventListener('mouseenter',()=>outline.classList.add('hover'));
+                el.addEventListener('mouseleave',()=>outline.classList.remove('hover'));
+            });
+        }else{
+            if(dot)dot.style.display='none';
+            if(outline)outline.style.display='none';
+        }
+
+        // Mobile Menu
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mobileNav');
+        if(toggle && nav){
+            toggle.onclick=()=>{toggle.classList.toggle('active');nav.classList.toggle('active')};
+            nav.querySelectorAll('a').forEach(a=>a.onclick=()=>{toggle.classList.remove('active');nav.classList.remove('active')});
+        }
+
+        // Form Steps
+        let step=1;
+        window.nextStep=function(n){
+            step=n;
+            document.querySelectorAll('.form-step').forEach(s=>s.classList.remove('active'));
+            document.querySelectorAll('.progress-step').forEach((s,i)=>s.classList.toggle('active',i<step));
+            const el=document.getElementById('step'+step);
+            if(el)el.classList.add('active');
+        }
+
+        // Form Submit
+        const form=document.getElementById('contactForm');
+        if(form){
+            form.onsubmit=e=>{
+                e.preventDefault();
+                alert('Obrigado por entrar em contato! Nossa equipe retornará em breve.');
+                form.reset();
+                nextStep(1);
+            }
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{
+            a.onclick=e=>{
+                e.preventDefault();
+                const t=document.querySelector(a.getAttribute('href'));
+                if(t)t.scrollIntoView({behavior:'smooth'});
+            }
+        });
+    })();
+    </script>
+</body>
+</html>
