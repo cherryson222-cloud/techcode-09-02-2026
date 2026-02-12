@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contábil Excelência - Soluções Contábeis Estratégicas | Recife-PE</title>
+    <meta name="description" content="Escritório de contabilidade em Recife-PE. Serviços contábeis, planejamento tributário, abertura de empresas e BPO financeiro.">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #1a4d2e;
+            --primary-light: #2d6a4f;
+            --accent: #d4af37;
+            --dark: #0d1b2a;
+            --light: #f8f9fa;
+            --gray: #64748b;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e9 100%);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(26, 77, 46, 0.1);
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.75rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 77, 46, 0.2);
+        }
+
+        .cta-button i {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Info Bar */
+        .info-bar {
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 0;
+            position: fixed;
+            top: 93px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .info-bar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-item i {
+            width: 18px;
+            height: 18px;
+        }
+
+        .info-item a {
+            color: var(--white);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .info-item a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 160px;
+            min-height: 90vh;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path d="M0,400 Q300,200 600,400 T1200,400 L1200,800 L0,800 Z" fill="%231a4d2e" opacity="0.03"/></svg>') no-repeat;
+            background-size: cover;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-badge i {
+            width: 16px;
+            height: 16px;
+        }
+
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+            max-width: 580px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid var(--primary);
+        }
+
+        .btn-primary i {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(26, 77, 46, 0.3);
+        }
+
+        .btn-primary:hover i {
+            transform: translateX(5px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary i {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover i {
+            transform: translateY(3px);
+        }
+
+        /* Animação de Pulso para Botão de Destaque */
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(26, 77, 46, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(26, 77, 46, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(26, 77, 46, 0); }
+        }
+
+        .btn-pulse {
+            animation: pulse-green 2s infinite;
+        }
+
+        /* Botão com efeito Shine (Brilho) */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            animation: fadeInUp 0.8s ease 0.6s backwards;
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-number i {
+            width: 28px;
+            height: 28px;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        .hero-visual {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2e1b 100%);
+            border-radius: 30px;
+            height: 550px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(26, 77, 46, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+        }
+
+        .hero-visual::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            bottom: -50px;
+            left: -50px;
+            border-radius: 50%;
+        }
+
+        .visual-dashboard {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 80%;
+            max-width: 350px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .visual-dashboard:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .dashboard-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+        }
+
+        .dashboard-title h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .dashboard-title span {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--white);
+        }
+
+        .stat-row span {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .stat-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .stat-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 3px;
+            width: 0;
+            animation: fillBar 1.5s ease forwards;
+        }
+
+        @keyframes fillBar {
+            to { width: var(--width); }
+        }
+
+        /* Floating elements */
+        .floating-card {
+            position: absolute;
+            background: var(--white);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            z-index: 3;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floating-card i {
+            color: var(--primary);
+            width: 20px;
+            height: 20px;
+        }
+
+        .floating-card span {
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .fc-1 { top: 15%; right: 10%; animation-delay: 0s; }
+        .fc-2 { bottom: 20%; left: 5%; animation-delay: 1.5s; }
+        .fc-3 { bottom: 10%; right: 15%; animation-delay: 2.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            background: transparent;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-tag i {
+            width: 14px;
+            height: 14px;
+        }
+
+        h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.8rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(26, 77, 46, 0.2);
+            box-shadow: 0 5px 15px rgba(26, 77, 46, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .service-icon i {
+            width: 28px;
+            height: 28px;
+            stroke-width: 2;
+        }
+
+        .service-card h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .service-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        .service-arrow {
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .service-arrow i {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+        }
+
+        .service-card:hover .service-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .service-btn {
+            margin-top: 1.5rem;
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover .service-btn {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(26, 77, 46, 0.2);
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 2rem;
+            background: transparent;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image-placeholder {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            border-radius: 20px;
+            height: 450px;
+            box-shadow: 0 20px 60px rgba(26, 77, 46, 0.2);
+        }
+
+        /* Wrapper da Imagem com Elementos Decorativos */
+        .about-image-wrapper {
+            position: relative;
+            z-index: 1;
+            margin-left: 20px; /* Espaço para a borda decorativa */
+        }
+
+        .about-image-back {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .about-dots {
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 120px;
+            height: 120px;
+            background-image: radial-gradient(var(--primary) 2px, transparent 2px);
+            background-size: 15px 15px;
+            opacity: 0.15;
+            z-index: -2;
+        }
+
+        .about-text h2 {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .feature-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border: 1px solid rgba(26, 77, 46, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(26, 77, 46, 0.1);
+        }
+
+        /* Efeito de linha preenchendo no hover */
+        .feature-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .feature-item:hover::after {
+            width: 100%;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-icon i {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: -40px;
+            right: -40px;
+            background: var(--white);
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 2;
+            border: 1px solid rgba(26, 77, 46, 0.1);
+            min-width: 180px;
+            animation: floatBadge 4s ease-in-out infinite;
+        }
+
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .exp-number {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .exp-text {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 600;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-item h4 {
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .testimonials .section-tag {
+            color: var(--accent);
+        }
+
+        .testimonials h2 {
+            color: var(--white);
+        }
+
+        .testimonials .section-description {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+            color: var(--white);
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 6rem 2rem;
+            background: transparent;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(26, 77, 46, 0.2);
+            box-shadow: 0 5px 15px rgba(26, 77, 46, 0.05);
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--dark);
+            user-select: none;
+        }
+
+        .faq-toggle {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+            font-size: 20px;
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer-content {
+            padding: 0 2rem 1.5rem 2rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+        }
+
+        .contact-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-info h2 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-icon i {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+        }
+
+        .contact-item a {
+            color: var(--white);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .contact-item a:hover {
+            opacity: 0.8;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 77, 46, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn i {
+            width: 20px;
+            height: 20px;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(26, 77, 46, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-about {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+
+        .social-link i {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-section h4 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links li i {
+            width: 16px;
+            height: 16px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        /* Responsive */
+        /* Desktop: 1920px */
+        @media (min-width: 1920px) {
+            .container, nav, .hero-content, .info-bar-content, .footer-content, .contact-content {
+                max-width: 1600px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image {
+                display: none;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .experience-badge {
+                display: none;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .cta-button {
+                font-size: 0.85rem;
+                padding: 0.6rem 1.2rem;
+            }
+
+            .info-bar {
+                top: 85px;
+            }
+
+            .hero {
+                margin-top: 210px;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .info-bar-content {
+                gap: 1.5rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Mobile: 375px */
+        @media (max-width: 375px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section-header h2 {
+                font-size: 1.75rem;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+
+            footer {
+                padding-bottom: 6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Contábil Excelência</div>
+            <ul class="nav-links">
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#depoimentos">Depoimentos</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <a href="#contato" class="cta-button">
+                Fale Conosco
+                <i data-lucide="phone"></i>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Info Bar -->
+    <div class="info-bar">
+        <div class="info-bar-content">
+            <div class="info-item">
+                <i data-lucide="phone"></i>
+                <a href="https://wa.me/5581996273630" target="_blank">
+                    <strong>(81) 99627-3630</strong>
+                </a>
+            </div>
+            <div class="info-item">
+                <i data-lucide="map-pin"></i>
+                <span>Recife - PE</span>
+            </div>
+            <div class="info-item">
+                <i data-lucide="clock"></i>
+                <span>Seg-Sex: 8h às 18h</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-badge">
+                    <i data-lucide="map-pin"></i>
+                    Recife/PE • Mais de 15 anos de experiência
+                </span>
+                <h1>Contabilidade estratégica para o crescimento do seu negócio</h1>
+                <p>Soluções contábeis completas e personalizadas. Transformamos números em estratégia, compliance em tranquilidade.</p>
+                <div class="hero-buttons">
+                    <a href="#contato" class="btn-primary">
+                        Solicite uma Proposta
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                    <a href="#servicos" class="btn-secondary">
+                        <i data-lucide="chevron-down"></i>
+                        Conheça os Serviços
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">
+                            <i data-lucide="building"></i>
+                            500+
+                        </span>
+                        <span class="stat-label">Empresas atendidas</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">
+                            <i data-lucide="calendar-check"></i>
+                            15
+                        </span>
+                        <span class="stat-label">Anos de mercado</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">
+                            <i data-lucide="star"></i>
+                            98%
+                        </span>
+                        <span class="stat-label">Satisfação dos clientes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-visual">
+                    <div class="visual-dashboard">
+                        <div class="dashboard-header">
+                            <div class="dashboard-icon">
+                                <i data-lucide="trending-up"></i>
+                            </div>
+                            <div class="dashboard-title">
+                                <h4>Gestão Inteligente</h4>
+                                <span>Monitoramento em tempo real</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-stats">
+                            <div>
+                                <div class="stat-row">
+                                    <span>Redução de Custos</span>
+                                    <strong>28%</strong>
+                                </div>
+                                <div class="stat-bar"><div class="stat-fill" style="--width: 75%"></div></div>
+                            </div>
+                            <div>
+                                <div class="stat-row">
+                                    <span>Eficiência Fiscal</span>
+                                    <strong>95%</strong>
+                                </div>
+                                <div class="stat-bar"><div class="stat-fill" style="--width: 95%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="floating-card fc-1">
+                        <i data-lucide="pie-chart"></i>
+                        <span>Planejamento</span>
+                    </div>
+                    <div class="floating-card fc-2">
+                        <i data-lucide="shield-check"></i>
+                        <span>Compliance 100%</span>
+                    </div>
+                    <div class="floating-card fc-3">
+                        <i data-lucide="file-check"></i>
+                        <span>BPO Financeiro</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="servicos">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">
+                    <i data-lucide="briefcase"></i>
+                    NOSSOS SERVIÇOS
+                </div>
+                <h2>Soluções completas para sua empresa</h2>
+                <p class="section-description">Oferecemos um portfólio completo de serviços contábeis, fiscais e de gestão, adaptados às necessidades específicas do seu negócio.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-lucide="book-open"></i>
+                    </div>
+                    <h3>Contabilidade Empresarial</h3>
+                    <p>Escrituração contábil completa, demonstrações financeiras e relatórios gerenciais para todas as modalidades empresariais (MEI, ME, EPP, Ltda).</p>
+                    <a href="#contato" class="service-btn">
+                        Saiba Mais
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-lucide="chart-no-axes-combined"></i>
+                    </div>
+                    <h3>Planejamento Tributário</h3>
+                    <p>Análise estratégica para redução legal da carga tributária. Escolha do regime tributário mais vantajoso: Simples Nacional, Lucro Presumido ou Lucro Real.</p>
+                    <a href="#contato" class="service-btn">
+                        Saiba Mais
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3>Assessoria Fiscal</h3>
+                    <p>Gestão de obrigações acessórias, apuração de impostos e garantia de compliance fiscal para evitar multas e penalidades.</p>
+                    <a href="#contato" class="service-btn">
+                        Saiba Mais
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-lucide="user-check"></i>
+                    </div>
+                    <h3>Departamento Pessoal</h3>
+                    <p>Folha de pagamento, admissões, rescisões, férias, encargos trabalhistas e gestão completa de RH com conformidade legal.</p>
+                    <a href="#contato" class="service-btn">
+                        Saiba Mais
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-lucide="building-2"></i>
+                    </div>
+                    <h3>Abertura de Empresas</h3>
+                    <p>Consultoria completa para abertura, alteração e encerramento de empresas. Registro em todos os órgãos competentes de forma ágil.</p>
+                    <a href="#contato" class="service-btn">
+                        Saiba Mais
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-lucide="wallet"></i>
+                    </div>
+                    <h3>BPO Financeiro</h3>
+                    <p>Terceirização do departamento financeiro com controle de contas a pagar e receber, fluxo de caixa e conciliação bancária.</p>
+                    <a href="#contato" class="service-btn">
+                        Saiba Mais
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="sobre">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image-wrapper">
+                    <div class="about-image-back"></div>
+                    <div class="about-dots"></div>
+                    <div class="about-image-placeholder"></div>
+                    <div class="experience-badge">
+                        <span class="exp-number">15+</span>
+                        <span class="exp-text">Anos de Mercado</span>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <div class="section-tag">
+                        <i data-lucide="info"></i>
+                        SOBRE NÓS
+                    </div>
+                    <h2>Experiência e confiança em cada serviço prestado</h2>
+                    <p>Fundada há mais de 15 anos, a Contábil Excelência se consolidou como referência em soluções contábeis estratégicas. Nossa missão é transformar a complexidade tributária e contábil em tranquilidade para nossos clientes.</p>
+                    <p>Combinamos expertise técnica, tecnologia de ponta e atendimento humanizado para entregar não apenas números, mas insights que impulsionam o crescimento sustentável dos negócios que atendemos.</p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="badge-check"></i>
+                            </div>
+                            <div>
+                                <h4>Certificações</h4>
+                                <p>CRC ativo e equipe certificada</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="cloud"></i>
+                            </div>
+                            <div>
+                                <h4>Tecnologia</h4>
+                                <p>Sistemas integrados e portal do cliente</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h4>Especialização</h4>
+                                <p>Experiência em múltiplos setores</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="message-circle"></i>
+                            </div>
+                            <div>
+                                <h4>Atendimento</h4>
+                                <p>Suporte personalizado e ágil</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 3rem;">
+                        <a href="#contato" class="btn-primary btn-pulse btn-shine">
+                            Fale com um Especialista
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="depoimentos">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">
+                    <i data-lucide="quote"></i>
+                    DEPOIMENTOS
+                </div>
+                <h2>O que nossos clientes dizem</h2>
+                <p class="section-description">A confiança de centenas de empresas que crescem conosco</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"A Contábil Excelência transformou nossa gestão financeira. Com o planejamento tributário que desenvolveram, reduzimos nossa carga fiscal em 28% de forma totalmente legal."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>Marina Rodrigues</h4>
+                            <p>CEO, TechSolutions Ltda</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Atendimento excepcional! A equipe é extremamente proativa e sempre nos mantém informados sobre obrigações e prazos. Nunca tivemos problemas com fiscalização."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">CS</div>
+                        <div class="author-info">
+                            <h4>Carlos Silva</h4>
+                            <p>Proprietário, Padaria Artesanal</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Desde que migramos para a Contábil Excelência, nossa empresa ganhou organização e clareza financeira. Os relatórios gerenciais são essenciais para nossas decisões estratégicas."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AP</div>
+                        <div class="author-info">
+                            <h4>Ana Paula Costa</h4>
+                            <p>Diretora Financeira, Clínica Vida</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">
+                    <i data-lucide="help-circle"></i>
+                    PERGUNTAS FREQUENTES
+                </div>
+                <h2>Tire suas dúvidas</h2>
+                <p class="section-description">Respostas para as questões mais comuns sobre contabilidade e nossos serviços</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Qual regime tributário é melhor para minha empresa?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Depende do faturamento, atividade e margem de lucro da empresa. O Simples Nacional é ideal para empresas com faturamento até R$ 4,8 milhões/ano. Lucro Presumido funciona bem para empresas de serviços com margem alta. Lucro Real pode ser vantajoso para empresas com margem baixa ou prejuízo. Fazemos uma análise completa para identificar a melhor opção.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quanto tempo leva para abrir uma empresa?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            O processo de abertura leva em média de 5 a 15 dias úteis, dependendo do município e tipo de atividade. Empresas virtuais ou de baixo risco podem ser abertas mais rapidamente. Cuidamos de todo o processo: registro na Junta Comercial, CNPJ, Inscrição Estadual/Municipal e alvarás necessários.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como funciona o planejamento tributário?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Analisamos todas as operações da empresa, regime tributário atual, projeções de faturamento e despesas para identificar oportunidades legais de economia tributária. Isso pode incluir mudança de regime, reorganização societária, aproveitamento de incentivos fiscais e outras estratégias totalmente dentro da lei.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Preciso ir até o escritório para contratar os serviços?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Não! Todo o processo pode ser feito de forma digital. Realizamos reuniões por videoconferência, assinatura eletrônica de contratos e disponibilizamos um portal exclusivo onde você acompanha todos os documentos e movimentações da sua empresa em tempo real.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quais documentos preciso enviar mensalmente?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Geralmente: notas fiscais de entrada e saída, extratos bancários, comprovantes de despesas, folhas de ponto e informações de admissões/demissões. Nosso sistema permite envio digital organizado e temos uma equipe dedicada para te orientar sobre a documentação necessária.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contato">
+        <div class="contact-content">
+            <div class="contact-info">
+                <h2>Entre em contato conosco</h2>
+                <p>Estamos prontos para atender sua empresa com excelência e profissionalismo. Solicite uma proposta sem compromisso.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i data-lucide="smartphone"></i>
+                        </div>
+                        <div>
+                            <strong>
+                                <a href="https://wa.me/5581996273630" target="_blank">(81) 99627-3630</a>
+                            </strong><br>
+                            WhatsApp disponível
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i data-lucide="mail"></i>
+                        </div>
+                        <div>
+                            <strong>contato@contabilexcelencia.com.br</strong><br>
+                            Resposta em até 24h
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i data-lucide="map-pin"></i>
+                        </div>
+                        <div>
+                            <strong>Recife - PE</strong><br>
+                            Atendimento presencial e online
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" placeholder="Digite seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="tel" placeholder="(00) 00000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo de Empresa</label>
+                        <select required>
+                            <option value="">Selecione</option>
+                            <option>Ainda não tenho empresa</option>
+                            <option>MEI</option>
+                            <option>ME - Microempresa</option>
+                            <option>EPP - Empresa de Pequeno Porte</option>
+                            <option>Empresa de Médio/Grande Porte</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensagem</label>
+                        <textarea placeholder="Descreva suas necessidades..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i data-lucide="send"></i>
+                        Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo">Contábil Excelência</div>
+                <p class="footer-about">Soluções contábeis estratégicas para impulsionar o crescimento do seu negócio. Há mais de 15 anos transformando números em resultados.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <i data-lucide="facebook"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i data-lucide="youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Serviços</h4>
+                <ul class="footer-links">
+                    <li><a href="#servicos">Contabilidade</a></li>
+                    <li><a href="#servicos">Planejamento Tributário</a></li>
+                    <li><a href="#servicos">Dep. Pessoal</a></li>
+                    <li><a href="#servicos">Abertura de Empresas</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Empresa</h4>
+                <ul class="footer-links">
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                    <li><a href="#depoimentos">Depoimentos</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Carreiras</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul class="footer-links">
+                    <li>
+                        <i data-lucide="phone"></i>
+                        <a href="https://wa.me/5581996273630" target="_blank">(81) 99627-3630</a>
+                    </li>
+                    <li>
+                        <i data-lucide="mail"></i>
+                        <span>contato@contabil.com.br</span>
+                    </li>
+                    <li>
+                        <i data-lucide="map-pin"></i>
+                        <span>Recife - PE</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Contábil Excelência - Recife/PE | Todos os direitos reservados | CNPJ: 00.000.000/0001-00 | CRC/PE 000000 | Desenvolvido pela TechCoDesign</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/5581996273630?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20contábeis." target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>
+    </a>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const answer = item.querySelector('.faq-answer');
+                
+                // Toggle active class
+                item.classList.toggle('active');
+                
+                // Toggle answer visibility
+                if (item.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                } else {
+                    answer.style.maxHeight = '0';
+                }
+                
+                // Close other items
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-answer').style.maxHeight = '0';
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.contact-form form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Obrigado pelo contato! Em breve retornaremos.');
+        });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

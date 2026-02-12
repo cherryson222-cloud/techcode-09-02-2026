@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelos de Contabilidade | TechCoDesign</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :root {
+            --black: #090909;
+            --magenta: #b515bf;
+            --cyan: #33c5e8;
+            --purple: #400f7d;
+            --white: #ffffff;
+            --gray: #a0a0a0;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Background Animado (Simplificado) */
+        .animated-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; overflow: hidden;
+        }
+        .gradient-orb {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.2;
+        }
+        .orb-1 { width: 500px; height: 500px; background: var(--magenta); top: -10%; right: -10%; }
+        .orb-2 { width: 400px; height: 400px; background: var(--cyan); bottom: -10%; left: -10%; }
+
+        /* Header */
+        header {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .btn-back {
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .btn-back:hover { color: var(--cyan); }
+
+        /* Main Content */
+        main {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 80vh;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-title {
+            font-family: 'Urbanist', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-desc {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Grid de Templates */
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .template-card {
+            background: var(--glass);
+            border: 1px solid rgba(181, 21, 191, 0.2);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .template-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cyan);
+            box-shadow: 0 20px 50px rgba(51, 197, 232, 0.15);
+        }
+
+        .template-cover {
+            height: 240px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .template-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .template-card:hover .template-cover img {
+            transform: scale(1.05);
+        }
+
+        .template-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(9,9,9,0.8) 100%);
+        }
+
+        .template-info {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .template-tag {
+            display: inline-block;
+            background: rgba(181, 21, 191, 0.2);
+            color: var(--cyan);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            align-self: flex-start;
+        }
+
+        .template-title {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+
+        .template-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .btn-view {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-view:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(181, 21, 191, 0.3);
+        }
+
+        .btn-disabled {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            cursor: not-allowed;
+        }
+        .btn-disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header>
+        <a href="index.html" class="logo">TECHCODESIGN</a>
+        <a href="index.html#modelos" class="btn-back"><i class="ri-arrow-left-line"></i> Voltar</a>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title">Modelos de <span class="gradient-text">Contabilidade</span></h1>
+            <p class="page-desc">Escolha o layout que transmite confiança e expertise para o seu escritório contábil.</p>
+        </div>
+
+        <div class="templates-grid">
+            <!-- Modelo 1 -->
+            <div class="template-card">
+                <div class="template-cover">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop" alt="Modelo Excelência">
+                    <div class="template-overlay"></div>
+                </div>
+                <div class="template-info">
+                    <span class="template-tag">Modelo 01</span>
+                    <h3 class="template-title">Excelência Corporativa</h3>
+                    <p class="template-desc">Design robusto e estratégico, ideal para escritórios que buscam transmitir autoridade e solidez.</p>
+                    <a href="contabilidade1.html" class="btn-view">Ver Demonstração <i class="ri-eye-line"></i></a>
+                </div>
+            </div>
+
+            <!-- Modelo 2 -->
+            <div class="template-card">
+                <div class="template-cover">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="Modelo Consultivo">
+                    <div class="template-overlay"></div>
+                </div>
+                <div class="template-info">
+                    <span class="template-tag">Modelo 02</span>
+                    <h3 class="template-title">Navis Consultiva</h3>
+                    <p class="template-desc">Layout moderno e clean, focado em contabilidade digital e consultiva. Ótimo para atrair startups e empresas tech.</p>
+                    <a href="contabilidade2.html" class="btn-view">Ver Demonstração <i class="ri-eye-line"></i></a>
+                </div>
+            </div>
+
+            <!-- Modelo 3 -->
+            <div class="template-card">
+                <div class="template-cover">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" alt="Modelo Fiscal">
+                    <div class="template-overlay"></div>
+                </div>
+                <div class="template-info">
+                    <span class="template-tag">Modelo 03</span>
+                    <h3 class="template-title">Fiscal Tech</h3>
+                    <p class="template-desc">Focado em automação e tecnologia. Ideal para contabilidades online e serviços digitais.</p>
+                    <a href="#" class="btn-view btn-disabled" onclick="alert('Este modelo estará disponível em breve!'); return false;">Em Breve <i class="ri-time-line"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TechCoDesign. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
