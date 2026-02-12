@@ -904,6 +904,75 @@
             margin-bottom: 2rem;
         }
 
+        /* Mascote Section */
+        .mascot-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 5%;
+            background: linear-gradient(180deg, rgba(9, 9, 9, 0) 0%, rgba(181, 21, 191, 0.05) 100%);
+        }
+
+        .mascot-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            max-width: 1100px;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .mascot-image img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 30px rgba(181, 21, 191, 0.2));
+        }
+
+        .mascot-text-box {
+            flex: 1;
+            min-width: 300px;
+            background: var(--glass);
+            border: 1px solid rgba(51, 197, 232, 0.3);
+            padding: 3rem;
+            border-radius: 24px;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .mascot-label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(51, 197, 232, 0.1);
+            border: 1px solid var(--cyan);
+            border-radius: 50px;
+            color: var(--cyan);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .mascot-text-box h3 {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .mascot-text-box p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .mascot-section { text-align: center; }
+            .mascot-container { gap: 2rem; }
+        }
+
         /* Footer */
         footer {
             padding: 4rem 5% 2rem;
@@ -938,27 +1007,33 @@
 
         .social-links {
             display: flex;
-            gap: 1rem;
+            gap: 1.2rem;
             margin-top: 1.5rem;
         }
 
-        .social-link {
+        /* Aumentei a especificidade para vencer o conflito com .footer-section a */
+        .social-links .social-link {
             width: 45px;
             height: 45px;
             border-radius: 50%;
-            background: var(--glass);
-            border: 1px solid rgba(181, 21, 191, 0.2);
+            background: rgba(51, 197, 232, 0.1);
+            border: 1px solid var(--cyan);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
+            color: var(--cyan);
             font-size: 1.2rem;
-            transition: all 0.3s;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 0; /* Remove margem herdada */
+            box-shadow: 0 0 10px rgba(51, 197, 232, 0.1);
         }
 
-        .social-link:hover {
-            background: linear-gradient(135deg, var(--magenta), var(--cyan));
-            transform: translateY(-5px);
+        .social-links .social-link:hover {
+            background: var(--cyan);
+            color: var(--black);
+            box-shadow: 0 0 20px rgba(51, 197, 232, 0.4);
+            transform: translateY(-3px);
         }
 
         .footer-bottom {
@@ -1037,7 +1112,7 @@
             <p class="hero-description">Desenvolvimento de sites, aplicativos e identidades visuais que elevam sua marca ao próximo nível. Soluções completas e personalizadas para o seu negócio digital.</p>
             <div class="cta-buttons">
                 <a href="#planos" class="btn btn-primary"><span>Ver Planos</span><i class="ri-arrow-right-line"></i></a>
-                <a href="#contato" class="btn btn-secondary">Falar com Especialista</a>
+                <a href="https://wa.me/5581996273630" target="_blank" class="btn btn-secondary">Entrar em contato</a>
             </div>
         </div>
     </section>
@@ -1050,7 +1125,7 @@
                     <span class="btn-term minimize"></span>
                     <span class="btn-term maximize"></span>
                 </div>
-                <div class="terminal-title">TECHCODESIGN.EXE</div>
+                <div class="terminal-title">Tech CoDesign</div>
             </div>
             <div class="terminal-body">
                 <h3>Bem-vindo à <span class="terminal-highlight">TechCoDesign</span></h3>
@@ -1070,6 +1145,19 @@
                         <span class="stat-label">Dedicação</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mascot-section">
+        <div class="mascot-container">
+            <div class="mascot-image">
+                <img src="https://drive.google.com/thumbnail?id=18WvKOveBjdcubynzYjcdGiF8k4wDK7MX&sz=w1000" alt="Mascote TechCoDesign">
+            </div>
+            <div class="mascot-text-box">
+                <span class="mascot-label">Sua Assistente</span>
+                <h3>Olá, eu sou a Tech!</h3>
+                <p>"A tecnologia existe para facilitar sua vida. Estou aqui para garantir que sua experiência digital seja incrível e sem complicações."</p>
             </div>
         </div>
     </section>
@@ -1157,7 +1245,7 @@
             <p class="section-description">Templates profissionais prontos para diversos segmentos</p>
         </div>
         <div class="modelos-grid">
-            <div class="modelo-card" onclick="alert('Em breve você será direcionado para ver os modelos de Contabilidade')">
+            <div class="modelo-card" onclick="window.location.href='modelos-contabilidade.html'">
                 <div class="modelo-image"><i class="modelo-icon ri-calculator-line"></i></div>
                 <div class="modelo-info">
                     <h3>Contabilidade</h3>
@@ -1183,6 +1271,13 @@
                 <div class="modelo-info">
                     <h3>Personal Trainer</h3>
                     <p>Sites personalizados para personal trainers com portfólio, depoimentos e agendamento online.</p>
+                </div>
+            </div>
+            <div class="modelo-card" onclick="window.location.href='modelos-psicologia.html'">
+                <div class="modelo-image"><i class="modelo-icon ri-mental-health-line"></i></div>
+                <div class="modelo-info">
+                    <h3>Psicólogas</h3>
+                    <p>Modelos de sites elegantes e acolhedores para psicólogas, focados em transmitir confiança e profissionalismo.</p>
                 </div>
             </div>
         </div>
@@ -1270,22 +1365,22 @@
                 </div>
                 <div class="form-step active" id="step1">
                     <div class="form-group">
-                        <input type="text" class="form-input" placeholder=" " required>
+                        <input type="text" id="inputName" class="form-input" placeholder=" " required>
                         <label class="form-label">Seu nome</label>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-input" placeholder=" " required>
+                        <input type="email" id="inputEmail" class="form-input" placeholder=" " required>
                         <label class="form-label">Seu melhor email</label>
                     </div>
                     <div class="form-group">
-                        <input type="tel" class="form-input" placeholder=" " required>
+                        <input type="tel" id="inputPhone" class="form-input" placeholder=" " required>
                         <label class="form-label">Telefone / WhatsApp</label>
                     </div>
                     <button type="button" class="form-button" onclick="nextStep(2)">Avançar <i class="ri-arrow-right-line"></i></button>
                 </div>
                 <div class="form-step" id="step2">
                     <div class="form-group">
-                        <select class="form-input" required>
+                        <select id="inputService" class="form-input" required>
                             <option value=""></option>
                             <option>Site Personalizado</option>
                             <option>Site Modelo</option>
@@ -1298,7 +1393,11 @@
                         <label class="form-label">O que você procura?</label>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-input" placeholder=" " required></textarea>
+                        <input type="text" id="inputRequest" class="form-input" placeholder=" " required>
+                        <label class="form-label">Resumo do Pedido</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="inputDetails" class="form-input" placeholder=" " required></textarea>
                         <label class="form-label">Conte-nos sobre seu projeto</label>
                     </div>
                     <div class="form-navigation">
@@ -1321,13 +1420,11 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h4>TechCoDesign</h4>
+                <img src="https://drive.google.com/thumbnail?id=1gahc9gkIUbYUXFwGSFskGRKuX6B1rId0&sz=w1000" alt="TechCoDesign" style="max-width: 150px; margin-bottom: 0.5rem;">
                 <p>Transformando ideias em experiências digitais memoráveis desde 2020.</p>
                 <div class="social-links">
-                    <a href="#" class="social-link"><i class="ri-instagram-line"></i></a>
-                    <a href="#" class="social-link"><i class="ri-linkedin-fill"></i></a>
-                    <a href="#" class="social-link"><i class="ri-github-fill"></i></a>
-                    <a href="#" class="social-link"><i class="ri-whatsapp-line"></i></a>
+                    <a href="#" class="social-link"><i class="ri-instagram-fill"></i></a>
+                    <a href="https://wa.me/5581996273630" target="_blank" class="social-link"><i class="ri-whatsapp-fill"></i></a>
                 </div>
             </div>
             <div class="footer-section">
@@ -1350,7 +1447,7 @@
             <div class="footer-section">
                 <h4>Contato</h4>
                 <p>contato@techcodesign.com</p>
-                <p>(81) 99999-9999</p>
+                <p>+55 81 9 9627-3630</p>
                 <p>Segunda a Sexta<br>9h às 18h</p>
             </div>
         </div>
@@ -1401,7 +1498,18 @@
         if(form){
             form.onsubmit=e=>{
                 e.preventDefault();
-                alert('Obrigado por entrar em contato! Nossa equipe retornará em breve.');
+                
+                const name = document.getElementById('inputName').value;
+                const email = document.getElementById('inputEmail').value;
+                const phone = document.getElementById('inputPhone').value;
+                const service = document.getElementById('inputService').value;
+                const request = document.getElementById('inputRequest').value;
+                const details = document.getElementById('inputDetails').value;
+
+                const message = `*Novo Pedido via Site*%0A%0A*Nome:* ${name}%0A*Email:* ${email}%0A*WhatsApp:* ${phone}%0A*Serviço:* ${service}%0A*Pedido:* ${request}%0A*Detalhes:* ${details}`;
+                
+                window.open(`https://wa.me/5581996273630?text=${message}`, '_blank');
+                
                 form.reset();
                 nextStep(1);
             }
