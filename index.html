@@ -1117,6 +1117,117 @@
         </div>
     </section>
 
+    <!-- ============================================================
+     TICKER STRIP — TECHCODESIGN
+     Sugestão: cole logo após o </section> do Hero (#home),
+     antes da seção #sobre
+     ============================================================ -->
+
+<!-- ── CSS: adicione dentro do <style> existente ─────────────── -->
+<style>
+/* ─── Ticker Strip ──────────────────────────────────────────── */
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    padding: 1.1rem 0;
+    background: linear-gradient(90deg,
+        rgba(181, 21, 191, 0.12) 0%,
+        rgba(51, 197, 232, 0.08) 50%,
+        rgba(181, 21, 191, 0.12) 100%);
+    border-top: 1px solid rgba(181, 21, 191, 0.25);
+    border-bottom: 1px solid rgba(51, 197, 232, 0.2);
+    position: relative;
+    /* fade nas bordas */
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 8%,
+        black 92%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 8%,
+        black 92%,
+        transparent 100%
+    );
+}
+
+.ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker-scroll 28s linear infinite;
+}
+
+.ticker-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes ticker-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0 2.5rem;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--white);
+    white-space: nowrap;
+    opacity: 0.85;
+    transition: opacity 0.3s;
+}
+
+.ticker-item:hover { opacity: 1; }
+
+.ticker-sep {
+    color: var(--magenta);
+    font-size: 1.1rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+/* Alterna a cor do losango entre magenta e cyan */
+.ticker-item:nth-child(even) .ticker-sep  { color: var(--cyan); }
+</style>
+
+<!-- ── HTML ──────────────────────────────────────────────────── -->
+<div class="ticker-wrap">
+    <div class="ticker-track" id="tickerTrack">
+        <!-- Bloco original (será duplicado pelo JS) -->
+        <span class="ticker-item">Sites Personalizados <span class="ticker-sep">◆</span></span>
+        <span class="ticker-item">Aplicativos Mobile <span class="ticker-sep">◆</span></span>
+        <span class="ticker-item">Identidade Visual <span class="ticker-sep">◆</span></span>
+        <span class="ticker-item">Sites Modelo <span class="ticker-sep">◆</span></span>
+        <span class="ticker-item">Design para Instagram <span class="ticker-sep">◆</span></span>
+        <span class="ticker-item">Combos Especiais <span class="ticker-sep">◆</span></span>
+        <span class="ticker-item">SEO & Performance <span class="ticker-sep">◆</span></span>
+        <span class="ticker-item">Consultoria Digital <span class="ticker-sep">◆</span></span>
+        <span class="ticker-item">Branding Completo <span class="ticker-sep">◆</span></span>
+        <span class="ticker-item">E-commerce <span class="ticker-sep">◆</span></span>
+        <span class="ticker-item">UI / UX Design <span class="ticker-sep">◆</span></span>
+        <span class="ticker-item">Suporte & Manutenção <span class="ticker-sep">◆</span></span>
+    </div>
+</div>
+
+<!-- ── JS: adicione DENTRO do (function(){ ... })() já existente ── -->
+<script>
+/* Ticker — duplica os itens para loop contínuo sem gaps */
+(function(){
+    const track = document.getElementById('tickerTrack');
+    if (!track) return;
+    // Clona o conteúdo original para criar loop sem gaps
+    const clone = track.innerHTML;
+    track.innerHTML = clone + clone;
+})();
+</script>
     <section id="sobre" class="about-section">
         <div class="terminal-window">
             <div class="terminal-header">
@@ -1350,6 +1461,8 @@
         </div>
     </section>
 
+    
+
     <section id="contato" class="contact-section">
         <div class="section-header">
             <p class="section-label">Entre em contato</p>
@@ -1416,6 +1529,1299 @@
             </form>
         </div>
     </section>
+
+<!-- ============================================================
+     SEÇÃO FAQ — TECHCODESIGN
+     Cole este bloco completo no seu index.html
+     Sugestão: antes do <section id="contato">
+     ============================================================ -->
+
+<!-- ── CSS: adicione dentro do <style> existente ─────────────── -->
+<style>
+/* ─── FAQ ──────────────────────────────────────────────────── */
+.faq-section {
+    position: relative;
+}
+
+.faq-categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 3.5rem;
+}
+
+.faq-cat-btn {
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    background: transparent;
+    border: 1px solid rgba(181, 21, 191, 0.35);
+    color: var(--gray);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.faq-cat-btn.active,
+.faq-cat-btn:hover {
+    background: linear-gradient(135deg, var(--magenta), var(--cyan));
+    border-color: transparent;
+    color: var(--white);
+}
+
+.faq-grid {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.faq-item {
+    background: var(--glass);
+    border: 1px solid rgba(181, 21, 191, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.faq-item.open {
+    border-color: var(--cyan);
+    box-shadow: 0 8px 40px rgba(51, 197, 232, 0.12);
+}
+
+.faq-item[data-cat] { display: flex; flex-direction: column; }
+.faq-item[data-cat].hidden { display: none; }
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.6rem 2rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.faq-q-left {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.faq-num {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--cyan);
+    min-width: 24px;
+    opacity: 0.7;
+}
+
+.faq-question span {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.4;
+}
+
+.faq-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid rgba(51, 197, 232, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cyan);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s;
+}
+
+.faq-item.open .faq-icon {
+    transform: rotate(45deg);
+    background: rgba(51, 197, 232, 0.15);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.3s ease;
+    padding: 0 2rem 0 5rem;
+}
+
+.faq-item.open .faq-answer {
+    max-height: 400px;
+    padding: 0 2rem 1.8rem 5rem;
+}
+
+.faq-answer p {
+    color: var(--gray);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.faq-answer p + p { margin-top: 0.8rem; }
+
+.faq-answer strong {
+    color: var(--white);
+    font-weight: 600;
+}
+
+.faq-answer a {
+    color: var(--cyan);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.faq-answer a:hover { text-decoration: underline; }
+
+.faq-cta-strip {
+    max-width: 860px;
+    margin: 3.5rem auto 0;
+    background: linear-gradient(135deg, rgba(181,21,191,0.12), rgba(51,197,232,0.08));
+    border: 1px solid rgba(51, 197, 232, 0.25);
+    border-radius: 20px;
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.faq-cta-strip p {
+    color: var(--gray);
+    font-size: 1rem;
+}
+
+.faq-cta-strip strong {
+    display: block;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+}
+
+@media (max-width: 768px) {
+    .faq-answer { padding-left: 2rem; }
+    .faq-item.open .faq-answer { padding-left: 2rem; }
+    .faq-cta-strip { padding: 2rem; }
+}
+</style>
+
+<!-- ── HTML: o bloco da seção ────────────────────────────────── -->
+<section id="faq" class="faq-section">
+    <div class="section-header">
+        <p class="section-label">Dúvidas frequentes</p>
+        <h2 class="section-title">Perguntas <span class="gradient-text">Frequentes</span></h2>
+        <p class="section-description">Respondemos as principais dúvidas sobre nossos serviços e processos</p>
+    </div>
+
+    <!-- Filtro por categoria -->
+    <div class="faq-categories">
+        <button class="faq-cat-btn active" data-filter="todos">Todas</button>
+        <button class="faq-cat-btn" data-filter="servicos">Serviços</button>
+        <button class="faq-cat-btn" data-filter="processo">Como Funciona</button>
+        <button class="faq-cat-btn" data-filter="pagamento">Pagamento</button>
+        <button class="faq-cat-btn" data-filter="prazo">Prazos</button>
+        <button class="faq-cat-btn" data-filter="suporte">Suporte</button>
+    </div>
+
+    <div class="faq-grid">
+
+        <!-- ── SERVIÇOS ──────────────────────────────────────── -->
+        <div class="faq-item" data-cat="servicos">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">01</span>
+                    <span>Qual a diferença entre um Site Personalizado e um Site Modelo?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>O <strong>Site Modelo</strong> é um template pré-desenvolvido para segmentos específicos (contabilidade, advocacia, academia etc.). É mais ágil e econômico — entregamos em até 7 dias, pois a estrutura já está pronta e adaptamos com os seus dados e cores.</p>
+                <p>O <strong>Site Personalizado</strong> é criado do zero exclusivamente para o seu negócio, com design único, funcionalidades sob medida e possibilidades ilimitadas. É ideal para quem quer total diferenciação no mercado.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="servicos">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">02</span>
+                    <span>Os sites são responsivos (funcionam no celular)?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Sim, <strong>100% responsivos</strong>. Todos os nossos sites são desenvolvidos com design adaptável para smartphones, tablets e desktops. Também garantimos compatibilidade com os principais navegadores do mercado.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="servicos">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">03</span>
+                    <span>Os aplicativos funcionam tanto no Android quanto no iOS?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Desenvolvemos apps <strong>nativos e híbridos</strong>. Os apps híbridos rodam em ambas as plataformas com um único código, reduzindo custo e prazo. Já os nativos são construídos especificamente para cada sistema (Android ou iOS), entregando máxima performance. Na conversa inicial, indicamos a melhor opção para o seu projeto.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="servicos">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">04</span>
+                    <span>O que está incluso na Identidade Visual?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Nossa Identidade Visual inclui <strong>logotipo exclusivo</strong> (com variações horizontal, vertical, símbolo e versão monocromática), paleta de cores oficial, tipografia da marca e <strong>manual de identidade visual</strong> com regras de uso.</p>
+                <p>Dependendo do plano escolhido, também entregamos papelaria empresarial (cartão de visita, papel timbrado, assinatura de e-mail) e templates para redes sociais.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="servicos">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">05</span>
+                    <span>Vocês criam conteúdo para o Instagram além das artes?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Nos planos <strong>Professional e Premium</strong>, entregamos também planejamento de conteúdo com sugestão de temas, legendas e estratégia de hashtags. No Premium, incluímos ainda Reels (artes animadas) e consultoria de branding para posicionamento de marca.</p>
+            </div>
+        </div>
+
+        <!-- ── COMO FUNCIONA ─────────────────────────────────── -->
+        <div class="faq-item" data-cat="processo">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">06</span>
+                    <span>Como funciona o processo de criação do meu projeto?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Nosso processo tem <strong>4 etapas</strong>:</p>
+                <p><strong>1. Briefing</strong> — Entendemos seu negócio, público-alvo e objetivos por meio de um formulário ou reunião via WhatsApp/Google Meet.</p>
+                <p><strong>2. Proposta</strong> — Apresentamos a melhor solução com escopo, prazo e valor detalhados.</p>
+                <p><strong>3. Produção</strong> — Desenvolvemos o projeto com atualizações periódicas e rodadas de revisão.</p>
+                <p><strong>4. Entrega</strong> — Você recebe os arquivos finais, credenciais de acesso e suporte pós-entrega.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="processo">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">07</span>
+                    <span>Preciso ter um domínio e hospedagem para o meu site?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Sim. Domínio (ex.: <strong>suaempresa.com.br</strong>) e hospedagem são contratados à parte, pois o custo e a escolha do plano variam conforme as necessidades do projeto. Nós orientamos você na contratação do melhor serviço, auxiliamos na configuração e conectamos tudo ao seu site.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="processo">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">08</span>
+                    <span>Quantas revisões estão inclusas no projeto?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Oferecemos <strong>revisões ilimitadas</strong> dentro do escopo acordado no briefing. Isso significa que ajustamos cores, textos, layout e elementos visuais até você ficar 100% satisfeito, sem custo extra.</p>
+                <p>Alterações que ampliem o escopo original (ex.: adicionar novas páginas ou funcionalidades não previstas) são avaliadas separadamente.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="processo">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">09</span>
+                    <span>Vou ter acesso ao código/arquivos do meu projeto?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Sim! Ao final do projeto você recebe <strong>todos os arquivos fontes</strong> — arquivos editáveis de design (Figma/Illustrator/Photoshop), código-fonte do site ou app e manual de identidade visual em PDF. O projeto é completamente seu.</p>
+            </div>
+        </div>
+
+        <!-- ── PAGAMENTO ─────────────────────────────────────── -->
+        <div class="faq-item" data-cat="pagamento">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">10</span>
+                    <span>Quais as formas de pagamento aceitas?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Aceitamos <strong>PIX, transferência bancária e cartão de crédito</strong> (em até 12x via link de pagamento). O pagamento é dividido em duas partes: <strong>50% na aprovação da proposta</strong> para início do projeto e <strong>50% na entrega final</strong>.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="pagamento">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">11</span>
+                    <span>Os valores dos planos são negociáveis?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Os combos têm valores fechados, mas estamos abertos a <strong>personalizar um pacote</strong> sob medida para o seu orçamento. Entre em contato e conte o que você precisa — montamos uma proposta exclusiva para você.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="pagamento">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">12</span>
+                    <span>Há mensalidade ou taxa de manutenção?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Não cobramos mensalidade pelos projetos entregues. O único custo recorrente é a <strong>hospedagem e domínio</strong>, contratados diretamente por você com fornecedores parceiros que indicamos. Caso deseje um plano de manutenção mensal do site, oferecemos esse serviço opcionalmente.</p>
+            </div>
+        </div>
+
+        <!-- ── PRAZOS ────────────────────────────────────────── -->
+        <div class="faq-item" data-cat="prazo">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">13</span>
+                    <span>Quais os prazos médios de entrega para cada serviço?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p><strong>Site Modelo:</strong> até 7 dias corridos.<br>
+                   <strong>Identidade Visual:</strong> 10 a 15 dias.<br>
+                   <strong>Combo Starter:</strong> 15 dias.<br>
+                   <strong>Combo Professional:</strong> 20 dias.<br>
+                   <strong>Combo Premium:</strong> 25 dias.<br>
+                   <strong>Site Personalizado:</strong> 30 a 60 dias conforme complexidade.<br>
+                   <strong>Aplicativo Mobile:</strong> 60 a 120 dias.</p>
+                <p>Os prazos são contados a partir da <strong>aprovação do briefing e do primeiro pagamento</strong>.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="prazo">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">14</span>
+                    <span>O prazo pode ser antecipado em caso de urgência?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Em alguns casos, sim. Projetos com entrega expressa podem ter um <strong>acréscimo de prioridade</strong> dependendo da disponibilidade da equipe. Fale conosco pelo WhatsApp e verificamos a viabilidade para o seu prazo.</p>
+            </div>
+        </div>
+
+        <!-- ── SUPORTE ────────────────────────────────────────── -->
+        <div class="faq-item" data-cat="suporte">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">15</span>
+                    <span>Vocês oferecem suporte após a entrega do projeto?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Sim! Todo projeto tem um <strong>período de suporte pós-entrega</strong> para correção de eventuais ajustes técnicos. Clientes dos planos Professional e Premium têm suporte prioritário e acesso a um canal exclusivo de atendimento via WhatsApp.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="suporte">
+            <div class="faq-question">
+                <div class="faq-q-left">
+                    <span class="faq-num">16</span>
+                    <span>Consigo atualizar o conteúdo do meu site sozinho depois?</span>
+                </div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Sites que necessitam de atualizações frequentes podem ser entregues com um <strong>painel administrativo (CMS)</strong>, permitindo que você edite textos, imagens e conteúdos sem precisar de programação. Essa funcionalidade é incluída conforme o escopo do projeto — basta solicitar no briefing.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CTA inferior -->
+    <div class="faq-cta-strip">
+        <div>
+            <strong>Não encontrou sua dúvida?</strong>
+            <p>Nossa equipe está pronta para responder qualquer pergunta sobre o seu projeto.</p>
+        </div>
+        <a href="https://wa.me/5581996273630" target="_blank" class="btn btn-primary">
+            <i class="ri-whatsapp-line"></i> Falar no WhatsApp
+        </a>
+    </div>
+</section>
+
+<!-- ── JS: adicione DENTRO do bloco (function(){ ... })() já existente ── -->
+<script>
+/* FAQ — filtro por categoria + accordion */
+(function(){
+    // Accordion
+    document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+            const item = q.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            // Fecha todos
+            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+            // Abre o clicado (toggle)
+            if (!isOpen) item.classList.add('open');
+        });
+    });
+
+    // Filtro por categoria
+    document.querySelectorAll('.faq-cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (filter === 'todos' || item.dataset.cat === filter) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                    item.classList.remove('open'); // fecha ao esconder
+                }
+            });
+        });
+    });
+})();
+</script>
+    
+
+<!-- ============================================================
+     SEÇÃO FAQ — TECHCODESIGN (versão compacta / alinhada à esquerda)
+     Substitui o bloco anterior integralmente
+     ============================================================ -->
+
+<!-- ── CSS ───────────────────────────────────────────────────── -->
+<style>
+/* ─── FAQ compacto ──────────────────────────────────────────── */
+.faq-section .section-header {
+    text-align: left;
+    margin-bottom: 2.5rem;
+}
+
+.faq-section .section-header .section-description {
+    margin: 0; /* remove margin: 0 auto que centralizava */
+}
+
+.faq-categories {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+}
+
+.faq-cat-btn {
+    padding: 0.45rem 1.1rem;
+    border-radius: 50px;
+    background: transparent;
+    border: 1px solid rgba(181, 21, 191, 0.35);
+    color: var(--gray);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.faq-cat-btn.active,
+.faq-cat-btn:hover {
+    background: linear-gradient(135deg, var(--magenta), var(--cyan));
+    border-color: transparent;
+    color: var(--white);
+}
+
+.faq-grid {
+    max-width: 680px;   /* menor que antes (era 860px) */
+    margin: 0;          /* alinhado à esquerda */
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.faq-item {
+    background: var(--glass);
+    border: 1px solid rgba(181, 21, 191, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.faq-item.open {
+    border-color: var(--cyan);
+    box-shadow: 0 6px 28px rgba(51, 197, 232, 0.1);
+}
+
+.faq-item[data-cat] { display: flex; flex-direction: column; }
+.faq-item[data-cat].hidden { display: none; }
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.4rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.faq-q-left {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.faq-num {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--cyan);
+    min-width: 20px;
+    opacity: 0.6;
+}
+
+.faq-question span {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.4;
+}
+
+.faq-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(51, 197, 232, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cyan);
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s;
+}
+
+.faq-item.open .faq-icon {
+    transform: rotate(45deg);
+    background: rgba(51, 197, 232, 0.12);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+    padding: 0 1.4rem 0 3.8rem;
+}
+
+.faq-item.open .faq-answer {
+    max-height: 400px;
+    padding: 0 1.4rem 1.3rem 3.8rem;
+}
+
+.faq-answer p {
+    color: var(--gray);
+    line-height: 1.75;
+    font-size: 0.92rem;
+}
+
+.faq-answer p + p { margin-top: 0.6rem; }
+
+.faq-answer strong { color: var(--white); font-weight: 600; }
+
+.faq-answer a {
+    color: var(--cyan);
+    text-decoration: none;
+    font-weight: 600;
+}
+.faq-answer a:hover { text-decoration: underline; }
+
+/* CTA strip — alinhada à esquerda e proporcional à grid */
+.faq-cta-strip {
+    max-width: 680px;
+    margin: 2.5rem 0 0;
+    background: linear-gradient(135deg, rgba(181,21,191,0.1), rgba(51,197,232,0.07));
+    border: 1px solid rgba(51, 197, 232, 0.22);
+    border-radius: 14px;
+    padding: 1.8rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.faq-cta-strip p {
+    color: var(--gray);
+    font-size: 0.88rem;
+}
+
+.faq-cta-strip strong {
+    display: block;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+}
+
+@media (max-width: 768px) {
+    .faq-answer { padding-left: 1.4rem; }
+    .faq-item.open .faq-answer { padding-left: 1.4rem; }
+    .faq-cta-strip { padding: 1.4rem; }
+}
+</style>
+
+<!-- ── HTML ───────────────────────────────────────────────────── -->
+<section id="faq" class="faq-section">
+    <div class="section-header">
+        <p class="section-label">Dúvidas frequentes</p>
+        <h2 class="section-title">Perguntas <span class="gradient-text">Frequentes</span></h2>
+        <p class="section-description">Principais dúvidas sobre nossos serviços e processos</p>
+    </div>
+
+    <div class="faq-categories">
+        <button class="faq-cat-btn active" data-filter="todos">Todas</button>
+        <button class="faq-cat-btn" data-filter="servicos">Serviços</button>
+        <button class="faq-cat-btn" data-filter="processo">Como Funciona</button>
+        <button class="faq-cat-btn" data-filter="pagamento">Pagamento</button>
+        <button class="faq-cat-btn" data-filter="prazo">Prazos</button>
+        <button class="faq-cat-btn" data-filter="suporte">Suporte</button>
+    </div>
+
+    <div class="faq-grid">
+
+        <!-- SERVIÇOS -->
+        <div class="faq-item" data-cat="servicos">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">01</span><span>Qual a diferença entre Site Personalizado e Site Modelo?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>O <strong>Site Modelo</strong> é um template pré-desenvolvido por segmento, entregue em até 7 dias com personalização de dados e cores.</p>
+                <p>O <strong>Site Personalizado</strong> é criado do zero, com design exclusivo e funcionalidades sob medida para total diferenciação.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="servicos">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">02</span><span>Os sites são responsivos (funcionam no celular)?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Sim, <strong>100% responsivos</strong> — adaptados para smartphones, tablets e desktops, compatíveis com os principais navegadores.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="servicos">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">03</span><span>Os aplicativos funcionam no Android e no iOS?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Desenvolvemos apps <strong>nativos e híbridos</strong>. Os híbridos rodam nas duas plataformas com um único código. Na conversa inicial indicamos a melhor opção para o seu projeto.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="servicos">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">04</span><span>O que está incluso na Identidade Visual?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p><strong>Logotipo exclusivo</strong> (variações horizontal, vertical e monocromática), paleta de cores, tipografia e <strong>manual de identidade visual</strong>. Planos superiores incluem papelaria e templates para redes sociais.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="servicos">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">05</span><span>Vocês criam conteúdo para o Instagram além das artes?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Nos planos <strong>Professional e Premium</strong> entregamos planejamento de conteúdo, legendas e estratégia de hashtags. O Premium inclui ainda Reels e consultoria de branding.</p>
+            </div>
+        </div>
+
+        <!-- COMO FUNCIONA -->
+        <div class="faq-item" data-cat="processo">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">06</span><span>Como funciona o processo de criação do projeto?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p><strong>1. Briefing</strong> — entendemos seu negócio e objetivos.<br>
+                   <strong>2. Proposta</strong> — escopo, prazo e valor detalhados.<br>
+                   <strong>3. Produção</strong> — desenvolvimento com rodadas de revisão.<br>
+                   <strong>4. Entrega</strong> — arquivos finais + suporte pós-entrega.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="processo">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">07</span><span>Preciso ter domínio e hospedagem?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Sim, contratados à parte. Orientamos na escolha do melhor serviço, auxiliamos na configuração e conectamos tudo ao seu site.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="processo">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">08</span><span>Quantas revisões estão inclusas?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p><strong>Revisões ilimitadas</strong> dentro do escopo acordado. Ajustamos cores, textos e layout até sua total aprovação, sem custo extra.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="processo">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">09</span><span>Vou ter acesso ao código e arquivos do projeto?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Sim! Você recebe <strong>todos os arquivos fontes</strong> — design editável (Figma/Illustrator), código-fonte e manual em PDF. O projeto é completamente seu.</p>
+            </div>
+        </div>
+
+        <!-- PAGAMENTO -->
+        <div class="faq-item" data-cat="pagamento">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">10</span><span>Quais as formas de pagamento aceitas?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p><strong>PIX, transferência e cartão em até 12x</strong>. Pagamento em 2 partes: 50% na aprovação da proposta e 50% na entrega final.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="pagamento">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">11</span><span>Há mensalidade ou taxa de manutenção?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Não. O único custo recorrente é <strong>hospedagem e domínio</strong>, contratados por você. Plano de manutenção mensal do site é opcional e sob consulta.</p>
+            </div>
+        </div>
+
+        <!-- PRAZOS -->
+        <div class="faq-item" data-cat="prazo">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">12</span><span>Quais os prazos médios de entrega?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p><strong>Site Modelo:</strong> 7 dias · <strong>ID Visual:</strong> 10–15 dias · <strong>Starter:</strong> 15 dias · <strong>Professional:</strong> 20 dias · <strong>Premium:</strong> 25 dias · <strong>Site Custom:</strong> 30–60 dias · <strong>App:</strong> 60–120 dias.</p>
+                <p>Prazos contados a partir da aprovação do briefing e do primeiro pagamento.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="prazo">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">13</span><span>O prazo pode ser antecipado em caso de urgência?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Em alguns casos, sim. Projetos expressos podem ter um <strong>acréscimo de prioridade</strong> conforme disponibilidade. Fale conosco pelo WhatsApp para verificar.</p>
+            </div>
+        </div>
+
+        <!-- SUPORTE -->
+        <div class="faq-item" data-cat="suporte">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">14</span><span>Vocês oferecem suporte após a entrega?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Sim! Todo projeto inclui <strong>suporte pós-entrega</strong>. Planos Professional e Premium têm atendimento prioritário via canal exclusivo no WhatsApp.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-cat="suporte">
+            <div class="faq-question">
+                <div class="faq-q-left"><span class="faq-num">15</span><span>Consigo atualizar o conteúdo do site sozinho?</span></div>
+                <div class="faq-icon"><i class="ri-add-line"></i></div>
+            </div>
+            <div class="faq-answer">
+                <p>Sites com atualizações frequentes podem ser entregues com <strong>painel CMS</strong>, permitindo edição de textos e imagens sem programação. Basta solicitar no briefing.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="faq-cta-strip">
+        <div>
+            <strong>Não encontrou sua dúvida?</strong>
+            <p>Nossa equipe responde qualquer pergunta sobre o seu projeto.</p>
+        </div>
+        <a href="https://wa.me/5581996273630" target="_blank" class="btn btn-primary" style="white-space:nowrap">
+            <i class="ri-whatsapp-line"></i> Falar no WhatsApp
+        </a>
+    </div>
+</section>
+
+<!-- ── JS (dentro do IIFE existente) ─────────────────────────── -->
+<script>
+(function(){
+    document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+            const item = q.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        });
+    });
+    document.querySelectorAll('.faq-cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const show = filter === 'todos' || item.dataset.cat === filter;
+                item.classList.toggle('hidden', !show);
+                if (!show) item.classList.remove('open');
+            });
+        });
+    });
+})();
+</script>
+
+
+<!-- ============================================================
+     SEÇÃO DE GRÁFICOS ANIMADOS — TECHCODESIGN
+     Sugestão: após o ticker-strip, antes da seção #sobre
+     ============================================================ -->
+
+<style>
+/* ─── Charts Section ────────────────────────────────────────── */
+.charts-section {
+    padding: 6rem 5%;
+    position: relative;
+    overflow: hidden;
+}
+
+.charts-section .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.charts-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
+.chart-card {
+    background: var(--glass);
+    border: 1px solid rgba(181,21,191,0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.chart-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(51,197,232,0.4);
+    box-shadow: 0 20px 50px rgba(51,197,232,0.1);
+}
+
+.chart-card-title {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.4rem;
+}
+
+.chart-card-value {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--magenta), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    line-height: 1;
+}
+
+.chart-card-value span {
+    font-size: 1rem;
+    opacity: 0.7;
+    font-weight: 500;
+}
+
+/* ── Gráfico de Barras ── */
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 120px;
+    padding-top: 8px;
+}
+
+.bar-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.bar {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+    position: relative;
+    transform-origin: bottom;
+    transform: scaleY(0);
+    transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.bar.animated { transform: scaleY(1); }
+
+.bar-label {
+    font-size: 0.72rem;
+    color: var(--gray);
+    white-space: nowrap;
+}
+
+/* ── Gráfico de Linha (SVG) ── */
+.line-chart-wrap {
+    width: 100%;
+    height: 120px;
+    position: relative;
+}
+
+.line-chart-wrap svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.line-path {
+    fill: none;
+    stroke: url(#lineGrad);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    transition: stroke-dashoffset 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-path.animated { stroke-dashoffset: 0; }
+
+.area-path {
+    fill: url(#areaGrad);
+    opacity: 0;
+    transition: opacity 0.8s ease 1s;
+}
+
+.area-path.animated { opacity: 1; }
+
+.line-dot {
+    fill: var(--cyan);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.line-dot.animated { opacity: 1; }
+
+/* ── Gráfico Donut ── */
+.donut-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.donut-svg {
+    width: 110px;
+    height: 110px;
+    flex-shrink: 0;
+}
+
+.donut-circle-bg {
+    fill: none;
+    stroke: rgba(255,255,255,0.05);
+    stroke-width: 14;
+}
+
+.donut-circle {
+    fill: none;
+    stroke-width: 14;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    transition: stroke-dashoffset 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.donut-circle.animated { stroke-dashoffset: var(--offset); }
+
+.donut-center {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    fill: var(--white);
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+.donut-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--gray);
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* ── Card extra grande (linha) ── */
+.charts-grid .chart-card.wide {
+    grid-column: span 2;
+}
+
+@media (max-width: 900px) {
+    .charts-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .chart-card.wide { grid-column: span 2; }
+}
+
+@media (max-width: 580px) {
+    .charts-grid { grid-template-columns: 1fr; }
+    .chart-card.wide { grid-column: span 1; }
+}
+</style>
+
+<!-- HTML -->
+<section class="charts-section">
+    <div class="section-header">
+        <p class="section-label">Nossos Números</p>
+        <h2 class="section-title">Resultados em <span class="gradient-text">Dados</span></h2>
+        <p class="section-description">A evolução da TechCoDesign em projetos, clientes e qualidade</p>
+    </div>
+
+    <div class="charts-grid">
+
+        <!-- Card 1 — Barra: projetos por ano -->
+        <div class="chart-card" data-chart="bar">
+            <div class="chart-card-title">Projetos por Ano</div>
+            <div class="chart-card-value">150+ <span>projetos</span></div>
+            <div class="bar-chart">
+                <div class="bar-wrap">
+                    <div class="bar" style="height:35%; background:linear-gradient(180deg,#b515bf,#400f7d)"></div>
+                    <span class="bar-label">2020</span>
+                </div>
+                <div class="bar-wrap">
+                    <div class="bar" style="height:52%; background:linear-gradient(180deg,#b515bf,#400f7d)"></div>
+                    <span class="bar-label">2021</span>
+                </div>
+                <div class="bar-wrap">
+                    <div class="bar" style="height:65%; background:linear-gradient(180deg,#b515bf,#400f7d)"></div>
+                    <span class="bar-label">2022</span>
+                </div>
+                <div class="bar-wrap">
+                    <div class="bar" style="height:78%; background:linear-gradient(180deg,#33c5e8,#400f7d)"></div>
+                    <span class="bar-label">2023</span>
+                </div>
+                <div class="bar-wrap">
+                    <div class="bar" style="height:85%; background:linear-gradient(180deg,#33c5e8,#b515bf)"></div>
+                    <span class="bar-label">2024</span>
+                </div>
+                <div class="bar-wrap">
+                    <div class="bar" style="height:93%; background:linear-gradient(180deg,#33c5e8,#b515bf)"></div>
+                    <span class="bar-label">2025</span>
+                </div>
+                <div class="bar-wrap">
+                    <div class="bar" style="height:100%; background:linear-gradient(180deg,#33c5e8,#b515bf); box-shadow:0 0 14px rgba(51,197,232,0.5)"></div>
+                    <span class="bar-label" style="color:var(--cyan);font-weight:700">2026</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 — Donut: satisfação -->
+        <div class="chart-card" data-chart="donut">
+            <div class="chart-card-title">Satisfação</div>
+            <div class="chart-card-value">100% <span>aprovação</span></div>
+            <div class="donut-wrap">
+                <svg class="donut-svg" viewBox="0 0 100 100">
+                    <defs>
+                        <linearGradient id="donutGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#b515bf"/>
+                            <stop offset="100%" stop-color="#33c5e8"/>
+                        </linearGradient>
+                    </defs>
+                    <circle class="donut-circle-bg" cx="50" cy="50" r="45"/>
+                    <circle class="donut-circle"
+                        cx="50" cy="50" r="45"
+                        stroke="url(#donutGrad1)"
+                        style="--offset: 0; stroke-dasharray: 283"
+                        data-pct="100"/>
+                    <text class="donut-center" x="50" y="50">100%</text>
+                </svg>
+                <div class="donut-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:#b515bf"></div>
+                        Muito satisfeitos
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:#33c5e8"></div>
+                        Retornam projetos
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:#400f7d"></div>
+                        Indicam serviços
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 — Linha: crescimento de clientes -->
+        <div class="chart-card wide" data-chart="line">
+            <div class="chart-card-title">Crescimento de Clientes</div>
+            <div class="chart-card-value">120+ <span>clientes ativos</span></div>
+            <div class="line-chart-wrap">
+                <svg viewBox="0 0 400 100" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#b515bf"/>
+                            <stop offset="100%" stop-color="#33c5e8"/>
+                        </linearGradient>
+                        <linearGradient id="areaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#33c5e8" stop-opacity="0.25"/>
+                            <stop offset="100%" stop-color="#b515bf" stop-opacity="0"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Área -->
+                    <path class="area-path"
+                        d="M0,88 C30,80 60,72 90,65 C120,58 150,50 190,38 C230,26 260,18 300,12 C330,8 360,5 400,2 L400,100 L0,100 Z"/>
+                    <!-- Linha -->
+                    <path class="line-path"
+                        d="M0,88 C30,80 60,72 90,65 C120,58 150,50 190,38 C230,26 260,18 300,12 C330,8 360,5 400,2"/>
+                    <!-- Pontos -->
+                    <circle class="line-dot" cx="0"   cy="88" r="4"/>
+                    <circle class="line-dot" cx="90"  cy="65" r="4"/>
+                    <circle class="line-dot" cx="190" cy="38" r="4"/>
+                    <circle class="line-dot" cx="300" cy="12" r="4"/>
+                    <circle class="line-dot" cx="400" cy="2"  r="4" style="fill:#33c5e8; filter:drop-shadow(0 0 6px #33c5e8)"/>
+                </svg>
+            </div>
+            <!-- Labels eixo X -->
+            <div style="display:flex; justify-content:space-between; margin-top:0.5rem; padding:0 2px">
+                <span style="font-size:0.72rem; color:var(--gray)">2020</span>
+                <span style="font-size:0.72rem; color:var(--gray)">2021</span>
+                <span style="font-size:0.72rem; color:var(--gray)">2022</span>
+                <span style="font-size:0.72rem; color:var(--gray)">2024</span>
+                <span style="font-size:0.72rem; color:var(--cyan); font-weight:700">2026</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- JS (dentro do IIFE existente) -->
+<script>
+(function(){
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+
+            const card = entry.target;
+            const type = card.dataset.chart;
+
+            // Barras
+            if (type === 'bar') {
+                card.querySelectorAll('.bar').forEach((bar, i) => {
+                    setTimeout(() => bar.classList.add('animated'), i * 100);
+                });
+            }
+
+            // Linha
+            if (type === 'line') {
+                setTimeout(() => {
+                    card.querySelector('.line-path')?.classList.add('animated');
+                    card.querySelector('.area-path')?.classList.add('animated');
+                    card.querySelectorAll('.line-dot').forEach((d, i) => {
+                        setTimeout(() => d.classList.add('animated'), 600 + i * 160);
+                    });
+                }, 100);
+            }
+
+            // Donut
+            if (type === 'donut') {
+                const circle = card.querySelector('.donut-circle');
+                if (circle) {
+                    const pct = parseFloat(circle.dataset.pct) / 100;
+                    const circumference = 283;
+                    const offset = circumference * (1 - pct);
+                    circle.style.setProperty('--offset', offset);
+                    setTimeout(() => circle.classList.add('animated'), 200);
+                }
+            }
+
+            observer.unobserve(card);
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.chart-card[data-chart]').forEach(c => observer.observe(c));
+})();
+</script>
+
+
 
     <footer>
         <div class="footer-content">
