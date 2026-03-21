@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Dr. Lucas Porto | Nutrição Esportiva</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{--lime:#a8cc1c;--lime-dark:#8aab10;--black:#0a0a0a;--dark:#141414;--card:#1e1e1e;--white:#fff;--gray:#888;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{font-family:'Barlow',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.6;}
+    .btn-voltar{position:fixed;top:20px;left:20px;z-index:9999;background:var(--lime);color:#000;padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:6px;}
+    nav{position:fixed;top:0;width:100%;background:rgba(10,10,10,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(168,204,28,.2);z-index:1000;padding:.9rem 0;}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-size:1.2rem;font-weight:900;color:var(--lime);text-decoration:none;letter-spacing:1px;text-transform:uppercase;}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{color:var(--gray);font-size:.82rem;text-decoration:none;font-weight:600;letter-spacing:.5px;text-transform:uppercase;transition:color .3s;}
+    .nav-links a:hover{color:var(--lime);}
+    .nav-cta{background:var(--lime)!important;color:#000!important;padding:.5rem 1.3rem;border-radius:4px;}
+    .hero{min-height:100vh;background:var(--black);display:flex;align-items:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(168,204,28,.15),transparent 65%);border-radius:50%;}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1;}
+    .hero-tag{display:inline-block;background:rgba(168,204,28,.15);border:1px solid rgba(168,204,28,.3);color:var(--lime);font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:.35rem .9rem;border-radius:4px;margin-bottom:1.2rem;}
+    .hero h1{font-size:clamp(2.8rem,6vw,4.5rem);font-weight:900;line-height:1;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:-1px;}
+    .hero h1 span{color:var(--lime);}
+    .hero p{color:var(--gray);font-size:.95rem;line-height:1.8;margin-bottom:2rem;max-width:460px;}
+    .btn-lime{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--lime);color:#000;border-radius:4px;font-weight:700;text-decoration:none;font-size:.9rem;text-transform:uppercase;letter-spacing:.5px;transition:all .3s;}
+    .btn-lime:hover{background:var(--lime-dark);transform:translateY(-2px);}
+    .btn-ghost-l{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.2);border-radius:4px;font-weight:600;text-decoration:none;font-size:.9rem;transition:all .3s;}
+    .btn-ghost-l:hover{border-color:var(--lime);color:var(--lime);}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+    .hero-stats{display:flex;gap:2.5rem;}
+    .hs-num{font-size:2.4rem;font-weight:900;color:var(--lime);display:block;line-height:1;}
+    .hs-lbl{font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px;}
+    .hero-img img{width:100%;height:500px;object-fit:cover;border-radius:8px;filter:brightness(.9);}
+    .stats-bar{background:var(--lime);padding:1rem 2rem;}
+    .sb-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:center;gap:5rem;flex-wrap:wrap;}
+    .sb-item{font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#000;display:flex;align-items:center;gap:.4rem;}
+    section{padding:5rem 2rem;}
+    .sec-inner{max-width:1200px;margin:0 auto;}
+    .sec-tag{display:block;font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--lime);margin-bottom:.5rem;}
+    .sec-title{font-size:clamp(2rem,4vw,2.8rem);font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin-bottom:1rem;}
+    .sec-desc{color:var(--gray);font-size:.88rem;max-width:560px;line-height:1.8;}
+    .text-center{text-align:center;}.text-center .sec-desc{margin:0 auto 3rem;}
+    .bg-dark{background:var(--dark);}
+    .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:3rem;}
+    .goal-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:2rem;text-align:center;transition:all .3s;cursor:pointer;}
+    .goal-card:hover{border-color:var(--lime);transform:translateY(-4px);}
+    .goal-icon{font-size:2.5rem;margin-bottom:.8rem;}
+    .goal-name{font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem;}
+    .goal-desc{font-size:.78rem;color:var(--gray);}
+    .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3rem;}
+    .plan-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:2rem;transition:all .3s;position:relative;}
+    .plan-card.featured{border-color:var(--lime);}
+    .plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--lime);color:#000;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:.3rem .9rem;border-radius:20px;white-space:nowrap;}
+    .plan-name{font-size:1.3rem;font-weight:900;text-transform:uppercase;margin-bottom:.6rem;}
+    .plan-desc{font-size:.82rem;color:var(--gray);margin-bottom:1.5rem;line-height:1.5;}
+    .plan-feats{list-style:none;margin-bottom:1.8rem;}
+    .plan-feats li{font-size:.82rem;color:var(--gray);padding:.35rem 0 .35rem 1.4rem;position:relative;}
+    .plan-feats li::before{content:'✓';position:absolute;left:0;color:var(--lime);font-weight:700;}
+    .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+    .t-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:2rem;}
+    .t-stars{color:var(--lime);font-size:.82rem;margin-bottom:.8rem;}
+    .t-text{font-size:.86rem;color:var(--gray);font-style:italic;line-height:1.7;margin-bottom:1rem;}
+    .t-result{display:inline-block;background:rgba(168,204,28,.12);color:var(--lime);font-size:.72rem;font-weight:700;border-radius:4px;padding:.2rem .6rem;margin-bottom:.6rem;}
+    .t-name{font-size:.84rem;font-weight:700;}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;}
+    .ci-item{display:flex;gap:.8rem;align-items:center;margin-bottom:1rem;}
+    .ci-icon{width:38px;height:38px;background:rgba(168,204,28,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--lime);flex-shrink:0;font-size:.9rem;}
+    .ci-text{font-size:.85rem;color:var(--gray);}
+    .cf{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:2.5rem;}
+    .fg{margin-bottom:1rem;}
+    .fg label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--gray);margin-bottom:.3rem;}
+    .fg input,.fg select,.fg textarea{width:100%;padding:.8rem 1rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:var(--white);font-family:'Barlow',sans-serif;font-size:.88rem;transition:border-color .3s;}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--lime);}
+    .fg select option{background:#1e1e1e;}
+    footer{background:#050505;border-top:1px solid rgba(168,204,28,.15);padding:3rem 2rem 1.5rem;text-align:center;color:var(--gray);}
+    .f-logo{font-size:1.1rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--lime);display:block;margin-bottom:.4rem;}
+    .f-note{font-size:.75rem;margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;}
+    .wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;transition:transform .3s;}
+    .wa-float:hover{transform:scale(1.1);}
+    @media(max-width:968px){.hero-inner,.contact-grid{grid-template-columns:1fr;}nav .nav-links{display:none;}.hero-img{display:none;}}
+    @media(max-width:600px){.hero{padding:7rem 1.5rem 4rem;}.sb-inner{gap:2rem;}}
+  </style>
+</head>
+<body>
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+  <nav><div class="nav-inner"><a href="#" class="nav-logo">Sport Nutrition</a><ul class="nav-links"><li><a href="#objetivos">Objetivos</a></li><li><a href="#planos">Planos</a></li><li><a href="#depoimentos">Resultados</a></li><li><a href="#contato" class="nav-cta">Agendar</a></li></ul></div></nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag">Nutricionista Esportivo · CRN 6/54321</div>
+        <h1>Nutrição para<br><span>performance</span><br>máxima.</h1>
+        <p>Protocolos nutricionais científicos para atletas e praticantes de atividade física que exigem o máximo do seu corpo.</p>
+        <div class="hero-btns">
+          <a href="#contato" class="btn-lime"><i class="fas fa-rocket"></i> Começar Agora</a>
+          <a href="#objetivos" class="btn-ghost-l">Ver Objetivos</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hs-item"><span class="hs-num">400+</span><span class="hs-lbl">Atletas</span></div>
+          <div class="hs-item"><span class="hs-num">8</span><span class="hs-lbl">Anos</span></div>
+          <div class="hs-item"><span class="hs-num">98%</span><span class="hs-lbl">Satisfação</span></div>
+        </div>
+      </div>
+      <div class="hero-img"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=1000&fit=crop" alt="Sport Nutrition"></div>
+    </div>
+  </section>
+  <div class="stats-bar"><div class="sb-inner"><div class="sb-item"><i class="fas fa-dumbbell"></i> Hipertrofia</div><div class="sb-item"><i class="fas fa-fire"></i> Emagrecimento</div><div class="sb-item"><i class="fas fa-running"></i> Endurance</div><div class="sb-item"><i class="fas fa-trophy"></i> Competição</div></div></div>
+
+  <section id="objetivos" class="bg-dark"><div class="sec-inner"><div class="text-center"><span class="sec-tag">Objetivos</span><h2 class="sec-title">Para qual objetivo você treina?</h2><p class="sec-desc">Protocolos específicos para cada tipo de atleta e praticante.</p></div><div class="goals-grid"><div class="goal-card"><div class="goal-icon">💪</div><div class="goal-name">Hipertrofia</div><p class="goal-desc">Ganho de massa muscular com protocolos de periodização nutricional</p></div><div class="goal-card"><div class="goal-icon">🔥</div><div class="goal-name">Cutting</div><p class="goal-desc">Definição muscular mantendo força e preservando massa magra</p></div><div class="goal-card"><div class="goal-icon">🏃</div><div class="goal-name">Endurance</div><p class="goal-desc">Nutrição para corrida, ciclismo, triathlon e esportes de resistência</p></div><div class="goal-card"><div class="goal-icon">🏆</div><div class="goal-name">Competição</div><p class="goal-desc">Peak week e protocolos para palco, pódio e competições</p></div></div></div></section>
+
+  <section id="planos"><div class="sec-inner"><div class="text-center"><span class="sec-tag">Serviços</span><h2 class="sec-title">Planos de atendimento</h2></div><div class="plans-grid"><div class="plan-card"><div class="plan-name">Starter</div><p class="plan-desc">Para quem está iniciando na nutrição esportiva.</p><ul class="plan-feats"><li>Consulta inicial completa</li><li>Plano alimentar personalizado</li><li>Lista de suplementação</li><li>Retorno em 30 dias</li></ul><a href="#contato" class="btn-ghost-l" style="width:100%;justify-content:center;">Agendar</a></div><div class="plan-card featured"><div class="plan-badge">Mais escolhido</div><div class="plan-name">Performance</div><p class="plan-desc">Acompanhamento mensal para atletas que treinam com frequência.</p><ul class="plan-feats"><li>Tudo do Starter</li><li>Retornos quinzenais</li><li>Periodização por mesociclo</li><li>Suporte via WhatsApp</li></ul><a href="#contato" class="btn-lime" style="width:100%;justify-content:center;">Agendar</a></div><div class="plan-card"><div class="plan-name">Elite</div><p class="plan-desc">Para atletas de competição com acompanhamento intensivo.</p><ul class="plan-feats"><li>Tudo do Performance</li><li>Protocolo de peak week</li><li>Bioimpedância mensal</li><li>Suporte prioritário 7 dias</li></ul><a href="#contato" class="btn-ghost-l" style="width:100%;justify-content:center;">Agendar</a></div></div></div></section>
+
+  <section id="depoimentos" class="bg-dark"><div class="sec-inner"><div class="text-center"><span class="sec-tag">Resultados</span><h2 class="sec-title">Quem já evoluiu</h2></div><div class="test-grid"><div class="t-card"><div class="t-stars">★★★★★</div><div class="t-result">+9kg de massa em 4 meses</div><p class="t-text">"Protocolos precisos e acompanhamento atento. Finalmente entendi como a nutrição impacta meu treino."</p><div class="t-name">Gabriel Torres, 26 anos — Fisiculturista</div></div><div class="t-card"><div class="t-stars">★★★★★</div><div class="t-result">PR na meia maratona</div><p class="t-text">"Meu desempenho nas corridas melhorou absurdamente depois que comecei o acompanhamento nutricional esportivo."</p><div class="t-name">Fernanda Cruz, 32 anos — Corredora</div></div><div class="t-card"><div class="t-stars">★★★★★</div><div class="t-result">Medalha em campeonato regional</div><p class="t-text">"O protocolo de peak week foi perfeito. Cheguei no melhor shape da minha vida para a competição."</p><div class="t-name">Thiago Rocha, 29 anos — Atleta Clássico</div></div></div></div></section>
+
+  <section id="contato"><div class="sec-inner"><span class="sec-tag">Contato</span><h2 class="sec-title">Comece seu protocolo</h2><div class="contact-grid" style="margin-top:2rem;"><div><div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><span class="ci-text">(81) 9 9627-3630</span></div><div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><span class="ci-text">contato@sportnutri.com.br</span></div><div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><span class="ci-text">Recife – PE · Online para todo o Brasil</span></div></div><div class="cf"><form onsubmit="return false;"><div class="fg"><label>Nome</label><input type="text" placeholder="Seu nome completo"></div><div class="fg"><label>WhatsApp</label><input type="tel" placeholder="(81) 9 9999-9999"></div><div class="fg"><label>Objetivo</label><select><option value="">Selecione...</option><option>Hipertrofia</option><option>Emagrecimento / Cutting</option><option>Endurance / Corrida</option><option>Competição</option></select></div><div class="fg"><label>Mensagem</label><textarea rows="3" placeholder="Conte sobre seu treino atual..."></textarea></div><button onclick="alert('Solicitação enviada! Entro em contato em breve.')" style="width:100%;padding:.9rem;background:var(--lime);color:#000;border:none;border-radius:8px;font-weight:700;font-size:.9rem;cursor:pointer;text-transform:uppercase;letter-spacing:.5px;">Agendar Consulta</button></form></div></div></div></section>
+
+  <footer><span class="f-logo">Sport Nutrition</span><p>Dr. Lucas Porto · Nutricionista Esportivo CRN 6/54321 · Recife – PE</p><div class="f-note">&copy; 2026 Sport Nutrition · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div></footer>
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+  <script>document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});</script>
+</body>
+</html>

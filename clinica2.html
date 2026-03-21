@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odonto Excellence | Clínica Odontológica Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{--blue:#0a6ab8;--blue-light:#e8f3fc;--blue-dark:#075192;--cyan:#00bcd4;--white:#fff;--dark:#0a1929;--gray:#64748b;--light:#f0f6fb;--border:#cfe3f5;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--dark);overflow-x:hidden;line-height:1.6;}
+
+    .btn-voltar{position:fixed;top:20px;left:20px;z-index:9999;background:var(--blue);color:#fff;padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(10,106,184,.4);}
+    .btn-voltar:hover{background:var(--blue-dark);}
+
+    nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000;padding:1rem 0;}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-size:1.2rem;font-weight:800;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+    .nav-logo i{color:var(--cyan);}
+    .nav-logo span{color:var(--dark);}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{color:var(--gray);font-size:.87rem;text-decoration:none;font-weight:500;transition:color .3s;}
+    .nav-links a:hover{color:var(--blue);}
+    .nav-cta{background:var(--blue)!important;color:#fff!important;padding:.55rem 1.3rem;border-radius:50px;font-weight:700;}
+
+    /* HERO */
+    .hero{min-height:100vh;background:linear-gradient(145deg,var(--dark) 0%,#0d2744 60%,#0a3d62 100%);display:flex;align-items:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:-200px;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(10,106,184,.3),transparent 65%);border-radius:50%;}
+    .hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,188,212,.1),transparent 65%);border-radius:50%;}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1;}
+    .hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,188,212,.12);border:1px solid rgba(0,188,212,.3);color:var(--cyan);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:.4rem 1rem;border-radius:50px;margin-bottom:1.5rem;}
+    .hero h1{font-size:clamp(2.5rem,5.5vw,4rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1.5rem;letter-spacing:-.5px;}
+    .hero h1 em{color:var(--cyan);font-style:normal;}
+    .hero p{color:rgba(255,255,255,.65);font-size:.97rem;line-height:1.9;margin-bottom:2.5rem;max-width:480px;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;}
+    .btn-blue{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--blue);color:#fff;border-radius:50px;font-weight:700;text-decoration:none;font-size:.92rem;transition:all .3s;}
+    .btn-blue:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(10,106,184,.4);}
+    .btn-ghost-w{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:50px;font-weight:600;text-decoration:none;font-size:.92rem;transition:all .3s;}
+    .btn-ghost-w:hover{border-color:var(--cyan);color:var(--cyan);}
+    .hero-stats{display:flex;gap:3rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.1);}
+    .hs-num{font-size:2.5rem;font-weight:900;color:var(--cyan);display:block;line-height:1;}
+    .hs-lbl{font-size:.72rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;margin-top:.3rem;}
+    /* SMILE card */
+    .smile-card{background:rgba(255,255,255,.06);backdrop-filter:blur(16px);border:1px solid rgba(0,188,212,.2);border-radius:24px;padding:2rem;overflow:hidden;}
+    .sc-head{display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem;}
+    .sc-icon{width:44px;height:44px;background:rgba(0,188,212,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.2rem;}
+    .sc-title{font-size:.95rem;font-weight:700;color:#fff;}
+    .sc-sub{font-size:.75rem;color:rgba(255,255,255,.5);}
+    .treat-list{display:flex;flex-direction:column;gap:.8rem;}
+    .treat-item{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:12px;}
+    .ti-left{display:flex;align-items:center;gap:.8rem;}
+    .ti-icon{width:34px;height:34px;background:rgba(10,106,184,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#6ec6f5;font-size:.9rem;}
+    .ti-name{font-size:.86rem;font-weight:600;color:#fff;}
+    .ti-sub{font-size:.72rem;color:rgba(255,255,255,.45);}
+    .ti-badge{font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:50px;}
+    .badge-popular{background:rgba(0,188,212,.15);color:var(--cyan);}
+    .badge-new{background:rgba(46,204,113,.15);color:#2ecc71;}
+
+    section{padding:5.5rem 2rem;}
+    .sec-inner{max-width:1200px;margin:0 auto;}
+    .sec-tag{display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--blue);margin-bottom:.6rem;}
+    .sec-title{font-size:clamp(2rem,4vw,2.8rem);font-weight:800;margin-bottom:1rem;line-height:1.15;letter-spacing:-.3px;}
+    .sec-title em{color:var(--blue);font-style:normal;}
+    .sec-desc{color:var(--gray);font-size:.93rem;max-width:560px;line-height:1.8;}
+    .text-center{text-align:center;}.text-center .sec-desc{margin:0 auto 3rem;}
+    .bg-light{background:var(--light);}
+    .bg-dark{background:var(--dark);}
+
+    /* TRATAMENTOS */
+    .treat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3rem;}
+    .t-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:2rem;transition:all .3s;position:relative;overflow:hidden;}
+    .t-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transition:transform .4s;transform-origin:left;}
+    .t-card:hover{border-color:var(--blue);box-shadow:0 12px 40px rgba(10,106,184,.1);transform:translateY(-5px);}
+    .t-card:hover::after{transform:scaleX(1);}
+    .t-icon{width:56px;height:56px;background:var(--blue-light);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:1.4rem;margin-bottom:1.2rem;}
+    .t-card h3{font-size:1rem;font-weight:700;margin-bottom:.4rem;}
+    .t-card p{font-size:.84rem;color:var(--gray);line-height:1.65;}
+    .t-tag{display:inline-block;margin-top:.8rem;background:var(--blue-light);color:var(--blue);font-size:.72rem;font-weight:700;border-radius:50px;padding:.2rem .7rem;}
+
+    /* EQUIPE */
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-top:3rem;}
+    .team-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:2rem;text-align:center;transition:all .3s;}
+    .team-card:hover{border-color:var(--blue);box-shadow:0 10px 30px rgba(10,106,184,.1);}
+    .team-avatar{width:90px;height:90px;border-radius:50%;background:var(--blue-light);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:800;color:var(--blue);border:3px solid var(--blue);}
+    .team-name{font-weight:800;font-size:.95rem;margin-bottom:.2rem;}
+    .team-role{font-size:.82rem;color:var(--gray);margin-bottom:.3rem;}
+    .team-cro{font-size:.75rem;color:var(--blue);font-weight:700;}
+
+    /* CONVÊNIOS */
+    .conv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-top:3rem;}
+    .conv-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.4rem;text-align:center;transition:all .3s;}
+    .conv-card:hover{border-color:var(--blue);transform:translateY(-3px);}
+    .conv-icon{font-size:1.8rem;margin-bottom:.5rem;}
+    .conv-name{font-size:.82rem;font-weight:700;color:var(--dark);}
+
+    /* DEPOIMENTOS */
+    .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem;}
+    .te-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:2rem;}
+    .te-stars{color:#f5c842;margin-bottom:.8rem;font-size:.85rem;}
+    .te-text{font-size:.88rem;color:rgba(255,255,255,.8);font-style:italic;line-height:1.75;margin-bottom:1.5rem;}
+    .te-author{display:flex;align-items:center;gap:.8rem;}
+    .te-av{width:44px;height:44px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;color:#fff;flex-shrink:0;}
+    .te-name{font-weight:700;font-size:.88rem;color:#fff;}
+    .te-role{font-size:.75rem;color:rgba(255,255,255,.5);}
+
+    /* CONTATO */
+    .contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start;margin-top:3rem;}
+    .ci-item{display:flex;gap:1rem;align-items:center;margin-bottom:1.2rem;}
+    .ci-icon{width:42px;height:42px;background:var(--blue-light);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--blue);flex-shrink:0;}
+    .ci-label{font-weight:700;font-size:.8rem;display:block;margin-bottom:.1rem;color:var(--dark);text-transform:uppercase;letter-spacing:.5px;}
+    .ci-text{font-size:.88rem;color:var(--gray);}
+    .cf{background:var(--light);border:1px solid var(--border);border-radius:20px;padding:2.5rem;}
+    .cf h3{font-size:1.4rem;font-weight:800;margin-bottom:1.5rem;}
+    .fg{margin-bottom:1.1rem;}
+    .fg label{display:block;font-size:.78rem;font-weight:600;margin-bottom:.3rem;color:var(--dark);}
+    .fg input,.fg select,.fg textarea{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-family:'Outfit',sans-serif;font-size:.9rem;background:var(--white);transition:border-color .3s;}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--blue);}
+    .f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+
+    footer{background:var(--dark);color:rgba(255,255,255,.5);padding:3rem 2rem 1.5rem;text-align:center;}
+    .f-logo{font-size:1.4rem;font-weight:800;color:var(--cyan);display:block;margin-bottom:.5rem;}
+    .f-note{font-size:.78rem;margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);padding-top:1rem;}
+    .wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;transition:transform .3s;}
+    .wa-float:hover{transform:scale(1.1);}
+
+    @media(max-width:968px){.hero-inner,.contact-grid{grid-template-columns:1fr;}nav .nav-links{display:none;}.hero-inner>div:last-child{display:none;}}
+    @media(max-width:600px){.hero{padding:7rem 1.5rem 4rem;}.hero-stats{gap:1.5rem;}.f-row{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><i class="fas fa-tooth"></i> Odonto <span>Excellence</span></a>
+      <ul class="nav-links">
+        <li><a href="#tratamentos">Tratamentos</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+        <li><a href="#convenios">Convênios</a></li>
+        <li><a href="#contato" class="nav-cta">Agendar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag"><i class="fas fa-tooth"></i> Clínica Odontológica · Recife – PE</div>
+        <h1>O sorriso que você <em>sempre sonhou</em> está aqui.</h1>
+        <p>Odontologia estética e restauradora de alto padrão. Tecnologia de ponta, dentistas especializados e tratamentos personalizados para o seu sorriso perfeito.</p>
+        <div class="hero-btns">
+          <a href="#contato" class="btn-blue"><i class="fas fa-calendar-check"></i> Agendar Avaliação Grátis</a>
+          <a href="#tratamentos" class="btn-ghost-w"><i class="fas fa-tooth"></i> Ver Tratamentos</a>
+        </div>
+        <div class="hero-stats">
+          <div><span class="hs-num">8k+</span><span class="hs-lbl">Sorrisos transformados</span></div>
+          <div><span class="hs-num">15+</span><span class="hs-lbl">Especialidades</span></div>
+          <div><span class="hs-num">20+</span><span class="hs-lbl">Dentistas</span></div>
+        </div>
+      </div>
+      <div class="smile-card">
+        <div class="sc-head">
+          <div class="sc-icon"><i class="fas fa-smile"></i></div>
+          <div><div class="sc-title">Nossos Tratamentos</div><div class="sc-sub">Mais procurados pelos pacientes</div></div>
+        </div>
+        <div class="treat-list">
+          <div class="treat-item"><div class="ti-left"><div class="ti-icon"><i class="fas fa-star"></i></div><div><div class="ti-name">Lentes de Contato Dental</div><div class="ti-sub">Transformação completa do sorriso</div></div></div><span class="ti-badge badge-popular">Popular</span></div>
+          <div class="treat-item"><div class="ti-left"><div class="ti-icon"><i class="fas fa-magic"></i></div><div><div class="ti-name">Clareamento a Laser</div><div class="ti-sub">Resultados visíveis em 1 sessão</div></div></div><span class="ti-badge badge-popular">Popular</span></div>
+          <div class="treat-item"><div class="ti-left"><div class="ti-icon"><i class="fas fa-cog"></i></div><div><div class="ti-name">Implante Dentário</div><div class="ti-sub">Fixo e permanente</div></div></div><span class="ti-badge badge-new">Premium</span></div>
+          <div class="treat-item"><div class="ti-left"><div class="ti-icon"><i class="fas fa-align-center"></i></div><div><div class="ti-name">Invisalign®</div><div class="ti-sub">Aparelho transparente</div></div></div><span class="ti-badge badge-new">Novo</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRATAMENTOS -->
+  <section id="tratamentos" class="bg-light">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Especialidades</span>
+        <h2 class="sec-title">Tratamentos para <em>cada necessidade</em></h2>
+        <p class="sec-desc">Mais de 15 especialidades odontológicas sob o mesmo teto. Do preventivo ao estético avançado.</p>
+      </div>
+      <div class="treat-grid">
+        <div class="t-card"><div class="t-icon"><i class="fas fa-star"></i></div><h3>Estética Dental</h3><p>Lentes de porcelana, facetas, coroas e recontorno dental para o sorriso dos seus sonhos.</p><span class="t-tag">Mais procurado</span></div>
+        <div class="t-card"><div class="t-icon"><i class="fas fa-magic"></i></div><h3>Clareamento</h3><p>Clareamento a laser com resultados imediatos ou clareamento caseiro supervisionado.</p></div>
+        <div class="t-card"><div class="t-icon"><i class="fas fa-cog"></i></div><h3>Implantes Dentários</h3><p>Implantes de titânio de última geração, com osseointegração segura e resultado estético natural.</p></div>
+        <div class="t-card"><div class="t-icon"><i class="fas fa-align-center"></i></div><h3>Ortodontia</h3><p>Aparelho fixo metálico, cerâmico, autoligado e o revolucionário Invisalign® (alinhadores transparentes).</p></div>
+        <div class="t-card"><div class="t-icon"><i class="fas fa-heartbeat"></i></div><h3>Periodontia</h3><p>Tratamento de gengivite, periodontite, cirurgias gengivais e manutenção da saúde das gengivas.</p></div>
+        <div class="t-card"><div class="t-icon"><i class="fas fa-baby"></i></div><h3>Odontopediatria</h3><p>Atendimento especializado para crianças, com ambiente lúdico e abordagem acolhedora.</p></div>
+        <div class="t-card"><div class="t-icon"><i class="fas fa-shield-alt"></i></div><h3>Endodontia</h3><p>Tratamento de canal moderno e indolor, com técnicas avançadas e alta taxa de sucesso.</p></div>
+        <div class="t-card"><div class="t-icon"><i class="fas fa-camera"></i></div><h3>Diagnóstico Digital</h3><p>Radiografia panorâmica digital, tomografia cone beam e escaneamento 3D intraoral.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section id="equipe">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Nossa Equipe</span>
+        <h2 class="sec-title">Dentistas <em>especializados</em></h2>
+        <p class="sec-desc">Profissionais certificados e em constante atualização para oferecer o melhor tratamento.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card"><div class="team-avatar">DR</div><div class="team-name">Dr. Daniel Rocha</div><div class="team-role">Implantodontia & Cirurgia</div><div class="team-cro">CRO/PE 12345</div></div>
+        <div class="team-card"><div class="team-avatar">PA</div><div class="team-name">Dra. Patrícia Amaral</div><div class="team-role">Estética & Prótese</div><div class="team-cro">CRO/PE 23456</div></div>
+        <div class="team-card"><div class="team-avatar">MS</div><div class="team-name">Dr. Marcos Silva</div><div class="team-role">Ortodontia & Invisalign®</div><div class="team-cro">CRO/PE 34567</div></div>
+        <div class="team-card"><div class="team-avatar">TC</div><div class="team-name">Dra. Tânia Coelho</div><div class="team-role">Odontopediatria</div><div class="team-cro">CRO/PE 45678</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONVÊNIOS -->
+  <section id="convenios" class="bg-light">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Planos aceitos</span>
+        <h2 class="sec-title">Convênios <em>aceitos</em></h2>
+        <p class="sec-desc">Trabalhamos com os principais planos odontológicos do mercado.</p>
+      </div>
+      <div class="conv-grid">
+        <div class="conv-card"><div class="conv-icon">🦷</div><div class="conv-name">OdontoPrev</div></div>
+        <div class="conv-card"><div class="conv-icon">🦷</div><div class="conv-name">Bradesco Dental</div></div>
+        <div class="conv-card"><div class="conv-icon">🦷</div><div class="conv-name">SulAmérica</div></div>
+        <div class="conv-card"><div class="conv-icon">🦷</div><div class="conv-name">Amil Dental</div></div>
+        <div class="conv-card"><div class="conv-icon">🦷</div><div class="conv-name">Porto Seguro</div></div>
+        <div class="conv-card"><div class="conv-icon">🦷</div><div class="conv-name">Unimed Odonto</div></div>
+        <div class="conv-card"><div class="conv-icon">🦷</div><div class="conv-name">Interodonto</div></div>
+        <div class="conv-card"><div class="conv-icon">💳</div><div class="conv-name">Particular / Parcelado</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section class="bg-dark">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag" style="color:var(--cyan);">Depoimentos</span>
+        <h2 class="sec-title" style="color:#fff;">Sorrisos que <em style="color:var(--cyan);">falam</em></h2>
+        <p class="sec-desc" style="color:rgba(255,255,255,.6);margin:0 auto 3rem;">Pacientes que transformaram seus sorrisos conosco.</p>
+      </div>
+      <div class="test-grid">
+        <div class="te-card"><div class="te-stars">★★★★★</div><p class="te-text">"Fiz as lentes de contato dental e minha vida mudou! A confiança de sorrir sem esconder os dentes é incrível. Equipe maravilhosa!"</p><div class="te-author"><div class="te-av">CM</div><div><div class="te-name">Camila Martins</div><div class="te-role">Lentes de Contato Dental</div></div></div></div>
+        <div class="te-card"><div class="te-stars">★★★★★</div><p class="te-text">"Coloquei implante e não sinto nenhuma diferença do dente natural. Procedimento tranquilo e resultado perfeito. Super recomendo!"</p><div class="te-author"><div class="te-av">JP</div><div><div class="te-name">José Paulo</div><div class="te-role">Implante Dentário</div></div></div></div>
+        <div class="te-card"><div class="te-stars">★★★★★</div><p class="te-text">"Comecei o Invisalign® há 8 meses e os resultados são incríveis. Ninguém percebe que estou usando. Atendimento de excelência!"</p><div class="te-author"><div class="te-av">LR</div><div><div class="te-name">Letícia Ramos</div><div class="te-role">Invisalign®</div></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="sec-inner">
+      <div class="contact-grid">
+        <div>
+          <span class="sec-tag">Agende sua visita</span>
+          <h2 class="sec-title">Avaliação <em>100% gratuita</em></h2>
+          <p style="color:var(--gray);font-size:.9rem;line-height:1.8;margin-bottom:2.5rem;">Venha conhecer nossa clínica e fazer uma avaliação completa do seu sorriso sem custo. Nossos dentistas vão indicar o melhor tratamento para você.</p>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><span class="ci-label">Telefone</span><span class="ci-text">(81) 9 9627-3630</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><span class="ci-label">E-mail</span><span class="ci-text">contato@odontoexcellence.com.br</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><span class="ci-label">Endereço</span><span class="ci-text">Av. Boa Viagem, 2500 · Boa Viagem · Recife – PE</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-clock"></i></div><div><span class="ci-label">Horários</span><span class="ci-text">Seg–Sex: 8h–20h · Sáb: 8h–16h</span></div></div>
+        </div>
+        <div class="cf">
+          <h3>Agendar avaliação gratuita</h3>
+          <form onsubmit="return false;">
+            <div class="fg"><label>Nome Completo</label><input type="text" placeholder="Seu nome"></div>
+            <div class="f-row">
+              <div class="fg"><label>Telefone</label><input type="tel" placeholder="(81) 9 9999-9999"></div>
+              <div class="fg"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+            </div>
+            <div class="fg"><label>Tratamento de interesse</label>
+              <select><option value="">Selecione...</option><option>Estética Dental / Lentes</option><option>Clareamento</option><option>Implante Dentário</option><option>Ortodontia / Invisalign®</option><option>Periodontia</option><option>Odontopediatria</option><option>Avaliação geral</option></select>
+            </div>
+            <div class="fg"><label>Convênio</label>
+              <select><option value="">Particular / Sem convênio</option><option>OdontoPrev</option><option>Bradesco Dental</option><option>SulAmérica</option><option>Amil Dental</option><option>Outro</option></select>
+            </div>
+            <div class="fg"><label>Observações</label><textarea rows="2" placeholder="Alguma informação adicional?"></textarea></div>
+            <button onclick="alert('Agendamento realizado! Entraremos em contato para confirmar.')" style="width:100%;padding:.9rem;background:var(--blue);color:#fff;border:none;border-radius:50px;font-weight:700;font-size:.92rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:background .3s;" onmouseover="this.style.background='var(--blue-dark)'" onmouseout="this.style.background='var(--blue)'"><i class="fas fa-calendar-check"></i> Agendar Avaliação Gratuita</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="f-logo"><i class="fas fa-tooth"></i> Odonto Excellence</span>
+    <p>Clínica Odontológica Premium · Recife – PE</p>
+    <div class="f-note">&copy; 2026 Odonto Excellence · Todos os direitos reservados · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div>
+  </footer>
+
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+  <script>document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});</script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clínica Saúde Integral | Medicina Multidisciplinar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root { --blue: #1a5cad; --blue-light: #e8f0fb; --teal: #0d9488; --gray: #64748b; --light: #f8fafc; --white: #fff; --border: #e2e8f0; --dark: #0f172a; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', sans-serif; background: var(--white); color: var(--dark); overflow-x: hidden; line-height: 1.6; }
+    .btn-voltar { position: fixed; top: 20px; left: 20px; z-index: 9999; background: var(--blue); color: #fff; padding: 10px 18px; border-radius: 30px; text-decoration: none; font-size: .85rem; font-weight: 700; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(26,92,173,.35); }
+    .btn-voltar:hover { background: #154d94; }
+    nav { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 1000; padding: 1rem 0; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-size: 1.2rem; font-weight: 800; color: var(--blue); text-decoration: none; display: flex; align-items: center; gap: .5rem; }
+    .nav-logo i { color: var(--teal); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--gray); font-size: .88rem; font-weight: 600; text-decoration: none; transition: color .3s; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta { background: var(--blue); color: #fff !important; padding: .55rem 1.3rem; border-radius: 50px; }
+    .hero { min-height: 100vh; background: linear-gradient(135deg, #e8f0fb 0%, #f0f9ff 50%, var(--white) 100%); display: flex; align-items: center; padding: 8rem 2rem 5rem; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(26,92,173,.1), transparent 65%); border-radius: 50%; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 1; }
+    .hero-tag { display: inline-flex; align-items: center; gap: .5rem; background: rgba(26,92,173,.1); border: 1px solid rgba(26,92,173,.25); color: var(--blue); border-radius: 50px; padding: .35rem 1rem; font-size: .75rem; font-weight: 700; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2.4rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.5rem; color: var(--dark); }
+    .hero h1 span { color: var(--blue); }
+    .hero p { color: var(--gray); font-size: .96rem; line-height: 1.8; margin-bottom: 2.5rem; max-width: 480px; }
+    .btn-blue { display: inline-flex; align-items: center; gap: .5rem; padding: .9rem 2rem; background: var(--blue); color: #fff; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: .92rem; transition: all .3s; }
+    .btn-blue:hover { background: #154d94; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,92,173,.3); }
+    .btn-outline-blue { display: inline-flex; align-items: center; gap: .5rem; padding: .9rem 2rem; background: transparent; color: var(--blue); border: 2px solid var(--blue); border-radius: 50px; font-weight: 700; text-decoration: none; font-size: .92rem; transition: all .3s; }
+    .btn-outline-blue:hover { background: var(--blue); color: #fff; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .hs-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.2rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,.05); }
+    .hs-num { font-size: 1.8rem; font-weight: 800; color: var(--blue); display: block; line-height: 1; }
+    .hs-lbl { font-size: .75rem; color: var(--gray); margin-top: .2rem; }
+    .hero-img { position: relative; }
+    .hero-img img { width: 100%; height: 520px; object-fit: cover; border-radius: 24px; box-shadow: 0 24px 60px rgba(26,92,173,.2); }
+    .hero-img .convs { position: absolute; bottom: 24px; left: 24px; background: var(--white); border-radius: 16px; padding: 1rem 1.4rem; box-shadow: 0 8px 30px rgba(0,0,0,.12); display: flex; align-items: center; gap: .8rem; }
+    .convs-icon { width: 40px; height: 40px; background: var(--blue-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--blue); }
+    .convs-text { font-size: .75rem; color: var(--gray); }
+    .convs-title { font-weight: 700; color: var(--dark); font-size: .88rem; }
+    section { padding: 5.5rem 2rem; }
+    .sec-inner { max-width: 1200px; margin: 0 auto; }
+    .sec-tag { display: block; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--blue); margin-bottom: .5rem; }
+    .sec-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.2; color: var(--dark); }
+    .sec-desc { color: var(--gray); font-size: .92rem; max-width: 580px; line-height: 1.8; }
+    .text-center { text-align: center; }
+    .text-center .sec-desc { margin: 0 auto 3rem; }
+    .bg-light { background: var(--light); }
+    .bg-blue { background: var(--blue); color: var(--white); }
+    .specs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .spec-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; transition: all .3s; }
+    .spec-card:hover { border-color: var(--blue); box-shadow: 0 12px 40px rgba(26,92,173,.1); transform: translateY(-5px); }
+    .spec-icon { width: 56px; height: 56px; background: var(--blue-light); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--blue); font-size: 1.4rem; margin-bottom: 1.2rem; }
+    .spec-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
+    .spec-card p { font-size: .84rem; color: var(--gray); line-height: 1.6; }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .team-card { text-align: center; background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; }
+    .t-avatar { width: 80px; height: 80px; background: var(--blue-light); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: 800; color: var(--blue); border: 2px solid var(--blue); }
+    .t-name { font-weight: 800; font-size: .92rem; margin-bottom: .2rem; }
+    .t-role { font-size: .78rem; color: var(--gray); margin-bottom: .2rem; }
+    .t-crm { font-size: .72rem; color: var(--blue); font-weight: 700; }
+    .convs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1.2rem; margin-top: 3rem; }
+    .conv-card { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 12px; padding: 1.2rem; text-align: center; font-weight: 700; font-size: .85rem; }
+    .conv-icon { font-size: 1.5rem; margin-bottom: .4rem; opacity: .8; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+    .ci-item { display: flex; gap: 1rem; align-items: center; margin-bottom: 1.2rem; }
+    .ci-icon { width: 42px; height: 42px; background: var(--blue-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--blue); flex-shrink: 0; }
+    .ci-label { font-weight: 700; font-size: .82rem; display: block; }
+    .ci-text { font-size: .88rem; color: var(--gray); }
+    .cf { background: var(--light); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; }
+    .cf h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem; }
+    .fg { margin-bottom: 1rem; }
+    .fg label { display: block; font-size: .78rem; font-weight: 700; margin-bottom: .3rem; color: var(--dark); }
+    .fg input, .fg select, .fg textarea { width: 100%; padding: .8rem 1rem; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'Nunito', sans-serif; font-size: .9rem; transition: border-color .3s; background: var(--white); }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { outline: none; border-color: var(--blue); }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    footer { background: var(--dark); color: rgba(255,255,255,.5); padding: 3rem 2rem 1.5rem; text-align: center; }
+    .f-logo { font-size: 1.3rem; font-weight: 800; color: var(--blue); display: block; margin-bottom: .4rem; }
+    .f-note { font-size: .78rem; margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.08); padding-top: 1rem; }
+    .wa-float { position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.6rem; text-decoration: none; box-shadow: 0 4px 16px rgba(37,211,102,.4); z-index: 999; transition: transform .3s; }
+    .wa-float:hover { transform: scale(1.1); }
+    @media (max-width: 968px) { .hero-inner, .contact-grid { grid-template-columns: 1fr; } nav .nav-links { display: none; } .hero-img { display: none; } }
+    @media (max-width: 600px) { .hero { padding: 7rem 1.5rem 4rem; } .hero-stats { grid-template-columns: 1fr 1fr; } .f-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><i class="fas fa-heartbeat"></i> Saúde Integral</a>
+      <ul class="nav-links">
+        <li><a href="#especialidades">Especialidades</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+        <li><a href="#convenios">Convênios</a></li>
+        <li><a href="#contato" class="nav-cta">Agendar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag"><i class="fas fa-hospital"></i> Clínica Multidisciplinar · Recife – PE</div>
+        <h1>Cuidado médico completo para <span>toda a família.</span></h1>
+        <p>Clínica multidisciplinar com equipe especializada, tecnologia de ponta e atendimento humanizado. Sua saúde é nossa prioridade.</p>
+        <div class="hero-btns">
+          <a href="#contato" class="btn-blue"><i class="fas fa-calendar-check"></i> Agendar Consulta</a>
+          <a href="#especialidades" class="btn-outline-blue">Nossas Especialidades</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hs-card"><span class="hs-num">15k+</span><span class="hs-lbl">Pacientes</span></div>
+          <div class="hs-card"><span class="hs-num">20+</span><span class="hs-lbl">Especialidades</span></div>
+          <div class="hs-card"><span class="hs-num">25+</span><span class="hs-lbl">Médicos</span></div>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=1000&fit=crop" alt="Clínica Saúde Integral">
+        <div class="convs">
+          <div class="convs-icon"><i class="fas fa-shield-alt"></i></div>
+          <div><div class="convs-title">Convênios aceitos</div><div class="convs-text">Unimed, Bradesco, Amil e +18</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="especialidades" class="bg-light">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Especialidades</span>
+        <h2 class="sec-title">Cuidamos de você do início ao fim</h2>
+        <p class="sec-desc">Mais de 20 especialidades médicas sob o mesmo teto para facilitar seu cuidado.</p>
+      </div>
+      <div class="specs-grid">
+        <div class="spec-card"><div class="spec-icon"><i class="fas fa-heart"></i></div><h3>Cardiologia</h3><p>Exames, diagnósticos e tratamentos para o coração e sistema cardiovascular.</p></div>
+        <div class="spec-card"><div class="spec-icon"><i class="fas fa-brain"></i></div><h3>Neurologia</h3><p>Tratamento de doenças do sistema nervoso central e periférico.</p></div>
+        <div class="spec-card"><div class="spec-icon"><i class="fas fa-bone"></i></div><h3>Ortopedia</h3><p>Lesões, fraturas, articulações e reabilitação do aparelho locomotor.</p></div>
+        <div class="spec-card"><div class="spec-icon"><i class="fas fa-eye"></i></div><h3>Oftalmologia</h3><p>Saúde ocular completa, cirurgias e correções visuais.</p></div>
+        <div class="spec-card"><div class="spec-icon"><i class="fas fa-baby"></i></div><h3>Pediatria</h3><p>Cuidado completo para bebês, crianças e adolescentes.</p></div>
+        <div class="spec-card"><div class="spec-icon"><i class="fas fa-dna"></i></div><h3>Endocrinologia</h3><p>Diabetes, tireoide, obesidade e distúrbios hormonais.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="equipe">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Nossa Equipe</span>
+        <h2 class="sec-title">Médicos dedicados a você</h2>
+        <p class="sec-desc">Profissionais experientes e em constante atualização.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card"><div class="t-avatar">AM</div><div class="t-name">Dra. Ana Mendes</div><div class="t-role">Cardiologista</div><div class="t-crm">CRM/PE 12345</div></div>
+        <div class="team-card"><div class="t-avatar">JP</div><div class="t-name">Dr. João Prado</div><div class="t-role">Neurologista</div><div class="t-crm">CRM/PE 23456</div></div>
+        <div class="team-card"><div class="t-avatar">CF</div><div class="t-name">Dra. Cláudia Faria</div><div class="t-role">Pediatra</div><div class="t-crm">CRM/PE 34567</div></div>
+        <div class="team-card"><div class="t-avatar">RL</div><div class="t-name">Dr. Ricardo Lima</div><div class="t-role">Ortopedista</div><div class="t-crm">CRM/PE 45678</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="convenios" class="bg-blue">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag" style="color:rgba(255,255,255,.7);">Convênios</span>
+        <h2 class="sec-title" style="color:#fff;">Convênios aceitos</h2>
+        <p class="sec-desc" style="color:rgba(255,255,255,.75);margin:0 auto 2rem;">Trabalhamos com os principais planos de saúde do mercado.</p>
+      </div>
+      <div class="convs-grid">
+        <div class="conv-card"><div class="conv-icon">🏥</div>Unimed</div>
+        <div class="conv-card"><div class="conv-icon">🏥</div>Bradesco Saúde</div>
+        <div class="conv-card"><div class="conv-icon">🏥</div>Amil</div>
+        <div class="conv-card"><div class="conv-icon">🏥</div>SulAmérica</div>
+        <div class="conv-card"><div class="conv-icon">🏥</div>Porto Seguro</div>
+        <div class="conv-card"><div class="conv-icon">🏥</div>Hapvida</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="sec-inner">
+      <div class="contact-grid">
+        <div>
+          <span class="sec-tag">Contato</span>
+          <h2 class="sec-title">Agende sua consulta</h2>
+          <p style="color:var(--gray);font-size:.9rem;line-height:1.8;margin-bottom:2rem;">Nossa equipe está pronta para atendê-lo. Agende pelo formulário, telefone ou WhatsApp.</p>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><span class="ci-label">Telefone</span><span class="ci-text">(81) 9 9627-3630</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><span class="ci-label">E-mail</span><span class="ci-text">contato@saudeintegral.com.br</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><span class="ci-label">Endereço</span><span class="ci-text">Av. Domingos Ferreira, 400 · Boa Viagem · Recife – PE</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-clock"></i></div><div><span class="ci-label">Horário</span><span class="ci-text">Seg–Sex: 7h–20h · Sáb: 8h–14h</span></div></div>
+        </div>
+        <div class="cf">
+          <h3>Solicitar Agendamento</h3>
+          <form onsubmit="handleForm(event)">
+            <div class="fg"><label>Nome Completo</label><input type="text" placeholder="Seu nome" required></div>
+            <div class="f-row">
+              <div class="fg"><label>Telefone</label><input type="tel" placeholder="(81) 9 9999-9999" required></div>
+              <div class="fg"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+            </div>
+            <div class="fg"><label>Especialidade</label>
+              <select required><option value="">Selecione...</option><option>Cardiologia</option><option>Neurologia</option><option>Ortopedia</option><option>Oftalmologia</option><option>Pediatria</option><option>Endocrinologia</option></select>
+            </div>
+            <div class="fg"><label>Convênio</label>
+              <select><option value="">Particular / Sem convênio</option><option>Unimed</option><option>Bradesco Saúde</option><option>Amil</option><option>SulAmérica</option><option>Hapvida</option></select>
+            </div>
+            <div class="fg"><label>Observações</label><textarea rows="2" placeholder="Alguma informação adicional?"></textarea></div>
+            <button type="submit" style="width:100%;padding:.9rem;background:var(--blue);color:#fff;border:none;border-radius:50px;font-weight:700;font-size:.92rem;cursor:pointer;font-family:'Nunito',sans-serif;transition:background .3s;" onmouseover="this.style.background='#154d94'" onmouseout="this.style.background='var(--blue)'"><i class="fas fa-calendar-check"></i> Agendar Consulta</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="f-logo"><i class="fas fa-heartbeat"></i> Saúde Integral</span>
+    <p>Clínica Multidisciplinar · Recife – PE</p>
+    <div class="f-note">&copy; 2026 Clínica Saúde Integral · Todos os direitos reservados · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div>
+  </footer>
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) { a.addEventListener('click', function(e) { var h = a.getAttribute('href'); if (h === '#') return; e.preventDefault(); var t = document.querySelector(h); if (t) t.scrollIntoView({ behavior: 'smooth' }); }); });
+    function handleForm(e) { e.preventDefault(); alert('Agendamento solicitado! Entraremos em contato em breve.'); e.target.reset(); }
+  </script>
+</body>
+</html>

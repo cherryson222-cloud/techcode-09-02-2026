@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modelos de Site para Clínicas | TechCoDesign</title>
+  <meta name="description" content="Modelos de sites para clínicas médicas e odontológicas. Templates confiáveis e profissionais pela TechCoDesign.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    :root{--black:#090909;--card:#131313;--magenta:#b515bf;--cyan:#33c5e8;--white:#fff;--gray:#a0a0a0;--gray2:#5a5a5a;--line:rgba(255,255,255,.07);--glass:rgba(255,255,255,.04);}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{text-decoration:none;color:inherit;}
+    ::-webkit-scrollbar{width:5px;}
+    ::-webkit-scrollbar-track{background:var(--black);}
+    ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--magenta),var(--cyan));border-radius:3px;}
+    .grad{background:linear-gradient(135deg,var(--magenta),var(--cyan));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+    .bg-wrap{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;}
+    .bg-orb{position:absolute;border-radius:50%;filter:blur(130px);opacity:.16;}
+    .bg-orb-1{width:600px;height:600px;background:var(--magenta);top:-15%;right:-15%;animation:drift1 25s infinite ease-in-out;}
+    .bg-orb-2{width:500px;height:500px;background:var(--cyan);bottom:-15%;left:-15%;animation:drift2 30s infinite ease-in-out;}
+    @keyframes drift1{0%,100%{transform:translate(0,0);}50%{transform:translate(-60px,80px);}}
+    @keyframes drift2{0%,100%{transform:translate(0,0);}50%{transform:translate(80px,-60px);}}
+
+    .site-header{position:sticky;top:0;z-index:100;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(9,9,9,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);}
+    .logo{font-family:'Urbanist',sans-serif;font-size:1.05rem;font-weight:900;letter-spacing:.5px;background:linear-gradient(135deg,var(--magenta),var(--cyan));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .btn-back{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:600;color:var(--gray);border:1px solid var(--line);padding:.5rem 1.1rem;border-radius:50px;transition:all .3s;}
+    .btn-back:hover{color:var(--cyan);border-color:rgba(51,197,232,.4);}
+
+    .page-hero{padding:5rem 3rem 4rem;max-width:1360px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;}
+    .page-hero-left{max-width:700px;}
+    .eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(51,197,232,.08);border:1px solid rgba(51,197,232,.2);border-radius:50px;padding:.35rem 1rem;font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);margin-bottom:1.5rem;}
+    .page-hero h1{font-family:'Urbanist',sans-serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:900;letter-spacing:-2px;line-height:1.05;margin-bottom:1.2rem;}
+    .page-hero p{font-size:1rem;color:var(--gray);line-height:1.8;max-width:560px;}
+    .count-pill{display:inline-flex;align-items:center;gap:.6rem;background:rgba(181,21,191,.1);border:1px solid rgba(181,21,191,.25);border-radius:50px;padding:.5rem 1.2rem;font-size:.78rem;font-weight:700;color:var(--magenta);}
+
+    .notice{max-width:1360px;margin:0 auto 3rem;padding:0 3rem;}
+    .notice-inner{background:rgba(51,197,232,.05);border:1px solid rgba(51,197,232,.18);border-radius:14px;padding:1rem 1.5rem;display:flex;align-items:flex-start;gap:1rem;}
+    .notice-inner i{color:var(--cyan);font-size:1.1rem;flex-shrink:0;margin-top:.1rem;}
+    .notice-inner p{font-size:.82rem;color:var(--gray);line-height:1.6;}
+    .notice-inner strong{color:var(--white);}
+
+    .models-section{max-width:1360px;margin:0 auto;padding:0 3rem 6rem;}
+    .models-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;}
+
+    .model-card{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;position:relative;}
+    .model-card:hover{transform:translateY(-10px);border-color:rgba(51,197,232,.35);box-shadow:0 24px 60px rgba(0,0,0,.4),0 0 0 1px rgba(51,197,232,.1);}
+    .model-cover{height:260px;position:relative;overflow:hidden;}
+    .model-cover img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;filter:brightness(.88);}
+    .model-card:hover .model-cover img{transform:scale(1.06);filter:brightness(.95);}
+    .cover-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(9,9,9,.95));}
+    .cover-badge{position:absolute;top:16px;left:16px;background:linear-gradient(135deg,var(--magenta),var(--cyan));color:var(--white);padding:.3rem .9rem;border-radius:50px;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;}
+    .cover-tag{position:absolute;bottom:16px;left:16px;font-family:'Urbanist',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);}
+    .model-body{padding:2rem;flex-grow:1;display:flex;flex-direction:column;gap:1rem;}
+    .model-body h3{font-family:'Urbanist',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.3px;}
+    .model-body p{font-size:.88rem;color:var(--gray);line-height:1.7;}
+    .model-features{display:flex;flex-wrap:wrap;gap:.5rem;}
+    .feat-chip{background:var(--glass);border:1px solid var(--line);border-radius:50px;padding:.3rem .8rem;font-size:.72rem;color:var(--gray);font-weight:500;}
+    .model-footer{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2rem;border-top:1px solid var(--line);background:rgba(0,0,0,.2);}
+    .model-number{font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray2);}
+    .btn-demo{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--magenta),var(--cyan));color:var(--white);padding:.65rem 1.4rem;border-radius:50px;font-size:.8rem;font-weight:700;font-family:'Urbanist',sans-serif;letter-spacing:.5px;transition:all .3s;}
+    .btn-demo:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(181,21,191,.35);}
+
+    .cta-section{max-width:1360px;margin:0 auto;padding:0 3rem 6rem;}
+    .cta-inner{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:4rem;text-align:center;position:relative;overflow:hidden;}
+    .cta-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--magenta),var(--cyan));}
+    .cta-inner::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(181,21,191,.08),transparent 60%);pointer-events:none;}
+    .cta-inner h2{font-family:'Urbanist',sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;letter-spacing:-1px;margin-bottom:.8rem;position:relative;z-index:1;}
+    .cta-inner p{font-size:.95rem;color:var(--gray);margin-bottom:2.5rem;position:relative;z-index:1;}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+    .btn-cta-p{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:linear-gradient(135deg,var(--magenta),var(--cyan));color:var(--white);border-radius:50px;font-weight:700;font-size:.9rem;transition:all .3s;}
+    .btn-cta-p:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(181,21,191,.4);}
+    .btn-cta-s{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:transparent;color:var(--white);border-radius:50px;font-weight:700;font-size:.9rem;border:1.5px solid var(--line);transition:all .3s;}
+    .btn-cta-s:hover{border-color:rgba(51,197,232,.4);color:var(--cyan);}
+
+    footer{border-top:1px solid var(--line);padding:2rem 3rem;text-align:center;font-size:.8rem;color:var(--gray2);}
+    footer a{color:var(--cyan);}
+
+    @media(max-width:1024px){.models-grid{grid-template-columns:1fr;}.page-hero{grid-template-columns:1fr;}}
+    @media(max-width:768px){.site-header,.page-hero,.notice,.models-section,.cta-section{padding-left:1.5rem;padding-right:1.5rem;}.page-hero{padding-top:3rem;padding-bottom:2rem;}}
+  </style>
+</head>
+<body>
+
+  <div class="bg-wrap">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+  </div>
+
+  <header class="site-header">
+    <a href="index.html" class="logo">TECHCODESIGN</a>
+    <a href="index.html#modelos" class="btn-back"><i class="ri-arrow-left-line"></i> Voltar</a>
+  </header>
+
+  <div class="page-hero">
+    <div class="page-hero-left">
+      <div class="eyebrow"><i class="ri-hospital-line"></i> Clínicas &amp; Saúde</div>
+      <h1>Modelos para<br><span class="grad">Clínicas &amp; Saúde</span></h1>
+      <p>Templates confiáveis e profissionais para clínicas médicas, odontológicas e centros de saúde. Cada modelo é adaptado com as informações reais do seu consultório pela equipe TechCoDesign.</p>
+    </div>
+    <div class="count-pill"><i class="ri-layout-grid-line"></i> 3 modelos disponíveis</div>
+  </div>
+
+  <div class="notice">
+    <div class="notice-inner">
+      <i class="ri-information-line"></i>
+      <p><strong>Sites demonstrativos.</strong> Todos os dados exibidos (nome, CRM, endereço, telefone, convênios) são fictícios e serão substituídos pelas informações reais da sua clínica. Contato real TechCoDesign: <strong>(81) 9 9627-3630</strong>.</p>
+    </div>
+  </div>
+
+  <section class="models-section">
+    <div class="models-grid">
+
+      <div class="model-card">
+        <div class="model-cover">
+          <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=900&h=520&fit=crop" alt="Saúde Integral">
+          <div class="cover-overlay"></div>
+          <span class="cover-badge">Destaque</span>
+          <span class="cover-tag">Modelo 01</span>
+        </div>
+        <div class="model-body">
+          <h3>Saúde Integral</h3>
+          <p>Design moderno em azul-médico e branco. Transmite confiança, cuidado e profissionalismo — ideal para clínicas multidisciplinares, médicas ou odontológicas com múltiplas especialidades.</p>
+          <div class="model-features">
+            <span class="feat-chip">Design azul clínico</span>
+            <span class="feat-chip">Especialidades em grid</span>
+            <span class="feat-chip">Apresentação de equipe</span>
+            <span class="feat-chip">Convênios aceitos</span>
+            <span class="feat-chip">Agendamento online</span>
+            <span class="feat-chip">Responsivo</span>
+          </div>
+        </div>
+        <div class="model-footer">
+          <span class="model-number">N.º 01 / 03</span>
+          <a href="clinica1.html" class="btn-demo">Ver Demonstração <i class="ri-arrow-right-up-line"></i></a>
+        </div>
+      </div>
+      
+      <div class="model-card">
+        <div class="model-cover">
+          <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=900&h=520&fit=crop" alt="Odonto Excellence">
+          <div class="cover-overlay"></div>
+          <span class="cover-tag">Modelo 02</span>
+        </div>
+        <div class="model-body">
+          <h3>Odonto Excellence</h3>
+          <p>Design clean e profissional em azul e branco para clínicas odontológicas. Foco em tratamentos, convênios aceitos e agendamento.</p>
+          <div class="model-features">
+            <span class="feat-chip">Odontologia</span>
+            <span class="feat-chip">Lista de Convênios</span>
+            <span class="feat-chip">Equipe de Dentistas</span>
+            <span class="feat-chip">Agendamento</span>
+          </div>
+        </div>
+        <div class="model-footer">
+          <span class="model-number">N.º 02 / 03</span>
+          <a href="clinica2.html" class="btn-demo">Ver Demonstração <i class="ri-arrow-right-up-line"></i></a>
+        </div>
+      </div>
+
+      <div class="model-card">
+        <div class="model-cover">
+          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&h=520&fit=crop" alt="Lumière Estética">
+          <div class="cover-overlay"></div>
+          <span class="cover-badge">Novo</span>
+          <span class="cover-tag">Modelo 03</span>
+        </div>
+        <div class="model-body">
+          <h3>Lumière Estética</h3>
+          <p>Visual sofisticado em dourado e tons terrosos para clínicas de estética e dermatologia. Transmite luxo, cuidado e tecnologia.</p>
+          <div class="model-features">
+            <span class="feat-chip">Estética Avançada</span>
+            <span class="feat-chip">Design Premium</span>
+            <span class="feat-chip">Protocolos</span>
+            <span class="feat-chip">Depoimentos</span>
+          </div>
+        </div>
+        <div class="model-footer">
+          <span class="model-number">N.º 03 / 03</span>
+          <a href="clinica3.html" class="btn-demo">Ver Demonstração <i class="ri-arrow-right-up-line"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2>Gostou do modelo?<br><span class="grad">Adaptamos para você.</span></h2>
+      <p>Personalizamos o template com nome da clínica, CRM, especialidades, convênios e todas as informações reais do seu negócio.</p>
+      <div class="cta-btns">
+        <a href="https://wa.me/5581996273630?text=Ol%C3%A1!%20Vi%20os%20modelos%20de%20cl%C3%ADnica%20e%20tenho%20interesse." target="_blank" class="btn-cta-p"><i class="ri-whatsapp-line"></i> Falar no WhatsApp</a>
+        <a href="index.html#orcamento" class="btn-cta-s"><i class="ri-calculator-line"></i> Fazer Orçamento Online</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 <a href="index.html">TechCoDesign</a> — Desenvolvimento de Sites &amp; Identidade Visual &nbsp;·&nbsp; (81) 9 9627-3630</p>
+  </footer>
+
+</body>
+</html>

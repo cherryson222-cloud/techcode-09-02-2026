@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitCoach Pro | Personal Trainer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{--red:#e01c1c;--red-dark:#b81616;--black:#080808;--dark:#111;--card:#1a1a1a;--white:#fff;--gray:#888;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.6;}
+
+    .btn-voltar{position:fixed;top:20px;left:20px;z-index:9999;background:var(--red);color:#fff;padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(224,28,28,.4);}
+    .btn-voltar:hover{background:var(--red-dark);}
+
+    nav{position:fixed;top:0;width:100%;background:rgba(8,8,8,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(224,28,28,.2);z-index:1000;padding:.9rem 0;}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--red);text-decoration:none;letter-spacing:2px;}
+    .nav-logo span{color:var(--white);}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{color:var(--gray);font-size:.82rem;text-decoration:none;font-weight:600;letter-spacing:.5px;text-transform:uppercase;transition:color .3s;}
+    .nav-links a:hover{color:var(--red);}
+    .nav-cta{background:var(--red)!important;color:#fff!important;padding:.5rem 1.3rem;border-radius:4px;}
+
+    /* HERO */
+    .hero{min-height:100vh;position:relative;display:flex;align-items:center;padding:8rem 2rem 5rem;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&h=900&fit=crop') center/cover no-repeat;opacity:.2;}
+    .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,8,.95) 50%,rgba(224,28,28,.08));}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1;}
+    .hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(224,28,28,.15);border:1px solid rgba(224,28,28,.4);color:var(--red);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding:.35rem .9rem;border-radius:4px;margin-bottom:1.2rem;}
+    .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,9vw,7rem);line-height:.95;letter-spacing:2px;margin-bottom:1.5rem;text-transform:uppercase;}
+    .hero h1 span{color:var(--red);}
+    .hero p{color:var(--gray);font-size:.96rem;line-height:1.8;margin-bottom:2.5rem;max-width:460px;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;}
+    .btn-red{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--red);color:#fff;border-radius:4px;font-weight:700;text-decoration:none;font-size:.9rem;text-transform:uppercase;letter-spacing:.5px;transition:all .3s;}
+    .btn-red:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(224,28,28,.4);}
+    .btn-ghost{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:4px;font-weight:600;text-decoration:none;font-size:.9rem;transition:all .3s;}
+    .btn-ghost:hover{border-color:var(--red);color:var(--red);}
+    .hero-stats{display:flex;gap:3rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.08);}
+    .hs-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--red);display:block;line-height:1;}
+    .hs-lbl{font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px;}
+    .hero-img-wrap{position:relative;}
+    .hero-img-wrap img{width:100%;height:520px;object-fit:cover;border-radius:8px;filter:brightness(.85);}
+    .hero-img-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(8,8,8,.7));border-radius:8px;z-index:1;}
+    .hero-badge{position:absolute;bottom:24px;left:24px;z-index:2;background:var(--red);border-radius:8px;padding:1rem 1.4rem;display:flex;align-items:center;gap:.8rem;}
+    .hb-icon{font-size:1.4rem;}
+    .hb-val{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;line-height:1;}
+    .hb-lbl{font-size:.72rem;color:rgba(255,255,255,.8);text-transform:uppercase;letter-spacing:.5px;}
+
+    .ticker{background:var(--red);padding:.8rem 0;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent);mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent);}
+    .ticker-track{display:flex;width:max-content;animation:tick 24s linear infinite;}
+    @keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+    .ticker-item{display:inline-flex;align-items:center;gap:.5rem;padding:0 2rem;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:#fff;white-space:nowrap;}
+    .ticker-dot{opacity:.6;font-size:.8rem;}
+
+    section{padding:5rem 2rem;}
+    .sec-inner{max-width:1200px;margin:0 auto;}
+    .sec-tag{display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--red);margin-bottom:.5rem;}
+    .sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,3.8rem);letter-spacing:1px;margin-bottom:1rem;line-height:1.05;}
+    .sec-desc{color:var(--gray);font-size:.9rem;max-width:580px;line-height:1.8;}
+    .text-center{text-align:center;}.text-center .sec-desc{margin:0 auto 3rem;}
+    .bg-dark{background:var(--dark);}
+
+    /* SOBRE */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .about-img img{width:100%;height:500px;object-fit:cover;border-radius:8px;filter:brightness(.85);}
+    .about-list{list-style:none;margin:2rem 0;display:flex;flex-direction:column;gap:.8rem;}
+    .about-list li{display:flex;align-items:center;gap:.8rem;font-size:.9rem;color:var(--gray);}
+    .about-list i{color:var(--red);width:16px;}
+    .cert-row{display:flex;gap:.6rem;flex-wrap:wrap;}
+    .cert-chip{background:rgba(224,28,28,.12);border:1px solid rgba(224,28,28,.3);color:var(--red);border-radius:4px;padding:.3rem .8rem;font-size:.75rem;font-weight:700;}
+
+    /* SERVIÇOS */
+    .svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:3rem;}
+    .svc-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:2rem;transition:all .3s;position:relative;overflow:hidden;}
+    .svc-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--red);transition:height .4s;}
+    .svc-card:hover::before{height:100%;}
+    .svc-card:hover{background:#1e1e1e;}
+    .svc-icon{font-size:2rem;color:var(--red);margin-bottom:1rem;}
+    .svc-card h3{font-size:.92rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.5rem;}
+    .svc-card p{font-size:.82rem;color:var(--gray);line-height:1.6;}
+
+    /* PROCESSO */
+    .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3rem;position:relative;}
+    .process-grid::before{content:'';position:absolute;top:40px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--red),rgba(224,28,28,.2));z-index:0;}
+    .proc-step{text-align:center;position:relative;z-index:1;}
+    .proc-num{width:80px;height:80px;background:var(--card);border:2px solid var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--red);margin:0 auto 1.5rem;box-shadow:0 0 20px rgba(224,28,28,.2);}
+    .proc-step h4{font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.4rem;}
+    .proc-step p{font-size:.8rem;color:var(--gray);line-height:1.6;}
+
+    /* IMC */
+    .imc-box{background:var(--card);border:1px solid rgba(224,28,28,.2);border-radius:16px;padding:3rem;max-width:700px;margin:3rem auto 0;}
+    .imc-box h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:1px;margin-bottom:.5rem;}
+    .imc-box p{color:var(--gray);font-size:.88rem;margin-bottom:2rem;}
+    .imc-fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem;}
+    .imc-fields input{padding:.9rem 1rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:var(--white);font-family:'Inter',sans-serif;font-size:.9rem;transition:border-color .3s;}
+    .imc-fields input:focus{outline:none;border-color:var(--red);}
+    .imc-fields input::placeholder{color:rgba(255,255,255,.3);}
+    .imc-result{background:rgba(224,28,28,.1);border:1px solid rgba(224,28,28,.25);border-radius:8px;padding:1rem;margin-top:1rem;text-align:center;display:none;}
+    .imc-result strong{color:var(--red);font-size:1.4rem;}
+
+    /* PLANOS */
+    .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3rem;}
+    .plan-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:2rem;transition:all .3s;position:relative;}
+    .plan-card.featured{border-color:var(--red);background:linear-gradient(135deg,rgba(224,28,28,.08),var(--card));}
+    .plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:.3rem .9rem;border-radius:20px;white-space:nowrap;}
+    .plan-name{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:1px;margin-bottom:.6rem;}
+    .plan-desc{font-size:.82rem;color:var(--gray);margin-bottom:1.5rem;line-height:1.5;}
+    .plan-feats{list-style:none;margin-bottom:1.8rem;}
+    .plan-feats li{font-size:.82rem;color:var(--gray);padding:.35rem 0 .35rem 1.4rem;position:relative;}
+    .plan-feats li::before{content:'→';position:absolute;left:0;color:var(--red);font-weight:700;}
+
+    /* DEPOIMENTOS */
+    .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+    .t-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-left:3px solid var(--red);border-radius:0 12px 12px 0;padding:2rem;transition:all .3s;}
+    .t-card:hover{background:#1e1e1e;}
+    .t-stars{color:var(--red);font-size:.82rem;margin-bottom:.8rem;}
+    .t-text{font-size:.88rem;color:var(--gray);font-style:italic;line-height:1.7;margin-bottom:1rem;}
+    .t-result{display:inline-block;background:rgba(224,28,28,.12);color:var(--red);font-size:.72rem;font-weight:700;border-radius:4px;padding:.2rem .6rem;margin-bottom:.6rem;}
+    .t-name{font-size:.84rem;font-weight:700;}
+
+    /* CONTATO */
+    .contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start;margin-top:3rem;}
+    .ci-item{display:flex;gap:.8rem;align-items:center;margin-bottom:1.2rem;}
+    .ci-icon{width:40px;height:40px;background:rgba(224,28,28,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--red);flex-shrink:0;}
+    .ci-label{font-weight:700;font-size:.8rem;display:block;margin-bottom:.1rem;}
+    .ci-text{font-size:.86rem;color:var(--gray);}
+    .cf{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:2.5rem;}
+    .cf h3{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:1px;margin-bottom:1.5rem;}
+    .fg{margin-bottom:1rem;}
+    .fg label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--gray);margin-bottom:.3rem;}
+    .fg input,.fg select,.fg textarea{width:100%;padding:.8rem 1rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:var(--white);font-family:'Inter',sans-serif;font-size:.88rem;transition:border-color .3s;}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--red);}
+    .fg select option{background:#1a1a1a;}
+    .f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+
+    footer{background:#050505;border-top:1px solid rgba(224,28,28,.15);padding:3rem 2rem 1.5rem;text-align:center;color:var(--gray);}
+    .f-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:2px;color:var(--red);display:block;margin-bottom:.4rem;}
+    .f-note{font-size:.75rem;margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;}
+    .wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;transition:transform .3s;}
+    .wa-float:hover{transform:scale(1.1);}
+
+    @media(max-width:968px){.hero-inner,.about-grid,.contact-grid{grid-template-columns:1fr;}nav .nav-links{display:none;}.hero-img-wrap{display:none;}.process-grid{grid-template-columns:1fr 1fr;}.process-grid::before{display:none;}}
+    @media(max-width:600px){.hero{padding:7rem 1.5rem 4rem;}.hero-stats{gap:2rem;}.imc-fields{grid-template-columns:1fr;}.f-row{grid-template-columns:1fr;}.process-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Fit<span>Coach</span> Pro</a>
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#planos">Planos</a></li>
+        <li><a href="#contato" class="nav-cta">Agendar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag"><i class="fas fa-dumbbell"></i> Personal Trainer · Recife – PE</div>
+        <h1>Transforme<br>seu <span>corpo.</span><br>Mude sua<br>vida.</h1>
+        <p>Treinos personalizados, acompanhamento próximo e resultados reais. Mais de 7 anos transformando corpos e mentalidades em Recife.</p>
+        <div class="hero-btns">
+          <a href="#contato" class="btn-red"><i class="fas fa-rocket"></i> Começar Agora</a>
+          <a href="#planos" class="btn-ghost"><i class="fas fa-list"></i> Ver Planos</a>
+        </div>
+        <div class="hero-stats">
+          <div><span class="hs-num">500+</span><span class="hs-lbl">Alunos treinados</span></div>
+          <div><span class="hs-num">7</span><span class="hs-lbl">Anos de exp.</span></div>
+          <div><span class="hs-num">98%</span><span class="hs-lbl">Satisfação</span></div>
+        </div>
+      </div>
+      <div class="hero-img-wrap">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=1000&fit=crop" alt="FitCoach Pro">
+        <div class="hero-badge">
+          <div class="hb-icon">🏆</div>
+          <div><div class="hb-val">CREF</div><div class="hb-lbl">Certificado nacional</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker">
+    <div class="ticker-track" id="ticker">
+      <span class="ticker-item">Hipertrofia <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Emagrecimento <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Condicionamento <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Nutrição Esportiva <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Online e Presencial <span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Resultados Reais <span class="ticker-dot">◆</span></span>
+    </div>
+  </div>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="bg-dark">
+    <div class="sec-inner">
+      <div class="about-grid">
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=700&h=900&fit=crop" alt="Sobre">
+        </div>
+        <div>
+          <span class="sec-tag">Sobre mim</span>
+          <h2 class="sec-title">Sua evolução<br>é minha missão.</h2>
+          <p style="color:var(--gray);font-size:.92rem;line-height:1.8;margin-bottom:1rem;">Sou personal trainer certificado pelo CREF com mais de 7 anos de experiência transformando corpos e vidas em Recife. Cada aluno tem uma história única — por isso meu trabalho é 100% personalizado.</p>
+          <p style="color:var(--gray);font-size:.92rem;line-height:1.8;">Combino ciência do treinamento com escuta ativa para criar protocolos que cabem na sua rotina e geram resultados duradouros.</p>
+          <ul class="about-list">
+            <li><i class="fas fa-check"></i> Personal certificado pelo CREF</li>
+            <li><i class="fas fa-check"></i> Pós-graduação em Fisiologia do Exercício</li>
+            <li><i class="fas fa-check"></i> Especialização em Nutrição Esportiva</li>
+            <li><i class="fas fa-check"></i> Atendimento presencial e online</li>
+          </ul>
+          <div class="cert-row">
+            <span class="cert-chip">CREF Ativo</span>
+            <span class="cert-chip">Pós-Graduado</span>
+            <span class="cert-chip">Nutrição Esportiva</span>
+            <span class="cert-chip">Pilates Clínico</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">O que ofereço</span>
+        <h2 class="sec-title">Serviços</h2>
+        <p class="sec-desc">Modalidades pensadas para cada objetivo, rotina e nível de condicionamento.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-user-tie"></i></div><h3>Personal Presencial</h3><p>Sessões individuais na academia ou em espaço próprio com acompanhamento 100% dedicado e execução monitorada.</p></div>
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-laptop"></i></div><h3>Personal Online</h3><p>Planilha de treino personalizada com revisões semanais e suporte diário via WhatsApp para qualquer lugar do mundo.</p></div>
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-fire"></i></div><h3>Treino Funcional</h3><p>Circuitos funcionais de alta intensidade para condicionamento geral, queima de gordura e melhora de performance.</p></div>
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-utensils"></i></div><h3>Orientação Nutricional</h3><p>Diretrizes alimentares integradas ao treino para potencializar resultados de forma sustentável e saudável.</p></div>
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-running"></i></div><h3>Preparação para Corrida</h3><p>Planilhas específicas para 5km, 10km, meia e maratona com periodização científica para todos os níveis.</p></div>
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-chart-line"></i></div><h3>Avaliação Física</h3><p>Bioimpedância, avaliação postural, testes de aptidão e definição de metas realistas e mensuráveis.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESSO -->
+  <section class="bg-dark">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Como funciona</span>
+        <h2 class="sec-title">Do zero ao resultado</h2>
+        <p class="sec-desc">Um processo estruturado para garantir sua evolução desde o primeiro dia.</p>
+      </div>
+      <div class="process-grid">
+        <div class="proc-step"><div class="proc-num">01</div><h4>Avaliação</h4><p>Analisamos seu condicionamento atual, histórico e objetivos de curto e longo prazo.</p></div>
+        <div class="proc-step"><div class="proc-num">02</div><h4>Planejamento</h4><p>Montamos a periodização ideal com treinos e orientação nutricional personalizados.</p></div>
+        <div class="proc-step"><div class="proc-num">03</div><h4>Execução</h4><p>Iniciamos os treinos com acompanhamento próximo e correção de execução.</p></div>
+        <div class="proc-step"><div class="proc-num">04</div><h4>Evolução</h4><p>Reavaliações periódicas para ajustes e celebração dos resultados conquistados.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULADORA IMC -->
+  <section>
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Ferramenta gratuita</span>
+        <h2 class="sec-title">Calcule seu IMC</h2>
+        <p class="sec-desc">Descubra seu índice de massa corporal e dê o primeiro passo rumo ao seu objetivo.</p>
+      </div>
+      <div class="imc-box">
+        <h3>Calculadora de IMC</h3>
+        <p>Preencha os campos abaixo para calcular seu IMC instantaneamente.</p>
+        <div class="imc-fields">
+          <input type="number" id="peso" placeholder="Peso (kg)" min="30" max="300">
+          <input type="number" id="altura" placeholder="Altura (cm)" min="100" max="250">
+        </div>
+        <button onclick="calcIMC()" style="width:100%;padding:.9rem;background:var(--red);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.9rem;cursor:pointer;text-transform:uppercase;letter-spacing:.5px;transition:background .3s;" onmouseover="this.style.background='var(--red-dark)'" onmouseout="this.style.background='var(--red)'">Calcular IMC</button>
+        <div class="imc-result" id="imcResult"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section id="planos" class="bg-dark">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Investimento</span>
+        <h2 class="sec-title">Escolha seu plano</h2>
+        <p class="sec-desc">Planos para todos os objetivos e rotinas. Entre em contato para valores.</p>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card">
+          <div class="plan-name">Starter</div>
+          <p class="plan-desc">Para quem está começando a treinar e precisa de orientação e base sólida.</p>
+          <ul class="plan-feats">
+            <li>Avaliação física inicial</li>
+            <li>Planilha de treino mensal</li>
+            <li>Orientação nutricional básica</li>
+            <li>Suporte via WhatsApp</li>
+          </ul>
+          <a href="#contato" class="btn-ghost" style="width:100%;justify-content:center;">Saber Mais</a>
+        </div>
+        <div class="plan-card featured">
+          <div class="plan-badge">Mais Escolhido</div>
+          <div class="plan-name">Performance</div>
+          <p class="plan-desc">Acompanhamento intenso para quem quer resultados rápidos e duradouros.</p>
+          <ul class="plan-feats">
+            <li>Tudo do Starter</li>
+            <li>4 sessões presenciais/mês</li>
+            <li>Revisões semanais</li>
+            <li>Periodização por mesociclo</li>
+          </ul>
+          <a href="#contato" class="btn-red" style="width:100%;justify-content:center;">Saber Mais</a>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">Elite</div>
+          <p class="plan-desc">Para atletas e praticantes avançados com objetivos específicos de competição.</p>
+          <ul class="plan-feats">
+            <li>Tudo do Performance</li>
+            <li>8 sessões presenciais/mês</li>
+            <li>Plano nutricional completo</li>
+            <li>Suporte prioritário 7 dias</li>
+          </ul>
+          <a href="#contato" class="btn-ghost" style="width:100%;justify-content:center;">Saber Mais</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Resultados</span>
+        <h2 class="sec-title">Quem já evoluiu</h2>
+      </div>
+      <div class="test-grid">
+        <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-result">−15kg em 4 meses</div><p class="t-text">"Tentei emagrecer sozinho por anos sem resultado. Com o método do FitCoach, em 4 meses perdi 15kg e mudei minha mentalidade."</p><div class="t-name">Rafael Souza, 34 anos</div></div>
+        <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-result">+10kg de massa muscular</div><p class="t-text">"Profissional incrível! Me ensinou tudo sobre treino e nutrição. Hoje treino com autonomia e resultados constantes."</p><div class="t-name">Lucas Almeida, 26 anos</div></div>
+        <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-result">Correu primeira meia maratona</div><p class="t-text">"Nunca imaginei correr 21km. O acompanhamento foi essencial para eu chegar na linha de chegada com saúde e confiança."</p><div class="t-name">Fernanda Cruz, 31 anos</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="bg-dark">
+    <div class="sec-inner">
+      <span class="sec-tag">Fale comigo</span>
+      <h2 class="sec-title">Comece hoje mesmo</h2>
+      <div class="contact-grid">
+        <div>
+          <p style="color:var(--gray);font-size:.9rem;line-height:1.8;margin-bottom:2rem;">Pronto para transformar seu corpo? Entre em contato e vamos montar juntos o plano perfeito para o seu objetivo.</p>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><span class="ci-label">WhatsApp</span><span class="ci-text">(81) 9 9627-3630</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><span class="ci-label">E-mail</span><span class="ci-text">contato@fitcoachpro.com.br</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><span class="ci-label">Localização</span><span class="ci-text">Boa Viagem · Recife – PE · Online para todo o Brasil</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-clock"></i></div><div><span class="ci-label">Horários</span><span class="ci-text">Seg–Sex: 6h–21h · Sáb: 7h–14h</span></div></div>
+        </div>
+        <div class="cf">
+          <h3>Solicitar Avaliação</h3>
+          <form onsubmit="return false;">
+            <div class="fg"><label>Nome Completo</label><input type="text" placeholder="Seu nome"></div>
+            <div class="f-row">
+              <div class="fg"><label>WhatsApp</label><input type="tel" placeholder="(81) 9 9999-9999"></div>
+              <div class="fg"><label>Idade</label><input type="number" placeholder="Ex: 28"></div>
+            </div>
+            <div class="fg"><label>Objetivo principal</label><select><option value="">Selecione...</option><option>Emagrecer</option><option>Ganhar massa muscular</option><option>Condicionamento físico</option><option>Preparação para corrida</option><option>Saúde e bem-estar</option></select></div>
+            <div class="fg"><label>Modalidade</label><select><option value="">Selecione...</option><option>Personal Presencial</option><option>Personal Online</option><option>Presencial + Online</option></select></div>
+            <div class="fg"><label>Mensagem</label><textarea rows="3" placeholder="Conte um pouco sobre você e seu objetivo..."></textarea></div>
+            <button onclick="alert('Solicitação enviada! Entro em contato em breve.')" style="width:100%;padding:.9rem;background:var(--red);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.9rem;cursor:pointer;text-transform:uppercase;letter-spacing:.5px;transition:background .3s;" onmouseover="this.style.background='var(--red-dark)'" onmouseout="this.style.background='var(--red)'"><i class="fas fa-rocket"></i> Solicitar Avaliação Gratuita</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="f-logo">FitCoach Pro</span>
+    <p>Personal Trainer Certificado · Recife – PE</p>
+    <div class="f-note">&copy; 2026 FitCoach Pro · Todos os direitos reservados · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div>
+  </footer>
+
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    // Ticker
+    var t=document.getElementById('ticker');
+    if(t) t.innerHTML+=t.innerHTML;
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
+    });
+
+    // IMC
+    function calcIMC(){
+      var p=parseFloat(document.getElementById('peso').value);
+      var h=parseFloat(document.getElementById('altura').value)/100;
+      var r=document.getElementById('imcResult');
+      if(!p||!h||p<30||h<1){alert('Por favor, preencha os campos corretamente.');return;}
+      var imc=(p/(h*h)).toFixed(1);
+      var cat='';
+      if(imc<18.5) cat='Abaixo do peso';
+      else if(imc<25) cat='Peso normal ✓';
+      else if(imc<30) cat='Sobrepeso';
+      else cat='Obesidade';
+      r.style.display='block';
+      r.innerHTML='Seu IMC: <strong>'+imc+'</strong> — <span style="color:#fff;">'+cat+'</span><br><span style="font-size:.78rem;color:var(--gray);margin-top:.4rem;display:block;">Quer saber o que fazer com esse resultado? <a href="#contato" style="color:var(--red);">Fale comigo!</a></span>';
+    }
+  </script>
+</body>
+</html>

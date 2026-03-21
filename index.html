@@ -1,2935 +1,951 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechCoDesign - Desenvolvimento Web, Apps & Design</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <style>
-        :root {
-            --black: #090909;
-            --magenta: #b515bf;
-            --cyan: #33c5e8;
-            --purple: #400f7d;
-            --white: #ffffff;
-            --gray: #a0a0a0;
-            --glass: rgba(255, 255, 255, 0.05);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--black);
-            color: var(--white);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--black);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--magenta), var(--cyan));
-            border-radius: 5px;
-        }
-
-        /* Custom Cursor */
-        .cursor-dot,
-        .cursor-outline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: opacity 0.3s, transform 0.3s, width 0.3s, height 0.3s;
-        }
-
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--cyan);
-            box-shadow: 0 0 10px var(--cyan);
-            animation: cursor-glow 2s infinite ease-in-out;
-        }
-
-        @keyframes cursor-glow {
-            0%, 100% { box-shadow: 0 0 8px var(--cyan); }
-            50% { box-shadow: 0 0 16px var(--cyan); }
-        }
-
-        .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--cyan);
-            opacity: 0.5;
-            transition: all 0.15s ease-out;
-        }
-
-        .cursor-outline.hover {
-            width: 60px;
-            height: 60px;
-            opacity: 0.8;
-        }
-
-        /* Background Animado */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.25;
-            animation: float 30s infinite ease-in-out;
-        }
-
-        .orb-1 {
-            width: 600px;
-            height: 600px;
-            background: var(--magenta);
-            top: -15%;
-            right: -15%;
-        }
-
-        .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: var(--cyan);
-            bottom: -15%;
-            left: -15%;
-            animation-delay: 7s;
-        }
-
-        .orb-3 {
-            width: 400px;
-            height: 400px;
-            background: var(--purple);
-            top: 50%;
-            left: 50%;
-            animation-delay: 14s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            33% { transform: translate(50px, -60px); }
-            66% { transform: translate(-40px, 70px); }
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1200px;
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            padding: 1rem 2rem;
-            z-index: 1000;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Urbanist', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--magenta), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--magenta), var(--cyan));
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--cyan);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-cta {
-            background: linear-gradient(135deg, var(--magenta), var(--cyan));
-            padding: 0.6rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-        }
-
-        .nav-cta:hover {
-            color: var(--white) !important;
-        }
-
-        .nav-cta::after {
-            display: none;
-        }
-
-        /* Menu Mobile */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-        }
-
-        .menu-toggle .bar {
-            width: 25px;
-            height: 3px;
-            background: var(--white);
-            border-radius: 2px;
-            transition: all 0.3s;
-        }
-
-        .menu-toggle.active .bar:nth-child(1) {
-            transform: rotate(45deg) translate(7px, 7px);
-        }
-
-        .menu-toggle.active .bar:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active .bar:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(9, 9, 9, 0.98);
-            backdrop-filter: blur(20px);
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            z-index: 999;
-            transform: translateY(-100%);
-            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-
-        .mobile-nav.active {
-            transform: translateY(0);
-        }
-
-        .mobile-nav a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 10rem 5% 5rem;
-        }
-
-        .hero-content {
-            max-width: 900px;
-        }
-
-        .hero-subtitle {
-            font-family: 'Urbanist', sans-serif;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
-            font-weight: 700;
-            color: var(--cyan);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero h1 {
-            font-family: 'Urbanist', sans-serif;
-            font-size: clamp(2.5rem, 7vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            letter-spacing: -2px;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--magenta), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-description {
-            font-size: clamp(1rem, 2vw, 1.15rem);
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto 3rem;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1.1rem 2.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn i {
-            display: flex;
-            align-items: center;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--magenta), var(--cyan));
-            color: var(--white);
-            box-shadow: 0 10px 30px rgba(181, 21, 191, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(181, 21, 191, 0.5);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
-        }
-
-        .btn-secondary:hover {
-            background: var(--white);
-            color: var(--black);
-        }
-
-        /* Common */
-        section {
-            padding: 6rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-label {
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--cyan);
-            margin-bottom: 1rem;
-        }
-
-        .section-title {
-            font-family: 'Urbanist', sans-serif;
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .section-description {
-            font-size: 1.05rem;
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Terminal */
-        .about-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .terminal-window {
-            width: 100%;
-            max-width: 900px;
-            background: rgba(9, 9, 9, 0.8);
-            border: 1px solid rgba(181, 21, 191, 0.3);
-            border-radius: 16px;
-            backdrop-filter: blur(20px);
-            overflow: hidden;
-        }
-
-        .terminal-header {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid rgba(181, 21, 191, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .terminal-buttons {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .btn-term {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .btn-term.close { background: #ff5f56; }
-        .btn-term.minimize { background: #ffbd2e; }
-        .btn-term.maximize { background: #27c93f; }
-
-        .terminal-title {
-            color: var(--cyan);
-            font-family: 'Urbanist', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-        }
-
-        .terminal-body {
-            padding: 3rem;
-            font-size: 1.05rem;
-            line-height: 1.9;
-        }
-
-        .terminal-body h3 {
-            font-family: 'Urbanist', sans-serif;
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
-            margin-bottom: 1.5rem;
-        }
-
-        .terminal-body p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-        }
-
-        .terminal-highlight {
-            color: var(--cyan);
-            font-weight: 600;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem;
-            background: var(--glass);
-            border: 1px solid rgba(181, 21, 191, 0.2);
-            border-radius: 16px;
-            transition: all 0.3s;
-        }
-
-        .stat-item:hover {
-            background: rgba(181, 21, 191, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            font-family: 'Urbanist', sans-serif;
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--magenta), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-        }
-
-        .stat-label {
-            color: var(--gray);
-        }
-
-        /* Serviços */
-        .servicos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .servico-card {
-            background: var(--glass);
-            border: 1px solid rgba(181, 21, 191, 0.2);
-            border-radius: 20px;
-            padding: 3rem 2.5rem;
-            transition: all 0.3s;
-        }
-
-        .servico-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--cyan);
-            box-shadow: 0 20px 60px rgba(51, 197, 232, 0.3);
-        }
-
-        .servico-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--magenta), var(--cyan));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: var(--white);
-            margin-bottom: 1.5rem;
-        }
-
-        .servico-card h3 {
-            font-family: 'Urbanist', sans-serif;
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-        }
-
-        .servico-card p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-        }
-
-        .servico-features {
-            list-style: none;
-        }
-
-        .servico-features li {
-            color: var(--gray);
-            padding: 0.5rem 0 0.5rem 2rem;
-            position: relative;
-        }
-
-        .servico-features li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--cyan);
-            font-weight: 700;
-        }
-
-        /* Modelos */
-        .modelos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .modelo-card {
-            background: var(--glass);
-            border: 1px solid rgba(181, 21, 191, 0.2);
-            border-radius: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .modelo-image {
-            height: 200px;
-            background: linear-gradient(135deg, rgba(64, 15, 125, 0.4), rgba(181, 21, 191, 0.4));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modelo-icon {
-            font-size: 4rem;
-            color: var(--white);
-        }
-
-        .modelo-info {
-            padding: 2rem;
-        }
-
-        .modelo-info h3 {
-            font-family: 'Urbanist', sans-serif;
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .modelo-info p {
-            color: var(--gray);
-        }
-
-        .modelo-card::after {
-            content: 'VER MODELOS →';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, var(--magenta), var(--cyan));
-            font-weight: 700;
-            text-align: center;
-            transform: translateY(100%);
-            transition: transform 0.3s;
-        }
-
-        .modelo-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(51, 197, 232, 0.3);
-        }
-
-        .modelo-card:hover::after {
-            transform: translateY(0);
-        }
-
-        /* Planos */
-        .planos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .plano-card {
-            background: var(--glass);
-            border: 2px solid rgba(181, 21, 191, 0.3);
-            border-radius: 24px;
-            padding: 3rem 2.5rem;
-            text-align: center;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .plano-card.destaque {
-            border-color: var(--magenta);
-            transform: scale(1.05);
-        }
-
-        .plano-badge {
-            position: absolute;
-            top: 20px;
-            right: -40px;
-            background: linear-gradient(135deg, var(--magenta), var(--cyan));
-            padding: 0.5rem 3.5rem;
-            font-size: 0.75rem;
-            font-weight: 800;
-            transform: rotate(45deg);
-        }
-
-        .plano-card:hover {
-            transform: translateY(-10px) scale(1.02);
-        }
-
-        .plano-card.destaque:hover {
-            transform: translateY(-10px) scale(1.07);
-        }
-
-        .plano-nome {
-            font-family: 'Urbanist', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .plano-preco {
-            font-family: 'Urbanist', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--magenta), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        .plano-periodo {
-            color: var(--gray);
-            margin-bottom: 2rem;
-        }
-
-        .plano-features {
-            list-style: none;
-            text-align: left;
-            margin: 2.5rem 0;
-        }
-
-        .plano-features li {
-            padding: 0.8rem 0 0.8rem 2rem;
-            color: var(--gray);
-            position: relative;
-        }
-
-        .plano-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--cyan);
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        /* Contato */
-        .contact-section {
-            background: linear-gradient(180deg, var(--black) 0%, rgba(181, 21, 191, 0.05) 100%);
-        }
-
-        .contact-wrapper {
-            max-width: 700px;
-            margin: 0 auto;
-            background: var(--glass);
-            border: 1px solid rgba(181, 21, 191, 0.2);
-            border-radius: 24px;
-            padding: 4rem;
-        }
-
-        .progress-bar {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .progress-bar::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .progress-step {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--gray);
-            position: relative;
-            padding-left: 30px;
-            z-index: 1;
-        }
-
-        .progress-step::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid var(--black);
-        }
-
-        .progress-step.active {
-            color: var(--cyan);
-        }
-
-        .progress-step.active::before {
-            background: var(--cyan);
-        }
-
-        .form-step {
-            display: none;
-        }
-
-        .form-step.active {
-            display: block;
-        }
-
-        .form-group {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1.3rem 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(181, 21, 191, 0.3);
-            border-radius: 12px;
-            color: var(--white);
-            font-size: 1rem;
-            font-family: inherit;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--cyan);
-        }
-
-        .form-label {
-            position: absolute;
-            top: 1.3rem;
-            left: 1.5rem;
-            color: var(--gray);
-            pointer-events: none;
-            transition: all 0.3s;
-        }
-
-        .form-input:focus + .form-label,
-        .form-input:not(:placeholder-shown) + .form-label {
-            top: -0.7rem;
-            left: 1rem;
-            font-size: 0.8rem;
-            color: var(--cyan);
-            background: var(--black);
-            padding: 0 0.5rem;
-        }
-
-        textarea.form-input {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .form-navigation {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .form-button,
-        .form-button-secondary {
-            padding: 1.2rem 2.5rem;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-            flex: 1;
-        }
-
-        .form-button i,
-        .form-button-secondary i {
-            display: flex;
-            align-items: center;
-        }
-
-        .form-button {
-            background: linear-gradient(135deg, var(--magenta), var(--cyan));
-            color: var(--white);
-        }
-
-        .form-button:hover {
-            transform: translateY(-3px);
-        }
-
-        .form-button-secondary {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .review-title {
-            font-family: 'Urbanist', sans-serif;
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        .review-text {
-            color: var(--gray);
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        /* Mascote Section */
-        .mascot-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6rem 5%;
-            background: linear-gradient(180deg, rgba(9, 9, 9, 0) 0%, rgba(181, 21, 191, 0.05) 100%);
-        }
-
-        .mascot-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4rem;
-            max-width: 1100px;
-            width: 100%;
-            flex-wrap: wrap;
-        }
-
-        .mascot-image img {
-            max-width: 400px;
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0 0 30px rgba(181, 21, 191, 0.2));
-        }
-
-        .mascot-text-box {
-            flex: 1;
-            min-width: 300px;
-            background: var(--glass);
-            border: 1px solid rgba(51, 197, 232, 0.3);
-            padding: 3rem;
-            border-radius: 24px;
-            position: relative;
-            backdrop-filter: blur(10px);
-        }
-
-        .mascot-label {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: rgba(51, 197, 232, 0.1);
-            border: 1px solid var(--cyan);
-            border-radius: 50px;
-            color: var(--cyan);
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1.5rem;
-        }
-
-        .mascot-text-box h3 {
-            font-family: 'Urbanist', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--white);
-        }
-
-        .mascot-text-box p {
-            font-size: 1.1rem;
-            color: var(--gray);
-            line-height: 1.8;
-        }
-
-        @media (max-width: 768px) {
-            .mascot-section { text-align: center; }
-            .mascot-container { gap: 2rem; }
-        }
-
-        /* Footer */
-        footer {
-            padding: 4rem 5% 2rem;
-            border-top: 1px solid rgba(181, 21, 191, 0.2);
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto 3rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-        }
-
-        .footer-section h4 {
-            font-family: 'Urbanist', sans-serif;
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-section a,
-        .footer-section p {
-            color: var(--gray);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-section a:hover {
-            color: var(--cyan);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.2rem;
-            margin-top: 1.5rem;
-        }
-
-        /* Aumentei a especificidade para vencer o conflito com .footer-section a */
-        .social-links .social-link {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(51, 197, 232, 0.1);
-            border: 1px solid var(--cyan);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--cyan);
-            font-size: 1.2rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            margin-bottom: 0; /* Remove margem herdada */
-            box-shadow: 0 0 10px rgba(51, 197, 232, 0.1);
-        }
-
-        .social-links .social-link:hover {
-            background: var(--cyan);
-            color: var(--black);
-            box-shadow: 0 0 20px rgba(51, 197, 232, 0.4);
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(181, 21, 191, 0.1);
-            text-align: center;
-            color: var(--gray);
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .nav-links { display: none; }
-            .menu-toggle { display: flex; }
-            .mobile-nav { display: flex; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .plano-card.destaque { transform: scale(1); }
-        }
-
-        @media (max-width: 768px) {
-            section { padding: 4rem 5%; }
-            .hero { padding: 8rem 5% 4rem; }
-            .terminal-body { padding: 2rem; }
-            .contact-wrapper { padding: 2.5rem 2rem; }
-        }
-
-        @media (hover: none) {
-            body { cursor: auto; }
-            .cursor-dot, .cursor-outline { display: none; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechCoDesign | Desenvolvimento de Sites & Identidade Visual</title>
+<meta name="description" content="Agência digital especializada em Desenvolvimento de Sites e Identidade Visual em Recife-PE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:root{
+  --black:#080808;--card:#181818;--line:rgba(255,255,255,.08);
+  --magenta:#b515bf;--cyan:#33c5e8;--white:#fff;--g1:#a8a8a8;--g2:#5c5c5c;
+  --glass:rgba(255,255,255,.04);--radius:16px;--tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--magenta),var(--cyan));border-radius:3px;}
+
+/* TIPOGRAFIA */
+.grad{background:linear-gradient(135deg,var(--magenta),var(--cyan));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.t-display{font-family:'Urbanist',sans-serif;font-size:clamp(2.4rem,5vw,4.5rem);font-weight:900;letter-spacing:-2px;line-height:1.05;}
+.t-headline{font-family:'Urbanist',sans-serif;font-size:clamp(1.6rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-1px;line-height:1.15;}
+.t-title{font-family:'Urbanist',sans-serif;font-size:clamp(1rem,2vw,1.4rem);font-weight:700;line-height:1.3;}
+.t-label{font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);}
+.t-body{font-size:.95rem;color:var(--g1);line-height:1.8;}
+.t-body-sm{font-size:.85rem;color:var(--g1);line-height:1.7;}
+
+.container{max-width:1240px;margin:0 auto;padding:0 clamp(1rem,4vw,2rem);}
+.section{padding:clamp(4rem,8vw,7rem) 0;}
+.section-header{margin-bottom:clamp(2rem,5vw,4rem);}
+.section-header.center{text-align:center;}
+.section-header.center .t-body{max-width:560px;margin:.75rem auto 0;}
+
+/* BG ORBS */
+.bg-orbs{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.18;animation:drift 30s infinite ease-in-out;}
+.orb-1{width:min(560px,80vw);height:min(560px,80vw);background:var(--magenta);top:-14%;right:-14%;}
+.orb-2{width:min(480px,70vw);height:min(480px,70vw);background:var(--cyan);bottom:-14%;left:-14%;animation-delay:7s;}
+.orb-3{width:min(380px,60vw);height:min(380px,60vw);background:#400f7d;top:45%;left:45%;animation-delay:14s;}
+@keyframes drift{0%,100%{transform:translate(0,0);}33%{transform:translate(50px,-60px);}66%{transform:translate(-40px,70px);}}
+
+/* CURSOR — desktop only */
+.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;z-index:9999;display:none;}
+.cursor-dot{width:7px;height:7px;background:var(--cyan);}
+.cursor-ring{width:36px;height:36px;border:1.5px solid rgba(51,197,232,.5);transition:width .2s,height .2s;}
+.cursor-ring.big{width:54px;height:54px;}
+
+/* NAVBAR */
+.navbar{position:fixed;top:16px;left:50%;transform:translateX(-50%);width:calc(100% - clamp(1rem,4vw,4rem));max-width:1200px;background:rgba(8,8,8,.75);backdrop-filter:blur(24px);border:1px solid var(--line);border-radius:50px;padding:.75rem clamp(1rem,2.5vw,1.8rem);z-index:1000;transition:var(--tr);}
+.navbar.scrolled{background:rgba(8,8,8,.92);box-shadow:0 8px 40px rgba(0,0,0,.4);}
+.nav-inner{display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.nav-logo{font-family:'Urbanist',sans-serif;font-size:clamp(.85rem,2vw,1rem);font-weight:900;letter-spacing:1px;background:linear-gradient(135deg,var(--magenta),var(--cyan));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;flex-shrink:0;}
+.nav-links{display:flex;gap:clamp(1rem,2vw,2rem);list-style:none;}
+.nav-links a{font-size:.85rem;font-weight:500;color:rgba(255,255,255,.7);position:relative;transition:color .3s;white-space:nowrap;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:linear-gradient(90deg,var(--magenta),var(--cyan));transition:width .3s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after{width:100%;}
+.nav-btn{background:linear-gradient(135deg,var(--magenta),var(--cyan));color:var(--white);border:none;cursor:pointer;padding:.55rem 1.2rem;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:700;transition:var(--tr);white-space:nowrap;flex-shrink:0;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(181,21,191,.35);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;flex-shrink:0;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:1px;transition:var(--tr);}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(8,8,8,.98);backdrop-filter:blur(24px);flex-direction:column;align-items:center;justify-content:center;gap:2rem;z-index:999;transform:translateY(-100%);transition:transform .5s cubic-bezier(.77,0,.175,1);}
+.mobile-menu.open{transform:translateY(0);}
+.mobile-menu a{font-family:'Urbanist',sans-serif;font-size:clamp(1.4rem,5vw,1.8rem);font-weight:700;color:var(--white);}
+.mobile-menu a:hover{color:var(--cyan);}
+
+/* HERO */
+.hero{min-height:100svh;display:flex;align-items:center;padding:clamp(6rem,12vw,9rem) clamp(1rem,4vw,2rem) clamp(3rem,6vw,5rem);position:relative;overflow:hidden;}
+.hero-grid-bg{position:absolute;inset:0;background-image:radial-gradient(rgba(51,197,232,.12) 1px,transparent 1px);background-size:40px 40px;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black 40%,transparent 100%);mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black 40%,transparent 100%);pointer-events:none;}
+.hero-inner{max-width:1240px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 400px;gap:clamp(2rem,5vw,5rem);align-items:center;}
+.hero-left{position:relative;z-index:2;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(51,197,232,.07);border:1px solid rgba(51,197,232,.18);border-radius:50px;padding:.4rem 1.1rem;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:clamp(1rem,3vw,2rem);}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(51,197,232,.5);}50%{box-shadow:0 0 0 6px rgba(51,197,232,0);}}
+.hero-title{font-family:'Urbanist',sans-serif;font-size:clamp(2.4rem,6vw,5rem);font-weight:900;letter-spacing:-3px;line-height:1.02;margin-bottom:clamp(1rem,2.5vw,1.6rem);}
+.hero-sub{font-size:clamp(.9rem,1.8vw,1.05rem);color:var(--g1);max-width:500px;line-height:1.85;margin-bottom:clamp(1.5rem,3vw,2.5rem);}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:clamp(1.5rem,3vw,3rem);}
+.hero-stats{display:flex;gap:clamp(1.2rem,3vw,2.5rem);flex-wrap:wrap;}
+.hero-stat-n{font-family:'Urbanist',sans-serif;font-size:clamp(1.4rem,3vw,1.8rem);font-weight:900;line-height:1;background:linear-gradient(135deg,var(--magenta),var(--cyan));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-stat-l{font-size:.72rem;color:var(--g2);margin-top:.2rem;text-transform:uppercase;letter-spacing:1px;}
+.hero-right{position:relative;z-index:2;display:flex;flex-direction:column;gap:1rem;}
+.hcard{border-radius:20px;padding:1.4rem 1.6rem;transition:transform .3s;}
+.hcard:hover{transform:translateX(-6px);}
+.hcard-1{background:rgba(181,21,191,.08);border:1px solid rgba(181,21,191,.2);}
+.hcard-2{background:rgba(51,197,232,.06);border:1px solid rgba(51,197,232,.18);margin-left:1.5rem;}
+.hcard-3{background:rgba(64,15,125,.2);border:1px solid rgba(168,125,232,.18);margin-left:3rem;}
+.hcard-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:.9rem;}
+.hcard-1 .hcard-icon{background:rgba(181,21,191,.2);color:#d666dd;}
+.hcard-2 .hcard-icon{background:rgba(51,197,232,.15);color:var(--cyan);}
+.hcard-3 .hcard-icon{background:rgba(168,125,232,.15);color:#a87de8;}
+.hcard-title{font-family:'Urbanist',sans-serif;font-size:.95rem;font-weight:800;margin-bottom:.3rem;}
+.hcard-desc{font-size:.78rem;color:var(--g1);line-height:1.5;}
+.hcard-tag{display:inline-block;margin-top:.8rem;font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:.25rem .7rem;border-radius:50px;}
+.hcard-1 .hcard-tag{background:rgba(181,21,191,.15);color:#d666dd;border:1px solid rgba(181,21,191,.25);}
+.hcard-2 .hcard-tag{background:rgba(51,197,232,.1);color:var(--cyan);border:1px solid rgba(51,197,232,.2);}
+.hcard-3 .hcard-tag{background:rgba(168,125,232,.12);color:#a87de8;border:1px solid rgba(168,125,232,.2);}
+.hero-floater{position:absolute;border-radius:50%;pointer-events:none;animation:floatY 8s ease-in-out infinite;}
+.hf-1{width:180px;height:180px;background:radial-gradient(circle,rgba(181,21,191,.15),transparent 70%);right:-60px;top:10%;}
+.hf-2{width:120px;height:120px;background:radial-gradient(circle,rgba(51,197,232,.12),transparent 70%);right:20px;bottom:15%;animation-delay:3s;}
+@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);}}
+
+/* TICKER */
+.ticker-wrap{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.9rem 0;-webkit-mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);}
+.ticker-track{display:flex;width:max-content;animation:tick 32s linear infinite;}
+.ticker-track:hover{animation-play-state:paused;}
+@keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.ticker-item{display:inline-flex;align-items:center;gap:.5rem;padding:0 2rem;font-family:'Urbanist',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.65);white-space:nowrap;}
+.ticker-dot{color:var(--magenta);font-size:.7rem;}
+.ticker-item:nth-child(even) .ticker-dot{color:var(--cyan);}
+
+/* SERVIÇOS */
+.tech-section{padding:clamp(4rem,8vw,8rem) 0;position:relative;overflow:hidden;}
+.tech-section::before{content:'';position:absolute;inset:0;background:linear-gradient(145deg,rgba(181,21,191,.04) 0%,transparent 50%,rgba(51,197,232,.04) 100%);pointer-events:none;}
+.tech-hero-wrap{display:grid;grid-template-columns:580px 1fr;gap:0;align-items:stretch;max-width:1400px;margin:0 auto;padding:0 clamp(1rem,4vw,2rem);position:relative;z-index:1;}
+.tech-mascot-col{display:flex;flex-direction:column;align-items:center;position:relative;margin-left:-2rem;}
+.tech-mascot-img{width:100%;height:100%;min-height:600px;object-fit:contain;object-position:bottom center;animation:techFloat 6s ease-in-out infinite;filter:drop-shadow(0 40px 80px rgba(181,21,191,.4));transform-origin:bottom center;}
+@keyframes techFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-18px);}}
+.mascot-bubble{position:absolute;top:40px;right:-10px;background:rgba(8,8,8,.9);border:1px solid rgba(51,197,232,.3);backdrop-filter:blur(16px);border-radius:16px 16px 16px 0;padding:.9rem 1.2rem;max-width:190px;}
+.bubble-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);display:inline-block;margin-right:.4rem;animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.bubble-text{font-size:.76rem;color:var(--g1);line-height:1.4;}
+.bubble-text strong{color:var(--cyan);}
+.tech-content-col{padding:3rem 0 3rem clamp(1.5rem,4vw,4rem);display:flex;flex-direction:column;justify-content:center;}
+.tech-eyebrow{display:inline-flex;align-items:center;gap:.6rem;background:rgba(181,21,191,.1);border:1px solid rgba(181,21,191,.25);border-radius:50px;padding:.35rem 1rem;font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#d666dd;margin-bottom:1.5rem;}
+.tech-title{font-family:'Urbanist',sans-serif;font-size:clamp(1.8rem,3.5vw,3.2rem);font-weight:900;letter-spacing:-1.5px;line-height:1.08;margin-bottom:1.2rem;}
+.tech-subtitle{font-size:clamp(.88rem,1.5vw,1rem);color:var(--g1);line-height:1.8;max-width:520px;margin-bottom:2.5rem;}
+.tech-subtitle em{color:var(--white);font-style:normal;font-weight:600;}
+.tech-svc-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2.5rem;}
+.tech-svc-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:1.6rem;transition:var(--tr);position:relative;overflow:hidden;}
+.tech-svc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(181,21,191,.08),rgba(51,197,232,.04));opacity:0;transition:opacity .4s;}
+.tech-svc-card:hover{border-color:rgba(51,197,232,.3);transform:translateY(-4px);}
+.tech-svc-card:hover::before{opacity:1;}
+.tsc-icon-wrap{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:.9rem;font-size:1.3rem;}
+.tsc-icon-wrap.sites{background:linear-gradient(135deg,rgba(181,21,191,.2),rgba(181,21,191,.05));color:#d666dd;}
+.tsc-icon-wrap.id{background:linear-gradient(135deg,rgba(51,197,232,.2),rgba(51,197,232,.05));color:var(--cyan);}
+.tsc-name{font-family:'Urbanist',sans-serif;font-size:.92rem;font-weight:800;margin-bottom:.5rem;}
+.tsc-desc{font-size:.78rem;color:var(--g1);line-height:1.6;margin-bottom:.9rem;}
+.tsc-items{list-style:none;display:flex;flex-direction:column;gap:.4rem;}
+.tsc-items li{font-size:.74rem;color:var(--g2);display:flex;align-items:center;gap:.5rem;}
+.tsc-items li::before{content:'';width:5px;height:5px;border-radius:50%;background:linear-gradient(135deg,var(--magenta),var(--cyan));flex-shrink:0;}
+.tsc-tag{display:inline-block;font-size:.64rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.2rem .6rem;border-radius:50px;margin-top:.8rem;}
+.tsc-tag{background:rgba(51,197,232,.1);border:1px solid rgba(51,197,232,.2);color:var(--cyan);}
+.tsc-tag.mag{background:rgba(181,21,191,.1);border-color:rgba(181,21,191,.2);color:#d666dd;}
+.tech-diffs{display:flex;gap:1rem;flex-wrap:wrap;}
+.diff-pill{display:inline-flex;align-items:center;gap:.5rem;background:var(--glass);border:1px solid var(--line);border-radius:50px;padding:.45rem .9rem;font-size:.78rem;color:var(--g1);transition:var(--tr);}
+.diff-pill:hover{border-color:rgba(51,197,232,.3);color:var(--white);}
+
+/* MODELOS */
+.models-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.model-card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;cursor:pointer;transition:var(--tr);position:relative;}
+.model-cover{height:180px;overflow:hidden;}
+.model-cover img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+.model-card:hover .model-cover img{transform:scale(1.08);}
+.model-body{padding:1.4rem;}
+.model-card::after{content:'VER MODELOS →';position:absolute;bottom:0;left:0;right:0;padding:1.1rem;background:linear-gradient(135deg,var(--magenta),var(--cyan));font-family:'Urbanist',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:1.5px;text-align:center;text-transform:uppercase;transform:translateY(100%);transition:transform .3s;}
+.model-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(51,197,232,.2);}
+.model-card:hover::after{transform:translateY(0);}
+
+/* CALCULADORA */
+.calc-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.calc-panel{background:var(--card);border:1px solid rgba(181,21,191,.18);border-radius:24px;overflow:hidden;position:relative;}
+.calc-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--magenta),var(--cyan));}
+.calc-panel-hd{padding:1.4rem 1.6rem 0;display:flex;align-items:center;gap:.55rem;font-family:'Urbanist',sans-serif;font-size:.92rem;font-weight:800;}
+.calc-panel-hd i{color:var(--cyan);}
+.calc-panel-body{padding:1.2rem 1.6rem 1.6rem;}
+.grp{margin-bottom:1.4rem;}
+.grp-label{font-size:.62rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--g2);display:flex;align-items:center;gap:.4rem;margin-bottom:.75rem;}
+.grp-label i{color:var(--cyan);font-size:.72rem;}
+.svc-btns{display:flex;flex-direction:column;gap:.55rem;}
+.svc-btn{display:flex;align-items:center;gap:.85rem;padding:.85rem 1rem;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:14px;cursor:pointer;color:var(--white);text-align:left;width:100%;font-family:'DM Sans',sans-serif;transition:var(--tr);}
+.svc-btn:hover{border-color:rgba(51,197,232,.3);background:rgba(51,197,232,.04);}
+.svc-btn.sel{border-color:var(--cyan);background:rgba(51,197,232,.07);}
+.svc-btn i.ic{font-size:.95rem;color:var(--cyan);flex-shrink:0;}
+.svc-text{flex:1;min-width:0;}
+.svc-name{font-size:.84rem;font-weight:600;display:block;}
+.svc-desc{font-size:.7rem;color:var(--g1);margin-top:.1rem;display:block;}
+.chk{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);flex-shrink:0;position:relative;transition:var(--tr);}
+.svc-btn.sel .chk{background:var(--cyan);border-color:var(--cyan);}
+.svc-btn.sel .chk::after{content:'✓';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:.55rem;font-weight:900;color:var(--black);}
+.num-row{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:.55rem;}
+.num-row i.ic{font-size:.95rem;color:var(--cyan);flex-shrink:0;}
+.num-txt{flex:1;min-width:0;}
+.num-name{font-size:.83rem;font-weight:600;display:block;}
+.num-desc{font-size:.68rem;color:var(--g1);margin-top:.1rem;display:block;}
+.num-ctrl{display:flex;align-items:center;gap:.4rem;flex-shrink:0;}
+.nbtn{width:26px;height:26px;border-radius:8px;background:rgba(51,197,232,.1);border:1px solid rgba(51,197,232,.2);color:var(--cyan);font-size:1rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--tr);line-height:1;user-select:none;}
+.nbtn:hover{background:rgba(51,197,232,.2);}
+.nval{font-family:'Urbanist',sans-serif;font-size:.92rem;font-weight:800;min-width:24px;text-align:center;}
+.nicho-sel{width:100%;padding:.78rem .9rem;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.85rem;appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2333c5e8' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .9rem center;}
+.nicho-sel option{background:#181818;}
+.nicho-sel:focus{outline:none;border-color:var(--cyan);}
+.nota-edu-inline{display:flex;align-items:flex-start;gap:.5rem;background:rgba(245,197,66,.07);border:1px solid rgba(245,197,66,.2);border-radius:12px;padding:.65rem .9rem;font-size:.74rem;color:#f5c542;margin-top:.4rem;line-height:1.5;}
+.nota-edu-inline i{flex-shrink:0;margin-top:.05rem;}
+.tooltip-wrap{position:relative;display:inline-flex;align-items:center;gap:.3rem;cursor:help;}
+.tooltip-icon{width:14px;height:14px;border-radius:50%;background:rgba(51,197,232,.15);border:1px solid rgba(51,197,232,.3);display:inline-flex;align-items:center;justify-content:center;font-size:.55rem;color:var(--cyan);font-weight:700;flex-shrink:0;}
+.tooltip-box{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1e1e1e;border:1px solid rgba(51,197,232,.25);border-radius:10px;padding:.65rem .85rem;width:210px;font-size:.71rem;color:var(--g1);line-height:1.5;z-index:100;pointer-events:none;opacity:0;transition:opacity .2s;}
+.tooltip-wrap:hover .tooltip-box,.tooltip-wrap:focus .tooltip-box{opacity:1;}
+
+/* RESULTADO */
+.result-inner{display:flex;flex-direction:column;gap:.9rem;}
+.disp{background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:1.4rem;display:flex;flex-direction:column;gap:.45rem;}
+.disp-lbl{font-size:.6rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--g2);}
+.disp-empty{color:var(--g2);font-size:.8rem;display:flex;align-items:center;gap:.5rem;padding:.3rem 0;}
+.disp-empty i{opacity:.3;font-size:1rem;}
+.line-item{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;animation:sIn .2s ease;}
+@keyframes sIn{from{opacity:0;transform:translateX(-6px);}to{opacity:1;transform:translateX(0);}}
+.line-nm{color:var(--g1);display:flex;align-items:center;gap:.4rem;}
+.line-nm::before{content:'';width:4px;height:4px;border-radius:50%;background:linear-gradient(135deg,var(--magenta),var(--cyan));flex-shrink:0;}
+.line-vl{font-family:'Urbanist',sans-serif;font-weight:700;font-size:.78rem;white-space:nowrap;margin-left:.5rem;}
+.cdiv{height:1px;background:rgba(255,255,255,.06);margin:.3rem 0;}
+.total-row{display:flex;align-items:baseline;justify-content:space-between;}
+.total-lbl{font-size:.66rem;color:var(--g2);text-transform:uppercase;letter-spacing:1px;}
+.total-val{font-family:'Urbanist',sans-serif;font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:900;background:linear-gradient(135deg,var(--magenta),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+.parcel{font-size:.66rem;color:var(--g2);text-align:right;margin-top:.2rem;}
+.cpill{display:flex;align-items:flex-start;gap:.5rem;border-radius:12px;padding:.65rem .9rem;font-size:.75rem;line-height:1.5;}
+.cpill i{flex-shrink:0;margin-top:.05rem;}
+.cpill.info{background:rgba(51,197,232,.07);border:1px solid rgba(51,197,232,.15);color:var(--cyan);}
+.cpill.warn{background:rgba(245,197,66,.07);border:1px solid rgba(245,197,66,.2);color:#f5c542;}
+.cpill.combo{background:rgba(46,204,113,.07);border:1px solid rgba(46,204,113,.2);color:#2ecc71;}
+.cpill strong{font-weight:700;}
+.cpill .cw{color:var(--white);}
+.nota-bot-calc{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:.9rem 1.1rem;font-size:.77rem;color:var(--g1);line-height:1.7;}
+.nota-bot-calc i{color:var(--cyan);margin-right:.3rem;}
+.btn-wa{width:100%;padding:.95rem;background:linear-gradient(135deg,var(--magenta),var(--cyan));color:var(--white);border:none;border-radius:14px;font-family:'Urbanist',sans-serif;font-size:.88rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:var(--tr);}
+.btn-wa:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 32px rgba(181,21,191,.35);}
+.btn-wa:disabled{opacity:.35;cursor:not-allowed;}
+.btn-acordo{width:100%;padding:.82rem;background:transparent;border:1.5px solid rgba(255,255,255,.12);border-radius:14px;color:var(--g1);font-family:'Urbanist',sans-serif;font-size:.83rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:var(--tr);}
+.btn-acordo:hover{border-color:rgba(181,21,191,.4);color:#d666dd;background:rgba(181,21,191,.05);}
+.btn-hint-calc{text-align:center;font-size:.68rem;color:var(--g2);margin-top:.4rem;}
+.btn-hint-calc i{color:var(--cyan);}
+.calc-hidden{display:none!important;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:2000;display:none;align-items:center;justify-content:center;padding:1rem;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#141414;border:1px solid rgba(181,21,191,.25);border-radius:24px;padding:clamp(1.5rem,4vw,2.5rem);max-width:500px;width:100%;position:relative;max-height:90vh;overflow-y:auto;}
+.modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--magenta),var(--cyan));border-radius:24px 24px 0 0;}
+.modal-close{position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.06);border:none;color:var(--g1);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--tr);}
+.modal-close:hover{background:rgba(255,255,255,.12);color:var(--white);}
+.modal-title{font-family:'Urbanist',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:.4rem;display:flex;align-items:center;gap:.6rem;}
+.modal-title i{color:var(--magenta);}
+.modal-sub{font-size:.8rem;color:var(--g1);line-height:1.6;margin-bottom:1.2rem;}
+.modal-sub strong{color:var(--white);}
+.modal-nota{background:rgba(181,21,191,.07);border:1px solid rgba(181,21,191,.18);border-radius:10px;padding:.7rem .95rem;font-size:.74rem;color:#d666dd;line-height:1.5;margin-bottom:1.1rem;display:flex;align-items:flex-start;gap:.5rem;}
+.modal-nota i{flex-shrink:0;margin-top:.05rem;}
+.m-field{position:relative;margin-bottom:.85rem;}
+.m-field i.fi{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--g2);font-size:.88rem;pointer-events:none;}
+.m-input{width:100%;padding:.82rem 1rem .82rem 2.5rem;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.85rem;transition:border-color .3s;}
+.m-input:focus{outline:none;border-color:var(--cyan);}
+.m-input::placeholder{color:rgba(255,255,255,.25);}
+.m-textarea{resize:none;height:70px;padding-top:.82rem;}
+.modal-btns{display:flex;gap:.75rem;margin-top:1.1rem;flex-wrap:wrap;}
+.modal-btn-send{flex:1;min-width:140px;padding:.88rem;background:linear-gradient(135deg,var(--magenta),var(--cyan));color:var(--white);border:none;border-radius:12px;font-family:'Urbanist',sans-serif;font-size:.86rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:var(--tr);}
+.modal-btn-send:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(181,21,191,.35);}
+.modal-btn-send:disabled{opacity:.4;cursor:not-allowed;}
+.modal-btn-cancel{padding:.88rem 1.1rem;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);border-radius:12px;color:var(--g1);font-family:'Urbanist',sans-serif;font-size:.84rem;font-weight:700;cursor:pointer;transition:var(--tr);}
+.modal-btn-cancel:hover{border-color:rgba(255,255,255,.2);color:var(--white);}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:1fr 340px;gap:2.5rem;align-items:start;}
+.faq-list{display:flex;flex-direction:column;gap:.85rem;}
+.faq-card{background:var(--glass);border:1px solid rgba(181,21,191,.18);border-radius:16px;overflow:hidden;transition:border-color .3s;cursor:pointer;}
+.faq-card.open{border-color:rgba(51,197,232,.4);box-shadow:0 6px 28px rgba(51,197,232,.08);}
+.faq-q{display:flex;align-items:center;gap:.8rem;padding:1.1rem 1.3rem;user-select:none;}
+.faq-q-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.ic-1{background:rgba(181,21,191,.12);color:#d666dd;}
+.ic-2{background:rgba(51,197,232,.1);color:var(--cyan);}
+.ic-3{background:rgba(64,15,125,.3);color:#a87de8;}
+.ic-4{background:rgba(181,21,191,.08);color:#d666dd;}
+.ic-5{background:rgba(51,197,232,.08);color:var(--cyan);}
+.ic-6{background:rgba(64,15,125,.2);color:#a87de8;}
+.faq-q-txt{flex:1;font-family:'Urbanist',sans-serif;font-size:.88rem;font-weight:700;line-height:1.4;}
+.faq-tog{width:26px;height:26px;border-radius:50%;border:1.5px solid rgba(51,197,232,.3);display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:.88rem;flex-shrink:0;transition:transform .35s cubic-bezier(.34,1.56,.64,1);}
+.faq-card.open .faq-tog{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1),padding .3s;padding:0 1.3rem 0 4.2rem;}
+.faq-card.open .faq-a{max-height:300px;padding:0 1.3rem 1.1rem 4.2rem;}
+.faq-a p{font-size:.84rem;color:var(--g1);line-height:1.8;}
+.faq-a strong{color:var(--white);font-weight:600;}
+.faq-contact-aside{display:flex;flex-direction:column;gap:1.4rem;}
+.faq-aside-card{background:var(--card);border:1px solid rgba(181,21,191,.2);border-radius:20px;padding:1.8rem;text-align:center;position:relative;overflow:hidden;}
+.faq-aside-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--magenta),var(--cyan));}
+.faq-aside-icon{width:56px;height:56px;background:linear-gradient(135deg,rgba(37,211,102,.15),rgba(18,140,126,.15));border:1px solid rgba(37,211,102,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#25d366;margin:0 auto 1rem;}
+.faq-aside-info{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:1.5rem;display:flex;flex-direction:column;gap:1.1rem;}
+.faq-info-item{display:flex;align-items:center;gap:.9rem;}
+.faq-info-icon{width:36px;height:36px;flex-shrink:0;background:rgba(51,197,232,.08);border:1px solid rgba(51,197,232,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:.9rem;}
+.faq-info-label{display:block;font-size:.66rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--g2);margin-bottom:.12rem;}
+.faq-info-text{display:block;font-size:.82rem;color:var(--g1);}
+
+/* FOOTER */
+.footer{padding:clamp(3rem,6vw,4.5rem) 0 2rem;border-top:1px solid var(--line);}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;}
+.footer-about{font-size:.84rem;color:var(--g1);line-height:1.7;margin-bottom:1.2rem;max-width:160px;}
+.footer-socials{display:flex;gap:.75rem;}
+.social-link{width:38px;height:38px;border-radius:50%;background:rgba(51,197,232,.08);border:1px solid rgba(51,197,232,.2);display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1rem;transition:var(--tr);}
+.social-link:hover{background:var(--cyan);color:var(--black);transform:translateY(-3px);}
+.footer-col h4{font-family:'Urbanist',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:1rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem;}
+.footer-col ul li a{font-size:.83rem;color:var(--g1);transition:color .3s;}
+.footer-col ul li a:hover{color:var(--cyan);}
+.footer-bottom{padding-top:1.8rem;border-top:1px solid var(--line);text-align:center;font-size:.78rem;color:var(--g2);}
+
+/* BOTÕES GERAIS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.9rem 1.8rem;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;border:none;transition:var(--tr);text-decoration:none;white-space:nowrap;}
+.btn-primary{background:linear-gradient(135deg,var(--magenta),var(--cyan));color:var(--white);box-shadow:0 8px 24px rgba(181,21,191,.25);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(181,21,191,.4);}
+.btn-ghost{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.2);}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ══ RESPONSIVO ══ */
+@media(max-width:1100px){
+  .hero-inner{grid-template-columns:1fr 340px;gap:2.5rem;}
+  .tech-hero-wrap{grid-template-columns:440px 1fr;}
+  .tech-mascot-col{margin-left:-1rem;}
+  .tech-mascot-img{min-height:500px;}
+}
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .tech-hero-wrap{grid-template-columns:1fr;}
+  .tech-mascot-col{display:none;}
+  .tech-content-col{padding:0;}
+  .tech-svc-cards{grid-template-columns:1fr 1fr;}
+  .models-grid{grid-template-columns:repeat(2,1fr);}
+  .faq-grid{grid-template-columns:1fr;}
+  .faq-contact-aside{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .nav-links,.nav-btn{display:none;}
+  .hamburger{display:flex;}
+  .mobile-menu{display:flex;}
+  .navbar{top:12px;}
+  .calc-wrap{grid-template-columns:1fr;}
+  .tech-svc-cards{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .models-grid{grid-template-columns:1fr;}
+  .faq-contact-aside{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .hero-cta{flex-direction:column;}
+  .hero-cta .btn{width:100%;justify-content:center;}
+  .hero-stats{gap:1.2rem;}
+  .modal-btns{flex-direction:column;}
+  .modal-btn-cancel{text-align:center;}
+}
+@media(max-width:400px){
+  .calc-panel-body{padding:1rem 1.1rem 1.2rem;}
+  .svc-btn{padding:.75rem .85rem;}
+  .num-row{padding:.7rem .85rem;}
+}
+</style>
 </head>
 <body>
-    <div class="animated-bg">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
+
+<div class="bg-orbs" aria-hidden="true">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+</div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<!-- NAVBAR -->
+<header>
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">TECHCODESIGN</a>
+      <ul class="nav-links">
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#modelos">Modelos</a></li>
+        <li><a href="#orcamento">Orçamento</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <button class="nav-btn" onclick="navScrollTo('#orcamento')">Solicitar Orçamento</button>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
+</header>
 
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="#servicos" class="mob-link">Serviços</a>
+  <a href="#modelos" class="mob-link">Modelos</a>
+  <a href="#orcamento" class="mob-link">Orçamento</a>
+  <a href="#faq" class="mob-link">FAQ</a>
+</nav>
 
-    <header>
-        <nav>
-            <a href="#home" class="logo">TECHCODESIGN</a>
-            <ul class="nav-links">
-                <li><a href="#home">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#modelos">Modelos</a></li>
-                <li><a href="#planos">Planos</a></li>
-                <li><a href="#contato" class="nav-cta">Contato</a></li>
-            </ul>
-            <div class="menu-toggle" id="menuToggle">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-        </nav>
-    </header>
-
-    <div class="mobile-nav" id="mobileNav">
-        <a href="#home">Início</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#modelos">Modelos</a>
-        <a href="#planos">Planos</a>
-        <a href="#contato">Contato</a>
-    </div>
-
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <p class="hero-subtitle">Agência Digital Completa</p>
-            <h1>Transformamos Ideias em<br><span class="gradient-text">Experiências Digitais</span></h1>
-            <p class="hero-description">Desenvolvimento de sites, aplicativos e identidades visuais que elevam sua marca ao próximo nível. Soluções completas e personalizadas para o seu negócio digital.</p>
-            <div class="cta-buttons">
-                <a href="#planos" class="btn btn-primary"><span>Ver Planos</span><i class="ri-arrow-right-line"></i></a>
-                <a href="https://wa.me/5581996273630" target="_blank" class="btn btn-secondary">Entrar em contato</a>
-            </div>
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Agência Digital · Recife – PE
+      </div>
+      <h1 class="hero-title">
+        Sua marca vai ser<br>
+        <span class="grad">vista. lembrada.<br>admirada. encontrada.</span>
+      </h1>
+      <p class="hero-sub">Criamos sites e identidades visuais que transformam visitantes em clientes. Do briefing à entrega, com dedicação total e resultado garantido.</p>
+      <div class="hero-cta">
+        <a href="#orcamento" class="btn btn-primary"><i class="ri-calculator-line"></i> Calcular Orçamento</a>
+        <a href="https://wa.me/5581996273630" target="_blank" rel="noopener" class="btn btn-ghost"><i class="ri-whatsapp-line"></i> Falar no WhatsApp</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-n">150+</span>
+          <span class="hero-stat-l">Projetos entregues</span>
         </div>
-    </section>
-
-    <!-- ============================================================
-     TICKER STRIP — TECHCODESIGN
-     Sugestão: cole logo após o </section> do Hero (#home),
-     antes da seção #sobre
-     ============================================================ -->
-
-<!-- ── CSS: adicione dentro do <style> existente ─────────────── -->
-<style>
-/* ─── Ticker Strip ──────────────────────────────────────────── */
-.ticker-wrap {
-    width: 100%;
-    overflow: hidden;
-    padding: 1.1rem 0;
-    background: linear-gradient(90deg,
-        rgba(181, 21, 191, 0.12) 0%,
-        rgba(51, 197, 232, 0.08) 50%,
-        rgba(181, 21, 191, 0.12) 100%);
-    border-top: 1px solid rgba(181, 21, 191, 0.25);
-    border-bottom: 1px solid rgba(51, 197, 232, 0.2);
-    position: relative;
-    /* fade nas bordas */
-    -webkit-mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 8%,
-        black 92%,
-        transparent 100%
-    );
-    mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 8%,
-        black 92%,
-        transparent 100%
-    );
-}
-
-.ticker-track {
-    display: flex;
-    width: max-content;
-    animation: ticker-scroll 28s linear infinite;
-}
-
-.ticker-track:hover {
-    animation-play-state: paused;
-}
-
-@keyframes ticker-scroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-.ticker-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0 2.5rem;
-    font-family: 'Urbanist', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--white);
-    white-space: nowrap;
-    opacity: 0.85;
-    transition: opacity 0.3s;
-}
-
-.ticker-item:hover { opacity: 1; }
-
-.ticker-sep {
-    color: var(--magenta);
-    font-size: 1.1rem;
-    line-height: 1;
-    flex-shrink: 0;
-}
-
-/* Alterna a cor do losango entre magenta e cyan */
-.ticker-item:nth-child(even) .ticker-sep  { color: var(--cyan); }
-</style>
-
-<!-- ── HTML ──────────────────────────────────────────────────── -->
-<div class="ticker-wrap">
-    <div class="ticker-track" id="tickerTrack">
-        <!-- Bloco original (será duplicado pelo JS) -->
-        <span class="ticker-item">Sites Personalizados <span class="ticker-sep">◆</span></span>
-        <span class="ticker-item">Aplicativos Mobile <span class="ticker-sep">◆</span></span>
-        <span class="ticker-item">Identidade Visual <span class="ticker-sep">◆</span></span>
-        <span class="ticker-item">Sites Modelo <span class="ticker-sep">◆</span></span>
-        <span class="ticker-item">Design para Instagram <span class="ticker-sep">◆</span></span>
-        <span class="ticker-item">Combos Especiais <span class="ticker-sep">◆</span></span>
-        <span class="ticker-item">SEO & Performance <span class="ticker-sep">◆</span></span>
-        <span class="ticker-item">Consultoria Digital <span class="ticker-sep">◆</span></span>
-        <span class="ticker-item">Branding Completo <span class="ticker-sep">◆</span></span>
-        <span class="ticker-item">E-commerce <span class="ticker-sep">◆</span></span>
-        <span class="ticker-item">UI / UX Design <span class="ticker-sep">◆</span></span>
-        <span class="ticker-item">Suporte & Manutenção <span class="ticker-sep">◆</span></span>
+        <div class="hero-stat">
+          <span class="hero-stat-n">120+</span>
+          <span class="hero-stat-l">Clientes satisfeitos</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-n">100%</span>
+          <span class="hero-stat-l">Dedicação total</span>
+        </div>
+      </div>
     </div>
+    <div class="hero-right">
+      <div class="hero-floater hf-1"></div>
+      <div class="hero-floater hf-2"></div>
+      <div class="hcard hcard-1">
+        <div class="hcard-icon"><i class="ri-code-box-line"></i></div>
+        <div class="hcard-title">Sites que convertem</div>
+        <div class="hcard-desc">Design exclusivo, responsivo e pensado para o seu público desde a primeira dobra.</div>
+        <span class="hcard-tag">Personalizado · A partir de 5 seções</span>
+      </div>
+      <div class="hcard hcard-2">
+        <div class="hcard-icon"><i class="ri-brush-4-line"></i></div>
+        <div class="hcard-title">Identidade que comunica</div>
+        <div class="hcard-desc">Logo, manual de marca e paleta criados para diferenciar e construir reconhecimento.</div>
+        <span class="hcard-tag">Completo · Entrega em 10–15 dias</span>
+      </div>
+      <div class="hcard hcard-3">
+        <div class="hcard-icon"><i class="ri-layout-grid-line"></i></div>
+        <div class="hcard-title">Templates prontos</div>
+        <div class="hcard-desc">Modelos de sites adaptados ao seu negócio com entrega em apenas 7 dias úteis.</div>
+        <span class="hcard-tag">Rápido · R$ 397 fixo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack">
+    <span class="ticker-item">Sites Personalizados <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Identidade Visual <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Modelos de sites <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Logotipos Profissionais <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Manual de Marca <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">UI / UX Design <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Landing Pages <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Branding Completo <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Entrega Rápida <span class="ticker-dot">◆</span></span>
+  </div>
 </div>
 
-<!-- ── JS: adicione DENTRO do (function(){ ... })() já existente ── -->
-<script>
-/* Ticker — duplica os itens para loop contínuo sem gaps */
-(function(){
-    const track = document.getElementById('tickerTrack');
-    if (!track) return;
-    // Clona o conteúdo original para criar loop sem gaps
-    const clone = track.innerHTML;
-    track.innerHTML = clone + clone;
-})();
-</script>
-    <section id="sobre" class="about-section">
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="terminal-buttons">
-                    <span class="btn-term close"></span>
-                    <span class="btn-term minimize"></span>
-                    <span class="btn-term maximize"></span>
-                </div>
-                <div class="terminal-title">Tech CoDesign</div>
-            </div>
-            <div class="terminal-body">
-                <h3>Bem-vindo à <span class="terminal-highlight">TechCoDesign</span></h3>
-                <p>Somos uma agência especializada em desenvolvimento web, criação de aplicativos e design de identidade visual. Nossa missão é transformar a presença digital dos nossos clientes através de soluções inovadoras e criativas.</p>
-                <p>Combinamos <span class="terminal-highlight">tecnologia de ponta</span> com design sofisticado para criar experiências digitais memoráveis. Seja um site institucional, e-commerce, aplicativo mobile ou uma identidade visual completa, entregamos projetos que geram resultados reais.</p>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="stat-number">150+</span>
-                        <span class="stat-label">Projetos Entregues</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">120+</span>
-                        <span class="stat-label">Clientes Satisfeitos</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Dedicação</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="mascot-section">
-        <div class="mascot-container">
-            <div class="mascot-image">
-                <img src="https://drive.google.com/thumbnail?id=18WvKOveBjdcubynzYjcdGiF8k4wDK7MX&sz=w1000" alt="Mascote TechCoDesign">
-            </div>
-            <div class="mascot-text-box">
-                <span class="mascot-label">Sua Assistente</span>
-                <h3>Olá, eu sou a Tech!</h3>
-                <p>"A tecnologia existe para facilitar sua vida. Estou aqui para garantir que sua experiência digital seja incrível e sem complicações."</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="servicos">
-        <div class="section-header">
-            <p class="section-label">O que fazemos</p>
-            <h2 class="section-title">Nossos <span class="gradient-text">Serviços</span></h2>
-            <p class="section-description">Soluções completas para transformar sua presença digital</p>
-        </div>
-        <div class="servicos-grid">
-            <div class="servico-card">
-                <div class="servico-icon"><i class="ri-code-s-slash-line"></i></div>
-                <h3>Sites Personalizados</h3>
-                <p>Desenvolvimento de sites únicos e exclusivos, criados do zero para atender perfeitamente às necessidades do seu negócio.</p>
-                <ul class="servico-features">
-                    <li>Design 100% personalizado</li>
-                    <li>Responsivo e otimizado</li>
-                    <li>SEO integrado</li>
-                    <li>Painel administrativo</li>
-                </ul>
-            </div>
-            <div class="servico-card">
-                <div class="servico-icon"><i class="ri-smartphone-line"></i></div>
-                <h3>Aplicativos Mobile</h3>
-                <p>Criação de aplicativos nativos e híbridos para iOS e Android, com foco em usabilidade e performance.</p>
-                <ul class="servico-features">
-                    <li>Design intuitivo</li>
-                    <li>Alta performance</li>
-                    <li>Integração com APIs</li>
-                    <li>Publicação nas stores</li>
-                </ul>
-            </div>
-            <div class="servico-card">
-                <div class="servico-icon"><i class="ri-palette-line"></i></div>
-                <h3>Identidade Visual</h3>
-                <p>Criação completa de identidade visual que traduz a essência da sua marca de forma profissional e memorável.</p>
-                <ul class="servico-features">
-                    <li>Logotipo exclusivo</li>
-                    <li>Manual da marca</li>
-                    <li>Materiais gráficos</li>
-                    <li>Design para redes sociais</li>
-                </ul>
-            </div>
-            <div class="servico-card">
-                <div class="servico-icon"><i class="ri-layout-grid-line"></i></div>
-                <h3>Sites Modelo</h3>
-                <p>Opções de sites pré-desenvolvidos e otimizados para diversos segmentos, com custo reduzido e entrega rápida.</p>
-                <ul class="servico-features">
-                    <li>Templates profissionais</li>
-                    <li>Personalização incluída</li>
-                    <li>Entrega em 7 dias</li>
-                    <li>Preço acessível</li>
-                </ul>
-            </div>
-            <div class="servico-card">
-                <div class="servico-icon"><i class="ri-instagram-line"></i></div>
-                <h3>Design para Instagram</h3>
-                <p>Pacotes mensais de design para feed e stories, mantendo sua marca sempre atualizada nas redes sociais.</p>
-                <ul class="servico-features">
-                    <li>Posts profissionais</li>
-                    <li>Stories personalizados</li>
-                    <li>Planejamento visual</li>
-                    <li>Entrega mensal</li>
-                </ul>
-            </div>
-            <div class="servico-card">
-                <div class="servico-icon"><i class="ri-gift-line"></i></div>
-                <h3>Combos Especiais</h3>
-                <p>Pacotes completos que unem identidade visual e design para Instagram com preços promocionais.</p>
-                <ul class="servico-features">
-                    <li>ID Visual completa</li>
-                    <li>1 ou 2 meses de posts</li>
-                    <li>Economia garantida</li>
-                    <li>Consultoria incluída</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="modelos">
-        <div class="section-header">
-            <p class="section-label">Templates Prontos</p>
-            <h2 class="section-title">Modelos de <span class="gradient-text">Sites</span></h2>
-            <p class="section-description">Templates profissionais prontos para diversos segmentos</p>
-        </div>
-        <div class="modelos-grid">
-            <div class="modelo-card" onclick="window.location.href='modelos-contabilidade.html'">
-                <div class="modelo-image"><i class="modelo-icon ri-calculator-line"></i></div>
-                <div class="modelo-info">
-                    <h3>Contabilidade</h3>
-                    <p>Sites profissionais para escritórios contábeis com seções para serviços, equipe e área do cliente.</p>
-                </div>
-            </div>
-            <div class="modelo-card" onclick="alert('Em breve você será direcionado para ver os modelos de Advocacia')">
-                <div class="modelo-image"><i class="modelo-icon ri-scales-3-line"></i></div>
-                <div class="modelo-info">
-                    <h3>Advocacia</h3>
-                    <p>Layouts elegantes para escritórios de advocacia com foco em credibilidade e profissionalismo.</p>
-                </div>
-            </div>
-            <div class="modelo-card" onclick="alert('Em breve você será direcionado para ver os modelos de Academias')">
-                <div class="modelo-image"><i class="modelo-icon ri-boxing-line"></i></div>
-                <div class="modelo-info">
-                    <h3>Academias</h3>
-                    <p>Designs modernos e energéticos para academias, com grade de horários e planos de treino.</p>
-                </div>
-            </div>
-            <div class="modelo-card" onclick="alert('Em breve você será direcionado para ver os modelos de Personal Trainer')">
-                <div class="modelo-image"><i class="modelo-icon ri-heartbeat-line"></i></div>
-                <div class="modelo-info">
-                    <h3>Personal Trainer</h3>
-                    <p>Sites personalizados para personal trainers com portfólio, depoimentos e agendamento online.</p>
-                </div>
-            </div>
-            <div class="modelo-card" onclick="window.location.href='modelos-psicologia.html'">
-                <div class="modelo-image"><i class="modelo-icon ri-mental-health-line"></i></div>
-                <div class="modelo-info">
-                    <h3>Psicólogas</h3>
-                    <p>Modelos de sites elegantes e acolhedores para psicólogas, focados em transmitir confiança e profissionalismo.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="planos">
-        <div class="section-header">
-            <p class="section-label">Preços</p>
-            <h2 class="section-title">Nossos <span class="gradient-text">Planos</span></h2>
-            <p class="section-description">Pacotes completos com os melhores preços do mercado</p>
-        </div>
-        <div class="planos-grid">
-            <div class="plano-card">
-                <h3 class="plano-nome">Combo Starter</h3>
-                <div class="plano-preco">R$ 1.497</div>
-                <p class="plano-periodo">Pagamento único</p>
-                <ul class="plano-features">
-                    <li>Identidade Visual Completa</li>
-                    <li>Logotipo + Manual da Marca</li>
-                    <li>8 Posts para Instagram</li>
-                    <li>4 Stories Personalizados</li>
-                    <li>1 mês de conteúdo</li>
-                    <li>Formatos para redes sociais</li>
-                    <li>Revisões ilimitadas</li>
-                    <li>Entrega em 15 dias</li>
-                </ul>
-                <a href="#contato" class="btn btn-secondary" style="width:100%">Escolher Plano</a>
-            </div>
-            <div class="plano-card destaque">
-                <div class="plano-badge">POPULAR</div>
-                <h3 class="plano-nome">Combo Professional</h3>
-                <div class="plano-preco">R$ 2.397</div>
-                <p class="plano-periodo">Pagamento único</p>
-                <ul class="plano-features">
-                    <li>Identidade Visual Completa</li>
-                    <li>Logotipo + Manual da Marca</li>
-                    <li>Papelaria Empresarial</li>
-                    <li>16 Posts para Instagram</li>
-                    <li>8 Stories Personalizados</li>
-                    <li>2 meses de conteúdo</li>
-                    <li>Planejamento de conteúdo</li>
-                    <li>Hashtags estratégicas</li>
-                    <li>Revisões ilimitadas</li>
-                    <li>Entrega em 20 dias</li>
-                    <li>Suporte prioritário</li>
-                </ul>
-                <a href="#contato" class="btn btn-primary" style="width:100%">Escolher Plano</a>
-            </div>
-            <div class="plano-card">
-                <h3 class="plano-nome">Combo Premium</h3>
-                <div class="plano-preco">R$ 3.997</div>
-                <p class="plano-periodo">Pagamento único</p>
-                <ul class="plano-features">
-                    <li>Identidade Visual Premium</li>
-                    <li>Logotipo + Sublogo + Manual</li>
-                    <li>Papelaria Completa</li>
-                    <li>Site Modelo Personalizado</li>
-                    <li>24 Posts para Instagram</li>
-                    <li>12 Stories + 6 Reels</li>
-                    <li>2 meses de conteúdo</li>
-                    <li>Estratégia de conteúdo</li>
-                    <li>Consultoria de branding</li>
-                    <li>Banco de imagens</li>
-                    <li>Revisões ilimitadas</li>
-                    <li>Entrega em 25 dias</li>
-                    <li>Suporte VIP</li>
-                </ul>
-                <a href="#contato" class="btn btn-secondary" style="width:100%">Escolher Plano</a>
-            </div>
-        </div>
-    </section>
-
-    
-
-    <section id="contato" class="contact-section">
-        <div class="section-header">
-            <p class="section-label">Entre em contato</p>
-            <h2 class="section-title">Vamos Trabalhar <span class="gradient-text">Juntos</span></h2>
-            <p class="section-description">Preencha o formulário e nossa equipe retornará em até 24 horas</p>
-        </div>
-        <div class="contact-wrapper">
-            <form id="contactForm">
-                <div class="progress-bar">
-                    <div class="progress-step active">Informações</div>
-                    <div class="progress-step">Detalhes</div>
-                    <div class="progress-step">Enviar</div>
-                </div>
-                <div class="form-step active" id="step1">
-                    <div class="form-group">
-                        <input type="text" id="inputName" class="form-input" placeholder=" " required>
-                        <label class="form-label">Seu nome</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="inputEmail" class="form-input" placeholder=" " required>
-                        <label class="form-label">Seu melhor email</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" id="inputPhone" class="form-input" placeholder=" " required>
-                        <label class="form-label">Telefone / WhatsApp</label>
-                    </div>
-                    <button type="button" class="form-button" onclick="nextStep(2)">Avançar <i class="ri-arrow-right-line"></i></button>
-                </div>
-                <div class="form-step" id="step2">
-                    <div class="form-group">
-                        <select id="inputService" class="form-input" required>
-                            <option value=""></option>
-                            <option>Site Personalizado</option>
-                            <option>Site Modelo</option>
-                            <option>Aplicativo Mobile</option>
-                            <option>Identidade Visual</option>
-                            <option>Combo Starter</option>
-                            <option>Combo Professional</option>
-                            <option>Combo Premium</option>
-                        </select>
-                        <label class="form-label">O que você procura?</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="inputRequest" class="form-input" placeholder=" " required>
-                        <label class="form-label">Resumo do Pedido</label>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="inputDetails" class="form-input" placeholder=" " required></textarea>
-                        <label class="form-label">Conte-nos sobre seu projeto</label>
-                    </div>
-                    <div class="form-navigation">
-                        <button type="button" class="form-button-secondary" onclick="nextStep(1)"><i class="ri-arrow-left-line"></i> Voltar</button>
-                        <button type="button" class="form-button" onclick="nextStep(3)">Revisar <i class="ri-check-line"></i></button>
-                    </div>
-                </div>
-                <div class="form-step" id="step3">
-                    <h3 class="review-title">Tudo pronto!</h3>
-                    <p class="review-text">Clique abaixo para enviar sua mensagem. Respondemos o mais breve possível!</p>
-                    <div class="form-navigation">
-                        <button type="button" class="form-button-secondary" onclick="nextStep(2)"><i class="ri-arrow-left-line"></i> Voltar</button>
-                        <button type="submit" class="form-button">Enviar Mensagem <i class="ri-send-plane-fill"></i></button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </section>
-
-<!-- ============================================================
-     SEÇÃO FAQ — TECHCODESIGN
-     Cole este bloco completo no seu index.html
-     Sugestão: antes do <section id="contato">
-     ============================================================ -->
-
-<!-- ── CSS: adicione dentro do <style> existente ─────────────── -->
-<style>
-/* ─── FAQ ──────────────────────────────────────────────────── */
-.faq-section {
-    position: relative;
-}
-
-.faq-categories {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-bottom: 3.5rem;
-}
-
-.faq-cat-btn {
-    padding: 0.6rem 1.5rem;
-    border-radius: 50px;
-    background: transparent;
-    border: 1px solid rgba(181, 21, 191, 0.35);
-    color: var(--gray);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.faq-cat-btn.active,
-.faq-cat-btn:hover {
-    background: linear-gradient(135deg, var(--magenta), var(--cyan));
-    border-color: transparent;
-    color: var(--white);
-}
-
-.faq-grid {
-    max-width: 860px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-}
-
-.faq-item {
-    background: var(--glass);
-    border: 1px solid rgba(181, 21, 191, 0.2);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.faq-item.open {
-    border-color: var(--cyan);
-    box-shadow: 0 8px 40px rgba(51, 197, 232, 0.12);
-}
-
-.faq-item[data-cat] { display: flex; flex-direction: column; }
-.faq-item[data-cat].hidden { display: none; }
-
-.faq-question {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    padding: 1.6rem 2rem;
-    cursor: pointer;
-    user-select: none;
-}
-
-.faq-q-left {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-}
-
-.faq-num {
-    font-family: 'Urbanist', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: var(--cyan);
-    min-width: 24px;
-    opacity: 0.7;
-}
-
-.faq-question span {
-    font-family: 'Urbanist', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--white);
-    line-height: 1.4;
-}
-
-.faq-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    border: 1px solid rgba(51, 197, 232, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--cyan);
-    font-size: 1.1rem;
-    flex-shrink: 0;
-    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s;
-}
-
-.faq-item.open .faq-icon {
-    transform: rotate(45deg);
-    background: rgba(51, 197, 232, 0.15);
-}
-
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-                padding 0.3s ease;
-    padding: 0 2rem 0 5rem;
-}
-
-.faq-item.open .faq-answer {
-    max-height: 400px;
-    padding: 0 2rem 1.8rem 5rem;
-}
-
-.faq-answer p {
-    color: var(--gray);
-    line-height: 1.8;
-    font-size: 1rem;
-}
-
-.faq-answer p + p { margin-top: 0.8rem; }
-
-.faq-answer strong {
-    color: var(--white);
-    font-weight: 600;
-}
-
-.faq-answer a {
-    color: var(--cyan);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.faq-answer a:hover { text-decoration: underline; }
-
-.faq-cta-strip {
-    max-width: 860px;
-    margin: 3.5rem auto 0;
-    background: linear-gradient(135deg, rgba(181,21,191,0.12), rgba(51,197,232,0.08));
-    border: 1px solid rgba(51, 197, 232, 0.25);
-    border-radius: 20px;
-    padding: 2.5rem 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.faq-cta-strip p {
-    color: var(--gray);
-    font-size: 1rem;
-}
-
-.faq-cta-strip strong {
-    display: block;
-    font-family: 'Urbanist', sans-serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 0.3rem;
-}
-
-@media (max-width: 768px) {
-    .faq-answer { padding-left: 2rem; }
-    .faq-item.open .faq-answer { padding-left: 2rem; }
-    .faq-cta-strip { padding: 2rem; }
-}
-</style>
-
-<!-- ── HTML: o bloco da seção ────────────────────────────────── -->
-<section id="faq" class="faq-section">
-    <div class="section-header">
-        <p class="section-label">Dúvidas frequentes</p>
-        <h2 class="section-title">Perguntas <span class="gradient-text">Frequentes</span></h2>
-        <p class="section-description">Respondemos as principais dúvidas sobre nossos serviços e processos</p>
+<!-- SERVIÇOS -->
+<section id="servicos" class="tech-section">
+  <div class="tech-hero-wrap">
+    <div class="tech-mascot-col">
+      <div class="mascot-bubble">
+        <span class="bubble-dot"></span>
+        <p class="bubble-text">Pronta para transformar sua <strong>presença digital</strong>! 🚀</p>
+      </div>
+      <img src="https://drive.google.com/thumbnail?id=18WvKOveBjdcubynzYjcdGiF8k4wDK7MX&sz=w1000" alt="Tech — Assistente da TechCoDesign" class="tech-mascot-img" loading="lazy">
     </div>
-
-    <!-- Filtro por categoria -->
-    <div class="faq-categories">
-        <button class="faq-cat-btn active" data-filter="todos">Todas</button>
-        <button class="faq-cat-btn" data-filter="servicos">Serviços</button>
-        <button class="faq-cat-btn" data-filter="processo">Como Funciona</button>
-        <button class="faq-cat-btn" data-filter="pagamento">Pagamento</button>
-        <button class="faq-cat-btn" data-filter="prazo">Prazos</button>
-        <button class="faq-cat-btn" data-filter="suporte">Suporte</button>
+    <div class="tech-content-col">
+      <div class="tech-eyebrow"><i class="ri-robot-line"></i> Sua parceira digital</div>
+      <h2 class="tech-title">Olá, eu sou a <span class="grad">Tech!</span><br>Sua marca merece <span class="grad">brilhar</span>.</h2>
+      <p class="tech-subtitle">Cuidamos de tudo que faz seu negócio ser encontrado, admirado e lembrado online. De um <em>site que converte</em> a uma <em>identidade que comunica</em> — entregamos com precisão, agilidade e dedicação total.</p>
+      <div class="tech-svc-cards">
+        <div class="tech-svc-card">
+          <div class="tsc-icon-wrap sites"><i class="ri-layout-masonry-line"></i></div>
+          <div class="tsc-name">Desenvolvimento de Sites</div>
+          <div class="tsc-desc">Sites que vendem, engajam e representam sua marca com excelência.</div>
+          <ul class="tsc-items">
+            <li>Modelos de sites — template adaptado ao seu negócio</li>
+            <li>Sites Personalizados — design exclusivo do zero</li>
+            <li>Landing Pages de alta conversão</li>
+            <li>WhatsApp, formulários e redes integrados</li>
+            <li>Responsivo para todos os dispositivos</li>
+            <li>Revisões ilimitadas até aprovação</li>
+          </ul>
+          <span class="tsc-tag mag">A partir de 7 dias</span>
+        </div>
+        <div class="tech-svc-card">
+          <div class="tsc-icon-wrap id"><i class="ri-brush-4-line"></i></div>
+          <div class="tsc-name">Identidade Visual</div>
+          <div class="tsc-desc">Uma marca forte começa pelo visual. Criamos identidades que diferenciam.</div>
+          <ul class="tsc-items">
+            <li>Logotipo profissional vetorizado</li>
+            <li>Paleta de cores e tipografia estratégicas</li>
+            <li>Manual da Marca (Brand Guide completo)</li>
+            <li>Papelaria empresarial — cartão, envelope e mais</li>
+            <li>Arquivos em todos os formatos</li>
+            <li>Revisões ilimitadas até aprovação</li>
+          </ul>
+          <span class="tsc-tag">Entrega em 10–15 dias</span>
+        </div>
+      </div>
+      <div class="tech-diffs">
+        <span class="diff-pill"><i class="ri-shield-check-line" style="color:var(--cyan);"></i> Sem custo por revisões</span>
+        <span class="diff-pill"><i class="ri-rocket-line" style="color:#d666dd;"></i> Entrega ágil e pontual</span>
+        <span class="diff-pill"><i class="ri-whatsapp-line" style="color:#25d366;"></i> Suporte no WhatsApp</span>
+        <span class="diff-pill"><i class="ri-star-smile-line" style="color:var(--cyan);"></i> 150+ projetos entregues</span>
+      </div>
     </div>
-
-    <div class="faq-grid">
-
-        <!-- ── SERVIÇOS ──────────────────────────────────────── -->
-        <div class="faq-item" data-cat="servicos">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">01</span>
-                    <span>Qual a diferença entre um Site Personalizado e um Site Modelo?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>O <strong>Site Modelo</strong> é um template pré-desenvolvido para segmentos específicos (contabilidade, advocacia, academia etc.). É mais ágil e econômico — entregamos em até 7 dias, pois a estrutura já está pronta e adaptamos com os seus dados e cores.</p>
-                <p>O <strong>Site Personalizado</strong> é criado do zero exclusivamente para o seu negócio, com design único, funcionalidades sob medida e possibilidades ilimitadas. É ideal para quem quer total diferenciação no mercado.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="servicos">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">02</span>
-                    <span>Os sites são responsivos (funcionam no celular)?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Sim, <strong>100% responsivos</strong>. Todos os nossos sites são desenvolvidos com design adaptável para smartphones, tablets e desktops. Também garantimos compatibilidade com os principais navegadores do mercado.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="servicos">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">03</span>
-                    <span>Os aplicativos funcionam tanto no Android quanto no iOS?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Desenvolvemos apps <strong>nativos e híbridos</strong>. Os apps híbridos rodam em ambas as plataformas com um único código, reduzindo custo e prazo. Já os nativos são construídos especificamente para cada sistema (Android ou iOS), entregando máxima performance. Na conversa inicial, indicamos a melhor opção para o seu projeto.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="servicos">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">04</span>
-                    <span>O que está incluso na Identidade Visual?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Nossa Identidade Visual inclui <strong>logotipo exclusivo</strong> (com variações horizontal, vertical, símbolo e versão monocromática), paleta de cores oficial, tipografia da marca e <strong>manual de identidade visual</strong> com regras de uso.</p>
-                <p>Dependendo do plano escolhido, também entregamos papelaria empresarial (cartão de visita, papel timbrado, assinatura de e-mail) e templates para redes sociais.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="servicos">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">05</span>
-                    <span>Vocês criam conteúdo para o Instagram além das artes?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Nos planos <strong>Professional e Premium</strong>, entregamos também planejamento de conteúdo com sugestão de temas, legendas e estratégia de hashtags. No Premium, incluímos ainda Reels (artes animadas) e consultoria de branding para posicionamento de marca.</p>
-            </div>
-        </div>
-
-        <!-- ── COMO FUNCIONA ─────────────────────────────────── -->
-        <div class="faq-item" data-cat="processo">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">06</span>
-                    <span>Como funciona o processo de criação do meu projeto?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Nosso processo tem <strong>4 etapas</strong>:</p>
-                <p><strong>1. Briefing</strong> — Entendemos seu negócio, público-alvo e objetivos por meio de um formulário ou reunião via WhatsApp/Google Meet.</p>
-                <p><strong>2. Proposta</strong> — Apresentamos a melhor solução com escopo, prazo e valor detalhados.</p>
-                <p><strong>3. Produção</strong> — Desenvolvemos o projeto com atualizações periódicas e rodadas de revisão.</p>
-                <p><strong>4. Entrega</strong> — Você recebe os arquivos finais, credenciais de acesso e suporte pós-entrega.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="processo">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">07</span>
-                    <span>Preciso ter um domínio e hospedagem para o meu site?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Sim. Domínio (ex.: <strong>suaempresa.com.br</strong>) e hospedagem são contratados à parte, pois o custo e a escolha do plano variam conforme as necessidades do projeto. Nós orientamos você na contratação do melhor serviço, auxiliamos na configuração e conectamos tudo ao seu site.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="processo">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">08</span>
-                    <span>Quantas revisões estão inclusas no projeto?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Oferecemos <strong>revisões ilimitadas</strong> dentro do escopo acordado no briefing. Isso significa que ajustamos cores, textos, layout e elementos visuais até você ficar 100% satisfeito, sem custo extra.</p>
-                <p>Alterações que ampliem o escopo original (ex.: adicionar novas páginas ou funcionalidades não previstas) são avaliadas separadamente.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="processo">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">09</span>
-                    <span>Vou ter acesso ao código/arquivos do meu projeto?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Sim! Ao final do projeto você recebe <strong>todos os arquivos fontes</strong> — arquivos editáveis de design (Figma/Illustrator/Photoshop), código-fonte do site ou app e manual de identidade visual em PDF. O projeto é completamente seu.</p>
-            </div>
-        </div>
-
-        <!-- ── PAGAMENTO ─────────────────────────────────────── -->
-        <div class="faq-item" data-cat="pagamento">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">10</span>
-                    <span>Quais as formas de pagamento aceitas?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Aceitamos <strong>PIX, transferência bancária e cartão de crédito</strong> (em até 12x via link de pagamento). O pagamento é dividido em duas partes: <strong>50% na aprovação da proposta</strong> para início do projeto e <strong>50% na entrega final</strong>.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="pagamento">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">11</span>
-                    <span>Os valores dos planos são negociáveis?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Os combos têm valores fechados, mas estamos abertos a <strong>personalizar um pacote</strong> sob medida para o seu orçamento. Entre em contato e conte o que você precisa — montamos uma proposta exclusiva para você.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="pagamento">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">12</span>
-                    <span>Há mensalidade ou taxa de manutenção?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Não cobramos mensalidade pelos projetos entregues. O único custo recorrente é a <strong>hospedagem e domínio</strong>, contratados diretamente por você com fornecedores parceiros que indicamos. Caso deseje um plano de manutenção mensal do site, oferecemos esse serviço opcionalmente.</p>
-            </div>
-        </div>
-
-        <!-- ── PRAZOS ────────────────────────────────────────── -->
-        <div class="faq-item" data-cat="prazo">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">13</span>
-                    <span>Quais os prazos médios de entrega para cada serviço?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p><strong>Site Modelo:</strong> até 7 dias corridos.<br>
-                   <strong>Identidade Visual:</strong> 10 a 15 dias.<br>
-                   <strong>Combo Starter:</strong> 15 dias.<br>
-                   <strong>Combo Professional:</strong> 20 dias.<br>
-                   <strong>Combo Premium:</strong> 25 dias.<br>
-                   <strong>Site Personalizado:</strong> 30 a 60 dias conforme complexidade.<br>
-                   <strong>Aplicativo Mobile:</strong> 60 a 120 dias.</p>
-                <p>Os prazos são contados a partir da <strong>aprovação do briefing e do primeiro pagamento</strong>.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="prazo">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">14</span>
-                    <span>O prazo pode ser antecipado em caso de urgência?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Em alguns casos, sim. Projetos com entrega expressa podem ter um <strong>acréscimo de prioridade</strong> dependendo da disponibilidade da equipe. Fale conosco pelo WhatsApp e verificamos a viabilidade para o seu prazo.</p>
-            </div>
-        </div>
-
-        <!-- ── SUPORTE ────────────────────────────────────────── -->
-        <div class="faq-item" data-cat="suporte">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">15</span>
-                    <span>Vocês oferecem suporte após a entrega do projeto?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Sim! Todo projeto tem um <strong>período de suporte pós-entrega</strong> para correção de eventuais ajustes técnicos. Clientes dos planos Professional e Premium têm suporte prioritário e acesso a um canal exclusivo de atendimento via WhatsApp.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="suporte">
-            <div class="faq-question">
-                <div class="faq-q-left">
-                    <span class="faq-num">16</span>
-                    <span>Consigo atualizar o conteúdo do meu site sozinho depois?</span>
-                </div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Sites que necessitam de atualizações frequentes podem ser entregues com um <strong>painel administrativo (CMS)</strong>, permitindo que você edite textos, imagens e conteúdos sem precisar de programação. Essa funcionalidade é incluída conforme o escopo do projeto — basta solicitar no briefing.</p>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- CTA inferior -->
-    <div class="faq-cta-strip">
-        <div>
-            <strong>Não encontrou sua dúvida?</strong>
-            <p>Nossa equipe está pronta para responder qualquer pergunta sobre o seu projeto.</p>
-        </div>
-        <a href="https://wa.me/5581996273630" target="_blank" class="btn btn-primary">
-            <i class="ri-whatsapp-line"></i> Falar no WhatsApp
-        </a>
-    </div>
+  </div>
 </section>
 
-<!-- ── JS: adicione DENTRO do bloco (function(){ ... })() já existente ── -->
-<script>
-/* FAQ — filtro por categoria + accordion */
-(function(){
-    // Accordion
-    document.querySelectorAll('.faq-question').forEach(q => {
-        q.addEventListener('click', () => {
-            const item = q.closest('.faq-item');
-            const isOpen = item.classList.contains('open');
-            // Fecha todos
-            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-            // Abre o clicado (toggle)
-            if (!isOpen) item.classList.add('open');
-        });
-    });
-
-    // Filtro por categoria
-    document.querySelectorAll('.faq-cat-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.dataset.filter;
-            document.querySelectorAll('.faq-item').forEach(item => {
-                if (filter === 'todos' || item.dataset.cat === filter) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                    item.classList.remove('open'); // fecha ao esconder
-                }
-            });
-        });
-    });
-})();
-</script>
-    
-
-<!-- ============================================================
-     SEÇÃO FAQ — TECHCODESIGN (versão compacta / alinhada à esquerda)
-     Substitui o bloco anterior integralmente
-     ============================================================ -->
-
-<!-- ── CSS ───────────────────────────────────────────────────── -->
-<style>
-/* ─── FAQ compacto ──────────────────────────────────────────── */
-.faq-section .section-header {
-    text-align: left;
-    margin-bottom: 2.5rem;
-}
-
-.faq-section .section-header .section-description {
-    margin: 0; /* remove margin: 0 auto que centralizava */
-}
-
-.faq-categories {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-bottom: 2rem;
-}
-
-.faq-cat-btn {
-    padding: 0.45rem 1.1rem;
-    border-radius: 50px;
-    background: transparent;
-    border: 1px solid rgba(181, 21, 191, 0.35);
-    color: var(--gray);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.faq-cat-btn.active,
-.faq-cat-btn:hover {
-    background: linear-gradient(135deg, var(--magenta), var(--cyan));
-    border-color: transparent;
-    color: var(--white);
-}
-
-.faq-grid {
-    max-width: 680px;   /* menor que antes (era 860px) */
-    margin: 0;          /* alinhado à esquerda */
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-.faq-item {
-    background: var(--glass);
-    border: 1px solid rgba(181, 21, 191, 0.2);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.faq-item.open {
-    border-color: var(--cyan);
-    box-shadow: 0 6px 28px rgba(51, 197, 232, 0.1);
-}
-
-.faq-item[data-cat] { display: flex; flex-direction: column; }
-.faq-item[data-cat].hidden { display: none; }
-
-.faq-question {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1.1rem 1.4rem;
-    cursor: pointer;
-    user-select: none;
-}
-
-.faq-q-left {
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-}
-
-.faq-num {
-    font-family: 'Urbanist', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 800;
-    color: var(--cyan);
-    min-width: 20px;
-    opacity: 0.6;
-}
-
-.faq-question span {
-    font-family: 'Urbanist', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--white);
-    line-height: 1.4;
-}
-
-.faq-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 1px solid rgba(51, 197, 232, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--cyan);
-    font-size: 1rem;
-    flex-shrink: 0;
-    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s;
-}
-
-.faq-item.open .faq-icon {
-    transform: rotate(45deg);
-    background: rgba(51, 197, 232, 0.12);
-}
-
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
-    padding: 0 1.4rem 0 3.8rem;
-}
-
-.faq-item.open .faq-answer {
-    max-height: 400px;
-    padding: 0 1.4rem 1.3rem 3.8rem;
-}
-
-.faq-answer p {
-    color: var(--gray);
-    line-height: 1.75;
-    font-size: 0.92rem;
-}
-
-.faq-answer p + p { margin-top: 0.6rem; }
-
-.faq-answer strong { color: var(--white); font-weight: 600; }
-
-.faq-answer a {
-    color: var(--cyan);
-    text-decoration: none;
-    font-weight: 600;
-}
-.faq-answer a:hover { text-decoration: underline; }
-
-/* CTA strip — alinhada à esquerda e proporcional à grid */
-.faq-cta-strip {
-    max-width: 680px;
-    margin: 2.5rem 0 0;
-    background: linear-gradient(135deg, rgba(181,21,191,0.1), rgba(51,197,232,0.07));
-    border: 1px solid rgba(51, 197, 232, 0.22);
-    border-radius: 14px;
-    padding: 1.8rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.faq-cta-strip p {
-    color: var(--gray);
-    font-size: 0.88rem;
-}
-
-.faq-cta-strip strong {
-    display: block;
-    font-family: 'Urbanist', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 0.2rem;
-}
-
-@media (max-width: 768px) {
-    .faq-answer { padding-left: 1.4rem; }
-    .faq-item.open .faq-answer { padding-left: 1.4rem; }
-    .faq-cta-strip { padding: 1.4rem; }
-}
-</style>
-
-<!-- ── HTML ───────────────────────────────────────────────────── -->
-<section id="faq" class="faq-section">
-    <div class="section-header">
-        <p class="section-label">Dúvidas frequentes</p>
-        <h2 class="section-title">Perguntas <span class="gradient-text">Frequentes</span></h2>
-        <p class="section-description">Principais dúvidas sobre nossos serviços e processos</p>
+<!-- MODELOS -->
+<section id="modelos" class="section">
+  <div class="container">
+    <div class="section-header center">
+      <span class="t-label">Templates prontos</span>
+      <h2 class="t-display" style="margin-top:.6rem;">Modelos de <span class="grad">sites</span></h2>
+      <p class="t-body">Templates profissionais por segmento — adaptados com as informações do seu negócio.</p>
     </div>
-
-    <div class="faq-categories">
-        <button class="faq-cat-btn active" data-filter="todos">Todas</button>
-        <button class="faq-cat-btn" data-filter="servicos">Serviços</button>
-        <button class="faq-cat-btn" data-filter="processo">Como Funciona</button>
-        <button class="faq-cat-btn" data-filter="pagamento">Pagamento</button>
-        <button class="faq-cat-btn" data-filter="prazo">Prazos</button>
-        <button class="faq-cat-btn" data-filter="suporte">Suporte</button>
+    <div class="models-grid">
+      <div class="model-card" onclick="location.href='modelos-contabilidade.html'" role="button" tabindex="0"><div class="model-cover"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&h=400&fit=crop" alt="Contabilidade" loading="lazy"></div><div class="model-body"><h3 class="t-title">Contabilidade</h3><p class="t-body-sm">Sites sérios e estratégicos para escritórios contábeis.</p></div></div>
+      <div class="model-card" onclick="location.href='modelos-advocacia.html'" role="button" tabindex="0"><div class="model-cover"><img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=900&h=400&fit=crop" alt="Advocacia" loading="lazy"></div><div class="model-body"><h3 class="t-title">Advocacia</h3><p class="t-body-sm">Layouts elegantes para escritórios de advocacia.</p></div></div>
+      <div class="model-card" onclick="location.href='modelos-academia.html'" role="button" tabindex="0"><div class="model-cover"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=400&fit=crop" alt="Academia" loading="lazy"></div><div class="model-body"><h3 class="t-title">Academia &amp; Personal</h3><p class="t-body-sm">Designs modernos para academias e personal trainers.</p></div></div>
+      <div class="model-card" onclick="location.href='modelos-psicologia.html'" role="button" tabindex="0"><div class="model-cover"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&h=400&fit=crop" alt="Psicologia" loading="lazy"></div><div class="model-body"><h3 class="t-title">Psicologia</h3><p class="t-body-sm">Sites acolhedores e profissionais para psicólogos(as).</p></div></div>
+      <div class="model-card" onclick="location.href='modelos-nutricionistas.html'" role="button" tabindex="0"><div class="model-cover"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=400&fit=crop" alt="Nutricionista" loading="lazy"></div><div class="model-body"><h3 class="t-title">Nutricionista</h3><p class="t-body-sm">Modelos frescos e profissionais para nutricionistas.</p></div></div>
+      <div class="model-card" onclick="location.href='modelos-clinicas.html'" role="button" tabindex="0"><div class="model-cover"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=900&h=400&fit=crop" alt="Clínicas" loading="lazy"></div><div class="model-body"><h3 class="t-title">Clínicas &amp; Saúde</h3><p class="t-body-sm">Layouts confiáveis para clínicas médicas e odontológicas.</p></div></div>
     </div>
-
-    <div class="faq-grid">
-
-        <!-- SERVIÇOS -->
-        <div class="faq-item" data-cat="servicos">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">01</span><span>Qual a diferença entre Site Personalizado e Site Modelo?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>O <strong>Site Modelo</strong> é um template pré-desenvolvido por segmento, entregue em até 7 dias com personalização de dados e cores.</p>
-                <p>O <strong>Site Personalizado</strong> é criado do zero, com design exclusivo e funcionalidades sob medida para total diferenciação.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="servicos">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">02</span><span>Os sites são responsivos (funcionam no celular)?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Sim, <strong>100% responsivos</strong> — adaptados para smartphones, tablets e desktops, compatíveis com os principais navegadores.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="servicos">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">03</span><span>Os aplicativos funcionam no Android e no iOS?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Desenvolvemos apps <strong>nativos e híbridos</strong>. Os híbridos rodam nas duas plataformas com um único código. Na conversa inicial indicamos a melhor opção para o seu projeto.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="servicos">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">04</span><span>O que está incluso na Identidade Visual?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p><strong>Logotipo exclusivo</strong> (variações horizontal, vertical e monocromática), paleta de cores, tipografia e <strong>manual de identidade visual</strong>. Planos superiores incluem papelaria e templates para redes sociais.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="servicos">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">05</span><span>Vocês criam conteúdo para o Instagram além das artes?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Nos planos <strong>Professional e Premium</strong> entregamos planejamento de conteúdo, legendas e estratégia de hashtags. O Premium inclui ainda Reels e consultoria de branding.</p>
-            </div>
-        </div>
-
-        <!-- COMO FUNCIONA -->
-        <div class="faq-item" data-cat="processo">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">06</span><span>Como funciona o processo de criação do projeto?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p><strong>1. Briefing</strong> — entendemos seu negócio e objetivos.<br>
-                   <strong>2. Proposta</strong> — escopo, prazo e valor detalhados.<br>
-                   <strong>3. Produção</strong> — desenvolvimento com rodadas de revisão.<br>
-                   <strong>4. Entrega</strong> — arquivos finais + suporte pós-entrega.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="processo">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">07</span><span>Preciso ter domínio e hospedagem?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Sim, contratados à parte. Orientamos na escolha do melhor serviço, auxiliamos na configuração e conectamos tudo ao seu site.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="processo">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">08</span><span>Quantas revisões estão inclusas?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p><strong>Revisões ilimitadas</strong> dentro do escopo acordado. Ajustamos cores, textos e layout até sua total aprovação, sem custo extra.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="processo">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">09</span><span>Vou ter acesso ao código e arquivos do projeto?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Sim! Você recebe <strong>todos os arquivos fontes</strong> — design editável (Figma/Illustrator), código-fonte e manual em PDF. O projeto é completamente seu.</p>
-            </div>
-        </div>
-
-        <!-- PAGAMENTO -->
-        <div class="faq-item" data-cat="pagamento">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">10</span><span>Quais as formas de pagamento aceitas?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p><strong>PIX, transferência e cartão em até 12x</strong>. Pagamento em 2 partes: 50% na aprovação da proposta e 50% na entrega final.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="pagamento">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">11</span><span>Há mensalidade ou taxa de manutenção?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Não. O único custo recorrente é <strong>hospedagem e domínio</strong>, contratados por você. Plano de manutenção mensal do site é opcional e sob consulta.</p>
-            </div>
-        </div>
-
-        <!-- PRAZOS -->
-        <div class="faq-item" data-cat="prazo">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">12</span><span>Quais os prazos médios de entrega?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p><strong>Site Modelo:</strong> 7 dias · <strong>ID Visual:</strong> 10–15 dias · <strong>Starter:</strong> 15 dias · <strong>Professional:</strong> 20 dias · <strong>Premium:</strong> 25 dias · <strong>Site Custom:</strong> 30–60 dias · <strong>App:</strong> 60–120 dias.</p>
-                <p>Prazos contados a partir da aprovação do briefing e do primeiro pagamento.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="prazo">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">13</span><span>O prazo pode ser antecipado em caso de urgência?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Em alguns casos, sim. Projetos expressos podem ter um <strong>acréscimo de prioridade</strong> conforme disponibilidade. Fale conosco pelo WhatsApp para verificar.</p>
-            </div>
-        </div>
-
-        <!-- SUPORTE -->
-        <div class="faq-item" data-cat="suporte">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">14</span><span>Vocês oferecem suporte após a entrega?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Sim! Todo projeto inclui <strong>suporte pós-entrega</strong>. Planos Professional e Premium têm atendimento prioritário via canal exclusivo no WhatsApp.</p>
-            </div>
-        </div>
-
-        <div class="faq-item" data-cat="suporte">
-            <div class="faq-question">
-                <div class="faq-q-left"><span class="faq-num">15</span><span>Consigo atualizar o conteúdo do site sozinho?</span></div>
-                <div class="faq-icon"><i class="ri-add-line"></i></div>
-            </div>
-            <div class="faq-answer">
-                <p>Sites com atualizações frequentes podem ser entregues com <strong>painel CMS</strong>, permitindo edição de textos e imagens sem programação. Basta solicitar no briefing.</p>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="faq-cta-strip">
-        <div>
-            <strong>Não encontrou sua dúvida?</strong>
-            <p>Nossa equipe responde qualquer pergunta sobre o seu projeto.</p>
-        </div>
-        <a href="https://wa.me/5581996273630" target="_blank" class="btn btn-primary" style="white-space:nowrap">
-            <i class="ri-whatsapp-line"></i> Falar no WhatsApp
-        </a>
-    </div>
+  </div>
 </section>
 
-<!-- ── JS (dentro do IIFE existente) ─────────────────────────── -->
+<!-- CALCULADORA -->
+<section id="orcamento" class="section">
+  <div class="container">
+    <div class="section-header center">
+      <span class="t-label">Precificação instantânea</span>
+      <h2 class="t-display" style="margin-top:.6rem;">Calcule seu <span class="grad">orçamento</span></h2>
+      <p class="t-body">Configure os serviços desejados e veja o total calculado em tempo real.</p>
+    </div>
+    <div class="calc-wrap">
+
+      <!-- ESQUERDO -->
+      <div class="calc-panel">
+        <div class="calc-panel-hd"><i class="ri-cursor-line"></i> Configure seu projeto</div>
+        <div class="calc-panel-body">
+          <div class="grp">
+            <div class="grp-label"><i class="ri-layout-line"></i> Tipo de site</div>
+            <div class="svc-btns">
+              <button class="svc-btn" id="btn-modelo" onclick="selSite('modelo')">
+                <i class="ic ri-layout-grid-line"></i>
+                <div class="svc-text"><span class="svc-name">Modelos de sites</span><span class="svc-desc">Template profissional adaptado · R$ 397,00 fixo</span></div>
+                <span class="chk"></span>
+              </button>
+              <button class="svc-btn" id="btn-personalizado" onclick="selSite('personalizado')">
+                <i class="ic ri-code-box-line"></i>
+                <div class="svc-text"><span class="svc-name">Site Personalizado</span><span class="svc-desc">Design exclusivo · Mínimo de 5 seções</span></div>
+                <span class="chk"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="grp calc-hidden" id="grp-secoes">
+            <div class="grp-label"><i class="ri-stack-line"></i> Seções da home</div>
+            <div class="num-row">
+              <i class="ic ri-layout-masonry-line"></i>
+              <div class="num-txt"><span class="num-name">Quantidade de seções</span><span class="num-desc">Mínimo 5 · R$ 111,00 por seção</span></div>
+              <div class="num-ctrl">
+                <button class="nbtn" onclick="adjSec(-1)" aria-label="Diminuir">−</button>
+                <span class="nval" id="val-sec">5</span>
+                <button class="nbtn" onclick="adjSec(1)" aria-label="Aumentar">+</button>
+              </div>
+            </div>
+            <div class="num-row">
+              <i class="ic ri-pages-line"></i>
+              <div class="num-txt">
+                <span class="num-name"><span class="tooltip-wrap" tabindex="0">Páginas internas<span class="tooltip-icon">?</span><span class="tooltip-box">Página que fica <strong>por trás de um botão</strong> — detalhe de post, ficha de serviço, "Sobre Nós" separada etc.</span></span></span>
+                <span class="num-desc">Cada página interna + R$ 30,00</span>
+              </div>
+              <div class="num-ctrl">
+                <button class="nbtn" onclick="adjSub(-1)" aria-label="Diminuir">−</button>
+                <span class="nval" id="val-sub">0</span>
+                <button class="nbtn" onclick="adjSub(1)" aria-label="Aumentar">+</button>
+              </div>
+            </div>
+            <div class="nota-edu-inline calc-hidden" id="nota-edu">
+              <i class="ri-information-line"></i>
+              <span>Segmento educacional: <strong>+ R$ 50,00 por seção extra</strong> (acima das 5 mínimas).</span>
+            </div>
+          </div>
+
+          <div class="grp calc-hidden" id="grp-sub-modelo">
+            <div class="grp-label"><i class="ri-pages-line"></i> Páginas internas</div>
+            <div class="num-row">
+              <i class="ic ri-pages-line"></i>
+              <div class="num-txt">
+                <span class="num-name"><span class="tooltip-wrap" tabindex="0">Páginas internas<span class="tooltip-icon">?</span><span class="tooltip-box">Página que fica <strong>por trás de um botão</strong> — detalhe de post, ficha de serviço, "Sobre Nós" separada etc.</span></span></span>
+                <span class="num-desc">Cada página interna + R$ 30,00</span>
+              </div>
+              <div class="num-ctrl">
+                <button class="nbtn" onclick="adjSubMod(-1)" aria-label="Diminuir">−</button>
+                <span class="nval" id="val-sub-mod">0</span>
+                <button class="nbtn" onclick="adjSubMod(1)" aria-label="Aumentar">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="grp">
+            <div class="grp-label"><i class="ri-palette-line"></i> Identidade Visual (opcional)</div>
+            <div class="svc-btns">
+              <button class="svc-btn" id="btn-id" onclick="toggleId()">
+                <i class="ic ri-brush-4-line"></i>
+                <div class="svc-text"><span class="svc-name">Identidade Visual</span><span class="svc-desc">Logo + Paleta + Manual + Papelaria · R$ 157,00 fixo</span></div>
+                <span class="chk"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="grp">
+            <div class="grp-label"><i class="ri-building-line"></i> Segmento do negócio</div>
+            <select id="nicho-sel" class="nicho-sel" onchange="recalc()">
+              <option value="">Selecione seu segmento…</option>
+              <option value="edu">Educação / Cursos</option>
+              <option value="edu">Institucional / ONG</option>
+              <option value="std">Contabilidade</option>
+              <option value="std">Advocacia</option>
+              <option value="std">Academia / Personal Trainer</option>
+              <option value="std">Psicologia</option>
+              <option value="std">Nutricionista</option>
+              <option value="std">Clínica Médica / Odontológica</option>
+              <option value="std">Estética / Beleza</option>
+              <option value="std">Restaurante / Alimentação</option>
+              <option value="std">Imobiliária / Corretor</option>
+              <option value="std">Tecnologia / Startup</option>
+              <option value="std">Varejo / E-commerce</option>
+              <option value="std">Outro</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIREITO -->
+      <div class="calc-panel">
+        <div class="calc-panel-hd"><i class="ri-calculator-line"></i> Resultado do orçamento</div>
+        <div class="calc-panel-body">
+          <div class="result-inner">
+            <div class="disp">
+              <div class="disp-lbl">Composição do valor</div>
+              <div id="disp-items">
+                <div class="disp-empty" id="disp-empty"><i class="ri-hand-coin-line"></i> Selecione um serviço ao lado.</div>
+              </div>
+              <div id="disp-total-wrap" class="calc-hidden">
+                <div class="cdiv"></div>
+                <div class="total-row">
+                  <span class="total-lbl">Total estimado</span>
+                  <span class="total-val" id="total-val">R$ 0</span>
+                </div>
+                <div class="parcel">Parcelável em até 12× no cartão</div>
+              </div>
+            </div>
+            <div class="cpill info calc-hidden" id="pill-prazo"><i class="ri-timer-flash-line"></i><span>Prazo estimado: <strong id="prazo-txt"></strong></span></div>
+            <div class="cpill combo calc-hidden" id="pill-combo"><i class="ri-gift-line"></i><span><strong>Combo Site + Identidade!</strong> Valores somados automaticamente.</span></div>
+            <div class="cpill warn calc-hidden" id="pill-edu"><i class="ri-information-line"></i><span><strong>Segmento educacional:</strong> <span class="cw">+ R$ 50,00 por seção extra aplicado.</span></span></div>
+            <div class="cpill warn calc-hidden" id="pill-sub"><i class="ri-pages-line"></i><span><strong>Páginas internas:</strong> <span class="cw">+ R$ 30,00 cada.</span></span></div>
+            <div class="nota-bot-calc"><i class="ri-information-line"></i>Valores são <strong style="color:var(--white);">estimativas de referência</strong>. Orçamento final confirmado em até 24h.</div>
+            <button class="btn-wa" id="btn-wa-calc" onclick="enviarWA()" disabled><i class="ri-whatsapp-line"></i> Enviar orçamento pelo WhatsApp</button>
+            <button class="btn-acordo" onclick="abrirModal()"><i class="ri-file-text-line"></i> Tenho um orçamento em mente — fazer proposta</button>
+            <p class="btn-hint-calc"><i class="ri-shield-check-line"></i> Sem compromisso · Resposta rápida</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MODAL PROPOSTA -->
+<div class="modal-overlay" id="modalAcordo">
+  <div class="modal-box">
+    <button class="modal-close" onclick="fecharModal()" aria-label="Fechar"><i class="ri-close-line"></i></button>
+    <div class="modal-title"><i class="ri-file-text-line"></i> Proposta de orçamento</div>
+    <p class="modal-sub">Já tem um valor em mente? Envie sua proposta — entraremos em acordo juntos. <strong>O valor final será combinado com a equipe.</strong></p>
+    <div class="modal-nota"><i class="ri-information-line"></i><span>O valor indicado é apenas sua referência. A proposta sai com <strong>R$ 0,00</strong> — ajustado conforme alinhamento.</span></div>
+    <div class="m-field"><i class="fi ri-user-3-line"></i><input type="text" id="mNome" class="m-input" placeholder="Seu nome completo"></div>
+    <div class="m-field"><i class="fi ri-whatsapp-line"></i><input type="tel" id="mTel" class="m-input" placeholder="WhatsApp com DDD"></div>
+    <div class="m-field"><i class="fi ri-service-line"></i>
+      <select id="mServico" class="m-input" style="padding-left:2.5rem;appearance:none;">
+        <option value="">Qual serviço você precisa?</option>
+          <option>Modelos de sites</option>
+        <option>Site Personalizado</option>
+        <option>Identidade Visual</option>
+        <option>Site + Identidade Visual</option>
+        <option>Ainda não sei — quero conversar</option>
+      </select>
+    </div>
+    <div class="m-field"><i class="fi ri-money-dollar-circle-line"></i><input type="text" id="mValor" class="m-input" placeholder="Valor que você tem em mente (ex: R$ 500)"></div>
+    <div class="m-field" style="position:relative;"><i class="fi ri-chat-3-line" style="top:1rem;transform:none;"></i><textarea id="mMsg" class="m-input m-textarea" placeholder="Conte um pouco sobre o projeto (opcional)"></textarea></div>
+    <div class="modal-btns">
+      <button class="modal-btn-cancel" onclick="fecharModal()">Cancelar</button>
+      <button class="modal-btn-send" id="modal-btn-send" onclick="enviarProposta()" disabled><i class="ri-whatsapp-line"></i> Enviar proposta</button>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section id="faq" class="section">
+  <div class="container">
+    <div class="section-header center">
+      <span class="t-label">Dúvidas</span>
+      <h2 class="t-display" style="margin-top:.6rem;">Perguntas <span class="grad">frequentes</span></h2>
+      <p class="t-body">Tudo que você precisa saber antes de solicitar seu orçamento.</p>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-list">
+        <div class="faq-card" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-ic ic-1"><i class="ri-price-tag-3-line"></i></div><span class="faq-q-txt">Os valores da calculadora são definitivos?</span><div class="faq-tog"><i class="ri-add-line"></i></div></div><div class="faq-a"><p>Os valores mostrados são <strong>preços de referência</strong>. O orçamento final pode variar conforme complexidade. Enviando pelo WhatsApp, nossa equipe confirma em até <strong>24h</strong>.</p></div></div>
+        <div class="faq-card" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-ic ic-2"><i class="ri-timer-flash-line"></i></div><span class="faq-q-txt">Qual o prazo de entrega?</span><div class="faq-tog"><i class="ri-add-line"></i></div></div><div class="faq-a"><p>Sites Modelo em <strong>7 dias</strong>. Identidade Visual em <strong>10–15 dias</strong>. Sites Personalizados entre <strong>20 e 45 dias</strong>. Prazos após aprovação do briefing e pagamento inicial.</p></div></div>
+        <div class="faq-card" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-ic ic-3"><i class="ri-bank-card-line"></i></div><span class="faq-q-txt">Como funciona o pagamento?</span><div class="faq-tog"><i class="ri-add-line"></i></div></div><div class="faq-a"><p>Aceitamos <strong>PIX, transferência e cartão em até 12×</strong>. Dividimos em duas partes: <strong>50% na aprovação</strong> e <strong>50% na entrega final</strong>.</p></div></div>
+        <div class="faq-card" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-ic ic-4"><i class="ri-refresh-line"></i></div><span class="faq-q-txt">Posso pedir alterações durante o projeto?</span><div class="faq-tog"><i class="ri-add-line"></i></div></div><div class="faq-a"><p>Sim! Oferecemos <strong>revisões ilimitadas</strong> dentro do escopo acordado, sem custo adicional, até você aprovar com 100% de satisfação.</p></div></div>
+        <div class="faq-card" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-ic ic-5"><i class="ri-customer-service-2-line"></i></div><span class="faq-q-txt">Há suporte após a entrega?</span><div class="faq-tog"><i class="ri-add-line"></i></div></div><div class="faq-a"><p>Sim! Todo projeto inclui <strong>suporte pós-entrega</strong> para ajustes técnicos. Também oferecemos planos de manutenção mensal.</p></div></div>
+        <div class="faq-card" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-ic ic-6"><i class="ri-image-line"></i></div><span class="faq-q-txt">Preciso fornecer imagens e textos?</span><div class="faq-tog"><i class="ri-add-line"></i></div></div><div class="faq-a"><p>Para Modelos de sites usamos banco de imagens gratuito. Para Sites Personalizados orientamos sobre o material — e podemos criar os textos se precisar.</p></div></div>
+      </div>
+      <div class="faq-contact-aside">
+        <div class="faq-aside-card">
+          <div class="faq-aside-icon"><i class="ri-whatsapp-line"></i></div>
+          <h3 class="t-title">Ainda tem dúvidas?</h3>
+          <p class="t-body-sm">Fale diretamente com nossa equipe. Respondemos rápido e sem enrolação.</p>
+          <a href="https://wa.me/5581996273630" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:1.2rem;"><i class="ri-whatsapp-line"></i> Chamar no WhatsApp</a>
+        </div>
+        <div class="faq-aside-info">
+          <div class="faq-info-item"><div class="faq-info-icon"><i class="ri-time-line"></i></div><div><span class="faq-info-label">Horário</span><span class="faq-info-text">Segunda a Sexta · 9h às 18h</span></div></div>
+          <div class="faq-info-item"><div class="faq-info-icon"><i class="ri-map-pin-line"></i></div><div><span class="faq-info-label">Localização</span><span class="faq-info-text">Recife – PE · Atendimento online</span></div></div>
+          <div class="faq-info-item"><div class="faq-info-icon"><i class="ri-mail-line"></i></div><div><span class="faq-info-label">E-mail</span><span class="faq-info-text">contato@techcodesign.com</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="https://drive.google.com/thumbnail?id=1gahc9gkIUbYUXFwGSFskGRKuX6B1rId0&sz=w1000" alt="TechCoDesign" style="max-width:150px;margin-bottom:.5rem;" loading="lazy">
+        <p class="footer-about">Programamos experiência<br>&amp; pixelamos soluções.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link" aria-label="Instagram"><i class="ri-instagram-fill"></i></a>
+          <a href="https://wa.me/5581996273630" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp"><i class="ri-whatsapp-fill"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Navegação</h4><ul><li><a href="#servicos">Serviços</a></li><li><a href="#modelos">Modelos</a></li><li><a href="#orcamento">Orçamento</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div class="footer-col"><h4>Serviços</h4><ul><li><a href="#servicos">Modelos de sites</a></li><li><a href="#servicos">Sites Personalizados</a></li><li><a href="#servicos">Identidade Visual</a></li></ul></div>
+      <div class="footer-col"><h4>Contato</h4><ul><li><a href="mailto:contato@techcodesign.com">contato@techcodesign.com</a></li><li><a href="tel:+5581996273630">(81) 9 9627-3630</a></li><li><a href="#">Recife – PE</a></li><li><a href="#">Seg–Sex · 9h–18h</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 TechCoDesign. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
 <script>
 (function(){
-    document.querySelectorAll('.faq-question').forEach(q => {
-        q.addEventListener('click', () => {
-            const item = q.closest('.faq-item');
-            const isOpen = item.classList.contains('open');
-            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-            if (!isOpen) item.classList.add('open');
-        });
+  'use strict';
+
+  /* TICKER */
+  var track=document.getElementById('tickerTrack');
+  if(track) track.innerHTML+=track.innerHTML;
+
+  /* CURSOR — apenas desktop */
+  var dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');
+  if(dot&&ring&&window.matchMedia('(pointer:fine)').matches){
+    var mx=0,my=0,rx=0,ry=0,started=false;
+    document.addEventListener('mousemove',function(e){
+      if(!started){dot.style.display='block';ring.style.display='block';started=true;}
+      mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';
     });
-    document.querySelectorAll('.faq-cat-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.dataset.filter;
-            document.querySelectorAll('.faq-item').forEach(item => {
-                const show = filter === 'todos' || item.dataset.cat === filter;
-                item.classList.toggle('hidden', !show);
-                if (!show) item.classList.remove('open');
-            });
-        });
+    (function anim(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
+    document.querySelectorAll('a,button,.model-card,.svc-btn').forEach(function(el){
+      el.addEventListener('mouseenter',function(){ring.classList.add('big');});
+      el.addEventListener('mouseleave',function(){ring.classList.remove('big');});
     });
-})();
-</script>
+  }
 
+  /* NAVBAR */
+  var navbar=document.getElementById('navbar');
+  window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.scrollY>60);},{passive:true});
 
-<!-- ============================================================
-     SEÇÃO DE GRÁFICOS ANIMADOS — TECHCODESIGN
-     Sugestão: após o ticker-strip, antes da seção #sobre
-     ============================================================ -->
+  /* HAMBURGER */
+  var ham=document.getElementById('hamburger'),mm=document.getElementById('mobileMenu');
+  if(ham&&mm){
+    ham.addEventListener('click',function(){
+      var open=mm.classList.toggle('open');
+      ham.classList.toggle('open',open);
+      ham.setAttribute('aria-expanded',String(open));
+      document.body.style.overflow=open?'hidden':'';
+    });
+    mm.querySelectorAll('a.mob-link').forEach(function(a){
+      a.addEventListener('click',function(){mm.classList.remove('open');ham.classList.remove('open');ham.setAttribute('aria-expanded','false');document.body.style.overflow='';});
+    });
+  }
 
-<style>
-/* ─── Charts Section ────────────────────────────────────────── */
-.charts-section {
-    padding: 6rem 5%;
-    position: relative;
-    overflow: hidden;
-}
+  /* SMOOTH SCROLL */
+  function navScrollTo(sel){var el=document.querySelector(sel);if(el)el.scrollIntoView({behavior:'smooth'});}
+  window.navScrollTo=navScrollTo;
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){var h=a.getAttribute('href');if(!h||h==='#')return;e.preventDefault();navScrollTo(h);});
+  });
 
-.charts-section .section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
+  /* MODEL CARDS — teclado */
+  document.querySelectorAll('.model-card[tabindex]').forEach(function(c){
+    c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}});
+  });
 
-.charts-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem;
-}
+  /* FAQ */
+  window.toggleFaq=function(card){
+    var o=card.classList.contains('open');
+    document.querySelectorAll('.faq-card.open').forEach(function(c){c.classList.remove('open');});
+    if(!o)card.classList.add('open');
+  };
 
-.chart-card {
-    background: var(--glass);
-    border: 1px solid rgba(181,21,191,0.2);
-    border-radius: 20px;
-    padding: 2rem;
-    backdrop-filter: blur(12px);
-    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-    position: relative;
-    overflow: hidden;
-}
+  /* ════════════════════════
+     CALCULADORA
+  ════════════════════════ */
+  var PREC_SEC=111,PREC_SUB=30,PREC_EDU=50,PREC_MOD=397,PREC_ID=157,MIN_SEC=5;
+  var siteType=null,secoes=5,subPag=0,subMod=0,idVisual=false;
 
-.chart-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(51,197,232,0.4);
-    box-shadow: 0 20px 50px rgba(51,197,232,0.1);
-}
+  function fmt(n){return 'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function isEdu(){var s=document.getElementById('nicho-sel');return s?s.value==='edu':false;}
+  function show(id){var e=document.getElementById(id);if(e)e.classList.remove('calc-hidden');}
+  function hide(id){var e=document.getElementById(id);if(e)e.classList.add('calc-hidden');}
+  function cond(id,c){c?show(id):hide(id);}
 
-.chart-card-title {
-    font-family: 'Urbanist', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--gray);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 0.4rem;
-}
+  window.selSite=function(t){
+    siteType=(siteType===t)?null:t;
+    document.getElementById('btn-modelo').classList.toggle('sel',siteType==='modelo');
+    document.getElementById('btn-personalizado').classList.toggle('sel',siteType==='personalizado');
+    cond('grp-secoes',siteType==='personalizado');
+    cond('grp-sub-modelo',siteType==='modelo');
+    if(siteType!=='personalizado'){secoes=5;subPag=0;document.getElementById('val-sec').textContent=5;document.getElementById('val-sub').textContent=0;}
+    if(siteType!=='modelo'){subMod=0;document.getElementById('val-sub-mod').textContent=0;}
+    recalc();
+  };
+  window.toggleId=function(){idVisual=!idVisual;document.getElementById('btn-id').classList.toggle('sel',idVisual);recalc();};
+  window.adjSec=function(d){secoes=Math.max(MIN_SEC,secoes+d);document.getElementById('val-sec').textContent=secoes;recalc();};
+  window.adjSub=function(d){subPag=Math.max(0,subPag+d);document.getElementById('val-sub').textContent=subPag;recalc();};
+  window.adjSubMod=function(d){subMod=Math.max(0,subMod+d);document.getElementById('val-sub-mod').textContent=subMod;recalc();};
 
-.chart-card-value {
-    font-family: 'Urbanist', sans-serif;
-    font-size: 2.4rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--magenta), var(--cyan));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 1.5rem;
-    line-height: 1;
-}
-
-.chart-card-value span {
-    font-size: 1rem;
-    opacity: 0.7;
-    font-weight: 500;
-}
-
-/* ── Gráfico de Barras ── */
-.bar-chart {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    height: 120px;
-    padding-top: 8px;
-}
-
-.bar-wrap {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    height: 100%;
-    justify-content: flex-end;
-}
-
-.bar {
-    width: 100%;
-    border-radius: 6px 6px 0 0;
-    position: relative;
-    transform-origin: bottom;
-    transform: scaleY(0);
-    transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.bar.animated { transform: scaleY(1); }
-
-.bar-label {
-    font-size: 0.72rem;
-    color: var(--gray);
-    white-space: nowrap;
-}
-
-/* ── Gráfico de Linha (SVG) ── */
-.line-chart-wrap {
-    width: 100%;
-    height: 120px;
-    position: relative;
-}
-
-.line-chart-wrap svg {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-}
-
-.line-path {
-    fill: none;
-    stroke: url(#lineGrad);
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 600;
-    stroke-dashoffset: 600;
-    transition: stroke-dashoffset 1.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.line-path.animated { stroke-dashoffset: 0; }
-
-.area-path {
-    fill: url(#areaGrad);
-    opacity: 0;
-    transition: opacity 0.8s ease 1s;
-}
-
-.area-path.animated { opacity: 1; }
-
-.line-dot {
-    fill: var(--cyan);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.line-dot.animated { opacity: 1; }
-
-/* ── Gráfico Donut ── */
-.donut-wrap {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.donut-svg {
-    width: 110px;
-    height: 110px;
-    flex-shrink: 0;
-}
-
-.donut-circle-bg {
-    fill: none;
-    stroke: rgba(255,255,255,0.05);
-    stroke-width: 14;
-}
-
-.donut-circle {
-    fill: none;
-    stroke-width: 14;
-    stroke-linecap: round;
-    transform: rotate(-90deg);
-    transform-origin: 50% 50%;
-    stroke-dasharray: 283;
-    stroke-dashoffset: 283;
-    transition: stroke-dashoffset 1.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.donut-circle.animated { stroke-dashoffset: var(--offset); }
-
-.donut-center {
-    font-family: 'Urbanist', sans-serif;
-    font-size: 1.15rem;
-    font-weight: 800;
-    fill: var(--white);
-    text-anchor: middle;
-    dominant-baseline: middle;
-}
-
-.donut-legend {
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.82rem;
-    color: var(--gray);
-}
-
-.legend-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-/* ── Card extra grande (linha) ── */
-.charts-grid .chart-card.wide {
-    grid-column: span 2;
-}
-
-@media (max-width: 900px) {
-    .charts-grid {
-        grid-template-columns: 1fr 1fr;
+  function buildItems(){
+    var edu=isEdu(),secExtra=siteType==='personalizado'?Math.max(0,secoes-MIN_SEC):0;
+    var items=[],total=0,prazos=[];
+    if(siteType==='modelo'){
+      items.push({nm:'Modelos de sites (fixo)',vl:PREC_MOD});total+=PREC_MOD;
+      if(subMod>0){var vSM=subMod*PREC_SUB;items.push({nm:'Páginas internas (×'+subMod+')',vl:vSM});total+=vSM;}
+      prazos.push('7 dias úteis');
     }
-    .chart-card.wide { grid-column: span 2; }
-}
+    if(siteType==='personalizado'){
+      var vS=secoes*PREC_SEC;items.push({nm:'Site Personalizado ('+secoes+' seções × R$ 111)',vl:vS});total+=vS;
+      if(edu&&secExtra>0){var vE=secExtra*PREC_EDU;items.push({nm:'Adicional educacional (×'+secExtra+' seções)',vl:vE});total+=vE;}
+      if(subPag>0){var vSP=subPag*PREC_SUB;items.push({nm:'Páginas internas (×'+subPag+')',vl:vSP});total+=vSP;}
+      prazos.push('20–45 dias úteis');
+    }
+    if(idVisual){items.push({nm:'Identidade Visual (fixo)',vl:PREC_ID});total+=PREC_ID;prazos.push('10–15 dias (ID)');}
+    return{items:items,total:total,prazos:prazos,secExtra:secExtra,edu:edu};
+  }
 
-@media (max-width: 580px) {
-    .charts-grid { grid-template-columns: 1fr; }
-    .chart-card.wide { grid-column: span 1; }
-}
-</style>
+  function recalc(){
+    var d=buildItems();
+    var hasSub=(siteType==='personalizado'&&subPag>0)||(siteType==='modelo'&&subMod>0);
+    cond('nota-edu',siteType==='personalizado'&&d.edu);
+    cond('pill-edu',siteType==='personalizado'&&d.edu&&d.secExtra>0);
+    var di=document.getElementById('disp-items');
+    di.querySelectorAll('.line-item').forEach(function(e){e.remove();});
+    if(d.items.length===0){
+      show('disp-empty');hide('disp-total-wrap');hide('pill-prazo');hide('pill-combo');hide('pill-sub');
+      document.getElementById('btn-wa-calc').disabled=true;return;
+    }
+    hide('disp-empty');
+    d.items.forEach(function(it){
+      var r=document.createElement('div');r.className='line-item';
+      r.innerHTML='<span class="line-nm">'+it.nm+'</span><span class="line-vl">'+fmt(it.vl)+'</span>';
+      di.appendChild(r);
+    });
+    show('disp-total-wrap');
+    document.getElementById('total-val').textContent=fmt(d.total);
+    show('pill-prazo');document.getElementById('prazo-txt').textContent=d.prazos.join(' / ');
+    cond('pill-combo',siteType!==null&&idVisual);
+    cond('pill-sub',hasSub);
+    document.getElementById('btn-wa-calc').disabled=false;
+  }
 
-<!-- HTML -->
-<section class="charts-section">
-    <div class="section-header">
-        <p class="section-label">Nossos Números</p>
-        <h2 class="section-title">Resultados em <span class="gradient-text">Dados</span></h2>
-        <p class="section-description">A evolução da TechCoDesign em projetos, clientes e qualidade</p>
-    </div>
+  window.enviarWA=function(){
+    var d=buildItems();
+    var nichoEl=document.getElementById('nicho-sel');
+    var nicho=(nichoEl&&nichoEl.selectedIndex>0)?nichoEl.options[nichoEl.selectedIndex].text:'';
+    var lines=d.items.map(function(it){return '• '+it.nm+': '+fmt(it.vl);});
+    var msg='*💻 Orçamento — TechCoDesign*'
+      +(nicho?'%0A*Segmento:* '+encodeURIComponent(nicho):'')
+      +'%0A%0A*Composição:%0A'+lines.map(function(l){return encodeURIComponent(l);}).join('%0A')
+      +'%0A%0A*Total estimado: '+encodeURIComponent(fmt(d.total))+'*'
+      +'%0A%0A_Aguardo confirmação da equipe. Obrigado!_';
+    window.open('https://wa.me/5581996273630?text='+msg,'_blank');
+  };
 
-    <div class="charts-grid">
+  /* MODAL */
+  window.abrirModal=function(){document.getElementById('modalAcordo').classList.add('open');document.body.style.overflow='hidden';};
+  window.fecharModal=function(){document.getElementById('modalAcordo').classList.remove('open');document.body.style.overflow='';};
+  document.getElementById('modalAcordo').addEventListener('click',function(e){if(e.target===this)fecharModal();});
 
-        <!-- Card 1 — Barra: projetos por ano -->
-        <div class="chart-card" data-chart="bar">
-            <div class="chart-card-title">Projetos por Ano</div>
-            <div class="chart-card-value">150+ <span>projetos</span></div>
-            <div class="bar-chart">
-                <div class="bar-wrap">
-                    <div class="bar" style="height:35%; background:linear-gradient(180deg,#b515bf,#400f7d)"></div>
-                    <span class="bar-label">2020</span>
-                </div>
-                <div class="bar-wrap">
-                    <div class="bar" style="height:52%; background:linear-gradient(180deg,#b515bf,#400f7d)"></div>
-                    <span class="bar-label">2021</span>
-                </div>
-                <div class="bar-wrap">
-                    <div class="bar" style="height:65%; background:linear-gradient(180deg,#b515bf,#400f7d)"></div>
-                    <span class="bar-label">2022</span>
-                </div>
-                <div class="bar-wrap">
-                    <div class="bar" style="height:78%; background:linear-gradient(180deg,#33c5e8,#400f7d)"></div>
-                    <span class="bar-label">2023</span>
-                </div>
-                <div class="bar-wrap">
-                    <div class="bar" style="height:85%; background:linear-gradient(180deg,#33c5e8,#b515bf)"></div>
-                    <span class="bar-label">2024</span>
-                </div>
-                <div class="bar-wrap">
-                    <div class="bar" style="height:93%; background:linear-gradient(180deg,#33c5e8,#b515bf)"></div>
-                    <span class="bar-label">2025</span>
-                </div>
-                <div class="bar-wrap">
-                    <div class="bar" style="height:100%; background:linear-gradient(180deg,#33c5e8,#b515bf); box-shadow:0 0 14px rgba(51,197,232,0.5)"></div>
-                    <span class="bar-label" style="color:var(--cyan);font-weight:700">2026</span>
-                </div>
-            </div>
-        </div>
+  ['mNome','mTel'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.addEventListener('input',function(){
+      var n=document.getElementById('mNome').value.trim();
+      var t=document.getElementById('mTel').value.trim();
+      document.getElementById('modal-btn-send').disabled=!(n&&t);
+    });
+  });
 
-        <!-- Card 2 — Donut: satisfação -->
-        <div class="chart-card" data-chart="donut">
-            <div class="chart-card-title">Satisfação</div>
-            <div class="chart-card-value">100% <span>aprovação</span></div>
-            <div class="donut-wrap">
-                <svg class="donut-svg" viewBox="0 0 100 100">
-                    <defs>
-                        <linearGradient id="donutGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#b515bf"/>
-                            <stop offset="100%" stop-color="#33c5e8"/>
-                        </linearGradient>
-                    </defs>
-                    <circle class="donut-circle-bg" cx="50" cy="50" r="45"/>
-                    <circle class="donut-circle"
-                        cx="50" cy="50" r="45"
-                        stroke="url(#donutGrad1)"
-                        style="--offset: 0; stroke-dasharray: 283"
-                        data-pct="100"/>
-                    <text class="donut-center" x="50" y="50">100%</text>
-                </svg>
-                <div class="donut-legend">
-                    <div class="legend-item">
-                        <div class="legend-dot" style="background:#b515bf"></div>
-                        Muito satisfeitos
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-dot" style="background:#33c5e8"></div>
-                        Retornam projetos
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-dot" style="background:#400f7d"></div>
-                        Indicam serviços
-                    </div>
-                </div>
-            </div>
-        </div>
+  window.enviarProposta=function(){
+    var nome=document.getElementById('mNome').value.trim();
+    var tel=document.getElementById('mTel').value.trim();
+    var svcEl=document.getElementById('mServico');
+    var servico=svcEl&&svcEl.selectedIndex>0?svcEl.options[svcEl.selectedIndex].text:'A definir';
+    var valor=document.getElementById('mValor').value.trim();
+    var msg=document.getElementById('mMsg').value.trim();
+    if(!nome){alert('Por favor, informe seu nome.');return;}
+    if(!tel){alert('Por favor, informe seu WhatsApp.');return;}
+    var texto='*💼 Proposta de Orçamento — TechCoDesign*'
+      +'%0A%0A*Nome:* '+encodeURIComponent(nome)
+      +'%0A*WhatsApp:* '+encodeURIComponent(tel)
+      +'%0A*Serviço:* '+encodeURIComponent(servico)
+      +(valor?'%0A*Valor em mente:* '+encodeURIComponent(valor):'')
+      +'%0A%0A*Valor na proposta:* R$ 0,00 — a definir em acordo'
+      +(msg?'%0A%0A*Sobre o projeto:* '+encodeURIComponent(msg):'')
+      +'%0A%0A_Aguardo contato para alinharmos os detalhes. Obrigado!_';
+    window.open('https://wa.me/5581996273630?text='+texto,'_blank');
+    fecharModal();
+  };
 
-        <!-- Card 3 — Linha: crescimento de clientes -->
-        <div class="chart-card wide" data-chart="line">
-            <div class="chart-card-title">Crescimento de Clientes</div>
-            <div class="chart-card-value">120+ <span>clientes ativos</span></div>
-            <div class="line-chart-wrap">
-                <svg viewBox="0 0 400 100" preserveAspectRatio="none">
-                    <defs>
-                        <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#b515bf"/>
-                            <stop offset="100%" stop-color="#33c5e8"/>
-                        </linearGradient>
-                        <linearGradient id="areaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#33c5e8" stop-opacity="0.25"/>
-                            <stop offset="100%" stop-color="#b515bf" stop-opacity="0"/>
-                        </linearGradient>
-                    </defs>
-                    <!-- Área -->
-                    <path class="area-path"
-                        d="M0,88 C30,80 60,72 90,65 C120,58 150,50 190,38 C230,26 260,18 300,12 C330,8 360,5 400,2 L400,100 L0,100 Z"/>
-                    <!-- Linha -->
-                    <path class="line-path"
-                        d="M0,88 C30,80 60,72 90,65 C120,58 150,50 190,38 C230,26 260,18 300,12 C330,8 360,5 400,2"/>
-                    <!-- Pontos -->
-                    <circle class="line-dot" cx="0"   cy="88" r="4"/>
-                    <circle class="line-dot" cx="90"  cy="65" r="4"/>
-                    <circle class="line-dot" cx="190" cy="38" r="4"/>
-                    <circle class="line-dot" cx="300" cy="12" r="4"/>
-                    <circle class="line-dot" cx="400" cy="2"  r="4" style="fill:#33c5e8; filter:drop-shadow(0 0 6px #33c5e8)"/>
-                </svg>
-            </div>
-            <!-- Labels eixo X -->
-            <div style="display:flex; justify-content:space-between; margin-top:0.5rem; padding:0 2px">
-                <span style="font-size:0.72rem; color:var(--gray)">2020</span>
-                <span style="font-size:0.72rem; color:var(--gray)">2021</span>
-                <span style="font-size:0.72rem; color:var(--gray)">2022</span>
-                <span style="font-size:0.72rem; color:var(--gray)">2024</span>
-                <span style="font-size:0.72rem; color:var(--cyan); font-weight:700">2026</span>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- JS (dentro do IIFE existente) -->
-<script>
-(function(){
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-
-            const card = entry.target;
-            const type = card.dataset.chart;
-
-            // Barras
-            if (type === 'bar') {
-                card.querySelectorAll('.bar').forEach((bar, i) => {
-                    setTimeout(() => bar.classList.add('animated'), i * 100);
-                });
-            }
-
-            // Linha
-            if (type === 'line') {
-                setTimeout(() => {
-                    card.querySelector('.line-path')?.classList.add('animated');
-                    card.querySelector('.area-path')?.classList.add('animated');
-                    card.querySelectorAll('.line-dot').forEach((d, i) => {
-                        setTimeout(() => d.classList.add('animated'), 600 + i * 160);
-                    });
-                }, 100);
-            }
-
-            // Donut
-            if (type === 'donut') {
-                const circle = card.querySelector('.donut-circle');
-                if (circle) {
-                    const pct = parseFloat(circle.dataset.pct) / 100;
-                    const circumference = 283;
-                    const offset = circumference * (1 - pct);
-                    circle.style.setProperty('--offset', offset);
-                    setTimeout(() => circle.classList.add('animated'), 200);
-                }
-            }
-
-            observer.unobserve(card);
-        });
-    }, { threshold: 0.3 });
-
-    document.querySelectorAll('.chart-card[data-chart]').forEach(c => observer.observe(c));
 })();
 </script>
-
-
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <img src="https://drive.google.com/thumbnail?id=1gahc9gkIUbYUXFwGSFskGRKuX6B1rId0&sz=w1000" alt="TechCoDesign" style="max-width: 150px; margin-bottom: 0.5rem;">
-                <p>Transformando ideias em experiências digitais memoráveis desde 2020.</p>
-                <div class="social-links">
-                    <a href="#" class="social-link"><i class="ri-instagram-fill"></i></a>
-                    <a href="https://wa.me/5581996273630" target="_blank" class="social-link"><i class="ri-whatsapp-fill"></i></a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h4>Navegação</h4>
-                <a href="#home">Início</a>
-                <a href="#sobre">Sobre</a>
-                <a href="#servicos">Serviços</a>
-                <a href="#modelos">Modelos</a>
-                <a href="#planos">Planos</a>
-                <a href="#contato">Contato</a>
-            </div>
-            <div class="footer-section">
-                <h4>Serviços</h4>
-                <a href="#servicos">Sites Personalizados</a>
-                <a href="#servicos">Aplicativos Mobile</a>
-                <a href="#servicos">Identidade Visual</a>
-                <a href="#modelos">Sites Modelo</a>
-                <a href="#planos">Combos</a>
-            </div>
-            <div class="footer-section">
-                <h4>Contato</h4>
-                <p>contato@techcodesign.com</p>
-                <p>+55 81 9 9627-3630</p>
-                <p>Segunda a Sexta<br>9h às 18h</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 TechCoDesign. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <script>
-    (function(){
-        // Cursor
-        const dot = document.querySelector('.cursor-dot');
-        const outline = document.querySelector('.cursor-outline');
-        if(dot && outline && !('ontouchstart' in window)){
-            let x=0,y=0,ox=0,oy=0;
-            document.addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY;dot.style.left=x+'px';dot.style.top=y+'px'});
-            function anim(){ox+=(x-ox)*0.15;oy+=(y-oy)*0.15;outline.style.left=ox+'px';outline.style.top=oy+'px';requestAnimationFrame(anim)}
-            anim();
-            document.querySelectorAll('a,button,.modelo-card,.servico-card,.plano-card').forEach(el=>{
-                el.addEventListener('mouseenter',()=>outline.classList.add('hover'));
-                el.addEventListener('mouseleave',()=>outline.classList.remove('hover'));
-            });
-        }else{
-            if(dot)dot.style.display='none';
-            if(outline)outline.style.display='none';
-        }
-
-        // Mobile Menu
-        const toggle = document.getElementById('menuToggle');
-        const nav = document.getElementById('mobileNav');
-        if(toggle && nav){
-            toggle.onclick=()=>{toggle.classList.toggle('active');nav.classList.toggle('active')};
-            nav.querySelectorAll('a').forEach(a=>a.onclick=()=>{toggle.classList.remove('active');nav.classList.remove('active')});
-        }
-
-        // Form Steps
-        let step=1;
-        window.nextStep=function(n){
-            step=n;
-            document.querySelectorAll('.form-step').forEach(s=>s.classList.remove('active'));
-            document.querySelectorAll('.progress-step').forEach((s,i)=>s.classList.toggle('active',i<step));
-            const el=document.getElementById('step'+step);
-            if(el)el.classList.add('active');
-        }
-
-        // Form Submit
-        const form=document.getElementById('contactForm');
-        if(form){
-            form.onsubmit=e=>{
-                e.preventDefault();
-                
-                const name = document.getElementById('inputName').value;
-                const email = document.getElementById('inputEmail').value;
-                const phone = document.getElementById('inputPhone').value;
-                const service = document.getElementById('inputService').value;
-                const request = document.getElementById('inputRequest').value;
-                const details = document.getElementById('inputDetails').value;
-
-                const message = `*Novo Pedido via Site*%0A%0A*Nome:* ${name}%0A*Email:* ${email}%0A*WhatsApp:* ${phone}%0A*Serviço:* ${service}%0A*Pedido:* ${request}%0A*Detalhes:* ${details}`;
-                
-                window.open(`https://wa.me/5581996273630?text=${message}`, '_blank');
-                
-                form.reset();
-                nextStep(1);
-            }
-        }
-
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(a=>{
-            a.onclick=e=>{
-                e.preventDefault();
-                const t=document.querySelector(a.getAttribute('href'));
-                if(t)t.scrollIntoView({behavior:'smooth'});
-            }
-        });
-    })();
-    </script>
 </body>
 </html>

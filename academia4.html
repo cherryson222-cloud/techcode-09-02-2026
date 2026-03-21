@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite Performance | Personal Trainer Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{--gold:#c9a23c;--gold-light:#f5e6c0;--black:#080808;--dark:#111;--mid:#1a1a1a;--card:#202020;--white:#fff;--gray:#888;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.6;}
+
+    .btn-voltar{position:fixed;top:20px;left:20px;z-index:9999;background:var(--gold);color:#000;padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:6px;}
+    .btn-voltar:hover{background:#b8913a;}
+
+    nav{position:fixed;top:0;width:100%;background:rgba(8,8,8,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,162,60,.2);z-index:1000;padding:1rem 0;}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-size:1rem;font-weight:900;color:var(--white);text-decoration:none;letter-spacing:3px;text-transform:uppercase;}
+    .nav-logo span{color:var(--gold);}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{color:var(--gray);font-size:.78rem;text-decoration:none;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:color .3s;}
+    .nav-links a:hover{color:var(--gold);}
+    .nav-cta{border:1px solid var(--gold)!important;color:var(--gold)!important;padding:.5rem 1.3rem;border-radius:2px;}
+
+    .hero{min-height:100vh;background:#080808;display:flex;align-items:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&h=900&fit=crop') center/cover no-repeat;opacity:.15;}
+    .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,8,.9) 40%,rgba(201,162,60,.05));}
+    .hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1;max-width:700px;}
+    .hero-pre{display:flex;align-items:center;gap:.8rem;margin-bottom:2rem;}
+    .pre-line{width:40px;height:1px;background:var(--gold);}
+    .pre-text{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
+    .hero h1{font-size:clamp(3rem,7vw,5.5rem);font-weight:900;line-height:1;margin-bottom:2rem;letter-spacing:-2px;text-transform:uppercase;}
+    .hero h1 .gold{color:var(--gold);}
+    .hero h1 .outline{-webkit-text-stroke:1px rgba(255,255,255,.4);color:transparent;}
+    .hero p{color:var(--gray);font-size:.95rem;line-height:1.8;margin-bottom:3rem;max-width:500px;font-weight:400;}
+    .hero-btns{display:flex;gap:1.2rem;flex-wrap:wrap;}
+    .btn-gold{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 2.2rem;background:var(--gold);color:#000;border-radius:2px;font-weight:700;text-decoration:none;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;transition:all .3s;}
+    .btn-gold:hover{background:#b8913a;transform:translateY(-2px);}
+    .btn-border-gold{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 2.2rem;background:transparent;color:var(--gold);border:1px solid var(--gold);border-radius:2px;font-weight:700;text-decoration:none;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;transition:all .3s;}
+    .btn-border-gold:hover{background:rgba(201,162,60,.1);}
+    .hero-stats{display:flex;gap:3rem;margin-top:4rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,.08);}
+    .hs{text-align:center;}
+    .hs-num{font-size:2.5rem;font-weight:900;color:var(--gold);line-height:1;display:block;}
+    .hs-lbl{font-size:.68rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-top:.3rem;}
+
+    .gold-strip{background:var(--gold);padding:.8rem 2rem;}
+    .gs-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:center;gap:5rem;flex-wrap:wrap;}
+    .gs-item{font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#000;display:flex;align-items:center;gap:.5rem;}
+
+    section{padding:6rem 2rem;}
+    .sec-inner{max-width:1200px;margin:0 auto;}
+    .sec-pre{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;}
+    .sp-line{width:30px;height:1px;background:var(--gold);}
+    .sp-text{font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
+    .sec-title{font-size:clamp(2rem,4vw,3rem);font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin-bottom:1rem;line-height:1.1;}
+    .sec-desc{color:var(--gray);font-size:.88rem;max-width:560px;line-height:1.8;}
+    .text-center{text-align:center;}
+    .text-center .sec-pre{justify-content:center;}
+    .text-center .sec-desc{margin:0 auto 3rem;}
+    .bg-mid{background:var(--mid);}
+
+    /* METODOLOGIA */
+    .method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:3rem;}
+    .method-card{background:var(--card);border:1px solid rgba(255,255,255,.05);border-left:2px solid var(--gold);padding:2rem;transition:all .3s;}
+    .method-card:hover{background:#252525;transform:translateY(-4px);}
+    .mc-num{font-size:2.5rem;font-weight:900;color:rgba(201,162,60,.2);line-height:1;margin-bottom:1rem;}
+    .mc-title{font-size:.9rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:.6rem;}
+    .mc-desc{font-size:.82rem;color:var(--gray);line-height:1.6;}
+
+    /* PORTFÓLIO */
+    .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3rem;}
+    .port-card{background:var(--card);border:1px solid rgba(255,255,255,.05);border-radius:4px;overflow:hidden;transition:all .3s;}
+    .port-card:hover{border-color:rgba(201,162,60,.3);}
+    .port-img{height:200px;overflow:hidden;}
+    .port-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(30%);transition:all .4s;}
+    .port-card:hover .port-img img{filter:grayscale(0%);transform:scale(1.04);}
+    .port-body{padding:1.5rem;}
+    .port-name{font-weight:700;font-size:.9rem;margin-bottom:.2rem;}
+    .port-result{font-size:.78rem;color:var(--gold);font-weight:600;margin-bottom:.6rem;}
+    .port-text{font-size:.8rem;color:var(--gray);line-height:1.5;font-style:italic;}
+
+    /* SERVIÇOS */
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem;}
+    .svc-card{background:var(--card);border:1px solid rgba(255,255,255,.05);padding:2.5rem;transition:all .3s;position:relative;overflow:hidden;}
+    .svc-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--gold);transition:height .4s;}
+    .svc-card:hover::before{height:100%;}
+    .svc-card:hover{background:#252525;}
+    .svc-icon{font-size:2rem;color:var(--gold);margin-bottom:1.2rem;}
+    .svc-title{font-size:.9rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:.6rem;}
+    .svc-desc{font-size:.82rem;color:var(--gray);line-height:1.6;}
+
+    /* AVALIAÇÃO */
+    .aval-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .aval-left h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;text-transform:uppercase;letter-spacing:-1px;line-height:1.1;margin:1rem 0 1.5rem;}
+    .aval-left p{color:var(--gray);font-size:.88rem;line-height:1.8;margin-bottom:2rem;}
+    .aval-feats{display:flex;flex-direction:column;gap:.8rem;margin-bottom:2.5rem;}
+    .aval-feat{display:flex;align-items:center;gap:.8rem;font-size:.85rem;font-weight:600;}
+    .aval-feat i{color:var(--gold);font-size:.9rem;}
+    .aval-card{background:var(--card);border:1px solid rgba(201,162,60,.2);padding:3rem;position:relative;}
+    .aval-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+    .af-title{font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;}
+    .af-group{margin-bottom:1.2rem;}
+    .af-label{display:block;font-size:.72rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:.3rem;}
+    .af-input{width:100%;padding:.85rem 1rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:2px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:.85rem;transition:border-color .3s;}
+    .af-input:focus{outline:none;border-color:var(--gold);}
+    .af-input option{background:#202020;}
+
+    footer{background:#050505;border-top:1px solid rgba(201,162,60,.15);padding:3rem 2rem 1.5rem;text-align:center;color:var(--gray);}
+    .f-logo{font-size:1rem;font-weight:900;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.5rem;}
+    .f-note{font-size:.72rem;margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.05);padding-top:1rem;}
+    .wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;transition:transform .3s;}
+    .wa-float:hover{transform:scale(1.1);}
+
+    @media(max-width:968px){.aval-grid{grid-template-columns:1fr;}nav .nav-links{display:none;}}
+    @media(max-width:600px){.hero{padding:7rem 1.5rem 4rem;}.hero-stats{gap:1.5rem;}.gs-inner{gap:2rem;}}
+  </style>
+</head>
+<body>
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><span>Elite</span> Performance</a>
+      <ul class="nav-links">
+        <li><a href="#metodologia">Metodologia</a></li>
+        <li><a href="#portfolio">Portfólio</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#avaliacao" class="nav-cta">Avaliação Gratuita</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-pre"><div class="pre-line"></div><span class="pre-text">Personal Trainer Premium · Recife – PE</span></div>
+      <h1>Resultados<br><span class="gold">de</span> <span class="outline">elite.</span></h1>
+      <p>Metodologia exclusiva para quem leva a evolução física a sério. Acompanhamento individualizado, ciência aplicada e comprometimento total com seus resultados.</p>
+      <div class="hero-btns">
+        <a href="#avaliacao" class="btn-gold"><i class="fas fa-clipboard-check"></i> Avaliação Gratuita</a>
+        <a href="#portfolio" class="btn-border-gold"><i class="fas fa-eye"></i> Ver Resultados</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hs"><span class="hs-num">300+</span><span class="hs-lbl">Clientes atendidos</span></div>
+        <div class="hs"><span class="hs-num">8</span><span class="hs-lbl">Anos de experiência</span></div>
+        <div class="hs"><span class="hs-num">100%</span><span class="hs-lbl">Dedicação</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-strip">
+    <div class="gs-inner">
+      <div class="gs-item"><i class="fas fa-dna"></i> Biotipo</div>
+      <div class="gs-item"><i class="fas fa-utensils"></i> Nutrição</div>
+      <div class="gs-item"><i class="fas fa-dumbbell"></i> Periodização</div>
+      <div class="gs-item"><i class="fas fa-brain"></i> Mental</div>
+      <div class="gs-item"><i class="fas fa-chart-line"></i> Progressão</div>
+    </div>
+  </div>
+
+  <!-- METODOLOGIA -->
+  <section id="metodologia" class="bg-mid">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Método</span><div class="sp-line"></div></div>
+        <h2 class="sec-title">Como trabalhamos</h2>
+        <p class="sec-desc">Um processo estruturado em 4 pilares para garantir sua evolução contínua.</p>
+      </div>
+      <div class="method-grid">
+        <div class="method-card"><div class="mc-num">01</div><div class="mc-title">Avaliação Completa</div><p class="mc-desc">Bioimpedância, avaliação postural, histórico e definição de metas realistas e mensuráveis.</p></div>
+        <div class="method-card"><div class="mc-num">02</div><div class="mc-title">Plano Individualizado</div><p class="mc-desc">Periodização científica adaptada ao seu biotipo, rotina e objetivos de curto e longo prazo.</p></div>
+        <div class="method-card"><div class="mc-num">03</div><div class="mc-title">Execução & Ajustes</div><p class="mc-desc">Acompanhamento presencial ou online com ajustes semanais baseados na sua evolução.</p></div>
+        <div class="method-card"><div class="mc-num">04</div><div class="mc-title">Análise de Progresso</div><p class="mc-desc">Reavaliações periódicas com comparativos de resultados e redefinição de novos desafios.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFÓLIO -->
+  <section id="portfolio">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Resultados</span><div class="sp-line"></div></div>
+        <h2 class="sec-title">Transformações reais</h2>
+        <p class="sec-desc">Clientes que confiaram no processo e colheram os resultados.</p>
+      </div>
+      <div class="portfolio-grid">
+        <div class="port-card"><div class="port-img"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=400&fit=crop" alt=""></div><div class="port-body"><div class="port-name">Carlos Mendonça, 34 anos</div><div class="port-result">−18kg · 6 meses</div><p class="port-text">"Metodologia impecável. Resultados que eu não conseguia há anos."</p></div></div>
+        <div class="port-card"><div class="port-img"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop" alt=""></div><div class="port-body"><div class="port-name">Thiago Alves, 28 anos</div><div class="port-result">+12kg de massa · 8 meses</div><p class="port-text">"Cada detalhe foi pensado. Evolução constante e suporte total."</p></div></div>
+        <div class="port-card"><div class="port-img"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&h=400&fit=crop" alt=""></div><div class="port-body"><div class="port-name">Fernanda Lima, 41 anos</div><div class="port-result">BF 30% → 18% · 5 meses</div><p class="port-text">"Voltei a me sentir forte e confiante. Transformação total."</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos" class="bg-mid">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Serviços</span><div class="sp-line"></div></div>
+        <h2 class="sec-title">Modalidades de atendimento</h2>
+        <p class="sec-desc">Presencial ou online, com a mesma qualidade e atenção.</p>
+      </div>
+      <div class="services-grid">
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-user-tie"></i></div><div class="svc-title">Personal Presencial</div><p class="svc-desc">Sessões individuais na academia ou em espaço privado com acompanhamento 100% dedicado.</p></div>
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-laptop"></i></div><div class="svc-title">Personal Online</div><p class="svc-desc">Planilha de treino personalizada, revisões semanais e suporte diário via WhatsApp.</p></div>
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-utensils"></i></div><div class="svc-title">Protocolo Nutricional</div><p class="svc-desc">Orientação alimentar estratégica integrada ao treino para maximizar os resultados.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVALIAÇÃO -->
+  <section id="avaliacao">
+    <div class="sec-inner">
+      <div class="aval-grid">
+        <div class="aval-left">
+          <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Avaliação</span></div>
+          <h2>Comece com uma avaliação<br><span style="color:var(--gold);">gratuita.</span></h2>
+          <p>Entendemos seu biotipo, histórico e objetivos antes de montar qualquer protocolo. Sem achismos — apenas ciência aplicada.</p>
+          <div class="aval-feats">
+            <div class="aval-feat"><i class="fas fa-check"></i> Bioimpedância completa</div>
+            <div class="aval-feat"><i class="fas fa-check"></i> Avaliação postural e funcional</div>
+            <div class="aval-feat"><i class="fas fa-check"></i> Definição de metas e expectativas</div>
+            <div class="aval-feat"><i class="fas fa-check"></i> Apresentação do protocolo inicial</div>
+          </div>
+          <a href="https://wa.me/5581996273630" target="_blank" class="btn-gold"><i class="fab fa-whatsapp"></i> Agendar pelo WhatsApp</a>
+        </div>
+        <div class="aval-card">
+          <div class="af-title">Formulário de Avaliação</div>
+          <form onsubmit="return false;">
+            <div class="af-group"><label class="af-label">Nome Completo</label><input type="text" class="af-input" placeholder="Seu nome"></div>
+            <div class="af-group"><label class="af-label">WhatsApp</label><input type="tel" class="af-input" placeholder="(81) 9 9999-9999"></div>
+            <div class="af-group"><label class="af-label">Objetivo Principal</label><select class="af-input"><option value="">Selecione...</option><option>Emagrecimento</option><option>Hipertrofia</option><option>Definição muscular</option><option>Condicionamento</option><option>Reabilitação</option></select></div>
+            <div class="af-group"><label class="af-label">Modalidade</label><select class="af-input"><option value="">Selecione...</option><option>Presencial</option><option>Online</option><option>Presencial + Online</option></select></div>
+            <div class="af-group"><label class="af-label">Mensagem (opcional)</label><textarea class="af-input" rows="3" placeholder="Conte um pouco sobre você..."></textarea></div>
+            <button onclick="alert('Avaliação solicitada! Entraremos em contato em breve.')" style="width:100%;padding:1rem;background:var(--gold);color:#000;border:none;font-weight:700;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background .3s;" onmouseover="this.style.background='#b8913a'" onmouseout="this.style.background='var(--gold)'">Solicitar Avaliação Gratuita</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="f-logo">Elite Performance</span>
+    <p>Personal Trainer Premium · Recife – PE</p>
+    <div class="f-note">&copy; 2026 Elite Performance · Todos os direitos reservados · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div>
+  </footer>
+
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+  <script>document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});</script>
+</body>
+</html>

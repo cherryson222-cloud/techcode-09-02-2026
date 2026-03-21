@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PowerGym | Academia Completa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{--orange:#ff5c00;--orange-dark:#cc4900;--dark:#111;--mid:#1e1e1e;--card:#252525;--white:#fff;--gray:#999;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--white);overflow-x:hidden;}
+
+    .btn-voltar{position:fixed;top:20px;left:20px;z-index:9999;background:var(--orange);color:#fff;padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:6px;}
+    .btn-voltar:hover{background:var(--orange-dark);}
+
+    nav{position:fixed;top:0;width:100%;background:rgba(17,17,17,.95);backdrop-filter:blur(12px);border-bottom:2px solid var(--orange);z-index:1000;padding:.9rem 0;}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:900;color:var(--orange);text-decoration:none;letter-spacing:1px;}
+    .nav-logo span{color:var(--white);}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{color:var(--gray);font-size:.88rem;text-decoration:none;font-weight:600;transition:color .3s;text-transform:uppercase;letter-spacing:.5px;}
+    .nav-links a:hover{color:var(--orange);}
+    .nav-cta{background:var(--orange)!important;color:#fff!important;padding:.55rem 1.3rem;border-radius:4px;}
+
+    .hero{min-height:100vh;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 100%);display:flex;align-items:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;}
+    .hero::before{content:'POWER';position:absolute;right:-5%;top:50%;transform:translateY(-50%);font-family:'Barlow Condensed',sans-serif;font-size:25vw;font-weight:900;color:rgba(255,92,0,.04);line-height:1;pointer-events:none;}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1;}
+    .hero-label{display:inline-block;background:var(--orange);color:#fff;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding:.3rem .9rem;border-radius:2px;margin-bottom:1.2rem;}
+    .hero h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:900;line-height:.95;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:-1px;}
+    .hero h1 span{color:var(--orange);}
+    .hero p{color:var(--gray);font-size:1rem;line-height:1.7;margin-bottom:2rem;max-width:460px;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+    .btn-or{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;background:var(--orange);color:#fff;border-radius:4px;font-weight:700;text-decoration:none;font-size:.95rem;transition:all .3s;text-transform:uppercase;letter-spacing:.5px;}
+    .btn-or:hover{background:var(--orange-dark);transform:translateY(-2px);}
+    .btn-ghost-w{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:4px;font-weight:600;text-decoration:none;font-size:.95rem;transition:all .3s;}
+    .btn-ghost-w:hover{border-color:var(--orange);color:var(--orange);}
+    .hero-stats{display:flex;gap:2.5rem;}
+    .hs-item{text-align:center;}
+    .hs-num{font-family:'Barlow Condensed',sans-serif;font-size:2.8rem;font-weight:900;color:var(--orange);line-height:1;}
+    .hs-lbl{font-size:.75rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px;}
+    .hero-img-box{border-radius:12px;overflow:hidden;position:relative;}
+    .hero-img-box img{width:100%;height:480px;object-fit:cover;display:block;filter:brightness(.85);}
+    .hero-img-box::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,92,0,.3),transparent);z-index:1;}
+
+    .modal-strip{background:var(--orange);padding:1rem 2rem;}
+    .ms-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;}
+    .ms-item{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:.5rem;}
+
+    section{padding:5rem 2rem;}
+    .sec-inner{max-width:1200px;margin:0 auto;}
+    .sec-label{display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--orange);margin-bottom:.5rem;}
+    .sec-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;text-transform:uppercase;margin-bottom:1rem;letter-spacing:.5px;}
+    .sec-desc{color:var(--gray);font-size:.9rem;max-width:580px;line-height:1.7;}
+    .text-center{text-align:center;}
+    .text-center .sec-desc{margin:0 auto 3rem;}
+    .bg-mid{background:var(--mid);}
+
+    /* MODALIDADES */
+    .modalities-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem;margin-top:3rem;}
+    .mod-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:1.8rem 1.2rem;text-align:center;transition:all .3s;cursor:pointer;}
+    .mod-card:hover{border-color:var(--orange);transform:translateY(-4px);}
+    .mod-icon{font-size:2.2rem;color:var(--orange);margin-bottom:.8rem;}
+    .mod-name{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+    .mod-count{font-size:.75rem;color:var(--gray);margin-top:.2rem;}
+
+    /* HORÁRIOS */
+    .schedule-table{width:100%;border-collapse:collapse;margin-top:2rem;}
+    .schedule-table th{background:var(--orange);color:#fff;padding:.9rem 1rem;text-align:left;font-size:.82rem;text-transform:uppercase;letter-spacing:.5px;}
+    .schedule-table td{padding:.9rem 1rem;border-bottom:1px solid rgba(255,255,255,.06);font-size:.88rem;color:var(--gray);}
+    .schedule-table tr:hover td{background:rgba(255,92,0,.05);color:var(--white);}
+    .tag-avail{display:inline-block;background:rgba(255,92,0,.15);color:var(--orange);border:1px solid rgba(255,92,0,.3);border-radius:4px;padding:.2rem .6rem;font-size:.72rem;font-weight:700;}
+
+    /* PLANOS */
+    .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3rem;}
+    .plan-card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:2rem;transition:all .3s;position:relative;}
+    .plan-card.featured{border-color:var(--orange);background:linear-gradient(135deg,rgba(255,92,0,.08),var(--card));}
+    .plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:.3rem .9rem;border-radius:20px;white-space:nowrap;}
+    .plan-name{font-family:'Barlow Condensed',sans-serif;font-size:1.5rem;font-weight:900;text-transform:uppercase;margin-bottom:.8rem;}
+    .plan-desc{font-size:.82rem;color:var(--gray);margin-bottom:1.5rem;line-height:1.5;}
+    .plan-feats{list-style:none;margin-bottom:1.8rem;}
+    .plan-feats li{font-size:.84rem;color:var(--gray);padding:.4rem 0 .4rem 1.4rem;position:relative;}
+    .plan-feats li::before{content:'✓';position:absolute;left:0;color:var(--orange);font-weight:700;}
+
+    /* DEPOIMENTOS */
+    .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem;}
+    .t-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:2rem;transition:all .3s;}
+    .t-card:hover{border-color:rgba(255,92,0,.3);}
+    .t-stars{color:var(--orange);font-size:.85rem;margin-bottom:.8rem;}
+    .t-text{font-size:.88rem;color:var(--gray);font-style:italic;line-height:1.6;margin-bottom:1.2rem;}
+    .t-author{font-size:.85rem;font-weight:700;}
+    .t-role{font-size:.75rem;color:var(--gray);}
+    .t-result{display:inline-block;background:rgba(255,92,0,.15);color:var(--orange);font-size:.72rem;font-weight:700;border-radius:4px;padding:.2rem .7rem;margin-top:.5rem;}
+
+    .contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start;margin-top:3rem;}
+    .ci{display:flex;flex-direction:column;gap:1.2rem;}
+    .ci-item{display:flex;gap:1rem;align-items:center;}
+    .ci-icon{width:42px;height:42px;background:rgba(255,92,0,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--orange);flex-shrink:0;}
+    .ci-text{font-size:.88rem;}
+    .ci-label{font-weight:700;font-size:.82rem;margin-bottom:.1rem;}
+    .cf{background:var(--mid);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:2.5rem;}
+    .fg{margin-bottom:1rem;}
+    .fg label{display:block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--gray);margin-bottom:.3rem;}
+    .fg input,.fg select,.fg textarea{width:100%;padding:.8rem 1rem;background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:var(--white);font-family:'Inter',sans-serif;font-size:.88rem;transition:border-color .3s;}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--orange);}
+    .fg select option{background:#1e1e1e;}
+
+    footer{background:#0a0a0a;border-top:2px solid var(--orange);padding:3rem 2rem 1.5rem;text-align:center;color:var(--gray);}
+    .f-logo{font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--orange);display:block;margin-bottom:.5rem;letter-spacing:1px;}
+    .f-note{font-size:.78rem;margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;}
+    .wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;transition:transform .3s;}
+    .wa-float:hover{transform:scale(1.1);}
+
+    @media(max-width:968px){
+      .hero-inner,.contact-grid{grid-template-columns:1fr;}
+      nav .nav-links{display:none;}
+      .hero-img-box{display:none;}
+    }
+    @media(max-width:600px){.hero{padding:7rem 1.5rem 4rem;}.hero::before{display:none;}}
+  </style>
+</head>
+<body>
+
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Power<span>Gym</span></a>
+      <ul class="nav-links">
+        <li><a href="#modalidades">Modalidades</a></li>
+        <li><a href="#horarios">Horários</a></li>
+        <li><a href="#planos">Planos</a></li>
+        <li><a href="#contato" class="nav-cta">Agendar Visita</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-label">Academia Completa · Recife – PE</div>
+        <h1>Treine<br><span>forte.</span><br>Viva mais.</h1>
+        <p>Estrutura completa, instrutores certificados e o melhor ambiente para você atingir seus objetivos. Venha treinar na PowerGym.</p>
+        <div class="hero-btns">
+          <a href="#contato" class="btn-or"><i class="fas fa-calendar-check"></i> Agendar Visita Grátis</a>
+          <a href="#planos" class="btn-ghost-w"><i class="fas fa-dumbbell"></i> Ver Planos</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hs-item"><div class="hs-num">800+</div><div class="hs-lbl">Alunos ativos</div></div>
+          <div class="hs-item"><div class="hs-num">12</div><div class="hs-lbl">Modalidades</div></div>
+          <div class="hs-item"><div class="hs-num">98%</div><div class="hs-lbl">Satisfação</div></div>
+        </div>
+      </div>
+      <div class="hero-img-box">
+        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=960&fit=crop" alt="PowerGym">
+      </div>
+    </div>
+  </section>
+
+  <div class="modal-strip">
+    <div class="ms-inner">
+      <div class="ms-item"><i class="fas fa-dumbbell"></i> Musculação</div>
+      <div class="ms-item"><i class="fas fa-running"></i> Cardio</div>
+      <div class="ms-item"><i class="fas fa-fire"></i> CrossFit</div>
+      <div class="ms-item"><i class="fas fa-heartbeat"></i> Spinning</div>
+      <div class="ms-item"><i class="fas fa-user-tie"></i> Personal</div>
+    </div>
+  </div>
+
+  <!-- MODALIDADES -->
+  <section id="modalidades" class="bg-mid">
+    <div class="sec-inner">
+      <span class="sec-label">O que oferecemos</span>
+      <h2 class="sec-title">Modalidades</h2>
+      <p class="sec-desc">Mais de 12 modalidades para você treinar do seu jeito, no seu ritmo.</p>
+      <div class="modalities-grid">
+        <div class="mod-card"><div class="mod-icon"><i class="fas fa-dumbbell"></i></div><div class="mod-name">Musculação</div><div class="mod-count">Turno livre</div></div>
+        <div class="mod-card"><div class="mod-icon"><i class="fas fa-fire"></i></div><div class="mod-name">CrossFit</div><div class="mod-count">8 turmas/dia</div></div>
+        <div class="mod-card"><div class="mod-icon"><i class="fas fa-biking"></i></div><div class="mod-name">Spinning</div><div class="mod-count">6 turmas/dia</div></div>
+        <div class="mod-card"><div class="mod-icon"><i class="fas fa-running"></i></div><div class="mod-name">Funcional</div><div class="mod-count">5 turmas/dia</div></div>
+        <div class="mod-card"><div class="mod-icon"><i class="fas fa-swimmer"></i></div><div class="mod-name">Natação</div><div class="mod-count">Todos os níveis</div></div>
+        <div class="mod-card"><div class="mod-icon"><i class="fas fa-user-tie"></i></div><div class="mod-name">Personal</div><div class="mod-count">Agendamento</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HORÁRIOS -->
+  <section id="horarios">
+    <div class="sec-inner">
+      <span class="sec-label">Grade</span>
+      <h2 class="sec-title">Horários das Aulas</h2>
+      <table class="schedule-table">
+        <thead><tr><th>Modalidade</th><th>Segunda – Sexta</th><th>Sábado</th><th>Domingo</th></tr></thead>
+        <tbody>
+          <tr><td>Musculação</td><td>06h – 22h</td><td>08h – 18h</td><td>09h – 14h</td></tr>
+          <tr><td>CrossFit</td><td>06h, 08h, 12h, 19h</td><td>08h, 10h</td><td><span class="tag-avail">–</span></td></tr>
+          <tr><td>Spinning</td><td>07h, 12h, 18h, 20h</td><td>09h, 11h</td><td><span class="tag-avail">–</span></td></tr>
+          <tr><td>Funcional</td><td>07h, 12h, 19h</td><td>08h</td><td><span class="tag-avail">–</span></td></tr>
+          <tr><td>Natação</td><td>07h, 08h, 17h, 18h</td><td>08h, 09h</td><td><span class="tag-avail">–</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section id="planos" class="bg-mid">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-label">Investimento</span>
+        <h2 class="sec-title">Escolha seu plano</h2>
+        <p class="sec-desc" style="margin:0 auto 0;">Planos para todos os objetivos e rotinas.</p>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card">
+          <div class="plan-name">Básico</div>
+          <p class="plan-desc">Acesso à musculação e área cardio. Ideal para quem está começando.</p>
+          <ul class="plan-feats">
+            <li>Musculação livre</li>
+            <li>Área cardio completa</li>
+            <li>Avaliação física inicial</li>
+            <li>App de treinos</li>
+          </ul>
+          <a href="#contato" class="btn-ghost-w" style="width:100%;justify-content:center;">Matricular-se</a>
+        </div>
+        <div class="plan-card featured">
+          <div class="plan-badge">+ Popular</div>
+          <div class="plan-name">Total</div>
+          <p class="plan-desc">Acesso completo a todas as modalidades em grupo. O mais escolhido.</p>
+          <ul class="plan-feats">
+            <li>Tudo do plano Básico</li>
+            <li>Todas as aulas coletivas</li>
+            <li>Avaliação física mensal</li>
+            <li>Nutricionista parceiro</li>
+          </ul>
+          <a href="#contato" class="btn-or" style="width:100%;justify-content:center;">Matricular-se</a>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">Premium</div>
+          <p class="plan-desc">Tudo que a academia tem a oferecer + acompanhamento de personal trainer.</p>
+          <ul class="plan-feats">
+            <li>Tudo do plano Total</li>
+            <li>4 sessões de personal/mês</li>
+            <li>Plano nutricional incluso</li>
+            <li>Prioridade de horários</li>
+          </ul>
+          <a href="#contato" class="btn-ghost-w" style="width:100%;justify-content:center;">Matricular-se</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos">
+    <div class="sec-inner">
+      <div class="text-center"><span class="sec-label">Resultados</span><h2 class="sec-title">Quem já treina aqui</h2></div>
+      <div class="test-grid">
+        <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-text">"Perdi 14kg em 5 meses com o suporte dos instrutores. A PowerGym mudou minha vida!"</p><div class="t-author">Felipe Nascimento</div><div class="t-role">Aluno há 8 meses</div><div class="t-result">−14kg em 5 meses</div></div>
+        <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-text">"As aulas de CrossFit são incríveis. Equipe super motivada e espaço de qualidade."</p><div class="t-author">Camila Barros</div><div class="t-role">Aluna há 1 ano</div><div class="t-result">+8kg de massa muscular</div></div>
+        <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-text">"Melhor academia de Recife! Estrutura top, limpeza impecável e instrutores atenciosos."</p><div class="t-author">Rodrigo Lima</div><div class="t-role">Aluno há 2 anos</div><div class="t-result">Condicionamento máximo</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="bg-mid">
+    <div class="sec-inner">
+      <span class="sec-label">Fale conosco</span>
+      <h2 class="sec-title">Agende sua visita grátis</h2>
+      <div class="contact-grid">
+        <div class="ci">
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><div class="ci-label">Telefone</div><div class="ci-text">(81) 9 9627-3630</div></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><div class="ci-label">E-mail</div><div class="ci-text">contato@powergym.com.br</div></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><div class="ci-label">Endereço</div><div class="ci-text">Av. Boa Viagem, 1500 · Recife – PE</div></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-clock"></i></div><div><div class="ci-label">Horário</div><div class="ci-text">Seg–Sex: 6h–22h · Sáb: 8h–18h · Dom: 9h–14h</div></div></div>
+        </div>
+        <div class="cf">
+          <form onsubmit="return false;">
+            <div class="fg"><label>Nome Completo</label><input type="text" placeholder="Seu nome"></div>
+            <div class="fg"><label>WhatsApp</label><input type="tel" placeholder="(81) 9 9999-9999"></div>
+            <div class="fg"><label>Objetivo</label><select><option value="">Selecione...</option><option>Emagrecer</option><option>Ganhar massa muscular</option><option>Condicionamento físico</option><option>Saúde e bem-estar</option></select></div>
+            <div class="fg"><label>Mensagem</label><textarea rows="3" placeholder="Alguma dúvida?"></textarea></div>
+            <button onclick="alert('Visita agendada! Entraremos em contato em breve.')" style="width:100%;padding:.9rem;background:var(--orange);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.95rem;cursor:pointer;text-transform:uppercase;letter-spacing:.5px;"><i class="fas fa-calendar-check"></i> Agendar Visita Gratuita</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="f-logo">PowerGym</span>
+    <p>A academia que transforma corpos e vidas em Recife.</p>
+    <div class="f-note">&copy; 2026 PowerGym · Todos os direitos reservados · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div>
+  </footer>
+
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});
+  </script>
+</body>
+</html>

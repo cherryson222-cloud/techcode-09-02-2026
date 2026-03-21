@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fiscal Pro | Escritório Contábil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{
+      --teal:#006666; --teal-light:#e0f0f0; --gold:#c9a84c;
+      --dark:#0f1c2e; --gray:#637282; --light:#f7f9fb;
+      --white:#fff; --border:#dde4ec;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden;line-height:1.6;}
+
+    .btn-voltar{position:fixed;top:20px;left:20px;z-index:9999;background:var(--teal);color:var(--white);padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(0,102,102,.35);}
+    .btn-voltar:hover{background:#004d4d;}
+
+    nav{position:fixed;top:0;width:100%;background:rgba(15,28,46,.97);backdrop-filter:blur(12px);z-index:1000;padding:1rem 0;border-bottom:1px solid rgba(201,168,76,.2);}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--gold);text-decoration:none;letter-spacing:.5px;}
+    .nav-logo span{color:var(--white);}
+    .nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+    .nav-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .3s;}
+    .nav-links a:hover{color:var(--gold);}
+    .nav-cta{background:var(--gold)!important;color:var(--dark)!important;padding:.55rem 1.3rem;border-radius:6px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;}
+
+    .hero{min-height:100vh;background:linear-gradient(135deg,var(--dark) 0%,#1a2d42 100%);display:flex;align-items:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--gold),var(--teal),var(--gold));}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;color:var(--gold);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.5rem;}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:700;color:var(--white);line-height:1.15;margin-bottom:1.5rem;letter-spacing:-.5px;}
+    .hero h1 em{color:var(--gold);font-style:normal;}
+    .hero p{color:rgba(255,255,255,.7);font-size:1rem;line-height:1.8;margin-bottom:2.5rem;max-width:480px;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+    .btn-gold{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;background:var(--gold);color:var(--dark);border-radius:6px;font-weight:700;text-decoration:none;transition:all .3s;font-size:.92rem;}
+    .btn-gold:hover{background:#b8943e;transform:translateY(-2px);}
+    .btn-ghost{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.3);border-radius:6px;font-weight:600;text-decoration:none;transition:all .3s;font-size:.92rem;}
+    .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+    .hero-badges{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:2rem;}
+    .badge{display:flex;align-items:center;gap:.5rem;color:rgba(255,255,255,.7);font-size:.82rem;}
+    .badge i{color:var(--gold);}
+    .hero-visual{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.25);border-radius:16px;padding:2rem;}
+    .v-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;}
+    .expertise-list{display:flex;flex-direction:column;gap:1rem;}
+    .exp-item{display:flex;align-items:center;gap:1rem;padding:1rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;transition:border-color .3s;}
+    .exp-item:hover{border-color:rgba(201,168,76,.3);}
+    .exp-icon{width:40px;height:40px;background:rgba(0,102,102,.3);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--teal);font-size:1.1rem;flex-shrink:0;}
+    /* fix teal light icon */
+    .exp-icon{color:#4dc8c8;}
+    .exp-label{font-size:.88rem;font-weight:600;color:var(--white);}
+    .exp-sub{font-size:.75rem;color:rgba(255,255,255,.5);}
+
+    section{padding:5rem 2rem;}
+    .sec-inner{max-width:1200px;margin:0 auto;}
+    .sec-eyebrow{display:block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:.6rem;}
+    .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:700;margin-bottom:1rem;line-height:1.2;}
+    .sec-desc{color:var(--gray);font-size:.95rem;max-width:580px;margin:0 auto 3rem;line-height:1.7;}
+    .text-center{text-align:center;}
+    .bg-light{background:var(--light);}
+    .bg-dark{background:var(--dark);}
+
+    .specialties-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
+    .spec-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.8rem;transition:all .3s;border-top:3px solid transparent;}
+    .spec-card:hover{border-top-color:var(--gold);box-shadow:0 10px 30px rgba(0,0,0,.07);transform:translateY(-4px);}
+    .spec-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;color:var(--gold);opacity:.4;line-height:1;}
+    .spec-card h3{font-size:1rem;font-weight:700;margin:.6rem 0 .4rem;}
+    .spec-card p{font-size:.84rem;color:var(--gray);line-height:1.6;}
+
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;}
+    .team-card{text-align:center;}
+    .team-img{width:120px;height:120px;border-radius:50%;background:var(--teal-light);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;color:var(--teal);border:3px solid var(--gold);}
+    .team-name{font-weight:700;font-size:1rem;margin-bottom:.2rem;}
+    .team-role{font-size:.82rem;color:var(--gray);}
+    .team-crc{font-size:.78rem;color:var(--gold);font-weight:600;margin-top:.3rem;}
+
+    .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;}
+    .blog-card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .3s;}
+    .blog-card:hover{box-shadow:0 10px 30px rgba(0,0,0,.08);}
+    .blog-img{height:180px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--teal);overflow:hidden;}
+    .blog-img img{width:100%;height:100%;object-fit:cover;}
+    .blog-body{padding:1.5rem;}
+    .blog-cat{font-size:.72rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;}
+    .blog-title{font-weight:700;font-size:.95rem;margin-bottom:.5rem;line-height:1.4;}
+    .blog-excerpt{font-size:.82rem;color:var(--gray);line-height:1.5;}
+
+    .contact-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;}
+    .ci-left h2{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--white);margin-bottom:1rem;}
+    .ci-left p{color:rgba(255,255,255,.65);margin-bottom:2rem;line-height:1.7;}
+    .ci-item{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.2rem;}
+    .ci-icon{width:40px;height:40px;background:rgba(201,168,76,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;}
+    .ci-text{font-size:.88rem;color:rgba(255,255,255,.75);}
+    .ci-label{font-weight:700;color:var(--white);font-size:.88rem;}
+    .cf{background:var(--white);border-radius:14px;padding:2.5rem;}
+    .cf h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:1.5rem;color:var(--dark);}
+    .fg{margin-bottom:1.1rem;}
+    .fg label{display:block;font-size:.78rem;font-weight:700;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.5px;color:var(--dark);}
+    .fg input,.fg select,.fg textarea{width:100%;padding:.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:.88rem;transition:border-color .3s;}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--gold);}
+    .fr{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+
+    footer{background:#080f18;color:rgba(255,255,255,.55);padding:3rem 2rem 1.5rem;text-align:center;}
+    .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold);display:block;margin-bottom:.5rem;}
+    .footer-note{font-size:.78rem;margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);padding-top:1rem;}
+    .wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;transition:transform .3s;}
+    .wa-float:hover{transform:scale(1.1);}
+
+    @media(max-width:968px){
+      .hero-inner,.contact-inner{grid-template-columns:1fr;}
+      nav .nav-links{display:none;}
+    }
+    @media(max-width:600px){
+      .fr{grid-template-columns:1fr;}
+      .hero{padding:7rem 1.5rem 4rem;}
+    }
+  </style>
+</head>
+<body>
+
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Fiscal<span>Pro</span></a>
+      <ul class="nav-links">
+        <li><a href="#especialidades">Especialidades</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+        <li><a href="#artigos">Artigos</a></li>
+        <li><a href="#contato" class="nav-cta">Fale Conosco</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow"><i class="fas fa-balance-scale"></i> Escritório Contábil · Recife – PE</div>
+        <h1>Expertise tributária que <em>protege</em> e faz sua empresa crescer.</h1>
+        <p>Mais de 15 anos assessorando empresas com planejamento tributário estratégico, conformidade fiscal e segurança jurídica.</p>
+        <div class="hero-btns">
+          <a href="#contato" class="btn-gold"><i class="fas fa-envelope"></i> Solicitar Proposta</a>
+          <a href="#especialidades" class="btn-ghost"><i class="fas fa-chevron-down"></i> Ver Especialidades</a>
+        </div>
+        <div class="hero-badges">
+          <span class="badge"><i class="fas fa-shield-alt"></i> CRC/PE Ativo</span>
+          <span class="badge"><i class="fas fa-building"></i> 500+ empresas</span>
+          <span class="badge"><i class="fas fa-award"></i> 15 anos de mercado</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="v-title"><i class="fas fa-star"></i> Áreas de Atuação</div>
+        <div class="expertise-list">
+          <div class="exp-item"><div class="exp-icon"><i class="fas fa-file-invoice-dollar"></i></div><div><div class="exp-label">Planejamento Tributário</div><div class="exp-sub">Redução legal da carga fiscal</div></div></div>
+          <div class="exp-item"><div class="exp-icon"><i class="fas fa-balance-scale-right"></i></div><div><div class="exp-label">Compliance Fiscal</div><div class="exp-sub">Conformidade e tranquilidade</div></div></div>
+          <div class="exp-item"><div class="exp-icon"><i class="fas fa-chart-line"></i></div><div><div class="exp-label">Contabilidade Gerencial</div><div class="exp-sub">Dados para decisões estratégicas</div></div></div>
+          <div class="exp-item"><div class="exp-icon"><i class="fas fa-users-cog"></i></div><div><div class="exp-label">Departamento Pessoal</div><div class="exp-sub">RH e folha de pagamento</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPECIALIDADES -->
+  <section id="especialidades" class="bg-light">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-eyebrow">Especialidades</span>
+        <h2 class="sec-title">O que nos torna referência</h2>
+        <p class="sec-desc">Décadas de experiência transformadas em expertise prática para o seu negócio.</p>
+      </div>
+      <div class="specialties-grid">
+        <div class="spec-card"><div class="spec-num">01</div><h3>Planejamento Tributário</h3><p>Análise profunda do regime mais vantajoso e identificação de créditos fiscais legais para sua empresa.</p></div>
+        <div class="spec-card"><div class="spec-num">02</div><h3>Abertura e Estruturação</h3><p>Criação, alteração e encerramento de empresas com orientação sobre a estrutura societária ideal.</p></div>
+        <div class="spec-card"><div class="spec-num">03</div><h3>Assessoria Fiscal</h3><p>Gestão completa de obrigações acessórias e apuração de impostos federais, estaduais e municipais.</p></div>
+        <div class="spec-card"><div class="spec-num">04</div><h3>Contabilidade Gerencial</h3><p>Relatórios de DRE, fluxo de caixa e análises que orientam as decisões estratégicas da sua empresa.</p></div>
+        <div class="spec-card"><div class="spec-num">05</div><h3>Departamento Pessoal</h3><p>Admissões, demissões, folha de pagamento, férias e FGTS com total conformidade trabalhista.</p></div>
+        <div class="spec-card"><div class="spec-num">06</div><h3>Auditoria Preventiva</h3><p>Revisão contábil e fiscal para identificar riscos antes que se tornem problemas com o fisco.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section id="equipe">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-eyebrow">Equipe</span>
+        <h2 class="sec-title">Especialistas à sua disposição</h2>
+        <p class="sec-desc">Profissionais certificados e em constante atualização para oferecer o melhor assessoramento.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card"><div class="team-img">RM</div><div class="team-name">Dr. Roberto Menezes</div><div class="team-role">Sócio-Diretor · Tributarista</div><div class="team-crc">CRC/PE 001234</div></div>
+        <div class="team-card"><div class="team-img">CP</div><div class="team-name">Dra. Carla Pinheiro</div><div class="team-role">Contadora Sênior · BPO</div><div class="team-crc">CRC/PE 005678</div></div>
+        <div class="team-card"><div class="team-img">LF</div><div class="team-name">Luiz Felipe Alves</div><div class="team-role">Especialista Fiscal</div><div class="team-crc">CRC/PE 009012</div></div>
+        <div class="team-card"><div class="team-img">TA</div><div class="team-name">Tatiana Araújo</div><div class="team-role">Departamento Pessoal</div><div class="team-crc">CRC/PE 003456</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTIGOS -->
+  <section id="artigos" class="bg-light">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-eyebrow">Artigos</span>
+        <h2 class="sec-title">Conteúdo especializado</h2>
+        <p class="sec-desc">Informação de qualidade para empresários tomarem decisões mais seguras.</p>
+      </div>
+      <div class="blog-grid">
+        <div class="blog-card"><div class="blog-img"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=300&fit=crop" alt=""></div><div class="blog-body"><div class="blog-cat">Tributário</div><h4 class="blog-title">Simples Nacional x Lucro Presumido: qual é melhor para sua empresa?</h4><p class="blog-excerpt">Entenda as diferenças e descubra qual regime pode gerar mais economia tributária.</p></div></div>
+        <div class="blog-card"><div class="blog-img"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=300&fit=crop" alt=""></div><div class="blog-body"><div class="blog-cat">Gestão</div><h4 class="blog-title">Como usar o fluxo de caixa para tomar decisões estratégicas</h4><p class="blog-excerpt">O DFC é mais do que controle financeiro — é o mapa do seu negócio.</p></div></div>
+        <div class="blog-card"><div class="blog-img"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&h=300&fit=crop" alt=""></div><div class="blog-body"><div class="blog-cat">RH</div><h4 class="blog-title">Reforma Trabalhista: o que ainda impacta sua folha de pagamento</h4><p class="blog-excerpt">Atualizações importantes que todo empregador precisa conhecer em 2026.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="bg-dark">
+    <div class="sec-inner">
+      <div class="contact-inner">
+        <div class="ci-left">
+          <h2>Entre em contato</h2>
+          <p>Solicite uma proposta sem compromisso. Nossa equipe retorna em até 24 horas úteis.</p>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><div class="ci-label">Telefone</div><div class="ci-text">(81) 9 9627-3630</div></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><div class="ci-label">E-mail</div><div class="ci-text">contato@fiscalpro.com.br</div></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><div class="ci-label">Endereço</div><div class="ci-text">Av. Agamenon Magalhães, 500 · Boa Vista · Recife – PE</div></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-clock"></i></div><div><div class="ci-label">Horário</div><div class="ci-text">Segunda a Sexta · 8h às 18h</div></div></div>
+        </div>
+        <div class="cf">
+          <h3>Solicite uma Proposta</h3>
+          <form onsubmit="return false;">
+            <div class="fg"><label>Nome Completo</label><input type="text" placeholder="Seu nome"></div>
+            <div class="fr">
+              <div class="fg"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+              <div class="fg"><label>WhatsApp</label><input type="tel" placeholder="(81) 9 9999-9999"></div>
+            </div>
+            <div class="fg"><label>Empresa / Segmento</label><input type="text" placeholder="Ex: Consultoria de TI"></div>
+            <div class="fg"><label>Mensagem</label><textarea rows="3" placeholder="Como podemos ajudar?"></textarea></div>
+            <button onclick="alert('Proposta solicitada! Em breve entraremos em contato.')" style="width:100%;padding:.9rem;background:var(--gold);color:var(--dark);border:none;border-radius:8px;font-weight:700;font-size:.95rem;cursor:pointer;transition:background .3s;" onmouseover="this.style.background='#b8943e'" onmouseout="this.style.background='var(--gold)'"><i class="fas fa-paper-plane"></i> Enviar Solicitação</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">FiscalPro</span>
+    <p>Escritório contábil especializado em planejamento tributário · Recife – PE</p>
+    <div class="footer-note">&copy; 2026 Fiscal Pro · Todos os direitos reservados · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div>
+  </footer>
+
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});
+  </script>
+</body>
+</html>

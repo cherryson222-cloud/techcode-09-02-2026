@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Fit | Pilates, Yoga & Musculação Feminina</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{--rose:#e8637a;--rose-light:#fdf0f2;--rose-dark:#c54d63;--gold:#d4a853;--dark:#1a1a2e;--gray:#6b7280;--light:#fafafa;--white:#fff;--border:#f0e4e8;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--white);color:var(--dark);overflow-x:hidden;line-height:1.6;}
+
+    .btn-voltar{position:fixed;top:20px;left:20px;z-index:9999;background:var(--rose);color:#fff;padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(232,99,122,.35);}
+    .btn-voltar:hover{background:var(--rose-dark);}
+
+    nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000;padding:1rem 0;}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--rose);text-decoration:none;}
+    .nav-logo span{color:var(--dark);}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{color:var(--gray);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .3s;}
+    .nav-links a:hover{color:var(--rose);}
+    .nav-cta{background:var(--rose)!important;color:#fff!important;padding:.55rem 1.3rem;border-radius:50px;font-weight:600;}
+
+    /* HERO */
+    .hero{min-height:100vh;background:linear-gradient(135deg,var(--rose-light) 0%,#fff5f7 50%,var(--white) 100%);display:flex;align-items:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(232,99,122,.12),transparent 65%);border-radius:50%;}
+    .hero::after{content:'';position:absolute;bottom:-150px;left:-150px;width:400px;height:400px;background:radial-gradient(circle,rgba(212,168,83,.1),transparent 65%);border-radius:50%;}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;color:var(--rose);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.5rem;}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:700;line-height:1.15;margin-bottom:1.5rem;}
+    .hero h1 em{color:var(--rose);font-style:normal;}
+    .hero p{color:var(--gray);font-size:1rem;line-height:1.8;margin-bottom:2.5rem;max-width:480px;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+    .btn-rose{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--rose);color:#fff;border-radius:50px;font-weight:600;text-decoration:none;transition:all .3s;font-size:.92rem;}
+    .btn-rose:hover{background:var(--rose-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,99,122,.35);}
+    .btn-outline-rose{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:transparent;color:var(--rose);border:2px solid var(--rose);border-radius:50px;font-weight:600;text-decoration:none;transition:all .3s;font-size:.92rem;}
+    .btn-outline-rose:hover{background:var(--rose);color:#fff;}
+    .hero-trust{display:flex;gap:2rem;flex-wrap:wrap;}
+    .trust-item{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--gray);}
+    .trust-item i{color:var(--rose);}
+    .hero-img-wrap{position:relative;}
+    .hero-img-wrap img{width:100%;height:560px;object-fit:cover;border-radius:40px 8px 40px 8px;box-shadow:0 24px 60px rgba(232,99,122,.2);}
+    .float-badge{position:absolute;bottom:30px;left:-20px;background:var(--white);border-radius:16px;padding:1rem 1.4rem;box-shadow:0 8px 30px rgba(0,0,0,.12);display:flex;align-items:center;gap:.8rem;}
+    .fb-icon{width:40px;height:40px;background:var(--rose-light);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--rose);font-size:1.1rem;}
+    .fb-num{font-weight:800;font-size:1.1rem;color:var(--dark);}
+    .fb-lbl{font-size:.72rem;color:var(--gray);}
+
+    /* STRIP */
+    .strip{background:var(--rose);padding:.9rem 2rem;overflow:hidden;}
+    .strip-track{display:flex;width:max-content;animation:tick 28s linear infinite;gap:0;}
+    @keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+    .strip-item{display:inline-flex;align-items:center;gap:.5rem;padding:0 2.5rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#fff;white-space:nowrap;}
+    .strip-dot{opacity:.5;font-size:.6rem;}
+
+    section{padding:5rem 2rem;}
+    .sec-inner{max-width:1200px;margin:0 auto;}
+    .sec-tag{display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--rose);margin-bottom:.5rem;}
+    .sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:700;margin-bottom:1rem;line-height:1.2;}
+    .sec-desc{color:var(--gray);font-size:.95rem;max-width:580px;line-height:1.7;}
+    .text-center{text-align:center;}.text-center .sec-desc{margin:0 auto 3rem;}
+    .bg-rose{background:var(--rose-light);}
+    .bg-dark{background:var(--dark);}
+    .bg-light{background:var(--light);}
+
+    /* SOBRE */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .about-img{position:relative;}
+    .about-img img{width:100%;height:520px;object-fit:cover;border-radius:24px;box-shadow:0 20px 50px rgba(232,99,122,.15);}
+    .about-badge{position:absolute;bottom:-20px;right:-20px;background:var(--white);border-radius:16px;padding:1.2rem 1.5rem;box-shadow:0 12px 40px rgba(0,0,0,.1);text-align:center;min-width:140px;}
+    .ab-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;color:var(--rose);line-height:1;}
+    .ab-lbl{font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-top:.3rem;}
+    .creds-list{list-style:none;margin:1.5rem 0;display:flex;flex-direction:column;gap:.7rem;}
+    .creds-list li{display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:var(--gray);}
+    .creds-list i{color:var(--rose);}
+    .cert-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+    .cert-chip{background:var(--rose-light);color:var(--rose);border:1px solid var(--border);border-radius:50px;padding:.3rem .9rem;font-size:.78rem;font-weight:600;}
+
+    /* MODALIDADES */
+    .mod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:3rem;}
+    .mod-card{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:2rem;text-align:center;transition:all .3s;}
+    .mod-card:hover{border-color:var(--rose);box-shadow:0 12px 40px rgba(232,99,122,.12);transform:translateY(-6px);}
+    .mod-icon{font-size:2.5rem;margin-bottom:1rem;display:block;}
+    .mod-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:.4rem;}
+    .mod-desc{font-size:.82rem;color:var(--gray);margin-bottom:.8rem;}
+    .mod-info{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;}
+    .mod-chip{background:var(--rose-light);color:var(--rose);font-size:.68rem;font-weight:700;border-radius:50px;padding:.2rem .6rem;}
+
+    /* HORÁRIOS */
+    .schedule-wrap{margin-top:3rem;overflow-x:auto;}
+    .schedule-table{width:100%;border-collapse:collapse;min-width:600px;}
+    .schedule-table th{background:var(--rose);color:#fff;padding:1rem 1.2rem;text-align:left;font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
+    .schedule-table th:first-child{border-radius:12px 0 0 0;}
+    .schedule-table th:last-child{border-radius:0 12px 0 0;}
+    .schedule-table td{padding:.9rem 1.2rem;border-bottom:1px solid var(--border);font-size:.88rem;color:var(--gray);}
+    .schedule-table tr:hover td{background:rgba(232,99,122,.04);color:var(--dark);}
+    .tag-nd{display:inline-block;background:var(--border);color:var(--gray);border-radius:4px;padding:.15rem .5rem;font-size:.7rem;}
+
+    /* ESTRUTURA */
+    .struct-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:3rem;}
+    .struct-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:2rem;display:flex;gap:1rem;align-items:flex-start;transition:all .3s;}
+    .struct-card:hover{border-color:var(--rose);box-shadow:0 8px 30px rgba(232,99,122,.1);}
+    .struct-icon{width:50px;height:50px;background:var(--rose-light);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--rose);font-size:1.3rem;flex-shrink:0;}
+    .struct-card h3{font-size:.9rem;font-weight:700;margin-bottom:.3rem;}
+    .struct-card p{font-size:.8rem;color:var(--gray);line-height:1.5;}
+
+    /* TRANSFORMAÇÕES */
+    .transform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:3rem;}
+    .tr-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:2rem;transition:all .3s;}
+    .tr-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.07);transform:translateY(-4px);}
+    .tr-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+    .tr-avatar{width:56px;height:56px;border-radius:50%;background:var(--rose-light);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--rose);border:2px solid var(--rose);flex-shrink:0;}
+    .tr-name{font-weight:700;font-size:.95rem;}
+    .tr-period{font-size:.78rem;color:var(--gray);}
+    .tr-result{display:inline-block;background:rgba(232,99,122,.1);color:var(--rose);font-size:.78rem;font-weight:700;border-radius:50px;padding:.3rem .9rem;margin-bottom:.8rem;}
+    .tr-text{font-size:.88rem;color:var(--gray);font-style:italic;line-height:1.6;}
+    .stars{color:var(--gold);font-size:.82rem;margin-bottom:.5rem;}
+
+    /* PROFESSORAS */
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-top:3rem;}
+    .team-card{text-align:center;}
+    .team-avatar{width:100px;height:100px;border-radius:50%;background:var(--rose-light);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--rose);border:3px solid var(--rose);}
+    .team-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:.2rem;}
+    .team-role{font-size:.82rem;color:var(--gray);margin-bottom:.4rem;}
+    .team-cref{font-size:.75rem;color:var(--rose);font-weight:700;}
+
+    /* PLANOS */
+    .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3rem;}
+    .plan-card{background:var(--white);border:2px solid var(--border);border-radius:24px;padding:2rem;transition:all .3s;position:relative;}
+    .plan-card.featured{border-color:var(--rose);background:linear-gradient(135deg,rgba(232,99,122,.04),var(--white));}
+    .plan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--rose);color:#fff;font-size:.7rem;font-weight:700;padding:.3rem 1rem;border-radius:20px;white-space:nowrap;}
+    .plan-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:.5rem;}
+    .plan-desc{font-size:.82rem;color:var(--gray);margin-bottom:1.5rem;}
+    .plan-feats{list-style:none;margin-bottom:1.8rem;}
+    .plan-feats li{font-size:.84rem;color:var(--gray);padding:.35rem 0 .35rem 1.4rem;position:relative;}
+    .plan-feats li::before{content:'♥';position:absolute;left:0;color:var(--rose);font-size:.7rem;}
+
+    /* FAQ */
+    .faq-list{max-width:800px;margin:3rem auto 0;display:flex;flex-direction:column;gap:1rem;}
+    .faq-item{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+    .faq-q{padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;font-size:.92rem;transition:background .3s;}
+    .faq-q:hover{background:var(--rose-light);}
+    .faq-q i{color:var(--rose);transition:transform .3s;flex-shrink:0;}
+    .faq-item.open .faq-q i{transform:rotate(45deg);}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;}
+    .faq-item.open .faq-a{max-height:220px;}
+    .faq-a p{padding:0 1.5rem 1.2rem;font-size:.88rem;color:var(--gray);line-height:1.75;}
+
+    /* CONTATO */
+    .contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;margin-top:3rem;}
+    .ci-item{display:flex;gap:1rem;align-items:center;margin-bottom:1.2rem;font-size:.88rem;}
+    .ci-icon{width:42px;height:42px;background:rgba(232,99,122,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--rose);flex-shrink:0;}
+    .ci-label{font-weight:700;color:#fff;font-size:.8rem;display:block;margin-bottom:.1rem;}
+    .ci-text{color:rgba(255,255,255,.8);}
+    .cf{background:var(--white);border-radius:20px;padding:2.5rem;box-shadow:0 20px 60px rgba(0,0,0,.15);}
+    .cf h3{font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:1.5rem;}
+    .fg{margin-bottom:1.1rem;}
+    .fg label{display:block;font-size:.78rem;font-weight:600;margin-bottom:.3rem;color:var(--dark);}
+    .fg input,.fg select,.fg textarea{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:.88rem;transition:border-color .3s;background:var(--light);}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--rose);background:#fff;}
+    .f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+
+    footer{background:#fff;border-top:1px solid var(--border);padding:3rem 2rem 1.5rem;text-align:center;color:var(--gray);}
+    .f-logo{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--rose);display:block;margin-bottom:.5rem;}
+    .f-note{font-size:.78rem;margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1rem;}
+    .wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;transition:transform .3s;}
+    .wa-float:hover{transform:scale(1.1);}
+
+    @media(max-width:968px){
+      .hero-inner,.about-grid,.contact-grid{grid-template-columns:1fr;}
+      nav .nav-links{display:none;}
+      .hero-img-wrap{display:none;}
+      .about-badge{display:none;}
+    }
+    @media(max-width:600px){
+      .hero{padding:7rem 1.5rem 4rem;}
+      .f-row{grid-template-columns:1fr;}
+      .hero-trust{flex-direction:column;gap:1rem;}
+    }
+  </style>
+</head>
+<body>
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Studio <span>Fit</span></a>
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#modalidades">Modalidades</a></li>
+        <li><a href="#horarios">Horários</a></li>
+        <li><a href="#planos">Planos</a></li>
+        <li><a href="#contato" class="nav-cta">Agendar Aula Grátis</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow"><i class="fas fa-heart"></i> Studio Feminino · Recife – PE</div>
+        <h1>Seu corpo, sua <em>força,</em> seu tempo.</h1>
+        <p>Um espaço pensado exclusivamente para a mulher. Pilates, yoga, musculação e muito mais em um ambiente acolhedor, seguro e completamente transformador.</p>
+        <div class="hero-btns">
+          <a href="#contato" class="btn-rose"><i class="fas fa-calendar-heart"></i> Aula Experimental Grátis</a>
+          <a href="#modalidades" class="btn-outline-rose"><i class="fas fa-spa"></i> Nossas Modalidades</a>
+        </div>
+        <div class="hero-trust">
+          <span class="trust-item"><i class="fas fa-check-circle"></i> Ambiente 100% feminino</span>
+          <span class="trust-item"><i class="fas fa-check-circle"></i> Professoras especializadas</span>
+          <span class="trust-item"><i class="fas fa-check-circle"></i> Turmas reduzidas</span>
+        </div>
+      </div>
+      <div class="hero-img-wrap">
+        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=1000&fit=crop" alt="Studio Fit">
+        <div class="float-badge">
+          <div class="fb-icon"><i class="fas fa-users"></i></div>
+          <div><div class="fb-num">600+</div><div class="fb-lbl">Alunas transformadas</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="strip">
+    <div class="strip-track" id="strip">
+      <span class="strip-item">Pilates Solo <span class="strip-dot">◆</span></span>
+      <span class="strip-item">Yoga Flow <span class="strip-dot">◆</span></span>
+      <span class="strip-item">Musculação Feminina <span class="strip-dot">◆</span></span>
+      <span class="strip-item">Funcional <span class="strip-dot">◆</span></span>
+      <span class="strip-item">Dance Fit <span class="strip-dot">◆</span></span>
+      <span class="strip-item">Aqua Pilates <span class="strip-dot">◆</span></span>
+      <span class="strip-item">Ambiente Feminino <span class="strip-dot">◆</span></span>
+      <span class="strip-item">Turmas Reduzidas <span class="strip-dot">◆</span></span>
+    </div>
+  </div>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="sec-inner">
+      <div class="about-grid">
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=700&h=900&fit=crop" alt="Studio Fit">
+          <div class="about-badge"><div class="ab-num">7+</div><div class="ab-lbl">anos de história</div></div>
+        </div>
+        <div>
+          <span class="sec-tag">Quem somos</span>
+          <h2 class="sec-title">Um espaço criado <em style="color:var(--rose);font-style:normal;">para você.</em></h2>
+          <p style="color:var(--gray);font-size:.93rem;line-height:1.9;margin-bottom:1rem;">O Studio Fit nasceu com uma missão clara: criar um espaço onde a mulher se sinta completamente à vontade para cuidar do seu corpo e da sua mente — sem julgamentos, sem pressão e com todo o suporte que merece.</p>
+          <p style="color:var(--gray);font-size:.93rem;line-height:1.9;">Há mais de 7 anos transformando vidas em Recife, somos referência em modalidades femininas com estrutura premium, professoras certificadas e turmas pequenas para atenção individualizada.</p>
+          <ul class="creds-list">
+            <li><i class="fas fa-venus"></i> Ambiente 100% exclusivo para mulheres</li>
+            <li><i class="fas fa-award"></i> Professoras com certificações nacionais e internacionais</li>
+            <li><i class="fas fa-users"></i> Turmas de até 8 alunas para atenção personalizada</li>
+            <li><i class="fas fa-map-marker-alt"></i> Localização privilegiada em Recife – PE</li>
+          </ul>
+          <div class="cert-chips">
+            <span class="cert-chip">CREF Ativo</span>
+            <span class="cert-chip">Stott Pilates</span>
+            <span class="cert-chip">Yoga Alliance</span>
+            <span class="cert-chip">Certificação Internacional</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODALIDADES -->
+  <section id="modalidades" class="bg-rose">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">O que oferecemos</span>
+        <h2 class="sec-title">Modalidades exclusivas</h2>
+        <p class="sec-desc">Cada aula foi pensada para o corpo e a mente feminina. Escolha a que combina com você — ou experimente todas!</p>
+      </div>
+      <div class="mod-grid">
+        <div class="mod-card"><span class="mod-icon">🧘</span><div class="mod-name">Pilates Solo</div><div class="mod-desc">Fortalecimento, postura e consciência corporal com turmas de até 8 alunas.</div><div class="mod-info"><span class="mod-chip"><i class="fas fa-clock"></i> 6 turmas/dia</span><span class="mod-chip">Todos os níveis</span></div></div>
+        <div class="mod-card"><span class="mod-icon">🌿</span><div class="mod-name">Yoga Flow</div><div class="mod-desc">Equilíbrio, flexibilidade e bem-estar mental com abordagem Hatha e Vinyasa.</div><div class="mod-info"><span class="mod-chip"><i class="fas fa-clock"></i> 4 turmas/dia</span></div></div>
+        <div class="mod-card"><span class="mod-icon">💪</span><div class="mod-name">Musculação</div><div class="mod-desc">Hipertrofia e definição com acompanhamento individual e sala equipada.</div><div class="mod-info"><span class="mod-chip">Turno livre</span></div></div>
+        <div class="mod-card"><span class="mod-icon">🔥</span><div class="mod-name">Funcional Feminino</div><div class="mod-desc">Treino de alta intensidade adaptado para o corpo da mulher. Queima rápida e eficiente.</div><div class="mod-info"><span class="mod-chip"><i class="fas fa-clock"></i> 5 turmas/dia</span></div></div>
+        <div class="mod-card"><span class="mod-icon">💃</span><div class="mod-name">Dance Fit</div><div class="mod-desc">Queima calórica dançando com muito ritmo, diversão e energia.</div><div class="mod-info"><span class="mod-chip"><i class="fas fa-clock"></i> 3 turmas/dia</span></div></div>
+        <div class="mod-card"><span class="mod-icon">🏊</span><div class="mod-name">Aqua Pilates</div><div class="mod-desc">Pilates na água, ideal para articulações, gestantes e reabilitação.</div><div class="mod-info"><span class="mod-chip"><i class="fas fa-clock"></i> 2 turmas/dia</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HORÁRIOS -->
+  <section id="horarios">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Grade semanal</span>
+        <h2 class="sec-title">Horários das aulas</h2>
+        <p class="sec-desc">Grade completa para você encaixar o treino na sua rotina.</p>
+      </div>
+      <div class="schedule-wrap">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Modalidade</th>
+              <th>Segunda – Sexta</th>
+              <th>Sábado</th>
+              <th>Domingo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><i class="fas fa-spa" style="color:var(--rose);margin-right:.4rem;"></i>Pilates Solo</td><td>07h, 09h, 11h, 14h, 17h, 19h</td><td>08h, 10h, 12h</td><td><span class="tag-nd">—</span></td></tr>
+            <tr><td><i class="fas fa-leaf" style="color:var(--rose);margin-right:.4rem;"></i>Yoga Flow</td><td>07h, 09h, 18h, 20h</td><td>08h, 10h</td><td><span class="tag-nd">—</span></td></tr>
+            <tr><td><i class="fas fa-dumbbell" style="color:var(--rose);margin-right:.4rem;"></i>Musculação</td><td>06h – 21h (livre)</td><td>07h – 16h</td><td><span class="tag-nd">—</span></td></tr>
+            <tr><td><i class="fas fa-fire" style="color:var(--rose);margin-right:.4rem;"></i>Funcional</td><td>06h, 08h, 12h, 17h, 19h</td><td>08h, 10h</td><td><span class="tag-nd">—</span></td></tr>
+            <tr><td><i class="fas fa-music" style="color:var(--rose);margin-right:.4rem;"></i>Dance Fit</td><td>08h, 12h, 19h</td><td>09h</td><td><span class="tag-nd">—</span></td></tr>
+            <tr><td><i class="fas fa-swimmer" style="color:var(--rose);margin-right:.4rem;"></i>Aqua Pilates</td><td>09h, 17h</td><td>09h</td><td><span class="tag-nd">—</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTRUTURA -->
+  <section class="bg-light">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Estrutura</span>
+        <h2 class="sec-title">Tudo pensado para você</h2>
+        <p class="sec-desc">Uma estrutura completa e acolhedora para que seu momento de cuidado seja perfeito.</p>
+      </div>
+      <div class="struct-grid">
+        <div class="struct-card"><div class="struct-icon"><i class="fas fa-spa"></i></div><div><h3>Sala de Pilates Equipada</h3><p>Reformers, cadeiras e acessórios de ponta para aulas de pilates studio.</p></div></div>
+        <div class="struct-card"><div class="struct-icon"><i class="fas fa-dumbbell"></i></div><div><h3>Sala de Musculação Feminina</h3><p>Equipamentos modernos e ambiente pensado para o conforto da mulher.</p></div></div>
+        <div class="struct-card"><div class="struct-icon"><i class="fas fa-swimming-pool"></i></div><div><h3>Piscina Aquecida</h3><p>Piscina aquecida exclusiva para as aulas de Aqua Pilates.</p></div></div>
+        <div class="struct-card"><div class="struct-icon"><i class="fas fa-shower"></i></div><div><h3>Vestiários Premium</h3><p>Vestiários espaçosos com armários individuais e amenidades completas.</p></div></div>
+        <div class="struct-card"><div class="struct-icon"><i class="fas fa-leaf"></i></div><div><h3>Sala de Yoga & Meditação</h3><p>Ambiente climatizado, silencioso e decorado para promover paz interior.</p></div></div>
+        <div class="struct-card"><div class="struct-icon"><i class="fas fa-utensils"></i></div><div><h3>Espaço de Nutrição</h3><p>Parcerias com nutricionistas para suporte alimentar completo às alunas.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFESSORAS -->
+  <section>
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Nossa equipe</span>
+        <h2 class="sec-title">Professoras especializadas</h2>
+        <p class="sec-desc">Profissionais apaixonadas e altamente qualificadas para guiar sua transformação.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card"><div class="team-avatar">CA</div><div class="team-name">Carol Almeida</div><div class="team-role">Pilates & Yoga</div><div class="team-cref">CREF 00001-G/PE · Stott Pilates</div></div>
+        <div class="team-card"><div class="team-avatar">RS</div><div class="team-name">Renata Silva</div><div class="team-role">Musculação & Funcional</div><div class="team-cref">CREF 00002-G/PE · Especialista em Hipertrofia</div></div>
+        <div class="team-card"><div class="team-avatar">JF</div><div class="team-name">Juliana Farias</div><div class="team-role">Dance Fit & Funcional</div><div class="team-cref">CREF 00003-G/PE · Dança Fitness</div></div>
+        <div class="team-card"><div class="team-avatar">BM</div><div class="team-name">Beatriz Melo</div><div class="team-role">Aqua Pilates</div><div class="team-cref">CREF 00004-G/PE · Pilates Aquático</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSFORMAÇÕES -->
+  <section id="transformacoes" class="bg-rose">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Resultados Reais</span>
+        <h2 class="sec-title">Histórias que inspiram</h2>
+        <p class="sec-desc">Mulheres reais com resultados reais. Cada história é única, cada conquista é celebrada.</p>
+      </div>
+      <div class="transform-grid">
+        <div class="tr-card"><div class="tr-header"><div class="tr-avatar">MS</div><div><div class="tr-name">Marina Souza</div><div class="tr-period">Aluna há 8 meses</div></div></div><div class="stars">★★★★★</div><div class="tr-result">−12kg e muito mais disposição</div><p class="tr-text">"O Studio Fit mudou minha vida. As professoras são incríveis e o ambiente é super acolhedor. Me sinto em casa toda vez que venho!"</p></div>
+        <div class="tr-card"><div class="tr-header"><div class="tr-avatar">JP</div><div><div class="tr-name">Juliana Paiva</div><div class="tr-period">Aluna há 1 ano</div></div></div><div class="stars">★★★★★</div><div class="tr-result">Controle da ansiedade</div><p class="tr-text">"O yoga e o pilates transformaram não só meu corpo, mas minha mente. Durmo melhor, trabalho melhor, vivo melhor."</p></div>
+        <div class="tr-card"><div class="tr-header"><div class="tr-avatar">AC</div><div><div class="tr-name">Ana Clara Ferreira</div><div class="tr-period">Aluna há 6 meses</div></div></div><div class="stars">★★★★★</div><div class="tr-result">Ganho de força e confiança</div><p class="tr-text">"Nunca imaginei que fosse gostar tanto de musculação. As turmas pequenas fazem toda a diferença no aprendizado."</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section id="planos">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Investimento</span>
+        <h2 class="sec-title">Escolha seu plano</h2>
+        <p class="sec-desc">Planos pensados para se encaixar na sua rotina e objetivos. Venha conhecer pessoalmente!</p>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card">
+          <div class="plan-name">Essencial</div>
+          <p class="plan-desc">Uma modalidade à sua escolha. Ideal para começar com foco e comprometimento.</p>
+          <ul class="plan-feats">
+            <li>1 modalidade ilimitada</li>
+            <li>Aula experimental gratuita</li>
+            <li>Avaliação postural inicial</li>
+            <li>App de acompanhamento</li>
+            <li>Acesso à área de musculação</li>
+          </ul>
+          <a href="#contato" class="btn-outline-rose" style="width:100%;justify-content:center;">Começar agora</a>
+        </div>
+        <div class="plan-card featured">
+          <div class="plan-badge">Mais escolhido ♥</div>
+          <div class="plan-name">Pleno</div>
+          <p class="plan-desc">Acesso a todas as modalidades. O plano da transformação completa e sem limites.</p>
+          <ul class="plan-feats">
+            <li>Todas as modalidades</li>
+            <li>Avaliação física mensal</li>
+            <li>Nutricionista parceira</li>
+            <li>Suporte via WhatsApp</li>
+            <li>Desconto em produtos parceiros</li>
+          </ul>
+          <a href="#contato" class="btn-rose" style="width:100%;justify-content:center;">Começar agora</a>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">Premium</div>
+          <p class="plan-desc">Tudo do Pleno com sessões individuais de pilates ou personal trainer.</p>
+          <ul class="plan-feats">
+            <li>Tudo do plano Pleno</li>
+            <li>4 sessões individuais/mês</li>
+            <li>Consulta nutricional inclusa</li>
+            <li>Prioridade de horários</li>
+            <li>Acesso ao lounge VIP</li>
+          </ul>
+          <a href="#contato" class="btn-outline-rose" style="width:100%;justify-content:center;">Começar agora</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-light">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Dúvidas</span>
+        <h2 class="sec-title">Perguntas frequentes</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><div class="faq-q">Homens podem frequentar o Studio Fit? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Não. O Studio Fit é um espaço exclusivamente feminino, criado para que a mulher se sinta 100% à vontade durante seus treinos, sem qualquer constrangimento.</p></div></div>
+        <div class="faq-item"><div class="faq-q">Posso experimentar antes de me matricular? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Sim! Oferecemos uma aula experimental gratuita em qualquer modalidade. Basta agendar pelo formulário abaixo ou pelo WhatsApp.</p></div></div>
+        <div class="faq-item"><div class="faq-q">O plano tem fidelidade? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Temos planos mensais sem fidelidade e planos trimestrais/semestrais com desconto progressivo. Consulte nossa equipe para a melhor opção.</p></div></div>
+        <div class="faq-item"><div class="faq-q">Posso fazer mais de uma modalidade no mesmo dia? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Nos planos Pleno e Premium, sim! Você pode combinar modalidades no mesmo dia respeitando o intervalo recomendado pelas professoras.</p></div></div>
+        <div class="faq-item"><div class="faq-q">O Studio atende gestantes? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Sim! Temos turmas específicas para gestantes no Pilates Solo e Aqua Pilates. É necessário apresentar liberação médica.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="bg-dark">
+    <div class="sec-inner">
+      <div class="contact-grid">
+        <div>
+          <span class="sec-tag" style="color:var(--rose);">Fale conosco</span>
+          <h2 class="sec-title" style="color:#fff;">Agende sua aula experimental</h2>
+          <p style="color:rgba(255,255,255,.65);margin-bottom:2.5rem;line-height:1.8;">Sua primeira aula é gratuita e sem compromisso. Venha conhecer o Studio Fit e apaixonar-se pelo seu espaço!</p>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><span class="ci-label">Telefone</span><span class="ci-text">(81) 9 9627-3630</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><span class="ci-label">E-mail</span><span class="ci-text">contato@studiofit.com.br</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><span class="ci-label">Endereço</span><span class="ci-text">Rua das Graças, 320 · Graças · Recife – PE</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-clock"></i></div><div><span class="ci-label">Horários</span><span class="ci-text">Seg–Sex: 6h–21h · Sáb: 7h–16h</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fab fa-instagram"></i></div><div><span class="ci-label">Instagram</span><span class="ci-text">@studiofit.recife</span></div></div>
+        </div>
+        <div class="cf">
+          <h3>Quero minha aula grátis!</h3>
+          <form onsubmit="return false;">
+            <div class="fg"><label>Nome Completo</label><input type="text" placeholder="Seu nome"></div>
+            <div class="f-row">
+              <div class="fg"><label>WhatsApp</label><input type="tel" placeholder="(81) 9 9999-9999"></div>
+              <div class="fg"><label>Idade</label><input type="number" placeholder="Ex: 32"></div>
+            </div>
+            <div class="fg"><label>Modalidade de interesse</label>
+              <select><option value="">Selecione...</option><option>Pilates Solo</option><option>Yoga Flow</option><option>Musculação</option><option>Funcional Feminino</option><option>Dance Fit</option><option>Aqua Pilates</option></select>
+            </div>
+            <div class="fg"><label>Objetivo principal</label>
+              <select><option value="">Selecione...</option><option>Emagrecer</option><option>Tonificar o corpo</option><option>Saúde e bem-estar</option><option>Reduzir estresse</option><option>Melhorar postura</option><option>Condicionamento físico</option></select>
+            </div>
+            <div class="fg"><label>Como nos conheceu?</label>
+              <select><option value="">Selecione...</option><option>Instagram</option><option>Indicação de amiga</option><option>Google</option><option>Passando em frente</option><option>Outro</option></select>
+            </div>
+            <button onclick="alert('Aula agendada! Entraremos em contato em breve. ♥')" style="width:100%;padding:.9rem;background:var(--rose);color:#fff;border:none;border-radius:50px;font-weight:700;font-size:.95rem;cursor:pointer;transition:background .3s;" onmouseover="this.style.background='var(--rose-dark)'" onmouseout="this.style.background='var(--rose)'"><i class="fas fa-heart"></i> Agendar Aula Gratuita</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="f-logo">Studio Fit</span>
+    <p>O espaço pensado para a mulher que quer se transformar.</p>
+    <div class="f-note">&copy; 2026 Studio Fit · Todos os direitos reservados · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div>
+  </footer>
+
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    var s=document.getElementById('strip');if(s)s.innerHTML+=s.innerHTML;
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});
+    document.querySelectorAll('.faq-q').forEach(q=>{q.onclick=()=>{var i=q.parentElement;document.querySelectorAll('.faq-item.open').forEach(x=>{if(x!==i)x.classList.remove('open');});i.classList.toggle('open');};});
+  </script>
+</body>
+</html>

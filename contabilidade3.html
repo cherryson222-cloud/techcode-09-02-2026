@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conta+ Digital | Contabilidade Online</title>
+  <meta name="description" content="Contabilidade online moderna, rápida e transparente. Abertura de empresas, BPO financeiro e planejamento tributário.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{
+      --green:#00b07a; --green-dark:#008f62; --green-light:#e8faf4;
+      --navy:#0d1f2d; --gray:#64748b; --light:#f8fafc;
+      --white:#fff; --border:#e2e8f0;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--navy);background:var(--white);overflow-x:hidden;line-height:1.6;}
+
+    /* VOLTAR */
+    .btn-voltar{position:fixed;top:20px;left:20px;z-index:9999;background:var(--green);color:var(--white);padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(0,176,122,.3);}
+    .btn-voltar:hover{background:var(--green-dark);}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000;padding:1rem 0;}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-size:1.4rem;font-weight:800;color:var(--green);text-decoration:none;}
+    .nav-logo span{color:var(--navy);}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{color:var(--gray);text-decoration:none;font-weight:500;font-size:.9rem;transition:color .3s;}
+    .nav-links a:hover{color:var(--green);}
+    .nav-cta{background:var(--green);color:var(--white)!important;padding:.6rem 1.4rem;border-radius:50px;font-weight:700;}
+
+    /* HERO */
+    .hero{padding:9rem 2rem 6rem;background:linear-gradient(135deg,var(--green-light) 0%,var(--white) 60%);position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(0,176,122,.12),transparent 70%);top:-100px;right:-100px;border-radius:50%;}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1;}
+    .hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,176,122,.1);border:1px solid rgba(0,176,122,.3);color:var(--green);border-radius:50px;padding:.4rem 1rem;font-size:.8rem;font-weight:700;margin-bottom:1.5rem;}
+    .hero h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;line-height:1.15;margin-bottom:1.5rem;letter-spacing:-1px;}
+    .hero h1 span{color:var(--green);}
+    .hero p{font-size:1.05rem;color:var(--gray);margin-bottom:2.5rem;max-width:540px;line-height:1.8;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;}
+    .btn-green{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--green);color:var(--white);border-radius:50px;font-weight:700;text-decoration:none;transition:all .3s;font-size:.95rem;}
+    .btn-green:hover{background:var(--green-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,176,122,.3);}
+    .btn-outline-green{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:transparent;color:var(--green);border:2px solid var(--green);border-radius:50px;font-weight:700;text-decoration:none;transition:all .3s;font-size:.95rem;}
+    .btn-outline-green:hover{background:var(--green);color:var(--white);}
+    .hero-checks{display:flex;gap:2rem;flex-wrap:wrap;}
+    .hero-check{display:flex;align-items:center;gap:.5rem;font-size:.88rem;color:var(--gray);font-weight:600;}
+    .hero-check i{color:var(--green);}
+    .hero-card{background:var(--white);border-radius:24px;padding:2rem;box-shadow:0 20px 60px rgba(0,0,0,.08);border:1px solid var(--border);}
+    .hero-card h3{font-size:1.2rem;margin-bottom:1.5rem;color:var(--navy);}
+    .process-steps{display:flex;flex-direction:column;gap:1rem;}
+    .p-step{display:flex;gap:1rem;align-items:center;padding:.9rem;background:var(--light);border-radius:12px;}
+    .p-step-num{width:36px;height:36px;background:var(--green);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0;}
+    .p-step-text{font-size:.88rem;font-weight:600;color:var(--navy);}
+    .p-step-sub{font-size:.78rem;color:var(--gray);margin-top:.1rem;}
+
+    /* STATS */
+    .stats{background:var(--green);padding:4rem 2rem;color:var(--white);}
+    .stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;}
+    .stat-num{font-size:2.8rem;font-weight:800;display:block;margin-bottom:.3rem;}
+    .stat-lbl{font-size:.9rem;opacity:.9;}
+
+    /* SECTION BASE */
+    section{padding:5rem 2rem;}
+    .sec-inner{max-width:1200px;margin:0 auto;}
+    .sec-tag{color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:.78rem;margin-bottom:.8rem;display:block;}
+    .sec-title{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;margin-bottom:1rem;letter-spacing:-.5px;}
+    .sec-desc{color:var(--gray);font-size:1rem;max-width:600px;margin:0 auto 3rem;line-height:1.7;}
+    .text-center{text-align:center;}
+
+    /* SERVIÇOS */
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+    .svc-card{background:var(--white);border:2px solid var(--border);border-radius:20px;padding:2rem;transition:all .3s;}
+    .svc-card:hover{border-color:var(--green);box-shadow:0 12px 40px rgba(0,176,122,.1);transform:translateY(-6px);}
+    .svc-icon{width:56px;height:56px;background:var(--green-light);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--green);font-size:1.5rem;margin-bottom:1.2rem;}
+    .svc-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.6rem;}
+    .svc-card p{font-size:.88rem;color:var(--gray);line-height:1.6;}
+
+    /* COMO FUNCIONA */
+    .how-bg{background:var(--light);}
+    .steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;}
+    .step-card{text-align:center;padding:2rem;}
+    .step-num{width:64px;height:64px;background:var(--green);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;margin:0 auto 1.2rem;}
+    .step-card h3{font-size:1rem;font-weight:700;margin-bottom:.5rem;}
+    .step-card p{font-size:.88rem;color:var(--gray);}
+
+    /* DEPOIMENTOS */
+    .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
+    .test-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:2rem;transition:all .3s;}
+    .test-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.07);}
+    .stars{color:#f59e0b;margin-bottom:1rem;font-size:.9rem;}
+    .test-text{font-size:.92rem;color:var(--gray);font-style:italic;line-height:1.7;margin-bottom:1.5rem;}
+    .test-author{display:flex;align-items:center;gap:.8rem;}
+    .test-avatar{width:44px;height:44px;border-radius:50%;background:var(--green);color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;}
+    .test-name{font-weight:700;font-size:.9rem;}
+    .test-role{font-size:.78rem;color:var(--gray);}
+
+    /* FAQ */
+    .faq-list{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:1rem;}
+    .faq-item{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+    .faq-q{padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;font-size:.95rem;}
+    .faq-q i{color:var(--green);transition:transform .3s;}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;}
+    .faq-item.open .faq-a{max-height:200px;padding:0 1.5rem 1.2rem;}
+    .faq-item.open .faq-q i{transform:rotate(45deg);}
+    .faq-a p{font-size:.88rem;color:var(--gray);line-height:1.7;}
+
+    /* CONTATO */
+    .contact-bg{background:var(--navy);}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start;}
+    .contact-info h2{font-size:2rem;color:var(--white);margin-bottom:1rem;}
+    .contact-info p{color:rgba(255,255,255,.7);margin-bottom:2rem;line-height:1.7;}
+    .c-item{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;color:rgba(255,255,255,.85);font-size:.92rem;}
+    .c-icon{width:40px;height:40px;background:rgba(0,176,122,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--green);flex-shrink:0;}
+    .contact-form{background:var(--white);padding:2.5rem;border-radius:20px;}
+    .contact-form h3{margin-bottom:1.5rem;font-size:1.3rem;}
+    .f-group{margin-bottom:1.2rem;}
+    .f-group label{display:block;font-size:.82rem;font-weight:600;margin-bottom:.4rem;color:var(--navy);}
+    .f-group input,.f-group select,.f-group textarea{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:.9rem;transition:border-color .3s;}
+    .f-group input:focus,.f-group select:focus,.f-group textarea:focus{outline:none;border-color:var(--green);}
+    .f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+
+    /* FOOTER */
+    footer{background:#0a1929;color:rgba(255,255,255,.6);padding:3rem 2rem 1.5rem;text-align:center;}
+    footer a{color:rgba(255,255,255,.6);text-decoration:none;}
+    .footer-logo{font-size:1.4rem;font-weight:800;color:var(--green);margin-bottom:.5rem;display:block;}
+    .footer-note{font-size:.8rem;margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);padding-top:1rem;}
+
+    /* WHATSAPP */
+    .wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:1.6rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;transition:transform .3s;}
+    .wa-float:hover{transform:scale(1.1);}
+
+    @media(max-width:968px){
+      .hero-inner,.contact-grid{grid-template-columns:1fr;}
+      .stats-inner{grid-template-columns:repeat(2,1fr);}
+      nav .nav-links{display:none;}
+    }
+    @media(max-width:600px){
+      .stats-inner{grid-template-columns:1fr 1fr;}
+      .f-row{grid-template-columns:1fr;}
+      .hero{padding:7rem 1.5rem 4rem;}
+    }
+  </style>
+</head>
+<body>
+
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Conta<span>+</span> Digital</a>
+      <ul class="nav-links">
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contato" class="nav-cta">Falar com especialista</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag"><i class="fas fa-bolt"></i> Contabilidade 100% Online</div>
+        <h1>Sua empresa <span>organizada</span> e em dia com o fisco.</h1>
+        <p>Contabilidade digital rápida, transparente e sem burocracia. Abrimos sua empresa e cuidamos de tudo para você focar no crescimento.</p>
+        <div class="hero-btns">
+          <a href="#contato" class="btn-green"><i class="fas fa-rocket"></i> Começar Agora</a>
+          <a href="#como-funciona" class="btn-outline-green"><i class="fas fa-play-circle"></i> Como funciona</a>
+        </div>
+        <div class="hero-checks">
+          <span class="hero-check"><i class="fas fa-check-circle"></i> Sem fidelidade</span>
+          <span class="hero-check"><i class="fas fa-check-circle"></i> Suporte humanizado</span>
+          <span class="hero-check"><i class="fas fa-check-circle"></i> 100% digital</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3><i class="fas fa-route" style="color:var(--green);margin-right:.5rem;"></i> Processo Simples</h3>
+        <div class="process-steps">
+          <div class="p-step">
+            <div class="p-step-num">1</div>
+            <div><div class="p-step-text">Diagnóstico gratuito</div><div class="p-step-sub">Entendemos o seu negócio</div></div>
+          </div>
+          <div class="p-step">
+            <div class="p-step-num">2</div>
+            <div><div class="p-step-text">Proposta personalizada</div><div class="p-step-sub">Plano ideal para o seu segmento</div></div>
+          </div>
+          <div class="p-step">
+            <div class="p-step-num">3</div>
+            <div><div class="p-step-text">Migração ou abertura</div><div class="p-step-sub">Cuidamos de toda a burocracia</div></div>
+          </div>
+          <div class="p-step">
+            <div class="p-step-num">4</div>
+            <div><div class="p-step-text">Gestão contínua</div><div class="p-step-sub">Fique tranquilo, estamos aqui</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stats-inner">
+      <div><span class="stat-num">500+</span><span class="stat-lbl">Empresas atendidas</span></div>
+      <div><span class="stat-num">15+</span><span class="stat-lbl">Anos de mercado</span></div>
+      <div><span class="stat-num">98%</span><span class="stat-lbl">Clientes satisfeitos</span></div>
+      <div><span class="stat-num">R$2M+</span><span class="stat-lbl">Economia tributária gerada</span></div>
+    </div>
+  </div>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Serviços</span>
+        <h2 class="sec-title">Tudo que sua empresa precisa</h2>
+        <p class="sec-desc">Soluções contábeis completas para MEI, ME, EPP e empresas de médio porte.</p>
+      </div>
+      <div class="services-grid">
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-building"></i></div><h3>Abertura de Empresas</h3><p>Abrimos sua empresa em poucos dias com toda a documentação no ponto.</p></div>
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-file-invoice-dollar"></i></div><h3>Contabilidade Fiscal</h3><p>Apuração de impostos, entregas acessórias e conformidade com a Receita Federal.</p></div>
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-users"></i></div><h3>Departamento Pessoal</h3><p>Folha de pagamento, admissões, férias e gestão completa de RH.</p></div>
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-chart-pie"></i></div><h3>Planejamento Tributário</h3><p>Redução legal da carga de impostos com análise do melhor regime tributário.</p></div>
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-wallet"></i></div><h3>BPO Financeiro</h3><p>Contas a pagar/receber, fluxo de caixa e conciliação bancária terceirizados.</p></div>
+        <div class="svc-card"><div class="svc-icon"><i class="fas fa-laptop"></i></div><h3>Portal do Cliente</h3><p>Acesso online a documentos, demonstrativos e relatórios em tempo real.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section id="como-funciona" class="how-bg">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Processo</span>
+        <h2 class="sec-title">Como funciona</h2>
+        <p class="sec-desc">Em 4 passos simples sua empresa fica 100% organizada e tranquila.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card"><div class="step-num">1</div><h3>Diagnóstico Gratuito</h3><p>Conversamos sobre sua empresa, setor e necessidades sem compromisso.</p></div>
+        <div class="step-card"><div class="step-num">2</div><h3>Proposta Personalizada</h3><p>Montamos o plano ideal com os serviços certos para o seu negócio.</p></div>
+        <div class="step-card"><div class="step-num">3</div><h3>Onboarding Digital</h3><p>Migramos ou abrimos sua empresa. Você assina tudo digitalmente.</p></div>
+        <div class="step-card"><div class="step-num">4</div><h3>Gestão Contínua</h3><p>Cuidamos de tudo mensalmente. Você foca no que realmente importa.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Depoimentos</span>
+        <h2 class="sec-title">O que nossos clientes dizem</h2>
+        <p class="sec-desc">Empresas reais que confiam na Conta+ Digital.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="test-card"><div class="stars">★★★★★</div><p class="test-text">"A Conta+ transformou nossa gestão. Antes eu perdia horas com papelada, agora tudo é resolvido em minutos pelo portal. Recomendo demais!"</p><div class="test-author"><div class="test-avatar">JC</div><div><div class="test-name">João Carlos Silva</div><div class="test-role">CEO, JC Tecnologia</div></div></div></div>
+        <div class="test-card"><div class="stars">★★★★★</div><p class="test-text">"Com o planejamento tributário deles, reduzimos a carga fiscal da nossa empresa em quase 25%. Vale cada centavo investido."</p><div class="test-author"><div class="test-avatar">AM</div><div><div class="test-name">Ana Maria Rocha</div><div class="test-role">Proprietária, Studio Flor</div></div></div></div>
+        <div class="test-card"><div class="stars">★★★★★</div><p class="test-text">"Atendimento ágil e sempre disponível no WhatsApp. É um prazer trabalhar com uma equipe que realmente entende de contabilidade digital."</p><div class="test-author"><div class="test-avatar">RP</div><div><div class="test-name">Ricardo Pinto</div><div class="test-role">Fundador, Pinto Engenharia</div></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="how-bg">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Dúvidas</span>
+        <h2 class="sec-title">Perguntas frequentes</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><div class="faq-q">Qual regime tributário é melhor para minha empresa? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Depende do faturamento e margem de lucro. Fazemos uma análise completa para indicar entre Simples Nacional, Lucro Presumido ou Lucro Real.</p></div></div>
+        <div class="faq-item"><div class="faq-q">Vocês atendem empresas de qualquer segmento? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Sim! Atendemos MEI, ME, EPP e médias empresas de todos os segmentos em todo o Brasil de forma 100% digital.</p></div></div>
+        <div class="faq-item"><div class="faq-q">Como envio meus documentos mensalmente? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Pelo nosso portal online ou via WhatsApp. Tudo organizado e sem papelada física.</p></div></div>
+        <div class="faq-item"><div class="faq-q">Posso cancelar quando quiser? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Sim, sem multa. Trabalhamos sem fidelização. Queremos clientes satisfeitos, não presos.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="contact-bg">
+    <div class="sec-inner">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Fale com um especialista</h2>
+          <p>Solicite uma proposta gratuita e sem compromisso. Respondemos em até 24h.</p>
+          <div class="c-item"><div class="c-icon"><i class="fas fa-phone"></i></div><span>(81) 9 9627-3630</span></div>
+          <div class="c-item"><div class="c-icon"><i class="fas fa-envelope"></i></div><span>contato@contadigital.com.br</span></div>
+          <div class="c-item"><div class="c-icon"><i class="fas fa-map-marker-alt"></i></div><span>Recife – PE · Atendimento online para todo o Brasil</span></div>
+          <div class="c-item"><div class="c-icon"><i class="fas fa-clock"></i></div><span>Segunda a Sexta · 8h às 18h</span></div>
+        </div>
+        <div class="contact-form">
+          <h3>Solicite sua proposta gratuita</h3>
+          <form onsubmit="return false;">
+            <div class="f-group"><label>Nome Completo</label><input type="text" placeholder="Digite seu nome"></div>
+            <div class="f-row">
+              <div class="f-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+              <div class="f-group"><label>WhatsApp</label><input type="tel" placeholder="(81) 9 9999-9999"></div>
+            </div>
+            <div class="f-group"><label>Tipo de empresa</label><select><option value="">Selecione...</option><option>Ainda não tenho empresa</option><option>MEI</option><option>ME – Microempresa</option><option>EPP</option><option>Médio/Grande porte</option></select></div>
+            <div class="f-group"><label>Mensagem</label><textarea rows="3" placeholder="Descreva suas necessidades..."></textarea></div>
+            <button onclick="enviarContato()" style="width:100%;padding:1rem;background:var(--green);color:#fff;border:none;border-radius:12px;font-weight:700;font-size:1rem;cursor:pointer;transition:background .3s;" onmouseover="this.style.background='var(--green-dark)'" onmouseout="this.style.background='var(--green)'"><i class="fas fa-paper-plane"></i> Enviar Mensagem</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">Conta+ Digital</span>
+    <p>Contabilidade online para empresas que querem crescer sem burocracia.</p>
+    <div class="footer-note">&copy; 2026 Conta+ Digital · Todos os direitos reservados · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div>
+  </footer>
+
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    document.querySelectorAll('.faq-q').forEach(q=>{
+      q.onclick=()=>{
+        const item=q.parentElement;
+        document.querySelectorAll('.faq-item.open').forEach(i=>{ if(i!==item) i.classList.remove('open'); });
+        item.classList.toggle('open');
+      };
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});
+    function enviarContato(){alert('Mensagem enviada! Entraremos em contato em breve.');}
+  </script>
+</body>
+</html>

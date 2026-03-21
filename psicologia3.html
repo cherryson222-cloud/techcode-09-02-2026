@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Dra. Clara Viana | Psicóloga Clínica</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{--sage:#5c7a68;--sage-light:#eef3f0;--cream:#faf7f2;--dark:#1c1c1c;--gray:#7a7a7a;--border:#e8e0d8;--white:#fff;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;line-height:1.7;}
+    .btn-voltar{position:fixed;top:20px;left:20px;z-index:9999;background:var(--sage);color:#fff;padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:6px;}
+    .btn-voltar:hover{background:#4a6657;}
+    nav{position:fixed;top:0;width:100%;background:rgba(250,247,242,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000;padding:1.2rem 0;}
+    .nav-inner{max-width:1100px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--sage);text-decoration:none;letter-spacing:.5px;}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{color:var(--gray);font-size:.82rem;text-decoration:none;letter-spacing:.5px;transition:color .3s;}
+    .nav-links a:hover{color:var(--sage);}
+    .nav-cta{background:var(--sage)!important;color:#fff!important;padding:.5rem 1.3rem;border-radius:4px;font-size:.8rem;letter-spacing:1px;}
+
+    .hero{min-height:100vh;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;align-items:stretch;padding-top:5rem;}
+    .hero-left{padding:6rem 3rem 5rem 2rem;display:flex;flex-direction:column;justify-content:center;max-width:600px;margin-left:auto;}
+    .hero-pre{font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:2rem;}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,4.2rem);font-weight:400;line-height:1.2;margin-bottom:2rem;color:var(--dark);}
+    .hero h1 em{color:var(--sage);font-style:italic;}
+    .hero-line{width:60px;height:1px;background:var(--sage);margin-bottom:2rem;}
+    .hero p{font-size:.95rem;color:var(--gray);line-height:1.9;margin-bottom:2.5rem;max-width:440px;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+    .btn-sage{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;background:var(--sage);color:#fff;border-radius:4px;font-size:.82rem;font-weight:600;text-decoration:none;letter-spacing:.5px;transition:all .3s;}
+    .btn-sage:hover{background:#4a6657;transform:translateY(-2px);}
+    .btn-outline-sage{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;background:transparent;color:var(--sage);border:1px solid var(--sage);border-radius:4px;font-size:.82rem;font-weight:600;text-decoration:none;letter-spacing:.5px;transition:all .3s;}
+    .btn-outline-sage:hover{background:var(--sage);color:#fff;}
+    .hero-stats{display:flex;gap:3rem;margin-top:3rem;padding-top:3rem;border-top:1px solid var(--border);}
+    .hs-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--sage);display:block;line-height:1;}
+    .hs-lbl{font-size:.72rem;color:var(--gray);letter-spacing:.5px;margin-top:.2rem;}
+    .hero-right{background:var(--sage-light);position:relative;overflow:hidden;}
+    .hero-right img{width:100%;height:100%;object-fit:cover;min-height:500px;}
+    .hero-right::before{content:'';position:absolute;inset:0;background:rgba(92,122,104,.1);z-index:1;}
+
+    section{padding:5.5rem 2rem;}
+    .sec-inner{max-width:1100px;margin:0 auto;}
+    .sec-pre{font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:1rem;display:block;}
+    .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3rem);font-weight:400;margin-bottom:1.5rem;line-height:1.2;}
+    .sec-title em{color:var(--sage);font-style:italic;}
+    .sec-desc{color:var(--gray);font-size:.92rem;max-width:560px;line-height:1.8;}
+    .text-center{text-align:center;}.text-center .sec-desc{margin:0 auto 3rem;}
+    .bg-white{background:var(--white);}
+
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .about-img{position:relative;}
+    .about-img img{width:100%;border-radius:2px;box-shadow:0 20px 60px rgba(0,0,0,.1);}
+    .about-img::before{content:'';position:absolute;top:20px;left:20px;right:-20px;bottom:-20px;border:1px solid var(--sage);border-radius:2px;z-index:-1;}
+    .creds{display:flex;flex-direction:column;gap:.8rem;margin-top:2rem;}
+    .cred-item{display:flex;align-items:center;gap:.8rem;font-size:.85rem;color:var(--gray);}
+    .cred-item i{color:var(--sage);width:16px;}
+
+    .areas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:3rem;}
+    .area-card{padding:2rem;border-top:1px solid var(--border);transition:all .3s;}
+    .area-card:hover{border-top-color:var(--sage);}
+    .area-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:rgba(92,122,104,.3);margin-bottom:.8rem;}
+    .area-title{font-size:.9rem;font-weight:600;margin-bottom:.5rem;}
+    .area-desc{font-size:.82rem;color:var(--gray);line-height:1.6;}
+
+    .process-list{display:flex;flex-direction:column;gap:2rem;margin-top:3rem;max-width:700px;margin-left:auto;margin-right:auto;}
+    .proc-item{display:grid;grid-template-columns:80px 1fr;gap:2rem;align-items:start;}
+    .proc-num{font-family:'Cormorant Garamond',serif;font-size:3rem;color:rgba(92,122,104,.25);line-height:1;text-align:right;}
+    .proc-title{font-size:.9rem;font-weight:600;margin-bottom:.4rem;}
+    .proc-desc{font-size:.84rem;color:var(--gray);line-height:1.7;}
+
+    .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+    .t-card{background:var(--cream);border:1px solid var(--border);padding:2rem;}
+    .quote{font-size:2rem;color:var(--sage);opacity:.3;line-height:1;margin-bottom:.8rem;}
+    .t-text{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--dark);line-height:1.8;margin-bottom:1.5rem;}
+    .t-name{font-size:.82rem;font-weight:600;}
+    .t-role{font-size:.75rem;color:var(--gray);}
+
+    .contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:start;}
+    .ci-item{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.5rem;}
+    .ci-icon{width:36px;height:36px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--sage);flex-shrink:0;}
+    .ci-label{font-size:.7rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:.2rem;}
+    .ci-text{font-size:.88rem;color:var(--dark);}
+    .cf{background:var(--white);padding:2.5rem;border:1px solid var(--border);}
+    .cf h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:1.5rem;}
+    .fg{margin-bottom:1rem;}
+    .fg label{display:block;font-size:.7rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:.4rem;}
+    .fg input,.fg select,.fg textarea{width:100%;padding:.8rem 1rem;border:1px solid var(--border);background:var(--cream);font-family:'Inter',sans-serif;font-size:.88rem;transition:border-color .3s;}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--sage);}
+    .f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    footer{background:var(--dark);color:rgba(255,255,255,.45);padding:3rem 2rem 1.5rem;text-align:center;}
+    .f-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--sage);display:block;margin-bottom:.5rem;}
+    .f-note{font-size:.75rem;margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);padding-top:1rem;}
+    .wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;transition:transform .3s;}
+    .wa-float:hover{transform:scale(1.1);}
+    @media(max-width:968px){.hero{grid-template-columns:1fr;}.hero-right{display:none;}.about-grid,.contact-grid{grid-template-columns:1fr;}nav .nav-links{display:none;}}
+    @media(max-width:600px){.hero-left{padding:6rem 1.5rem 4rem;}.f-row{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+  <nav><div class="nav-inner"><a href="#" class="nav-logo">Dra. Clara Viana</a><ul class="nav-links"><li><a href="#sobre">Sobre</a></li><li><a href="#areas">Áreas</a></li><li><a href="#processo">Processo</a></li><li><a href="#contato" class="nav-cta">Agendar</a></li></ul></div></nav>
+
+  <div class="hero">
+    <div class="hero-left">
+      <p class="hero-pre">Psicóloga Clínica · CRP 02/98765 · Recife – PE</p>
+      <h1>Espaço seguro para o seu <em>autoconhecimento.</em></h1>
+      <div class="hero-line"></div>
+      <p>Psicoterapia individual presencial e online com abordagem humanista e baseada em evidências. Um lugar para ser você, sem julgamentos.</p>
+      <div class="hero-btns">
+        <a href="#contato" class="btn-sage">Agendar Sessão</a>
+        <a href="#sobre" class="btn-outline-sage">Conheça meu trabalho</a>
+      </div>
+      <div class="hero-stats">
+        <div><span class="hs-num">12+</span><span class="hs-lbl">Anos de prática</span></div>
+        <div><span class="hs-num">700+</span><span class="hs-lbl">Pacientes</span></div>
+        <div><span class="hs-num">100%</span><span class="hs-lbl">Sigilo</span></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&h=1000&fit=crop" alt="Dra. Clara Viana">
+    </div>
+  </div>
+
+  <section id="sobre" class="bg-white"><div class="sec-inner"><div class="about-grid"><div class="about-img"><img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=700&h=800&fit=crop" alt="Consultório"></div><div><span class="sec-pre">Sobre mim</span><h2 class="sec-title">Olá, sou a <em>Dra. Clara</em></h2><p style="color:var(--gray);font-size:.92rem;line-height:1.9;margin-bottom:1.5rem;">Sou psicóloga clínica com formação pela UFPE, especialização em Psicoterapia Humanista e Existencial e mais de 12 anos de experiência clínica. Atendo adolescentes, adultos e idosos com escuta acolhedora e respeito à singularidade de cada história.</p><p style="color:var(--gray);font-size:.92rem;line-height:1.9;margin-bottom:2rem;">Acredito que a terapia é um espaço de expansão — não apenas de resolução de problemas, mas de descoberta de quem você realmente é e quer ser.</p><div class="creds"><div class="cred-item"><i class="fas fa-graduation-cap"></i>Psicologia – UFPE (2012)</div><div class="cred-item"><i class="fas fa-certificate"></i>Especialização em Psicoterapia Humanista</div><div class="cred-item"><i class="fas fa-book"></i>Formação em Gestalt-terapia</div><div class="cred-item"><i class="fas fa-id-badge"></i>CRP 02/98765</div></div></div></div></div></section>
+
+  <section id="areas"><div class="sec-inner"><span class="sec-pre">Áreas de atuação</span><h2 class="sec-title">Como posso <em>ajudar</em></h2><div class="areas-grid"><div class="area-card"><div class="area-num">01</div><div class="area-title">Ansiedade</div><p class="area-desc">Tratamento de ansiedade generalizada, fobias e síndrome do pânico.</p></div><div class="area-card"><div class="area-num">02</div><div class="area-title">Depressão</div><p class="area-desc">Acompanhamento cuidadoso para superação de episódios depressivos.</p></div><div class="area-card"><div class="area-num">03</div><div class="area-title">Autoestima</div><p class="area-desc">Reconstrução da autoimagem e desenvolvimento de autoconfiança.</p></div><div class="area-card"><div class="area-num">04</div><div class="area-title">Luto</div><p class="area-desc">Suporte em processos de luto e perdas significativas.</p></div><div class="area-card"><div class="area-num">05</div><div class="area-title">Relacionamentos</div><p class="area-desc">Dinâmicas afetivas, comunicação e vínculos saudáveis.</p></div><div class="area-card"><div class="area-num">06</div><div class="area-title">Autoconhecimento</div><p class="area-desc">Para quem busca crescimento sem uma queixa específica.</p></div></div></div></section>
+
+  <section id="processo" class="bg-white"><div class="sec-inner"><div class="text-center"><span class="sec-pre">Processo terapêutico</span><h2 class="sec-title">Como <em>funciona</em></h2></div><div class="process-list"><div class="proc-item"><div class="proc-num">01</div><div><div class="proc-title">Primeira Conversa</div><p class="proc-desc">Uma sessão inicial de escuta e acolhimento, sem compromisso. Você apresenta o que te trouxe até aqui.</p></div></div><div class="proc-item"><div class="proc-num">02</div><div><div class="proc-title">Avaliação e Direcionamento</div><p class="proc-desc">Nas sessões seguintes, aprofundamos a compreensão do seu momento e traçamos os caminhos terapêuticos.</p></div></div><div class="proc-item"><div class="proc-num">03</div><div><div class="proc-title">Processo Contínuo</div><p class="proc-desc">Sessões semanais ou quinzenais com espaço para exploração, reflexão e transformação real.</p></div></div><div class="proc-item"><div class="proc-num">04</div><div><div class="proc-title">Alta e Continuidade</div><p class="proc-desc">Quando chega o momento, celebramos juntos o caminho percorrido e planejamos sua autonomia.</p></div></div></div></div></section>
+
+  <section><div class="sec-inner"><div class="text-center"><span class="sec-pre">Depoimentos</span><h2 class="sec-title">Palavras de <em>quem passou por aqui</em></h2></div><div class="test-grid"><div class="t-card"><div class="quote">"</div><p class="t-text">A Dra. Clara tem uma escuta que transforma. Me sinto completamente segura para ser eu mesma nas sessões.</p><div class="t-name">Isabela Rocha, 29 anos</div><div class="t-role">Professora</div></div><div class="t-card"><div class="quote">"</div><p class="t-text">Cheguei perdida e encontrei minha direção. O processo foi lento, mas profundo e verdadeiro.</p><div class="t-name">Marcos Vidal, 44 anos</div><div class="t-role">Engenheiro</div></div><div class="t-card"><div class="quote">"</div><p class="t-text">Nunca pensei que terapia seria tão transformadora. A abordagem humanista fez todo sentido para mim.</p><div class="t-name">Renata Carvalho, 35 anos</div><div class="t-role">Enfermeira</div></div></div></div></section>
+
+  <section id="contato" class="bg-white"><div class="sec-inner"><div class="contact-grid"><div><span class="sec-pre">Contato</span><h2 class="sec-title">Vamos <em>conversar?</em></h2><p style="color:var(--gray);font-size:.88rem;line-height:1.8;margin-bottom:2.5rem;">Entre em contato para agendar sua primeira sessão. Atendo presencialmente em Recife e online para todo o Brasil.</p><div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><span class="ci-label">Telefone</span><span class="ci-text">(81) 9 9627-3630</span></div></div><div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><span class="ci-label">E-mail</span><span class="ci-text">contato@claraviana.psi.br</span></div></div><div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><span class="ci-label">Consultório</span><span class="ci-text">Rua do Riachuelo, 430 · Boa Vista · Recife – PE</span></div></div></div><div class="cf"><h3>Agende sua sessão</h3><form onsubmit="return false;"><div class="fg"><label>Nome</label><input type="text" placeholder="Seu nome completo"></div><div class="f-row"><div class="fg"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div><div class="fg"><label>Telefone</label><input type="tel" placeholder="(81) 9 9999-9999"></div></div><div class="fg"><label>Modalidade</label><select><option value="">Selecione...</option><option>Presencial – Recife</option><option>Online</option></select></div><div class="fg"><label>Mensagem</label><textarea rows="3" placeholder="O que te trouxe até aqui?"></textarea></div><button onclick="alert('Mensagem enviada!')" style="width:100%;padding:.9rem;background:var(--sage);color:#fff;border:none;font-weight:600;font-size:.88rem;cursor:pointer;letter-spacing:.5px;">Enviar mensagem</button></form></div></div></div></section>
+
+  <footer><span class="f-logo">Dra. Clara Viana</span><p>Psicóloga Clínica CRP 02/98765 · Recife – PE</p><div class="f-note">&copy; 2026 Dra. Clara Viana · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div></footer>
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+  <script>document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});</script>
+</body>
+</html>

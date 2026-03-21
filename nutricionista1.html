@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vida Leve | Nutrição & Bem-estar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{--olive:#4a6741;--olive-light:#eef4ec;--olive-mid:#7a9e75;--cream:#faf6ef;--gold:#c8a96e;--dark:#1e2a1a;--gray:#6b7c68;--border:#dde8d8;--white:#fff;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;line-height:1.7;}
+
+    .btn-voltar{position:fixed;top:20px;left:20px;z-index:9999;background:var(--olive);color:#fff;padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(74,103,65,.3);}
+    .btn-voltar:hover{background:#3a5432;}
+
+    nav{position:fixed;top:0;width:100%;background:rgba(250,246,239,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000;padding:1.1rem 0;}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--olive);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+    .nav-logo i{color:var(--gold);}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{color:var(--gray);font-size:.86rem;text-decoration:none;font-weight:500;transition:color .3s;}
+    .nav-links a:hover{color:var(--olive);}
+    .nav-cta{background:var(--olive)!important;color:#fff!important;padding:.55rem 1.3rem;border-radius:50px;}
+
+    /* HERO */
+    .hero{min-height:100vh;background:linear-gradient(155deg,var(--olive-light) 0%,var(--cream) 60%);display:flex;align-items:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:-150px;right:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(200,169,110,.2),transparent 65%);border-radius:50%;}
+    .hero::after{content:'';position:absolute;bottom:-100px;left:5%;width:300px;height:300px;background:radial-gradient(circle,rgba(74,103,65,.12),transparent 65%);border-radius:50%;}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1;}
+    .hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(74,103,65,.12);color:var(--olive);border-radius:50px;padding:.4rem 1rem;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1.5rem;}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:700;line-height:1.15;margin-bottom:1.5rem;}
+    .hero h1 em{color:var(--olive);font-style:italic;}
+    .hero p{color:var(--gray);font-size:.96rem;line-height:1.9;margin-bottom:2.5rem;max-width:480px;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+    .btn-olive{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--olive);color:#fff;border-radius:50px;font-weight:700;text-decoration:none;font-size:.92rem;transition:all .3s;}
+    .btn-olive:hover{background:#3a5432;transform:translateY(-2px);box-shadow:0 8px 24px rgba(74,103,65,.3);}
+    .btn-outline{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:transparent;color:var(--olive);border:2px solid var(--olive);border-radius:50px;font-weight:700;text-decoration:none;font-size:.92rem;transition:all .3s;}
+    .btn-outline:hover{background:var(--olive);color:#fff;}
+    .hero-trust{display:flex;gap:2rem;flex-wrap:wrap;}
+    .trust-item{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--gray);font-weight:500;}
+    .trust-item i{color:var(--olive);}
+    .hero-img-wrap{position:relative;}
+    .hero-img-wrap img{width:100%;height:540px;object-fit:cover;border-radius:40px 8px 40px 8px;box-shadow:0 24px 60px rgba(74,103,65,.2);}
+    .hero-float{position:absolute;bottom:28px;left:-20px;background:var(--white);border-radius:16px;padding:1rem 1.4rem;box-shadow:0 8px 30px rgba(0,0,0,.1);display:flex;align-items:center;gap:.8rem;}
+    .float-icon{width:40px;height:40px;background:var(--olive-light);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--olive);font-size:1.2rem;}
+    .float-val{font-weight:800;font-size:1rem;color:var(--dark);}
+    .float-lbl{font-size:.72rem;color:var(--gray);}
+
+    section{padding:5.5rem 2rem;}
+    .sec-inner{max-width:1200px;margin:0 auto;}
+    .sec-tag{display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--olive);margin-bottom:.5rem;}
+    .sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:700;margin-bottom:1rem;line-height:1.2;}
+    .sec-title em{color:var(--olive);font-style:italic;}
+    .sec-desc{color:var(--gray);font-size:.93rem;max-width:560px;line-height:1.8;}
+    .text-center{text-align:center;}.text-center .sec-desc{margin:0 auto 3rem;}
+    .bg-white{background:var(--white);}
+    .bg-olive{background:var(--olive);}
+
+    /* SOBRE */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .about-img{position:relative;}
+    .about-img img{width:100%;height:500px;object-fit:cover;border-radius:20px;box-shadow:0 20px 50px rgba(74,103,65,.15);}
+    .about-badge{position:absolute;bottom:-20px;right:-20px;background:var(--white);border-radius:16px;padding:1.2rem 1.5rem;box-shadow:0 12px 40px rgba(0,0,0,.1);text-align:center;min-width:140px;}
+    .ab-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;color:var(--olive);line-height:1;}
+    .ab-lbl{font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-top:.3rem;}
+    .about-creds{list-style:none;margin:1.5rem 0;display:flex;flex-direction:column;gap:.7rem;}
+    .about-creds li{display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:var(--gray);}
+    .about-creds i{color:var(--olive);}
+    .chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem;}
+    .chip{background:var(--olive-light);color:var(--olive);border:1px solid var(--border);border-radius:50px;padding:.3rem .9rem;font-size:.78rem;font-weight:600;}
+
+    /* ESPECIALIDADES */
+    .spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:3rem;}
+    .spec-card{background:var(--cream);border:1.5px solid var(--border);border-radius:20px;padding:2rem;text-align:center;transition:all .3s;}
+    .spec-card:hover{border-color:var(--olive);box-shadow:0 12px 40px rgba(74,103,65,.1);transform:translateY(-5px);}
+    .spec-icon{font-size:2.5rem;margin-bottom:1rem;display:block;}
+    .spec-card h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:.4rem;}
+    .spec-card p{font-size:.82rem;color:var(--gray);line-height:1.6;}
+
+    /* IMC */
+    .imc-box{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:3rem;max-width:680px;margin:3rem auto 0;}
+    .imc-box h3{font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:.5rem;}
+    .imc-box p{color:var(--gray);font-size:.88rem;margin-bottom:2rem;}
+    .imc-fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem;}
+    .imc-fields input{padding:.9rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:.9rem;background:var(--cream);transition:border-color .3s;}
+    .imc-fields input:focus{outline:none;border-color:var(--olive);}
+    .imc-result{background:var(--olive-light);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-top:1rem;text-align:center;display:none;font-size:.9rem;color:var(--dark);}
+    .imc-result strong{color:var(--olive);font-size:1.3rem;}
+
+    /* SERVIÇOS / PLANOS */
+    .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3rem;}
+    .plan-card{background:var(--white);border:2px solid var(--border);border-radius:20px;padding:2rem;transition:all .3s;position:relative;}
+    .plan-card.featured{border-color:var(--olive);}
+    .plan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--olive);color:#fff;font-size:.7rem;font-weight:700;padding:.3rem 1rem;border-radius:20px;white-space:nowrap;}
+    .plan-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:.5rem;}
+    .plan-desc{font-size:.82rem;color:var(--gray);margin-bottom:1.5rem;}
+    .plan-feats{list-style:none;margin-bottom:1.8rem;}
+    .plan-feats li{font-size:.84rem;color:var(--gray);padding:.35rem 0 .35rem 1.4rem;position:relative;}
+    .plan-feats li::before{content:'🌿';position:absolute;left:0;font-size:.7rem;}
+
+    /* DEPOIMENTOS */
+    .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem;}
+    .t-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:2rem;}
+    .t-stars{color:var(--gold);font-size:.85rem;margin-bottom:.8rem;}
+    .t-text{font-size:.88rem;color:var(--gray);font-style:italic;line-height:1.7;margin-bottom:1.2rem;}
+    .t-result{display:inline-block;background:var(--olive-light);color:var(--olive);font-size:.75rem;font-weight:700;border-radius:50px;padding:.3rem .9rem;margin-bottom:.7rem;}
+    .t-name{font-weight:700;font-size:.88rem;}
+    .t-role{font-size:.75rem;color:var(--gray);}
+
+    /* BLOG */
+    .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:3rem;}
+    .blog-card{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .3s;}
+    .blog-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.07);transform:translateY(-4px);}
+    .blog-img{height:180px;overflow:hidden;}
+    .blog-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+    .blog-card:hover .blog-img img{transform:scale(1.05);}
+    .blog-body{padding:1.5rem;}
+    .blog-cat{font-size:.72rem;font-weight:700;color:var(--olive);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;}
+    .blog-title{font-weight:700;font-size:.95rem;margin-bottom:.5rem;line-height:1.4;}
+    .blog-excerpt{font-size:.82rem;color:var(--gray);line-height:1.5;}
+
+    /* CONTATO */
+    .contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;margin-top:3rem;}
+    .ci-item{display:flex;gap:.9rem;align-items:center;margin-bottom:1.2rem;}
+    .ci-icon{width:42px;height:42px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;}
+    .ci-label{font-weight:700;font-size:.8rem;display:block;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.1rem;}
+    .ci-text{font-size:.88rem;color:rgba(255,255,255,.9);}
+    .cf{background:var(--white);border-radius:20px;padding:2.5rem;}
+    .cf h3{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:1.5rem;color:var(--dark);}
+    .fg{margin-bottom:1rem;}
+    .fg label{display:block;font-size:.78rem;font-weight:600;margin-bottom:.3rem;color:var(--dark);}
+    .fg input,.fg select,.fg textarea{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:.88rem;background:var(--cream);transition:border-color .3s;}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--olive);}
+    .f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+
+    footer{background:var(--dark);color:rgba(255,255,255,.5);padding:3rem 2rem 1.5rem;text-align:center;}
+    .f-logo{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--olive-mid);display:block;margin-bottom:.5rem;}
+    .f-note{font-size:.78rem;margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);padding-top:1rem;}
+    .wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;transition:transform .3s;}
+    .wa-float:hover{transform:scale(1.1);}
+
+    @media(max-width:968px){.hero-inner,.about-grid,.contact-grid{grid-template-columns:1fr;}nav .nav-links{display:none;}.hero-img-wrap{display:none;}.about-badge{display:none;}}
+    @media(max-width:600px){.hero{padding:7rem 1.5rem 4rem;}.imc-fields,.f-row{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><i class="fas fa-leaf"></i> Vida Leve</a>
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#especialidades">Especialidades</a></li>
+        <li><a href="#planos">Planos</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contato" class="nav-cta">Agendar Consulta</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag"><i class="fas fa-seedling"></i> Nutricionista · CRN 6/12345 · Recife – PE</div>
+        <h1>Alimentação que <em>transforma</em> seu corpo e sua vida.</h1>
+        <p>Reeducação alimentar personalizada e sustentável. Cuidamos da sua saúde de forma integral, com ciência, empatia e respeito à sua individualidade.</p>
+        <div class="hero-btns">
+          <a href="#contato" class="btn-olive"><i class="fas fa-calendar-check"></i> Agendar Consulta</a>
+          <a href="#especialidades" class="btn-outline"><i class="fas fa-leaf"></i> Especialidades</a>
+        </div>
+        <div class="hero-trust">
+          <span class="trust-item"><i class="fas fa-check-circle"></i> CRN Ativo</span>
+          <span class="trust-item"><i class="fas fa-check-circle"></i> Online e presencial</span>
+          <span class="trust-item"><i class="fas fa-check-circle"></i> Sem dietas restritivas</span>
+        </div>
+      </div>
+      <div class="hero-img-wrap">
+        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=1000&fit=crop" alt="Vida Leve Nutrição">
+        <div class="hero-float">
+          <div class="float-icon"><i class="fas fa-users"></i></div>
+          <div><div class="float-val">450+</div><div class="float-lbl">Pacientes atendidos</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="bg-white">
+    <div class="sec-inner">
+      <div class="about-grid">
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=700&h=900&fit=crop" alt="Sobre">
+          <div class="about-badge"><div class="ab-num">8+</div><div class="ab-lbl">anos de experiência</div></div>
+        </div>
+        <div>
+          <span class="sec-tag">Sobre mim</span>
+          <h2 class="sec-title">Olá, sou a <em>Nutri Ana!</em></h2>
+          <p style="color:var(--gray);font-size:.92rem;line-height:1.9;margin-bottom:1rem;">Sou nutricionista formada pela UFPE, especializada em Nutrição Clínica e Comportamento Alimentar. Há mais de 8 anos ajudo pessoas a reconquistarem uma relação saudável com a comida — sem restrições extremas, sem culpa.</p>
+          <p style="color:var(--gray);font-size:.92rem;line-height:1.9;">Acredito que cada corpo é único. Por isso, meu trabalho é sempre personalizado, levando em conta sua rotina, preferências, histórico e objetivos reais.</p>
+          <ul class="about-creds">
+            <li><i class="fas fa-graduation-cap"></i> Nutrição – UFPE (2016)</li>
+            <li><i class="fas fa-certificate"></i> Especialização em Nutrição Clínica</li>
+            <li><i class="fas fa-brain"></i> Pós-graduação em Comportamento Alimentar</li>
+            <li><i class="fas fa-id-badge"></i> CRN 6/12345 – Ativo</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">Reeducação Alimentar</span>
+            <span class="chip">Emagrecimento</span>
+            <span class="chip">Nutrição Funcional</span>
+            <span class="chip">Atendimento Online</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPECIALIDADES -->
+  <section id="especialidades">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Especialidades</span>
+        <h2 class="sec-title">Como posso <em>te ajudar</em></h2>
+        <p class="sec-desc">Cada consulta é adaptada à sua realidade. Veja as principais áreas de atuação.</p>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-card"><span class="spec-icon">🥗</span><h3>Reeducação Alimentar</h3><p>Mudança de hábitos sustentável e sem restrições radicais, com foco no longo prazo.</p></div>
+        <div class="spec-card"><span class="spec-icon">⚖️</span><h3>Emagrecimento Saudável</h3><p>Perda de peso com preservação da massa muscular e qualidade de vida.</p></div>
+        <div class="spec-card"><span class="spec-icon">🌿</span><h3>Nutrição Funcional</h3><p>Alimentação como medicina para prevenção e tratamento de doenças crônicas.</p></div>
+        <div class="spec-card"><span class="spec-icon">🍼</span><h3>Nutrição Materno-Infantil</h3><p>Gestação, amamentação, introdução alimentar e nutrição pediátrica.</p></div>
+        <div class="spec-card"><span class="spec-icon">💊</span><h3>Suplementação</h3><p>Orientação sobre suplementos baseada em evidências e seu perfil individual.</p></div>
+        <div class="spec-card"><span class="spec-icon">🧠</span><h3>Comportamento Alimentar</h3><p>Comer emocional, compulsão e construção de uma relação positiva com a comida.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULADORA IMC -->
+  <section class="bg-white">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Ferramenta gratuita</span>
+        <h2 class="sec-title">Calcule seu <em>IMC</em></h2>
+        <p class="sec-desc">Uma ferramenta rápida para entender seu índice de massa corporal e dar o primeiro passo.</p>
+      </div>
+      <div class="imc-box">
+        <h3>Calculadora de IMC</h3>
+        <p>Preencha seu peso e altura abaixo. Lembre-se: o IMC é apenas um indicador — agende sua consulta para uma avaliação completa!</p>
+        <div class="imc-fields">
+          <input type="number" id="peso" placeholder="Peso (kg)" min="30" max="300">
+          <input type="number" id="altura" placeholder="Altura (cm)" min="100" max="250">
+        </div>
+        <button onclick="calcIMC()" style="width:100%;padding:.9rem;background:var(--olive);color:#fff;border:none;border-radius:50px;font-weight:700;font-size:.9rem;cursor:pointer;transition:background .3s;" onmouseover="this.style.background='#3a5432'" onmouseout="this.style.background='var(--olive)'"><i class="fas fa-calculator"></i> Calcular IMC</button>
+        <div class="imc-result" id="imcResult"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section id="planos">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Investimento</span>
+        <h2 class="sec-title">Planos de <em>acompanhamento</em></h2>
+        <p class="sec-desc">Consultas e pacotes pensados para se encaixar na sua rotina e objetivo.</p>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card">
+          <div class="plan-name">Consulta Avulsa</div>
+          <p class="plan-desc">Ideal para quem quer começar com uma avaliação completa sem compromisso.</p>
+          <ul class="plan-feats">
+            <li>Anamnese nutricional completa</li>
+            <li>Plano alimentar personalizado</li>
+            <li>Orientação de suplementação</li>
+            <li>Retorno em 30 dias</li>
+          </ul>
+          <a href="#contato" class="btn-outline" style="width:100%;justify-content:center;">Agendar</a>
+        </div>
+        <div class="plan-card featured">
+          <div class="plan-badge">Mais escolhido 🌿</div>
+          <div class="plan-name">Acompanhamento Mensal</div>
+          <p class="plan-desc">Evolução contínua com revisões frequentes para resultados consistentes.</p>
+          <ul class="plan-feats">
+            <li>Consulta inicial completa</li>
+            <li>2 retornos mensais</li>
+            <li>Ajustes semanais de cardápio</li>
+            <li>Suporte via WhatsApp</li>
+          </ul>
+          <a href="#contato" class="btn-olive" style="width:100%;justify-content:center;">Agendar</a>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">Pacote Trimestral</div>
+          <p class="plan-desc">Para quem busca transformação real com acompanhamento intensivo de 3 meses.</p>
+          <ul class="plan-feats">
+            <li>Tudo do plano mensal</li>
+            <li>Exames e bioimpedância</li>
+            <li>Plano nutricional sazonal</li>
+            <li>Relatório de evolução</li>
+          </ul>
+          <a href="#contato" class="btn-outline" style="width:100%;justify-content:center;">Agendar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section class="bg-white">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Resultados</span>
+        <h2 class="sec-title">Histórias que <em>inspiram</em></h2>
+      </div>
+      <div class="test-grid">
+        <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-result">−11kg em 4 meses</div><p class="t-text">"Nunca pensei que emagrecer sem sofrimento fosse possível. A Nutri Ana mudou minha relação com a comida para sempre!"</p><div class="t-name">Camila Rocha</div><div class="t-role">Paciente há 6 meses</div></div>
+        <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-result">Controlou diabetes tipo 2</div><p class="t-text">"Com o plano nutricional funcional, reduzi minha glicemia e diminuí a medicação com acompanhamento médico. Vida transformada."</p><div class="t-name">José Carlos Melo</div><div class="t-role">Paciente há 1 ano</div></div>
+        <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-result">Introdução alimentar bem-sucedida</div><p class="t-text">"Fiz o acompanhamento durante a gestação e introdução do meu filho. Orientações claras e muito carinho. Super recomendo!"</p><div class="t-name">Larissa Neves</div><div class="t-role">Paciente há 8 meses</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <div class="sec-inner">
+      <div class="text-center">
+        <span class="sec-tag">Blog</span>
+        <h2 class="sec-title">Dicas de <em>nutrição</em></h2>
+        <p class="sec-desc">Conteúdo gratuito para você cuidar melhor da sua alimentação no dia a dia.</p>
+      </div>
+      <div class="blog-grid">
+        <div class="blog-card"><div class="blog-img"><img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=300&fit=crop" alt=""></div><div class="blog-body"><div class="blog-cat">Nutrição</div><h4 class="blog-title">5 alimentos que combatem a inflamação e você provavelmente já tem em casa</h4><p class="blog-excerpt">Descubra como pequenas mudanças na alimentação podem reduzir inflamações cronicamente.</p></div></div>
+        <div class="blog-card"><div class="blog-img"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&h=300&fit=crop" alt=""></div><div class="blog-body"><div class="blog-cat">Emagrecimento</div><h4 class="blog-title">Por que as dietas restritivas não funcionam — e o que fazer em vez disso</h4><p class="blog-excerpt">Entenda a ciência por trás do efeito sanfona e como construir hábitos sustentáveis.</p></div></div>
+        <div class="blog-card"><div class="blog-img"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=300&fit=crop" alt=""></div><div class="blog-body"><div class="blog-cat">Bem-estar</div><h4 class="blog-title">Como criar uma rotina alimentar saudável mesmo com uma agenda cheia</h4><p class="blog-excerpt">Estratégias práticas para manter a alimentação em dia mesmo nos dias mais corridos.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="bg-olive">
+    <div class="sec-inner">
+      <div class="contact-grid">
+        <div>
+          <span class="sec-tag" style="color:rgba(255,255,255,.7);">Fale comigo</span>
+          <h2 class="sec-title" style="color:#fff;">Agende sua <em style="color:var(--gold);">consulta</em></h2>
+          <p style="color:rgba(255,255,255,.75);margin-bottom:2.5rem;line-height:1.8;">Primeira consulta gratuita para novos pacientes! Entre em contato e vamos traçar juntos o caminho para uma vida mais leve e saudável.</p>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><span class="ci-label">WhatsApp</span><span class="ci-text">(81) 9 9627-3630</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><span class="ci-label">E-mail</span><span class="ci-text">contato@vidaleve.nutri.br</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><span class="ci-label">Consultório</span><span class="ci-text">Av. Conselheiro Aguiar, 500 · Boa Viagem · Recife – PE</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-clock"></i></div><div><span class="ci-label">Horários</span><span class="ci-text">Seg–Sex: 8h–19h · Sáb: 8h–13h</span></div></div>
+        </div>
+        <div class="cf">
+          <h3>Quero minha consulta!</h3>
+          <form onsubmit="return false;">
+            <div class="fg"><label>Nome Completo</label><input type="text" placeholder="Seu nome"></div>
+            <div class="f-row">
+              <div class="fg"><label>WhatsApp</label><input type="tel" placeholder="(81) 9 9999-9999"></div>
+              <div class="fg"><label>Idade</label><input type="number" placeholder="Ex: 32"></div>
+            </div>
+            <div class="fg"><label>Objetivo principal</label>
+              <select><option value="">Selecione...</option><option>Emagrecer</option><option>Ganhar peso / massa</option><option>Reeducação alimentar</option><option>Tratar doença crônica</option><option>Nutrição na gestação</option><option>Introdução alimentar</option><option>Outro</option></select>
+            </div>
+            <div class="fg"><label>Modalidade</label>
+              <select><option value="">Selecione...</option><option>Presencial – Recife</option><option>Online</option></select>
+            </div>
+            <div class="fg"><label>Mensagem</label><textarea rows="3" placeholder="Conte um pouco sobre você e seu objetivo..."></textarea></div>
+            <button onclick="alert('Consulta solicitada! Entro em contato em breve. 🌿')" style="width:100%;padding:.9rem;background:var(--olive);color:#fff;border:none;border-radius:50px;font-weight:700;font-size:.9rem;cursor:pointer;transition:background .3s;" onmouseover="this.style.background='#3a5432'" onmouseout="this.style.background='var(--olive)'"><i class="fas fa-leaf"></i> Agendar Consulta</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="f-logo">Vida Leve</span>
+    <p>Nutrição & Bem-estar · CRN 6/12345 · Recife – PE</p>
+    <div class="f-note">&copy; 2026 Vida Leve · Todos os direitos reservados · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div>
+  </footer>
+
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});
+    function calcIMC(){
+      var p=parseFloat(document.getElementById('peso').value);
+      var h=parseFloat(document.getElementById('altura').value)/100;
+      var r=document.getElementById('imcResult');
+      if(!p||!h||p<30||h<1){alert('Preencha os campos corretamente.');return;}
+      var imc=(p/(h*h)).toFixed(1);
+      var cat='',emoji='';
+      if(imc<18.5){cat='Abaixo do peso';emoji='⚠️';}
+      else if(imc<25){cat='Peso saudável';emoji='✅';}
+      else if(imc<30){cat='Sobrepeso';emoji='⚠️';}
+      else{cat='Obesidade';emoji='⚠️';}
+      r.style.display='block';
+      r.innerHTML=emoji+' Seu IMC: <strong>'+imc+'</strong> — '+cat+'<br><small style="color:var(--gray);margin-top:.4rem;display:block;">Agende uma consulta para uma avaliação nutricional completa! <a href="#contato" style="color:var(--olive);">Clique aqui.</a></small>';
+    }
+  </script>
+</body>
+</html>

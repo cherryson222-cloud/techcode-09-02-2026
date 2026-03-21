@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutri Premium | Emagrecimento Exclusivo & Atendimento VIP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{--rose:#c0586a;--rose-light:#fdf0f3;--gold:#c9933c;--gold-light:#fef6e4;--dark:#1c1018;--mid:#2a1e24;--gray:#7c6a72;--border:#ead8df;--light:#fdf8f9;--white:#fff;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--white);color:var(--dark);overflow-x:hidden;line-height:1.7;}
+
+    .btn-voltar{position:fixed;top:20px;left:20px;z-index:9999;background:var(--rose);color:#fff;padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(192,88,106,.4);}
+    .btn-voltar:hover{background:#a8485a;}
+
+    nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000;padding:1.1rem 0;}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--rose);text-decoration:none;display:flex;align-items:center;gap:.4rem;}
+    .nav-logo i{color:var(--gold);font-size:1.1rem;}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{color:var(--gray);font-size:.87rem;text-decoration:none;font-weight:500;transition:color .3s;}
+    .nav-links a:hover{color:var(--rose);}
+    .nav-cta{background:var(--rose)!important;color:#fff!important;padding:.55rem 1.3rem;border-radius:50px;font-weight:600;}
+
+    /* HERO */
+    .hero{min-height:100vh;background:linear-gradient(155deg,#1c1018 0%,#2e1a22 55%,#1c1018 100%);display:flex;align-items:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:-200px;right:-200px;width:650px;height:650px;background:radial-gradient(circle,rgba(192,88,106,.2),transparent 65%);border-radius:50%;}
+    .hero::after{content:'';position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,147,60,.1),transparent 65%);border-radius:50%;}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1;}
+    .hero-pre{display:flex;align-items:center;gap:.8rem;margin-bottom:2rem;}
+    .pre-line{width:40px;height:1px;background:var(--gold);}
+    .pre-text{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,4.5rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:1.5rem;letter-spacing:-.5px;}
+    .hero h1 em{color:var(--gold);font-style:italic;}
+    .hero p{color:rgba(255,255,255,.65);font-size:.97rem;line-height:1.9;margin-bottom:2.5rem;max-width:480px;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;}
+    .btn-gold{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;background:linear-gradient(135deg,var(--gold),#e0aa50);color:#1c1018;border-radius:50px;font-weight:700;text-decoration:none;font-size:.92rem;transition:all .3s;}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,147,60,.4);}
+    .btn-ghost-w{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:50px;font-weight:600;text-decoration:none;font-size:.92rem;transition:all .3s;}
+    .btn-ghost-w:hover{border-color:var(--gold);color:var(--gold);}
+    .hero-stats{display:flex;gap:3rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.1);}
+    .hs-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:var(--gold);display:block;line-height:1;}
+    .hs-lbl{font-size:.72rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;margin-top:.3rem;}
+    /* VIP card */
+    .vip-card{background:rgba(255,255,255,.05);backdrop-filter:blur(16px);border:1px solid rgba(201,147,60,.3);border-radius:24px;padding:2rem;position:relative;overflow:hidden;}
+    .vip-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+    .vip-tag{display:inline-flex;align-items:center;gap:.4rem;background:rgba(201,147,60,.15);color:var(--gold);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:.3rem .8rem;border-radius:50px;margin-bottom:1.2rem;}
+    .vip-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:1.5rem;}
+    .vip-items{display:flex;flex-direction:column;gap:.9rem;}
+    .vip-item{display:flex;gap:1rem;align-items:center;padding:1rem;background:rgba(255,255,255,.04);border-radius:12px;border:1px solid rgba(255,255,255,.06);}
+    .vi-icon{width:38px;height:38px;background:rgba(201,147,60,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;}
+    .vi-title{font-size:.88rem;font-weight:600;color:#fff;}
+    .vi-sub{font-size:.74rem;color:rgba(255,255,255,.5);}
+    .vip-footer{margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;}
+    .vip-limited{font-size:.75rem;color:rgba(255,255,255,.5);}
+    .vip-limited strong{color:var(--gold);}
+
+    section{padding:5.5rem 2rem;}
+    .sec-inner{max-width:1200px;margin:0 auto;}
+    .sec-pre{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;}
+    .sp-line{width:28px;height:1px;background:var(--gold);}
+    .sp-text{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
+    .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:700;margin-bottom:1rem;line-height:1.2;}
+    .sec-title em{color:var(--rose);font-style:italic;}
+    .sec-desc{color:var(--gray);font-size:.93rem;max-width:560px;line-height:1.8;}
+    .text-center{text-align:center;}.text-center .sec-pre{justify-content:center;}.text-center .sec-desc{margin:0 auto 3rem;}
+    .bg-light{background:var(--light);}
+    .bg-dark{background:var(--dark);}
+
+    /* SOBRE */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .about-img{position:relative;}
+    .about-img img{width:100%;height:540px;object-fit:cover;border-radius:24px;box-shadow:0 24px 60px rgba(192,88,106,.2);}
+    .about-badge{position:absolute;bottom:-20px;right:-20px;background:var(--white);border-radius:16px;padding:1.2rem 1.5rem;box-shadow:0 12px 40px rgba(0,0,0,.12);text-align:center;min-width:140px;border-top:3px solid var(--gold);}
+    .ab-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--rose);line-height:1;}
+    .ab-lbl{font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-top:.3rem;}
+    .about-list{list-style:none;margin:1.5rem 0;display:flex;flex-direction:column;gap:.7rem;}
+    .about-list li{display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:var(--gray);}
+    .about-list i{color:var(--rose);}
+    .chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem;}
+    .chip{background:var(--rose-light);color:var(--rose);border:1px solid var(--border);border-radius:50px;padding:.3rem .9rem;font-size:.78rem;font-weight:600;}
+
+    /* METODOLOGIA */
+    .method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:3rem;}
+    .method-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:2rem;transition:all .3s;position:relative;}
+    .method-card:hover{border-color:var(--rose);box-shadow:0 12px 40px rgba(192,88,106,.1);transform:translateY(-5px);}
+    .method-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:rgba(192,88,106,.15);line-height:1;margin-bottom:.8rem;}
+    .method-icon{width:52px;height:52px;background:var(--rose-light);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--rose);font-size:1.3rem;margin-bottom:1rem;}
+    .method-card h3{font-size:.95rem;font-weight:700;margin-bottom:.5rem;}
+    .method-card p{font-size:.84rem;color:var(--gray);line-height:1.65;}
+
+    /* PROCESSO STEPS */
+    .steps-list{display:flex;flex-direction:column;gap:0;max-width:750px;margin:3rem auto 0;}
+    .step-item{display:grid;grid-template-columns:80px 1fr;gap:2rem;align-items:start;position:relative;padding-bottom:2.5rem;}
+    .step-item:not(:last-child)::before{content:'';position:absolute;left:39px;top:80px;width:2px;height:calc(100% - 40px);background:linear-gradient(to bottom,var(--rose),rgba(192,88,106,.1));}
+    .step-num{width:80px;height:80px;background:var(--rose-light);border:2px solid var(--rose);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--rose);flex-shrink:0;}
+    .step-content{padding-top:.5rem;}
+    .step-title{font-size:.95rem;font-weight:700;margin-bottom:.4rem;}
+    .step-desc{font-size:.84rem;color:var(--gray);line-height:1.7;}
+
+    /* TRANSFORMAÇÕES */
+    .transform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:3rem;}
+    .tr-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:2rem;transition:all .3s;}
+    .tr-card:hover{box-shadow:0 12px 40px rgba(192,88,106,.1);transform:translateY(-4px);}
+    .tr-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+    .tr-avatar{width:56px;height:56px;border-radius:50%;background:var(--rose-light);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--rose);border:2px solid var(--rose);flex-shrink:0;}
+    .tr-name{font-weight:700;font-size:.95rem;}
+    .tr-period{font-size:.78rem;color:var(--gray);}
+    .tr-result{display:inline-block;background:var(--rose-light);color:var(--rose);font-size:.78rem;font-weight:700;border-radius:50px;padding:.3rem .9rem;margin-bottom:.8rem;}
+    .tr-text{font-size:.88rem;color:var(--gray);font-style:italic;line-height:1.65;}
+    .stars{color:var(--gold);font-size:.85rem;margin-bottom:.5rem;}
+
+    /* PLANOS VIP */
+    .vip-plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:3rem;}
+    .vplan{background:var(--white);border:2px solid var(--border);border-radius:24px;padding:2.5rem;transition:all .3s;position:relative;}
+    .vplan.featured{border-color:var(--gold);background:linear-gradient(135deg,rgba(201,147,60,.04),var(--white));}
+    .vplan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),#e0aa50);color:var(--dark);font-size:.7rem;font-weight:700;padding:.3rem 1.2rem;border-radius:20px;white-space:nowrap;}
+    .vplan-name{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;margin-bottom:.4rem;}
+    .vplan-desc{font-size:.82rem;color:var(--gray);margin-bottom:1.5rem;}
+    .vplan-feats{list-style:none;margin-bottom:2rem;}
+    .vplan-feats li{font-size:.84rem;color:var(--gray);padding:.35rem 0 .35rem 1.5rem;position:relative;}
+    .vplan-feats li::before{content:'✦';position:absolute;left:0;color:var(--gold);font-size:.65rem;top:.55rem;}
+
+    /* FAQ */
+    .faq-list{max-width:800px;margin:3rem auto 0;display:flex;flex-direction:column;gap:1rem;}
+    .faq-item{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+    .faq-q{padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;font-size:.92rem;transition:background .3s;}
+    .faq-q:hover{background:var(--rose-light);}
+    .faq-q i{color:var(--rose);transition:transform .3s;flex-shrink:0;}
+    .faq-item.open .faq-q i{transform:rotate(45deg);}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;}
+    .faq-item.open .faq-a{max-height:220px;}
+    .faq-a p{padding:0 1.5rem 1.2rem;font-size:.88rem;color:var(--gray);line-height:1.75;}
+
+    /* CONTATO */
+    .contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;margin-top:3rem;}
+    .ci-item{display:flex;gap:1rem;align-items:center;margin-bottom:1.2rem;}
+    .ci-icon{width:42px;height:42px;background:rgba(255,255,255,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;}
+    .ci-label{font-weight:700;color:#fff;font-size:.8rem;display:block;margin-bottom:.1rem;text-transform:uppercase;letter-spacing:.5px;}
+    .ci-text{font-size:.88rem;color:rgba(255,255,255,.8);}
+    .cf{background:var(--white);border-radius:20px;padding:2.5rem;box-shadow:0 24px 60px rgba(0,0,0,.15);}
+    .cf h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:1.5rem;}
+    .fg{margin-bottom:1.1rem;}
+    .fg label{display:block;font-size:.78rem;font-weight:600;margin-bottom:.3rem;color:var(--dark);}
+    .fg input,.fg select,.fg textarea{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:.88rem;background:var(--light);transition:border-color .3s;}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--rose);background:#fff;}
+    .f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+
+    footer{background:var(--dark);color:rgba(255,255,255,.45);padding:3rem 2rem 1.5rem;text-align:center;}
+    .f-logo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--rose);display:block;margin-bottom:.5rem;}
+    .f-note{font-size:.78rem;margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);padding-top:1rem;}
+    .wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;transition:transform .3s;}
+    .wa-float:hover{transform:scale(1.1);}
+
+    @media(max-width:968px){.hero-inner,.about-grid,.contact-grid{grid-template-columns:1fr;}nav .nav-links{display:none;}.hero-inner>div:last-child{display:none;}.about-badge{display:none;}}
+    @media(max-width:600px){.hero{padding:7rem 1.5rem 4rem;}.hero-stats{gap:2rem;}.f-row{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><i class="fas fa-crown"></i> Nutri Premium</a>
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#metodologia">Metodologia</a></li>
+        <li><a href="#transformacoes">Transformações</a></li>
+        <li><a href="#planos">Planos VIP</a></li>
+        <li><a href="#contato" class="nav-cta">Lista de Espera</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-pre"><div class="pre-line"></div><span class="pre-text">Nutricionista Premium · CRN 6/33445 · Recife – PE</span></div>
+        <h1>Emagrecimento de <em>elite,</em> resultados extraordinários.</h1>
+        <p>Atendimento VIP exclusivo para mulheres que querem resultados reais, com método proprietário de emagrecimento inteligente, sem dietas restritivas.</p>
+        <div class="hero-btns">
+          <a href="#contato" class="btn-gold"><i class="fas fa-crown"></i> Entrar na Lista de Espera</a>
+          <a href="#metodologia" class="btn-ghost-w"><i class="fas fa-star"></i> Ver Metodologia</a>
+        </div>
+        <div class="hero-stats">
+          <div><span class="hs-num">250+</span><span class="hs-lbl">Clientes VIP</span></div>
+          <div><span class="hs-num">12+</span><span class="hs-lbl">Anos de expertise</span></div>
+          <div><span class="hs-num">97%</span><span class="hs-lbl">Resultado garantido</span></div>
+        </div>
+      </div>
+      <!-- VIP card -->
+      <div class="vip-card">
+        <div class="vip-tag"><i class="fas fa-crown"></i> Atendimento VIP Exclusivo</div>
+        <div class="vip-title">O que está incluso no programa</div>
+        <div class="vip-items">
+          <div class="vip-item"><div class="vi-icon"><i class="fas fa-user-tie"></i></div><div><div class="vi-title">Personal Nutri Dedicada</div><div class="vi-sub">Suporte exclusivo direto comigo</div></div></div>
+          <div class="vip-item"><div class="vi-icon"><i class="fas fa-flask"></i></div><div><div class="vi-title">Análise de Exames Completa</div><div class="vi-sub">Protocolo baseado em bioquímica</div></div></div>
+          <div class="vip-item"><div class="vi-icon"><i class="fas fa-utensils"></i></div><div><div class="vi-title">Cardápios Personalizados</div><div class="vi-sub">Semanais, adaptados à sua rotina</div></div></div>
+          <div class="vip-item"><div class="vi-icon"><i class="fas fa-comments"></i></div><div><div class="vi-title">Suporte Diário</div><div class="vi-sub">WhatsApp ilimitado durante o programa</div></div></div>
+        </div>
+        <div class="vip-footer">
+          <span class="vip-limited">Apenas <strong>8 vagas/mês</strong> disponíveis</span>
+          <a href="#contato" style="background:linear-gradient(135deg,var(--gold),#e0aa50);color:#1c1018;padding:.5rem 1.2rem;border-radius:50px;text-decoration:none;font-size:.8rem;font-weight:700;"><i class="fas fa-crown"></i> Quero uma vaga</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="bg-light">
+    <div class="sec-inner">
+      <div class="about-grid">
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=700&h=900&fit=crop" alt="Nutri Premium">
+          <div class="about-badge"><div class="ab-num">12+</div><div class="ab-lbl">anos de carreira</div></div>
+        </div>
+        <div>
+          <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Sobre mim</span></div>
+          <h2 class="sec-title">Dra. Isabela Vaz, <em>Nutricionista VIP</em></h2>
+          <p style="color:var(--gray);font-size:.93rem;line-height:1.9;margin-bottom:1rem;">Nutricionista especializada em emagrecimento feminino com mais de 12 anos transformando corpos e vidas. Criei um método proprietário que combina análise bioquímica, comportamento alimentar e plano de vida para resultados que se sustentam.</p>
+          <p style="color:var(--gray);font-size:.93rem;line-height:1.9;">Atendo um número limitado de clientes por mês para garantir atenção total e resultado premium. Não trabalho com volumes — trabalho com transformações.</p>
+          <ul class="about-list">
+            <li><i class="fas fa-graduation-cap"></i> Nutrição – UFPE · Pós em Comportamento Alimentar</li>
+            <li><i class="fas fa-crown"></i> Criadora do Método SLIM SMART®</li>
+            <li><i class="fas fa-users"></i> Mais de 250 clientes VIP transformadas</li>
+            <li><i class="fas fa-id-badge"></i> CRN 6/33445 – Ativo</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">Método Proprietário</span>
+            <span class="chip">VIP Exclusivo</span>
+            <span class="chip">Comportamento Alimentar</span>
+            <span class="chip">Metabolismo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METODOLOGIA -->
+  <section id="metodologia">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Método SLIM SMART®</span><div class="sp-line"></div></div>
+        <h2 class="sec-title">Como funciona minha <em>metodologia exclusiva</em></h2>
+        <p class="sec-desc">Um método criado ao longo de 12 anos de prática clínica intensiva, aplicado a mais de 250 clientes com resultados comprovados.</p>
+      </div>
+      <div class="method-grid">
+        <div class="method-card"><div class="method-num">01</div><div class="method-icon"><i class="fas fa-search-plus"></i></div><h3>Diagnóstico Profundo</h3><p>Avaliação completa de metabolismo, histórico, comportamento alimentar e análise bioquímica para um retrato fiel do seu organismo.</p></div>
+        <div class="method-card"><div class="method-num">02</div><div class="method-icon"><i class="fas fa-brain"></i></div><h3>Reprogramação Mental</h3><p>Trabalhamos as crenças e gatilhos emocionais que sabotam seu emagrecimento para uma mudança real e duradoura.</p></div>
+        <div class="method-card"><div class="method-num">03</div><div class="method-icon"><i class="fas fa-utensils"></i></div><h3>Plano Gastronomicamente Prazeroso</h3><p>Cardápios ricos, saborosos e sem privação — porque resultados não precisam de sofrimento.</p></div>
+        <div class="method-card"><div class="method-num">04</div><div class="method-icon"><i class="fas fa-chart-line"></i></div><h3>Monitoramento de Alta Performance</h3><p>Acompanhamento semanal com ajustes precisos baseados em dados reais de evolução e bioquímica atualizada.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESSO -->
+  <section class="bg-light">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Do início ao resultado</span><div class="sp-line"></div></div>
+        <h2 class="sec-title">Como é a sua <em>jornada VIP</em></h2>
+      </div>
+      <div class="steps-list">
+        <div class="step-item"><div class="step-num">1</div><div class="step-content"><div class="step-title">Entrevista de Qualificação</div><p class="step-desc">Uma conversa inicial para entender seus objetivos, histórico e verificar se o programa VIP é o encaixe certo para você.</p></div></div>
+        <div class="step-item"><div class="step-num">2</div><div class="step-content"><div class="step-title">Avaliação Completa</div><p class="step-desc">Anamnese detalhada, análise de exames e aplicação do protocolo de diagnóstico SLIM SMART® para traçar seu perfil metabólico.</p></div></div>
+        <div class="step-item"><div class="step-num">3</div><div class="step-content"><div class="step-title">Plano Individualizado</div><p class="step-desc">Cardápio semanal personalizado, protocolo de suplementação e estratégias comportamentais exclusivas para o seu perfil.</p></div></div>
+        <div class="step-item" style="padding-bottom:0;"><div class="step-num">4</div><div class="step-content"><div class="step-title">Acompanhamento VIP Diário</div><p class="step-desc">Suporte diário via WhatsApp, ajustes semanais e reavaliações mensais com atualização completa do protocolo.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSFORMAÇÕES -->
+  <section id="transformacoes">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Resultados</span><div class="sp-line"></div></div>
+        <h2 class="sec-title">Transformações <em>reais</em></h2>
+        <p class="sec-desc">Clientes VIP que confiaram no método e conquistaram resultados extraordinários.</p>
+      </div>
+      <div class="transform-grid">
+        <div class="tr-card"><div class="tr-header"><div class="tr-avatar">AM</div><div><div class="tr-name">Amanda Moreira</div><div class="tr-period">Programa VIP – 4 meses</div></div></div><div class="stars">★★★★★</div><div class="tr-result">−18kg e metabolismo acelerado</div><p class="tr-text">"Em 4 meses perdi 18kg sem passar fome. O método da Dra. Isabela é completamente diferente de tudo que já tentei. Resultado definitivo!"</p></div>
+        <div class="tr-card"><div class="tr-header"><div class="tr-avatar">CP</div><div><div class="tr-name">Cláudia Pessoa</div><div class="tr-period">Programa VIP – 6 meses</div></div></div><div class="stars">★★★★★</div><div class="tr-result">Menopausa sob controle</div><p class="tr-text">"Com 52 anos e na menopausa achei que nunca mais emagreceria. A Dra. Isabela provou que eu estava errada. Perdi 12kg e me sinto jovem!"</p></div>
+        <div class="tr-card"><div class="tr-header"><div class="tr-avatar">RS</div><div><div class="tr-name">Renata Santos</div><div class="tr-period">Programa VIP – 3 meses</div></div></div><div class="stars">★★★★★</div><div class="tr-result">−14kg e autoestima renovada</div><p class="tr-text">"O suporte diário e os cardápios gostosos foram o diferencial. Nunca me senti privada e os resultados vieram consistentemente."</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS VIP -->
+  <section id="planos" class="bg-light">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Investimento VIP</span><div class="sp-line"></div></div>
+        <h2 class="sec-title">Programas <em>exclusivos</em></h2>
+        <p class="sec-desc">Vagas limitadas mensalmente para garantir atenção total e resultados premium.</p>
+      </div>
+      <div class="vip-plans">
+        <div class="vplan">
+          <div class="vplan-name">Programa Slim 60</div>
+          <p class="vplan-desc">2 meses de transformação acelerada com acompanhamento intensivo.</p>
+          <ul class="vplan-feats">
+            <li>Consulta inicial + 3 retornos</li>
+            <li>Análise de exames completa</li>
+            <li>Cardápios semanais personalizados</li>
+            <li>Suporte via WhatsApp (dias úteis)</li>
+            <li>Protocolo de suplementação</li>
+          </ul>
+          <a href="#contato" class="btn-ghost-w" style="background:transparent;color:var(--rose);border:2px solid var(--rose);border-radius:50px;padding:.85rem 2rem;font-weight:700;text-decoration:none;display:flex;justify-content:center;align-items:center;">Solicitar vaga</a>
+        </div>
+        <div class="vplan featured">
+          <div class="vplan-badge"><i class="fas fa-crown"></i> Programa Exclusivo</div>
+          <div class="vplan-name">Programa Slim Smart®</div>
+          <p class="vplan-desc">4 meses do método completo com acompanhamento VIP total.</p>
+          <ul class="vplan-feats">
+            <li>Tudo do Slim 60</li>
+            <li>Suporte diário via WhatsApp</li>
+            <li>Cardápios renovados semanalmente</li>
+            <li>Psicologia alimentar integrada</li>
+            <li>Bioimpedância mensal</li>
+            <li>Relatório de transformação</li>
+          </ul>
+          <a href="#contato" class="btn-gold" style="width:100%;justify-content:center;display:flex;"><i class="fas fa-crown"></i> Quero minha vaga</a>
+        </div>
+        <div class="vplan">
+          <div class="vplan-name">Manutenção Pós-Programa</div>
+          <p class="vplan-desc">Para ex-clientes que querem manter os resultados conquistados.</p>
+          <ul class="vplan-feats">
+            <li>1 consulta mensal</li>
+            <li>Ajuste de plano alimentar</li>
+            <li>Suporte quinzenal</li>
+            <li>Reavaliação de exames semestral</li>
+            <li>Acesso à comunidade VIP</li>
+          </ul>
+          <a href="#contato" class="btn-ghost-w" style="background:transparent;color:var(--rose);border:2px solid var(--rose);border-radius:50px;padding:.85rem 2rem;font-weight:700;text-decoration:none;display:flex;justify-content:center;align-items:center;">Solicitar vaga</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Dúvidas</span><div class="sp-line"></div></div>
+        <h2 class="sec-title">Perguntas <em>frequentes</em></h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><div class="faq-q">Por que o atendimento é VIP e limitado? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Prefiro atender menos clientes com excelência absoluta a atender muitas com atenção dividida. Cada cliente VIP recebe minha atenção total — por isso limito as vagas a 8 por mês.</p></div></div>
+        <div class="faq-item"><div class="faq-q">O método funciona para quem já tentou de tudo? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Sim, especialmente para essas pessoas! O método SLIM SMART® é baseado em bioquímica individual e comportamento alimentar — o que explica por que dietas genéricas não funcionaram antes.</p></div></div>
+        <div class="faq-item"><div class="faq-q">Preciso fazer exames antes de iniciar? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Sim, exames são fundamentais para a personalização do protocolo. Se você não tiver exames recentes, solicito durante a primeira consulta.</p></div></div>
+        <div class="faq-item"><div class="faq-q">Você atende online? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Sim! Metade das minhas clientes VIP são atendidas online. A qualidade do acompanhamento é idêntica — com videoconferência e suporte diário via WhatsApp.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="bg-dark">
+    <div class="sec-inner">
+      <div class="contact-grid">
+        <div>
+          <div class="sec-pre"><div class="sp-line"></div><span class="sp-text" style="color:var(--gold);">Reservar vaga</span></div>
+          <h2 class="sec-title" style="color:#fff;">Entre na <em style="color:var(--gold);">lista de espera VIP</em></h2>
+          <p style="color:rgba(255,255,255,.65);margin-bottom:2.5rem;font-size:.9rem;line-height:1.9;">Vagas abertas mensalmente. Preencha o formulário para entrar na lista de prioridade e ser contactada quando houver disponibilidade.</p>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><span class="ci-label">WhatsApp</span><span class="ci-text">(81) 9 9627-3630</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><span class="ci-label">E-mail</span><span class="ci-text">contato@nutripremium.com.br</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fab fa-instagram"></i></div><div><span class="ci-label">Instagram</span><span class="ci-text">@dra.isabelavaz</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><span class="ci-label">Consultório</span><span class="ci-text">Boa Viagem · Recife – PE · Online para todo Brasil</span></div></div>
+        </div>
+        <div class="cf">
+          <h3><i class="fas fa-crown" style="color:var(--gold);font-size:1.2rem;"></i> Entrar na lista VIP</h3>
+          <form onsubmit="return false;">
+            <div class="fg"><label>Nome Completo</label><input type="text" placeholder="Seu nome"></div>
+            <div class="f-row">
+              <div class="fg"><label>WhatsApp</label><input type="tel" placeholder="(81) 9 9999-9999"></div>
+              <div class="fg"><label>Idade</label><input type="number" placeholder="Ex: 42"></div>
+            </div>
+            <div class="fg"><label>Seu principal objetivo</label>
+              <select><option value="">Selecione...</option><option>Emagrecer de vez</option><option>Emagrecimento pós-menopausa</option><option>Pós-gestacional</option><option>Manutenção e saúde</option><option>Metabolismo lento</option><option>Outro</option></select>
+            </div>
+            <div class="fg"><label>Já tentou emagrecer antes?</label>
+              <select><option value="">Selecione...</option><option>Sim, várias vezes sem sucesso duradouro</option><option>Sim, com algum resultado mas não mantive</option><option>Não, esta é minha primeira tentativa</option></select>
+            </div>
+            <div class="fg"><label>Modalidade</label>
+              <select><option value="">Selecione...</option><option>Presencial – Recife</option><option>Online</option></select>
+            </div>
+            <div class="fg"><label>Por que escolheu o programa VIP?</label><textarea rows="2" placeholder="Conte brevemente o que te motivou..."></textarea></div>
+            <button onclick="alert('Solicitação enviada! Você entrou na lista VIP. Entrarei em contato em breve.')" style="width:100%;padding:.9rem;background:linear-gradient(135deg,var(--gold),#e0aa50);color:#1c1018;border:none;border-radius:50px;font-weight:700;font-size:.9rem;cursor:pointer;"><i class="fas fa-crown"></i> Confirmar Entrada na Lista VIP</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="f-logo">Nutri Premium</span>
+    <p>Dra. Isabela Vaz · Nutricionista VIP · CRN 6/33445 · Recife – PE</p>
+    <div class="f-note">&copy; 2026 Nutri Premium · Todos os direitos reservados · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div>
+  </footer>
+
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});
+    document.querySelectorAll('.faq-q').forEach(q=>{q.onclick=()=>{var i=q.parentElement;document.querySelectorAll('.faq-item.open').forEach(x=>{if(x!==i)x.classList.remove('open');});i.classList.toggle('open');};});
+  </script>
+</body>
+</html>

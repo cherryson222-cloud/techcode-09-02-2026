@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Dra. Beatriz Nunes | Psicóloga · Bem-estar Integrado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{--terra:#c06a3a;--terra-light:#fdf0e8;--olive:#6b7c4e;--cream:#fdf9f4;--dark:#2c2416;--gray:#7a6e64;--border:#ede4d8;--white:#fff;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;line-height:1.7;}
+    .btn-voltar{position:fixed;top:20px;left:20px;z-index:9999;background:var(--terra);color:#fff;padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:6px;}
+    nav{position:fixed;top:0;width:100%;background:rgba(253,249,244,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000;padding:1.2rem 0;}
+    .nav-inner{max-width:1100px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-family:'Lora',serif;font-size:1.3rem;color:var(--terra);text-decoration:none;}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{color:var(--gray);font-size:.85rem;text-decoration:none;transition:color .3s;}
+    .nav-links a:hover{color:var(--terra);}
+    .nav-cta{background:var(--terra)!important;color:#fff!important;padding:.5rem 1.3rem;border-radius:50px;}
+    .hero{min-height:100vh;background:linear-gradient(160deg,var(--terra-light) 0%,var(--cream) 60%);display:flex;align-items:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;bottom:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(107,124,78,.15),transparent 65%);border-radius:50%;}
+    .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1;}
+    .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(192,106,58,.12);color:var(--terra);border-radius:50px;padding:.35rem 1rem;font-size:.75rem;font-weight:600;margin-bottom:1.5rem;}
+    .hero h1{font-family:'Lora',serif;font-size:clamp(2.4rem,5vw,3.6rem);line-height:1.2;margin-bottom:1.5rem;}
+    .hero h1 em{color:var(--terra);font-style:italic;}
+    .hero p{color:var(--gray);font-size:.95rem;line-height:1.9;margin-bottom:2.5rem;max-width:460px;}
+    .btn-terra{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--terra);color:#fff;border-radius:50px;font-weight:600;text-decoration:none;font-size:.9rem;transition:all .3s;}
+    .btn-terra:hover{background:#a85a30;transform:translateY(-2px);}
+    .btn-outline-terra{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:transparent;color:var(--terra);border:1.5px solid var(--terra);border-radius:50px;font-weight:600;text-decoration:none;font-size:.9rem;transition:all .3s;}
+    .btn-outline-terra:hover{background:var(--terra);color:#fff;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+    .hero-pilares{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem;}
+    .pilar{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.2rem;text-align:center;transition:all .3s;}
+    .pilar:hover{border-color:var(--terra);}
+    .pilar-icon{font-size:1.5rem;margin-bottom:.5rem;}
+    .pilar-name{font-size:.8rem;font-weight:600;}
+    .hero-img img{width:100%;border-radius:30px 8px 30px 8px;box-shadow:0 24px 60px rgba(192,106,58,.2);}
+    section{padding:5.5rem 2rem;}
+    .sec-inner{max-width:1100px;margin:0 auto;}
+    .sec-tag{display:block;font-size:.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--terra);margin-bottom:.6rem;}
+    .sec-title{font-family:'Lora',serif;font-size:clamp(2rem,4vw,2.8rem);margin-bottom:1rem;line-height:1.2;}
+    .sec-title em{color:var(--terra);font-style:italic;}
+    .sec-desc{color:var(--gray);font-size:.9rem;max-width:560px;line-height:1.8;}
+    .text-center{text-align:center;}.text-center .sec-desc{margin:0 auto 3rem;}
+    .bg-white{background:var(--white);}
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:3rem;}
+    .card{background:var(--terra-light);border-radius:20px;padding:2rem;transition:all .3s;border:1.5px solid transparent;}
+    .card:hover{border-color:var(--terra);transform:translateY(-4px);}
+    .card-icon{width:50px;height:50px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--terra);font-size:1.3rem;margin-bottom:1.2rem;box-shadow:0 4px 12px rgba(192,106,58,.15);}
+    .card h3{font-size:.92rem;font-weight:700;margin-bottom:.5rem;}
+    .card p{font-size:.82rem;color:var(--gray);line-height:1.6;}
+    .resources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:3rem;}
+    .res-card{background:var(--terra-light);border-radius:16px;padding:1.8rem;text-align:center;border:1px solid var(--border);}
+    .res-icon{font-size:2rem;margin-bottom:1rem;}
+    .res-title{font-size:.88rem;font-weight:700;margin-bottom:.4rem;}
+    .res-desc{font-size:.78rem;color:var(--gray);}
+    .res-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;color:var(--terra);font-size:.8rem;font-weight:600;text-decoration:none;}
+    .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+    .t-card{background:var(--terra-light);border:1px solid var(--border);border-radius:16px;padding:2rem;}
+    .stars{color:var(--terra);font-size:.82rem;margin-bottom:.8rem;}
+    .t-text{font-size:.88rem;color:var(--dark);font-style:italic;line-height:1.7;margin-bottom:1.2rem;}
+    .t-name{font-size:.84rem;font-weight:700;}
+    .t-role{font-size:.75rem;color:var(--gray);}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:start;}
+    .ci-item{display:flex;gap:1rem;align-items:center;margin-bottom:1.2rem;}
+    .ci-icon{width:40px;height:40px;background:var(--terra-light);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--terra);flex-shrink:0;}
+    .ci-label{font-weight:700;font-size:.82rem;display:block;}
+    .ci-text{font-size:.85rem;color:var(--gray);}
+    .cf{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:2.5rem;}
+    .cf h3{font-family:'Lora',serif;font-size:1.6rem;margin-bottom:1.5rem;}
+    .fg{margin-bottom:1rem;}
+    .fg label{display:block;font-size:.78rem;font-weight:600;margin-bottom:.3rem;}
+    .fg input,.fg select,.fg textarea{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:.88rem;background:var(--cream);transition:border-color .3s;}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--terra);}
+    .f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    footer{background:var(--dark);color:rgba(255,255,255,.45);padding:3rem 2rem 1.5rem;text-align:center;}
+    .f-logo{font-family:'Lora',serif;font-size:1.6rem;color:var(--terra);display:block;margin-bottom:.5rem;}
+    .f-note{font-size:.75rem;margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);padding-top:1rem;}
+    .wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;transition:transform .3s;}
+    .wa-float:hover{transform:scale(1.1);}
+    @media(max-width:968px){.hero-inner,.contact-grid{grid-template-columns:1fr;}nav .nav-links{display:none;}.hero-img{display:none;}}
+    @media(max-width:600px){.hero-pilares{grid-template-columns:1fr 1fr;}.f-row{grid-template-columns:1fr;}.hero{padding:7rem 1.5rem 4rem;}}
+  </style>
+</head>
+<body>
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+  <nav><div class="nav-inner"><a href="#" class="nav-logo">Dra. Beatriz Nunes</a><ul class="nav-links"><li><a href="#abordagem">Abordagem</a></li><li><a href="#recursos">Recursos</a></li><li><a href="#depoimentos">Depoimentos</a></li><li><a href="#contato" class="nav-cta">Agendar</a></li></ul></div></nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge"><i class="fas fa-leaf"></i> Psicóloga Integrativa · CRP 02/11223</div>
+        <h1>Saúde mental <em>integrada</em> ao seu jeito de viver.</h1>
+        <p>Abordagem integrativa com mindfulness, psicologia positiva e terapia somática. Para quem busca equilíbrio genuíno entre corpo, mente e emoções.</p>
+        <div class="hero-btns">
+          <a href="#contato" class="btn-terra">Agendar Primeira Sessão</a>
+          <a href="#abordagem" class="btn-outline-terra">Ver abordagem</a>
+        </div>
+        <div class="hero-pilares">
+          <div class="pilar"><div class="pilar-icon">🧠</div><div class="pilar-name">Mente</div></div>
+          <div class="pilar"><div class="pilar-icon">🌿</div><div class="pilar-name">Corpo</div></div>
+          <div class="pilar"><div class="pilar-icon">❤️</div><div class="pilar-name">Emoções</div></div>
+        </div>
+      </div>
+      <div class="hero-img"><img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=700&h=900&fit=crop" alt="Bem-estar"></div>
+    </div>
+  </section>
+
+  <section id="abordagem"><div class="sec-inner"><div class="text-center"><span class="sec-tag">Abordagem</span><h2 class="sec-title">Integração como <em>caminho</em></h2><p class="sec-desc">Combino diversas abordagens para criar um processo terapêutico único para você.</p></div><div class="cards-grid"><div class="card"><div class="card-icon"><i class="fas fa-brain"></i></div><h3>TCC Integrativa</h3><p>Reestruturação cognitiva unida a técnicas de regulação emocional e corporal.</p></div><div class="card"><div class="card-icon"><i class="fas fa-spa"></i></div><h3>Mindfulness</h3><p>Práticas de atenção plena para presença, redução do estresse e clareza mental.</p></div><div class="card"><div class="card-icon"><i class="fas fa-sun"></i></div><h3>Psicologia Positiva</h3><p>Foco em forças, significado, gratidão e construção de uma vida mais plena.</p></div><div class="card"><div class="card-icon"><i class="fas fa-heartbeat"></i></div><h3>Terapia Somática</h3><p>Conexão corpo-mente para liberação de traumas e tensões armazenadas fisicamente.</p></div></div></div></section>
+
+  <section id="recursos" class="bg-white"><div class="sec-inner"><div class="text-center"><span class="sec-tag">Recursos Gratuitos</span><h2 class="sec-title">Para você <em>começar hoje</em></h2><p class="sec-desc">Materiais práticos para o seu bem-estar, disponíveis gratuitamente.</p></div><div class="resources-grid"><div class="res-card"><div class="res-icon">🧘</div><div class="res-title">Guia de Mindfulness</div><p class="res-desc">Práticas de 5 minutos para o dia a dia</p><a href="#" class="res-link"><i class="fas fa-download"></i> Baixar grátis</a></div><div class="res-card"><div class="res-icon">📓</div><div class="res-title">Diário de Emoções</div><p class="res-desc">Planilha para rastrear e entender seus sentimentos</p><a href="#" class="res-link"><i class="fas fa-download"></i> Baixar grátis</a></div><div class="res-card"><div class="res-icon">🎧</div><div class="res-title">Meditação Guiada</div><p class="res-desc">Áudio de 10min para ansiedade e relaxamento</p><a href="#" class="res-link"><i class="fas fa-play"></i> Ouvir grátis</a></div><div class="res-card"><div class="res-icon">📖</div><div class="res-title">Blog Semanal</div><p class="res-desc">Artigos sobre saúde mental e bem-estar</p><a href="#" class="res-link"><i class="fas fa-arrow-right"></i> Ler artigos</a></div></div></div></section>
+
+  <section id="depoimentos"><div class="sec-inner"><div class="text-center"><span class="sec-tag">Depoimentos</span><h2 class="sec-title">Histórias de <em>transformação</em></h2></div><div class="test-grid"><div class="t-card"><div class="stars">★★★★★</div><p class="t-text">"A abordagem integrativa da Dra. Beatriz foi exatamente o que eu precisava. Aprendi a ouvir meu corpo e minhas emoções."</p><div class="t-name">Sofia Matos, 33 anos</div><div class="t-role">Professora universitária</div></div><div class="t-card"><div class="stars">★★★★★</div><p class="t-text">"As práticas de mindfulness que aprendi nas sessões transformaram minha relação com o estresse. Recomendo muito!"</p><div class="t-name">Pedro Arantes, 39 anos</div><div class="t-role">Médico</div></div><div class="t-card"><div class="stars">★★★★★</div><p class="t-text">"Me sinto inteira de novo. O processo foi cuidadoso, respeitoso e completamente adaptado à minha realidade."</p><div class="t-name">Camila Esteves, 27 anos</div><div class="t-role">Designer</div></div></div></div></section>
+
+  <section id="contato" class="bg-white"><div class="sec-inner"><div class="contact-grid"><div><span class="sec-tag">Contato</span><h2 class="sec-title">Vamos <em>começar?</em></h2><p style="color:var(--gray);font-size:.9rem;line-height:1.8;margin-bottom:2rem;">Atendo presencialmente em Recife e online para todo o Brasil. Sua primeira sessão inclui uma conversa introdutória sem compromisso.</p><div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><span class="ci-label">WhatsApp</span><span class="ci-text">(81) 9 9627-3630</span></div></div><div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><span class="ci-label">E-mail</span><span class="ci-text">contato@beatriznunes.psi.br</span></div></div><div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><span class="ci-label">Consultório</span><span class="ci-text">Rua das Ninfas, 100 · Boa Vista · Recife – PE</span></div></div></div><div class="cf"><h3>Agende sua sessão</h3><form onsubmit="return false;"><div class="fg"><label>Nome Completo</label><input type="text" placeholder="Seu nome"></div><div class="f-row"><div class="fg"><label>WhatsApp</label><input type="tel" placeholder="(81) 9 9999-9999"></div><div class="fg"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div></div><div class="fg"><label>Modalidade</label><select><option value="">Selecione...</option><option>Presencial</option><option>Online</option></select></div><div class="fg"><label>Mensagem</label><textarea rows="3" placeholder="O que te motivou a buscar terapia?"></textarea></div><button onclick="alert('Mensagem enviada! Entro em contato em breve.')" style="width:100%;padding:.9rem;background:var(--terra);color:#fff;border:none;border-radius:50px;font-weight:600;font-size:.9rem;cursor:pointer;">Enviar mensagem</button></form></div></div></div></section>
+
+  <footer><span class="f-logo">Dra. Beatriz Nunes</span><p>Psicóloga Clínica CRP 02/11223 · Bem-estar Integrado · Recife – PE</p><div class="f-note">&copy; 2026 Dra. Beatriz Nunes · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div></footer>
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+  <script>document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});</script>
+</body>
+</html>

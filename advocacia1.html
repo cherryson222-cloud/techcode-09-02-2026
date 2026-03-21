@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menezes & Associados | Advocacia</title>
+  <meta name="description" content="Escritório de advocacia com tradição e excelência. Consultoria jurídica especializada em Recife-PE.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0c1f3f;
+      --navy-light: #162e58;
+      --gold: #b8963e;
+      --gold-light: #f5edd8;
+      --gray: #6b7280;
+      --light: #f8f9fb;
+      --white: #fff;
+      --border: #e5e7eb;
+      --dark: #111827;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--dark); overflow-x: hidden; line-height: 1.6; }
+
+    .btn-voltar { position: fixed; top: 20px; left: 20px; z-index: 9999; background: var(--navy); color: #fff; padding: 10px 18px; border-radius: 30px; text-decoration: none; font-size: .85rem; font-weight: 700; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(12,31,63,.35); }
+    .btn-voltar:hover { background: var(--navy-light); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 1000; padding: 1rem 0; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); text-decoration: none; letter-spacing: .5px; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: .88rem; font-weight: 500; transition: color .3s; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-cta { background: var(--navy); color: #fff !important; padding: .55rem 1.3rem; border-radius: 4px; font-weight: 600; }
+
+    /* HERO */
+    .hero { min-height: 100vh; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); display: flex; align-items: center; padding: 8rem 2rem 5rem; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--gold), transparent); }
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: center; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: .6rem; color: var(--gold); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 1.5rem; }
+    .hero-eyebrow::before { content: ''; display: block; width: 30px; height: 1px; background: var(--gold); }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 1.5rem; }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p { color: rgba(255,255,255,.7); font-size: .95rem; line-height: 1.8; margin-bottom: 2.5rem; max-width: 480px; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .btn-gold { display: inline-flex; align-items: center; gap: .5rem; padding: .9rem 2rem; background: var(--gold); color: #fff; border-radius: 4px; font-weight: 600; text-decoration: none; font-size: .9rem; transition: all .3s; }
+    .btn-gold:hover { background: #a07c30; transform: translateY(-2px); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: .5rem; padding: .9rem 2rem; background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.3); border-radius: 4px; font-weight: 500; text-decoration: none; font-size: .9rem; transition: all .3s; }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-creds { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+    .cred-item { display: flex; align-items: center; gap: .5rem; color: rgba(255,255,255,.65); font-size: .8rem; }
+    .cred-item i { color: var(--gold); }
+    .hero-img img { width: 100%; height: 520px; object-fit: cover; border-radius: 4px; box-shadow: 0 24px 60px rgba(0,0,0,.3); filter: brightness(.9); }
+
+    /* SECTIONS */
+    section { padding: 5.5rem 2rem; }
+    .sec-inner { max-width: 1200px; margin: 0 auto; }
+    .sec-eyebrow { display: flex; align-items: center; gap: .6rem; color: var(--gold); font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: .8rem; }
+    .sec-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+    .sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.2; color: var(--dark); }
+    .sec-title em { color: var(--gold); font-style: normal; }
+    .sec-desc { color: var(--gray); font-size: .92rem; max-width: 580px; line-height: 1.8; }
+    .text-center { text-align: center; }
+    .text-center .sec-eyebrow { justify-content: center; }
+    .text-center .sec-eyebrow::before { display: none; }
+    .text-center .sec-desc { margin: 0 auto 3rem; }
+    .bg-light { background: var(--light); }
+    .bg-navy { background: var(--navy); }
+
+    /* ÁREAS */
+    .areas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .area-card { background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--gold); border-radius: 4px; padding: 2rem; transition: all .3s; }
+    .area-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.08); transform: translateY(-4px); }
+    .area-icon { width: 48px; height: 48px; background: var(--gold-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.2rem; margin-bottom: 1.2rem; }
+    .area-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: .5rem; }
+    .area-card p { font-size: .84rem; color: var(--gray); line-height: 1.6; }
+
+    /* EQUIPE */
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .team-card { text-align: center; }
+    .team-img { width: 120px; height: 120px; border-radius: 50%; background: var(--gold-light); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--navy); border: 3px solid var(--gold); }
+    .team-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: .2rem; }
+    .team-role { font-size: .82rem; color: var(--gray); margin-bottom: .3rem; }
+    .team-oab { font-size: .75rem; color: var(--gold); font-weight: 600; }
+
+    /* DEPOIMENTOS */
+    .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .t-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 4px; padding: 2rem; }
+    .quote { font-size: 2.5rem; color: var(--gold); opacity: .5; line-height: 1; margin-bottom: .8rem; font-family: 'Cormorant Garamond', serif; }
+    .t-text { font-size: .9rem; color: rgba(255,255,255,.8); font-style: italic; line-height: 1.7; margin-bottom: 1.5rem; }
+    .t-name { font-weight: 700; color: #fff; font-size: .9rem; }
+    .t-role { font-size: .75rem; color: rgba(255,255,255,.55); }
+
+    /* FAQ */
+    .faq-list { max-width: 800px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: 1rem; }
+    .faq-item { background: var(--white); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .faq-q { padding: 1.2rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: .92rem; transition: background .3s; }
+    .faq-q:hover { background: var(--light); }
+    .faq-q i { color: var(--gold); transition: transform .3s; flex-shrink: 0; }
+    .faq-item.open .faq-q i { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .3s; }
+    .faq-item.open .faq-a { max-height: 200px; }
+    .faq-a p { padding: 0 1.5rem 1.2rem; font-size: .88rem; color: var(--gray); line-height: 1.7; }
+
+    /* CONTATO */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+    .ci-item { display: flex; gap: 1rem; align-items: center; margin-bottom: 1.2rem; }
+    .ci-icon { width: 42px; height: 42px; background: var(--gold-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; }
+    .ci-label { font-weight: 700; font-size: .82rem; display: block; margin-bottom: .1rem; }
+    .ci-text { font-size: .88rem; color: var(--gray); }
+    .cf { background: var(--light); border: 1px solid var(--border); border-radius: 4px; padding: 2.5rem; }
+    .cf h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; margin-bottom: 1.5rem; }
+    .fg { margin-bottom: 1rem; }
+    .fg label { display: block; font-size: .78rem; font-weight: 600; margin-bottom: .3rem; color: var(--dark); text-transform: uppercase; letter-spacing: .5px; }
+    .fg input, .fg select, .fg textarea { width: 100%; padding: .8rem 1rem; border: 1.5px solid var(--border); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: .88rem; transition: border-color .3s; background: var(--white); }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { outline: none; border-color: var(--gold); }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .btn-submit { width: 100%; padding: .9rem; background: var(--navy); color: #fff; border: none; border-radius: 4px; font-weight: 700; font-size: .92rem; cursor: pointer; transition: background .3s; }
+    .btn-submit:hover { background: var(--navy-light); }
+
+    /* FOOTER */
+    footer { background: #080f1c; color: rgba(255,255,255,.5); padding: 3rem 2rem 1.5rem; text-align: center; }
+    .f-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold); display: block; margin-bottom: .5rem; }
+    .f-note { font-size: .78rem; margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.08); padding-top: 1rem; }
+
+    .wa-float { position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.6rem; text-decoration: none; box-shadow: 0 4px 16px rgba(37,211,102,.4); z-index: 999; transition: transform .3s; }
+    .wa-float:hover { transform: scale(1.1); }
+
+    @media (max-width: 968px) { .hero-inner, .contact-grid { grid-template-columns: 1fr; } nav .nav-links { display: none; } .hero-img { display: none; } }
+    @media (max-width: 600px) { .hero { padding: 7rem 1.5rem 4rem; } .f-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Menezes <span>&amp;</span> Associados</a>
+      <ul class="nav-links">
+        <li><a href="#areas">Áreas de Atuação</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#contato" class="nav-cta">Consulta Inicial</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">Escritório de Advocacia · Recife – PE</div>
+        <h1>Defendendo seus direitos com <em>tradição</em> e excelência.</h1>
+        <p>Mais de 20 anos de atuação jurídica com resultados comprovados. Consultoria especializada para pessoas físicas e jurídicas com atendimento humanizado.</p>
+        <div class="hero-btns">
+          <a href="#contato" class="btn-gold"><i class="fas fa-balance-scale"></i> Consulta Inicial</a>
+          <a href="#areas" class="btn-ghost">Áreas de Atuação</a>
+        </div>
+        <div class="hero-creds">
+          <span class="cred-item"><i class="fas fa-award"></i> OAB/PE 12345</span>
+          <span class="cred-item"><i class="fas fa-building"></i> 20+ anos de mercado</span>
+          <span class="cred-item"><i class="fas fa-users"></i> 1.200+ casos</span>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=1000&fit=crop" alt="Menezes & Associados">
+      </div>
+    </div>
+  </section>
+
+  <section id="areas" class="bg-light">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-eyebrow">Especialidades</div>
+        <h2 class="sec-title">Áreas de <em>Atuação</em></h2>
+        <p class="sec-desc">Representação jurídica especializada nos principais ramos do direito brasileiro.</p>
+      </div>
+      <div class="areas-grid">
+        <div class="area-card"><div class="area-icon"><i class="fas fa-briefcase"></i></div><h3>Direito Empresarial</h3><p>Contratos, societário, M&A, recuperação judicial e consultoria preventiva para empresas.</p></div>
+        <div class="area-card"><div class="area-icon"><i class="fas fa-file-invoice-dollar"></i></div><h3>Direito Tributário</h3><p>Planejamento tributário, defesas fiscais, restituições e consultoria fiscal estratégica.</p></div>
+        <div class="area-card"><div class="area-icon"><i class="fas fa-users"></i></div><h3>Direito Trabalhista</h3><p>Defesa de empresas e trabalhadores em ações trabalhistas, acordos e compliance.</p></div>
+        <div class="area-card"><div class="area-icon"><i class="fas fa-home"></i></div><h3>Direito Imobiliário</h3><p>Compra, venda, locação, usucapião, incorporações e regularização de imóveis.</p></div>
+        <div class="area-card"><div class="area-icon"><i class="fas fa-heart"></i></div><h3>Direito de Família</h3><p>Divórcios, inventários, pensão alimentícia, guarda e planejamento sucessório.</p></div>
+        <div class="area-card"><div class="area-icon"><i class="fas fa-shield-alt"></i></div><h3>Direito do Consumidor</h3><p>Ações de indenização, revisão contratual e defesa dos direitos do consumidor.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="equipe">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-eyebrow">Nossa Equipe</div>
+        <h2 class="sec-title">Especialistas a seu <em>serviço</em></h2>
+        <p class="sec-desc">Advogados com formação sólida e dedicação total aos seus casos.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card"><div class="team-img">RM</div><div class="team-name">Dr. Roberto Menezes</div><div class="team-role">Sócio Fundador · Tributarista</div><div class="team-oab">OAB/PE 12345</div></div>
+        <div class="team-card"><div class="team-img">LP</div><div class="team-name">Dra. Luísa Prado</div><div class="team-role">Sócia · Direito Empresarial</div><div class="team-oab">OAB/PE 23456</div></div>
+        <div class="team-card"><div class="team-img">CA</div><div class="team-name">Dr. Carlos Almeida</div><div class="team-role">Associado · Trabalhista</div><div class="team-oab">OAB/PE 34567</div></div>
+        <div class="team-card"><div class="team-img">FB</div><div class="team-name">Dra. Fernanda Brito</div><div class="team-role">Associada · Família e Sucessões</div><div class="team-oab">OAB/PE 45678</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="depoimentos" class="bg-navy">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-eyebrow" style="color:var(--gold);justify-content:center;">Depoimentos</div>
+        <h2 class="sec-title" style="color:#fff;">Clientes que <em>confiam</em> em nós</h2>
+      </div>
+      <div class="test-grid">
+        <div class="t-card"><div class="quote">"</div><p class="t-text">A equipe do escritório foi fundamental para a recuperação judicial da nossa empresa. Profissionalismo e resultado em cada etapa.</p><div class="t-name">Eduardo Lemos</div><div class="t-role">CEO, Construtora Lemos</div></div>
+        <div class="t-card"><div class="quote">"</div><p class="t-text">Meu processo de divórcio foi conduzido com muito cuidado e eficiência. Senti-me amparada em todos os momentos.</p><div class="t-name">Mariana Costa</div><div class="t-role">Empresária</div></div>
+        <div class="t-card"><div class="quote">"</div><p class="t-text">Com o planejamento tributário desenvolvido pelo escritório, reduzimos legalmente nossa carga fiscal em mais de 20%.</p><div class="t-name">Paulo Henrique</div><div class="t-role">Diretor Financeiro, TechGroup</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="bg-light">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-eyebrow">Dúvidas</div>
+        <h2 class="sec-title">Perguntas <em>Frequentes</em></h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><div class="faq-q">Como funciona a consulta inicial? <i class="fas fa-plus"></i></div><div class="faq-a"><p>A consulta inicial é uma reunião de até 1 hora para análise do seu caso. Após a consulta, apresentamos nossa proposta de honorários e estratégia jurídica.</p></div></div>
+        <div class="faq-item"><div class="faq-q">Vocês atendem online? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Sim! Realizamos consultas e reuniões por videoconferência para clientes de todo o Brasil. A assinatura de documentos é feita de forma eletrônica.</p></div></div>
+        <div class="faq-item"><div class="faq-q">Como são cobrados os honorários? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Os honorários variam conforme a complexidade do caso. Trabalhamos com honorários fixos, por êxito ou combinados, sempre com transparência e contrato detalhado.</p></div></div>
+        <div class="faq-item"><div class="faq-q">Qual o prazo para resolução de casos? <i class="fas fa-plus"></i></div><div class="faq-a"><p>Depende da área e complexidade. Casos simples podem ser resolvidos em semanas; processos judiciais complexos podem levar meses ou anos. Mantemos você sempre informado.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="sec-inner">
+      <div class="sec-eyebrow">Contato</div>
+      <h2 class="sec-title">Agende sua <em>consulta</em></h2>
+      <div class="contact-grid">
+        <div>
+          <p style="color:var(--gray);font-size:.92rem;line-height:1.8;margin-bottom:2rem;">Nossa equipe está pronta para analisar seu caso. Entre em contato para agendarmos uma consulta inicial.</p>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><span class="ci-label">Telefone</span><span class="ci-text">(81) 9 9627-3630</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><span class="ci-label">E-mail</span><span class="ci-text">contato@menezesadv.com.br</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><span class="ci-label">Endereço</span><span class="ci-text">Av. Dantas Barreto, 500 · Boa Vista · Recife – PE</span></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-clock"></i></div><div><span class="ci-label">Horário</span><span class="ci-text">Segunda a Sexta · 9h às 18h</span></div></div>
+        </div>
+        <div class="cf">
+          <h3>Solicite uma Consulta</h3>
+          <form onsubmit="handleForm(event)">
+            <div class="fg"><label>Nome Completo</label><input type="text" placeholder="Seu nome" required></div>
+            <div class="f-row">
+              <div class="fg"><label>E-mail</label><input type="email" placeholder="seu@email.com" required></div>
+              <div class="fg"><label>Telefone</label><input type="tel" placeholder="(81) 9 9999-9999" required></div>
+            </div>
+            <div class="fg"><label>Área Jurídica</label>
+              <select required>
+                <option value="">Selecione...</option>
+                <option>Direito Empresarial</option>
+                <option>Direito Tributário</option>
+                <option>Direito Trabalhista</option>
+                <option>Direito Imobiliário</option>
+                <option>Direito de Família</option>
+                <option>Direito do Consumidor</option>
+              </select>
+            </div>
+            <div class="fg"><label>Descreva brevemente seu caso</label><textarea rows="3" placeholder="Como podemos ajudar?"></textarea></div>
+            <button type="submit" class="btn-submit">Solicitar Consulta</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="f-logo">Menezes &amp; Associados</span>
+    <p>Advocacia com tradição e excelência · Recife – PE</p>
+    <div class="f-note">&copy; 2026 Menezes &amp; Associados · OAB/PE 12345 · Todos os direitos reservados · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div>
+  </footer>
+
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var href = a.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        var target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    document.querySelectorAll('.faq-q').forEach(function(q) {
+      q.addEventListener('click', function() {
+        var item = q.parentElement;
+        document.querySelectorAll('.faq-item.open').forEach(function(i) {
+          if (i !== item) i.classList.remove('open');
+        });
+        item.classList.toggle('open');
+      });
+    });
+
+    function handleForm(e) {
+      e.preventDefault();
+      alert('Solicitação enviada! Entraremos em contato em breve.');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>

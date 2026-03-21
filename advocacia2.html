@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santos Advogados | Escritório Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root { --copper: #b5651d; --copper-light: #f9ede0; --black: #0d0d0d; --dark: #1a1a1a; --card: #222; --white: #fff; --gray: #999; --border: rgba(255,255,255,.08); }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; line-height: 1.6; }
+    .btn-voltar { position: fixed; top: 20px; left: 20px; z-index: 9999; background: var(--copper); color: #fff; padding: 10px 18px; border-radius: 30px; text-decoration: none; font-size: .85rem; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+    .btn-voltar:hover { background: #9a5418; }
+    nav { position: fixed; top: 0; width: 100%; background: rgba(13,13,13,.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 1000; padding: .9rem 0; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-size: 1rem; font-weight: 900; color: var(--white); text-decoration: none; letter-spacing: 3px; text-transform: uppercase; }
+    .nav-logo span { color: var(--copper); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--gray); font-size: .78rem; text-decoration: none; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; transition: color .3s; }
+    .nav-links a:hover { color: var(--copper); }
+    .nav-cta { border: 1px solid var(--copper) !important; color: var(--copper) !important; padding: .5rem 1.3rem; }
+    .hero { min-height: 100vh; background: var(--black); display: flex; align-items: center; padding: 8rem 2rem 5rem; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1400&h=900&fit=crop') center/cover no-repeat; opacity: .08; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; max-width: 760px; }
+    .hero-pre { display: flex; align-items: center; gap: .8rem; margin-bottom: 2rem; }
+    .pre-line { width: 40px; height: 1px; background: var(--copper); }
+    .pre-text { font-size: .68rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); }
+    .hero h1 { font-size: clamp(3rem, 6.5vw, 5rem); font-weight: 900; line-height: 1; margin-bottom: 2rem; letter-spacing: -2px; text-transform: uppercase; }
+    .hero h1 .cu { color: var(--copper); }
+    .hero p { color: var(--gray); font-size: .92rem; line-height: 1.8; margin-bottom: 3rem; max-width: 520px; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .btn-cu { display: inline-flex; align-items: center; gap: .5rem; padding: .9rem 2rem; background: var(--copper); color: #fff; border-radius: 2px; font-weight: 700; text-decoration: none; font-size: .8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: all .3s; }
+    .btn-cu:hover { background: #9a5418; transform: translateY(-2px); }
+    .btn-border-cu { display: inline-flex; align-items: center; gap: .5rem; padding: .9rem 2rem; background: transparent; color: var(--copper); border: 1px solid var(--copper); border-radius: 2px; font-weight: 600; text-decoration: none; font-size: .8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: all .3s; }
+    .btn-border-cu:hover { background: rgba(181,101,29,.1); }
+    .hero-stats { display: flex; gap: 3rem; border-top: 1px solid var(--border); padding-top: 2.5rem; flex-wrap: wrap; }
+    .hs-num { font-size: 2.5rem; font-weight: 900; color: var(--copper); display: block; line-height: 1; }
+    .hs-lbl { font-size: .68rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1.5px; margin-top: .3rem; }
+    section { padding: 5.5rem 2rem; }
+    .sec-inner { max-width: 1200px; margin: 0 auto; }
+    .sec-pre { display: flex; align-items: center; gap: .6rem; margin-bottom: .8rem; }
+    .sp-line { width: 24px; height: 1px; background: var(--copper); }
+    .sp-text { font-size: .65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); }
+    .sec-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 1rem; line-height: 1.1; }
+    .sec-title .cu { color: var(--copper); }
+    .sec-desc { color: var(--gray); font-size: .88rem; max-width: 560px; line-height: 1.8; }
+    .text-center { text-align: center; }
+    .text-center .sec-pre { justify-content: center; }
+    .text-center .sec-desc { margin: 0 auto 3rem; }
+    .bg-dark { background: var(--dark); }
+    .areas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .area-card { background: var(--card); border: 1px solid var(--border); border-left: 2px solid var(--copper); padding: 2rem; transition: all .3s; }
+    .area-card:hover { background: #282828; transform: translateX(4px); }
+    .area-num { font-size: 2rem; font-weight: 900; color: rgba(181,101,29,.25); line-height: 1; margin-bottom: .8rem; }
+    .area-card h3 { font-size: .9rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; margin-bottom: .5rem; }
+    .area-card p { font-size: .82rem; color: var(--gray); line-height: 1.6; }
+    .diff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .diff-card { text-align: center; padding: 2rem; border: 1px solid var(--border); border-radius: 4px; }
+    .diff-icon { font-size: 2.5rem; color: var(--copper); margin-bottom: 1rem; }
+    .diff-card h3 { font-size: .88rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: .5rem; }
+    .diff-card p { font-size: .8rem; color: var(--gray); line-height: 1.6; }
+    .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .t-card { background: var(--card); border: 1px solid var(--border); padding: 2rem; }
+    .stars { color: var(--copper); font-size: .82rem; margin-bottom: .8rem; }
+    .t-text { font-size: .88rem; color: var(--gray); font-style: italic; line-height: 1.7; margin-bottom: 1.2rem; }
+    .t-name { font-size: .84rem; font-weight: 700; }
+    .t-role { font-size: .75rem; color: var(--gray); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+    .ci-item { display: flex; gap: .8rem; align-items: center; margin-bottom: 1rem; }
+    .ci-icon { width: 38px; height: 38px; background: rgba(181,101,29,.15); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--copper); flex-shrink: 0; }
+    .ci-text { font-size: .85rem; color: var(--gray); }
+    .cf { background: var(--card); border: 1px solid var(--border); padding: 2.5rem; }
+    .cf h3 { font-size: 1.2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.5rem; }
+    .fg { margin-bottom: 1rem; }
+    .fg label { display: block; font-size: .68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); margin-bottom: .3rem; }
+    .fg input, .fg select, .fg textarea { width: 100%; padding: .8rem 1rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 2px; color: var(--white); font-family: 'Montserrat', sans-serif; font-size: .85rem; transition: border-color .3s; }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { outline: none; border-color: var(--copper); }
+    .fg select option { background: #222; }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    footer { background: #080808; border-top: 1px solid rgba(181,101,29,.2); padding: 3rem 2rem 1.5rem; text-align: center; color: var(--gray); }
+    .f-logo { font-size: .9rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--copper); display: block; margin-bottom: .5rem; }
+    .f-note { font-size: .72rem; margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.06); padding-top: 1rem; }
+    .wa-float { position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.6rem; text-decoration: none; box-shadow: 0 4px 16px rgba(37,211,102,.4); z-index: 999; transition: transform .3s; }
+    .wa-float:hover { transform: scale(1.1); }
+    @media (max-width: 968px) { .hero-inner, .contact-grid { grid-template-columns: 1fr; } nav .nav-links { display: none; } }
+    @media (max-width: 600px) { .hero { padding: 7rem 1.5rem 4rem; } .f-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a href="javascript:history.back()" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Santos <span>ADV</span></a>
+      <ul class="nav-links">
+        <li><a href="#areas">Áreas</a></li>
+        <li><a href="#diferenciais">Diferenciais</a></li>
+        <li><a href="#depoimentos">Clientes</a></li>
+        <li><a href="#contato" class="nav-cta">Consulta</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-pre"><div class="pre-line"></div><span class="pre-text">Advocacia Premium · Recife – PE</span></div>
+      <h1>Estratégia jurídica para <span class="cu">resultados</span> reais.</h1>
+      <p>Advocacia moderna com visão estratégica. Assessoria preventiva e contenciosa para empresas e pessoas físicas que exigem excelência jurídica.</p>
+      <div class="hero-btns">
+        <a href="#contato" class="btn-cu"><i class="fas fa-scale-balanced"></i> Consulta Inicial</a>
+        <a href="#areas" class="btn-border-cu">Ver Áreas</a>
+      </div>
+      <div class="hero-stats">
+        <div><span class="hs-num">15+</span><span class="hs-lbl">Anos</span></div>
+        <div><span class="hs-num">800+</span><span class="hs-lbl">Casos</span></div>
+        <div><span class="hs-num">95%</span><span class="hs-lbl">Êxito</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="areas" class="bg-dark">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Especialidades</span><div class="sp-line"></div></div>
+        <h2 class="sec-title">Áreas de <span class="cu">Atuação</span></h2>
+        <p class="sec-desc">Representação jurídica especializada com visão estratégica e foco em resultados.</p>
+      </div>
+      <div class="areas-grid">
+        <div class="area-card"><div class="area-num">01</div><h3>Direito Empresarial</h3><p>Contratos, compliance, M&A, recuperação judicial e consultoria societária preventiva.</p></div>
+        <div class="area-card"><div class="area-num">02</div><h3>Direito Tributário</h3><p>Planejamento, defesas administrativas e judiciais, restituições e exclusão de tributos.</p></div>
+        <div class="area-card"><div class="area-num">03</div><h3>Direito Digital</h3><p>LGPD, contratos tecnológicos, proteção de dados e crimes cibernéticos.</p></div>
+        <div class="area-card"><div class="area-num">04</div><h3>Direito Trabalhista</h3><p>Defesa empresarial, compliance trabalhista e acordos extrajudiciais.</p></div>
+        <div class="area-card"><div class="area-num">05</div><h3>Direito Imobiliário</h3><p>Contratos, incorporações, regularizações e litígios imobiliários.</p></div>
+        <div class="area-card"><div class="area-num">06</div><h3>Direito de Família</h3><p>Inventários, planejamento sucessório, divórcios e acordos familiares.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="diferenciais">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Por que nos escolher</span><div class="sp-line"></div></div>
+        <h2 class="sec-title">Nossos <span class="cu">Diferenciais</span></h2>
+      </div>
+      <div class="diff-grid">
+        <div class="diff-card"><div class="diff-icon"><i class="fas fa-lightbulb"></i></div><h3>Visão Estratégica</h3><p>Cada caso é analisado com profundidade para definir a melhor estratégia jurídica.</p></div>
+        <div class="diff-card"><div class="diff-icon"><i class="fas fa-laptop-code"></i></div><h3>Advocacia Digital</h3><p>Atendimento online, assinatura eletrônica e acompanhamento em tempo real.</p></div>
+        <div class="diff-card"><div class="diff-icon"><i class="fas fa-handshake"></i></div><h3>Transparência Total</h3><p>Honorários claros, contratos detalhados e comunicação proativa em cada etapa.</p></div>
+        <div class="diff-card"><div class="diff-icon"><i class="fas fa-trophy"></i></div><h3>Track Record</h3><p>Histórico de mais de 800 casos com 95% de índice de êxito nos processos.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="depoimentos" class="bg-dark">
+    <div class="sec-inner">
+      <div class="text-center">
+        <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Depoimentos</span><div class="sp-line"></div></div>
+        <h2 class="sec-title">Clientes que <span class="cu">confiam</span></h2>
+      </div>
+      <div class="test-grid">
+        <div class="t-card"><div class="stars">★★★★★</div><p class="t-text">"A Santos ADV resolveu questões tributárias complexas da nossa empresa com extrema competência. Resultado muito além do esperado."</p><div class="t-name">Alexandre Torres</div><div class="t-role">CEO, Grupo Torres</div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><p class="t-text">"Meu processo de inventário foi conduzido com total transparência e eficiência. Equipe excepcional em todos os sentidos."</p><div class="t-name">Beatriz Nogueira</div><div class="t-role">Empresária</div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><p class="t-text">"O atendimento online é impecável. Toda a nossa assessoria jurídica é feita de forma digital sem perder qualidade."</p><div class="t-name">Rafael Mendes</div><div class="t-role">Fundador, TechStartup</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="sec-inner">
+      <div class="sec-pre"><div class="sp-line"></div><span class="sp-text">Contato</span></div>
+      <h2 class="sec-title">Fale <span class="cu">conosco</span></h2>
+      <div class="contact-grid">
+        <div>
+          <p style="color:var(--gray);font-size:.88rem;line-height:1.8;margin-bottom:2rem;">Pronto para iniciar a assessoria jurídica que sua empresa merece? Entre em contato agora.</p>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><span class="ci-text">(81) 9 9627-3630</span></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><span class="ci-text">contato@santosadv.com.br</span></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><span class="ci-text">Av. Rio Branco, 200 · Recife – PE</span></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-clock"></i></div><span class="ci-text">Seg–Sex · 9h–18h</span></div>
+        </div>
+        <div class="cf">
+          <h3>Solicitar Consulta</h3>
+          <form onsubmit="handleForm(event)">
+            <div class="fg"><label>Nome</label><input type="text" placeholder="Seu nome completo" required></div>
+            <div class="f-row">
+              <div class="fg"><label>E-mail</label><input type="email" placeholder="seu@email.com" required></div>
+              <div class="fg"><label>WhatsApp</label><input type="tel" placeholder="(81) 9 9999-9999" required></div>
+            </div>
+            <div class="fg"><label>Área de interesse</label>
+              <select required><option value="">Selecione...</option><option>Direito Empresarial</option><option>Direito Tributário</option><option>Direito Digital</option><option>Direito Trabalhista</option><option>Outro</option></select>
+            </div>
+            <div class="fg"><label>Mensagem</label><textarea rows="3" placeholder="Descreva brevemente seu caso"></textarea></div>
+            <button type="submit" style="width:100%;padding:.9rem;background:var(--copper);color:#fff;border:none;font-weight:700;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background .3s;" onmouseover="this.style.background='#9a5418'" onmouseout="this.style.background='var(--copper)'">Enviar Solicitação</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="f-logo">Santos ADV</span>
+    <p>Advocacia Estratégica · OAB/PE 56789 · Recife – PE</p>
+    <div class="f-note">&copy; 2026 Santos Advogados · Todos os direitos reservados · Desenvolvido pela <strong>TechCoDesign</strong> · (81) 9 9627-3630</div>
+  </footer>
+  <a href="https://wa.me/5581996273630" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) { a.addEventListener('click', function(e) { var h = a.getAttribute('href'); if (h === '#') return; e.preventDefault(); var t = document.querySelector(h); if (t) t.scrollIntoView({ behavior: 'smooth' }); }); });
+    function handleForm(e) { e.preventDefault(); alert('Solicitação enviada! Entraremos em contato em breve.'); e.target.reset(); }
+  </script>
+</body>
+</html>
